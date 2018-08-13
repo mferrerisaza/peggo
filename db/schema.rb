@@ -10,10 +10,90 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_13_192311) do
+ActiveRecord::Schema.define(version: 2018_08_13_224655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.bigint "share_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["share_id"], name: "index_bills_on_share_id"
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "building_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.index ["building_id"], name: "index_budgets_on_building_id"
+  end
+
+  create_table "buildings", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_buildings_on_user_id"
+  end
+
+  create_table "concepts", force: :cascade do |t|
+    t.bigint "bill_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.index ["bill_id"], name: "index_concepts_on_bill_id"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.integer "type"
+    t.date "date"
+    t.bigint "budget_id"
+    t.string "description"
+    t.string "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_expenses_on_budget_id"
+  end
+
+  create_table "owners", force: :cascade do |t|
+    t.string "name"
+    t.string "card_number"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.integer "type"
+    t.string "name"
+    t.string "phone"
+    t.string "matricula_inmobiliaria"
+    t.decimal "building_coeficient", precision: 15, scale: 2
+    t.bigint "building_id"
+    t.integer "area"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_properties_on_building_id"
+  end
+
+  create_table "shares", force: :cascade do |t|
+    t.bigint "property_id"
+    t.bigint "owner_id"
+    t.decimal "ownerability_percentage", precision: 15, scale: 2
+    t.decimal "payment_percentage", precision: 15, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_shares_on_owner_id"
+    t.index ["property_id"], name: "index_shares_on_property_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +112,12 @@ ActiveRecord::Schema.define(version: 2018_08_13_192311) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bills", "shares"
+  add_foreign_key "budgets", "buildings"
+  add_foreign_key "buildings", "users"
+  add_foreign_key "concepts", "bills"
+  add_foreign_key "expenses", "budgets"
+  add_foreign_key "properties", "buildings"
+  add_foreign_key "shares", "owners"
+  add_foreign_key "shares", "properties"
 end
