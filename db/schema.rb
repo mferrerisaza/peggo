@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_13_224655) do
+ActiveRecord::Schema.define(version: 2018_08_13_235956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_08_13_224655) do
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.integer "type"
+    t.integer "category"
     t.date "date"
     t.bigint "budget_id"
     t.string "description"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2018_08_13_224655) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.integer "type"
+    t.integer "property_type"
     t.string "name"
     t.string "phone"
     t.string "matricula_inmobiliaria"
