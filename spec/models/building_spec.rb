@@ -9,11 +9,13 @@ RSpec.describe Building, type: :model do
   it "is invalid without a name" do
     building = FactoryBot.build(:building, name: nil)
     expect(building).to_not be_valid
+    expect(building.errors.messages).to have_key(:name)
   end
 
   it "is invalid without a user" do
     building = FactoryBot.build(:building, user: nil)
     expect(building).to_not be_valid
+    expect(building.errors.messages).to have_key(:user)
   end
 
   it "does not allow duplicate building names per user" do
@@ -21,7 +23,8 @@ RSpec.describe Building, type: :model do
     user.buildings.create(name: "El Recinto")
     new_building = user.buildings.build(name: "El Recinto")
     new_building.valid?
-    expect(new_building.errors[:name]).to include("has already been taken")
+    expect(new_building).to_not be_valid
+    expect(new_building.errors.messages).to have_key(:name)
   end
 
   it "allow two users to share a project name" do
