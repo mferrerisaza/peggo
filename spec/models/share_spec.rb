@@ -52,4 +52,11 @@ RSpec.describe Share, type: :model do
     expect(share).to_not be_valid
     expect(share.errors.messages).to have_key(:payment_percentage)
   end
+
+  context "bill relationship" do
+    it "can have many bills" do
+      share = FactoryBot.create(:share, :with_bills)
+      expect(share.bills.size).to eq 5
+    end
+  end
 end
