@@ -55,7 +55,7 @@ RSpec.describe Property, type: :model do
   end
 
   context "owners relationship" do
-    it "can have many users" do
+    it "can have many owners" do
       property = FactoryBot.create(:property, :fifty_fifty)
       expect(property.owners.size).to eq 2
     end
