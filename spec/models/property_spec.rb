@@ -15,7 +15,7 @@ RSpec.describe Property, type: :model do
   it "is invalid without a name" do
     property = FactoryBot.build(:property, name: nil)
     expect(property).to_not be_valid
-        expect(property.errors.messages).to have_key(:name)
+    expect(property.errors.messages).to have_key(:name)
   end
 
   it "is invalid without a building_coeficient" do
