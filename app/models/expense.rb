@@ -3,5 +3,8 @@ class Expense < ApplicationRecord
   enum category: ["Aseo", "Seguridad"]
   belongs_to :budget
 
-  # TODO: add validations with TDD
+  monetize :amount_cents
+
+  validates :date, :description, presence: true
+  validates :amount, numericality: { greater_than: 0 }
 end
