@@ -23,4 +23,9 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:email]).to include("has already been taken")
   end
+
+  it "can manage many buildings" do
+    user = FactoryBot.create(:user, :with_buildings)
+    expect(user.buildings.size).to eq 2
+  end
 end
