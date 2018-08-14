@@ -23,7 +23,7 @@ RSpec.describe Expense, type: :model do
     expect(expense.errors.messages).to have_key(:budget)
   end
 
-  it "is invalid without an amount = 0" do
+  it "is invalid with an amount = 0" do
     expense = FactoryBot.build(:expense, amount: 0)
     expect(expense).to_not be_valid
     expect(expense.errors.messages).to have_key(:amount)
