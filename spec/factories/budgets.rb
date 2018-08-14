@@ -4,6 +4,7 @@ FactoryBot.define do
     end_date "2018-12-31"
     association :building
     amount 100_000_000
+    status true
 
     trait :with_expenses do
       after(:create) { |budget| create_list(:expense, 10, budget: budget) }

@@ -46,6 +46,13 @@ RSpec.describe Budget, type: :model do
     expect(budget).to be_valid
   end
 
+  it "is invalid if the parent building has an other active budget" do
+    building = FactoryBot.create(:building)
+    budget = FactoryBot.create(:budget, building: building)
+    other_budget = FactoryBot.build(:budget, building: building)
+    expect(other_budget).to_not be_valid
+  end
+
   context "expenses relationship" do
     it "can have many expenses" do
       budget = FactoryBot.create(:budget, :with_expenses)
