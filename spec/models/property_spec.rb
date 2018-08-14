@@ -44,7 +44,7 @@ RSpec.describe Property, type: :model do
   it "is invalid without a building" do
     property = FactoryBot.build(:property, building: nil)
     expect(property).to_not be_valid
-        expect(property.errors.messages).to have_key(:building)
+    expect(property.errors.messages).to have_key(:building)
   end
 
   context "shares relationship" do
