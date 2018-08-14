@@ -31,4 +31,16 @@ RSpec.describe Building, type: :model do
     other_building = other_user.buildings.create(name: "El Recinto")
     expect(other_building).to be_valid
   end
+
+  it "can have many properties" do
+    building = FactoryBot.create(:building, :with_propierties)
+    expect(building.properties.size).to eq 10
+  end
+
+  context "sum of properties building_coeficients" do
+    it "returns the corrert sum of propierties building_coeficient" do
+      building = FactoryBot.create(:building, :with_propierties)
+      expect(building.building_coeficients_sum).to eq 1
+    end
+  end
 end
