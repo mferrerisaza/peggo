@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :expense do
-    type 1
-    date "2018-08-13"
-    budget nil
-    description "MyString"
-    attachment "MyString"
+    category "Aseo"
+    amount 1_000_000
+    date Date.current
+    association :budget
+    sequence(:description) { |n| "Gasto no #{n}" }
+    attachment nil
   end
 end
