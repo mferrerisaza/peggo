@@ -1,0 +1,10 @@
+<div class="sidebar">
+  <div class="sidebar-logo"">
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png"%>
+    <% end %>
+  </div>
+  <div class="sidebar-bottom">
+    <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "sidebar-signout"%>
+  </div>
+</div>

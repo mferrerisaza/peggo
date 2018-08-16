@@ -1,0 +1,21 @@
+.add-new-button {
+  height: 175px;
+  margin-top: 15px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  color: $brand-primary;
+  position: relative;
+  border:1px rgba(0, 0, 0, 0.1) solid;
+  border-radius: 8px;
+  background-color: rgba($brand-primary, 0.2);
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  i {
+    font-size: 50px;
+  }
+  &:hover, &:active, &:focus{
+    text-decoration: none;
+  }
+}
