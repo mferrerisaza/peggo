@@ -1,0 +1,38 @@
+.table-container {
+  border: 1px #364F6B66 solid;
+  border-radius: 8px;
+  padding: 0px !important;
+  margin: 32px;
+  margin-bottom: 8px;
+  overflow-x: scroll;
+  table{
+    width: 100%;
+    height: 100%;
+    th {
+      white-space: nowrap;
+      background-color: $brand-primary;
+      color: white;
+      font-size: 16px;
+      padding: 16px 12px;
+      text-align: center;
+      &:last-child {
+        border-top-right-radius: 8px;
+      }
+      &:first-child {
+        border-top-left-radius: 8px;
+      }
+    }
+    tr {
+      &:nth-of-type(odd) {
+        background-color: #364f6b20;
+      }
+    }
+    td {
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: lighter;
+      padding: 8px 16px;
+      text-align: center;
+    }
+  }
+}
