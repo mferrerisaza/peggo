@@ -1,0 +1,58 @@
+<% if render_blue_sidebar %>
+  <div class="sidebar hidden-xs hidden-sm">
+    <div class="sidebar-logo"">
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png"%>
+      <% end %>
+    </div>
+
+    <div class="sidebar-top">
+      <div class="sidebar-top-user">
+        <i class="far fa-user-circle"></i>
+        <i class="fas fa-cog"></i>
+      </div>
+
+      <div class="sidebar-top-building mdc-menu-anchor menu-button" style="cursor: pointer;">
+          <div class="mdc-menu" tabindex="-1">
+            <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+              <% current_user.buildings.each do |building|%>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <%= link_to building.name,building_path(building)%>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <h6>
+          <%= @building.name%>
+          <i class="fas fa-caret-down"></i>
+        </h6>
+        <hr>
+      </div>
+    </div>
+
+    <div class="sidebar-links">
+      <a class="sidebar-link <%= "active" if action_name == "show" %>" href="/buildings/<%= @building.id %>">
+        <i class="material-icons">
+          home
+        </i>
+        <span>Dashboard</span>
+      </a>
+      <a class="sidebar-link <%= "active" if controller_name == "properties" %>" href="/buildings/<%= @building.id %>/properties">
+        <i class="material-icons">
+          account_balance
+        </i>
+        <span>Propiedades</span>
+      </a>
+      <a class="sidebar-link <%= "active" if controller_name == "owners" %>" href="#">
+        <i class="material-icons">
+          people
+        </i>
+        <span>Copropietarios</span>
+      </a>
+
+    </div>
+    <div class="sidebar-bottom">
+      <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "sidebar-signout"%>
+    </div>
+  </div>
+<% end %>
