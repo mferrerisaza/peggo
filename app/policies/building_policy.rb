@@ -1,6 +1,14 @@
 class BuildingPolicy < ApplicationPolicy
-  def show
-    record.user == current_user
+  def show?
+    record.user == user
+  end
+
+  def new?
+    true
+  end
+
+  def create?
+    new?
   end
 
   class Scope < Scope
