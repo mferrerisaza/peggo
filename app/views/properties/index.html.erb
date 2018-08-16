@@ -1,25 +1,30 @@
-<h1>Lista de propiedades</h1>
-<div class="table-container">
-  <table>
-    <tr>
-      <th>Tipo Propiedad</th>
-      <th>Número</th>
-      <th>Propietario</th>
-      <th>Coeficiente de Copropiedad</th>
-      <th>Area (mt2)</th>
-      <th>Teléfono de la propiedad</th>
-      <th>Matricula Inmobiliaria</th>
-    </tr>
-    <% @properties.each do |property| %>
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <h1 class="properties-index-title">Lista de propiedades</h1>
+  <div class="table-container">
+    <table>
       <tr>
-        <td><%=property.property_type%></td>
-        <td><%=property.name%></td>
-        <td>TODO</td>
-        <td><%="#{property.building_coeficient * 100}%"%></td>
-        <td><%=property.area%></td>
-        <td><%=property.phone%></td>
-        <td><%=property.matricula_inmobiliaria%></td>
+        <th>Tipo Propiedad</th>
+        <th>Número</th>
+        <th>Propietarios</th>
+        <th>Coeficiente de Copropiedad</th>
+        <th>Area (mt2)</th>
+        <th>Teléfono de la propiedad</th>
+        <th>Matricula Inmobiliaria</th>
       </tr>
-    <% end %>
-  </table>
+      <% @properties.each do |property| %>
+        <tr>
+          <td><%=property.property_type%></td>
+          <td><%=property.name%></td>
+          <td><%= property.owners.map(&:name).join(", ") %></td>
+          <td><%="#{property.building_coeficient * 100}%"%></td>
+          <td><%=property.area%></td>
+          <td><%=property.phone%></td>
+          <td><%=property.matricula_inmobiliaria%></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
+
+
