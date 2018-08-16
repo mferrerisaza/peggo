@@ -13,6 +13,7 @@ module Peggo
       generate.helper false
       generate.test_framework :rspec,
         view_specs: false,
+        controller_specs: false,
         helper_specs: false,
         routing_specs: false,
         request_specs: false
