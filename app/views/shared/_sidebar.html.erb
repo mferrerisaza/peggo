@@ -4,6 +4,42 @@
       <%= image_tag "logo.png"%>
     <% end %>
   </div>
+
+  <div class="sidebar-top">
+    <div class="sidebar-top-user">
+      <i class="far fa-user-circle"></i>
+      <i class="fas fa-cog"></i>
+    </div>
+
+    <div class="sidebar-top-building">
+      <h6 class="">
+        <%= @building.name if @building %>
+        <i class="fas fa-caret-down"></i>
+      </h6>
+      <hr>
+    </div>
+  </div>
+
+  <div class="sidebar-links">
+    <%= link_to building_path(@building), class: "sidebar-link" do %>
+      <i class="material-icons">
+        home
+      </i>
+      <span>Dashboard</span>
+    <% end %>
+    <%= link_to building_properties_path(@building), class: "sidebar-link" do %>
+      <i class="material-icons">
+        account_balance
+      </i>
+      <span>Propiedades</span>
+    <% end %>
+    <%= link_to "#", class: "sidebar-link" do %>
+      <i class="material-icons">
+      people
+      </i>
+      <span>Copropietarios</span>
+    <% end %>
+  </div>
   <div class="sidebar-bottom">
     <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "sidebar-signout"%>
   </div>
