@@ -31,4 +31,43 @@ RSpec.describe Owner, type: :model do
       expect(owner.properties.size).to eq 2
     end
   end
+
+  it "is invalid without card_number" do
+    owner = FactoryBot.build(:owner, card_number: nil)
+    expect(owner).to_not be_valid
+    expect(owner.errors.messages).to have_key(:card_number)
+  end
+
+  it "has a unique card_number" do
+    older_owner = FactoryBot.create(:owner)
+    owner = FactoryBot.build(:owner, card_number: older_owner.card_number)
+    expect(owner).to_not be_valid
+  end
 end
+
+RSpec.describe "adding an owner", type: :system do
+  it  "allows a user to create an owner" do
+    visit new_owner_path
+    fill_in "Nombre del propietario", with: "Daniel José López"
+    fill_in "Cédula del propietario ", with: "1040182849"
+    fill_in "Teléfono del propietario", with: "2660480"
+    fill_in "Correo electrónico del propietario", with: "daniel@gmail.com"
+    click_on("Crear Propietario")
+    visit owners_path
+    expect(page).to have_conent("Daniel José López")
+  end
+end
+
+
+  def new
+    @owner = Owner.new
+  end
+
+  def create
+  end
+
+  def index
+  end
+
+  def show
+  end
