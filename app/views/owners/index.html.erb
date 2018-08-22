@@ -1,7 +1,10 @@
-<ol>
-  <% @owners.each do |owner| %>
-    <li>
-      <%= owner.name %>
-    </li>
-  <% end %>
-</ol>
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <ol>
+    <% @owners.each do |owner| %>
+      <li>
+        <%= owner.name %>
+      </li>
+    <% end %>
+  </ol>
+</div>
