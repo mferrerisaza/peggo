@@ -1,4 +1,5 @@
 class OwnersController < ApplicationController
+  before_action :set_building, only: [:index]
 
   def new
     @owner = Owner.new
@@ -17,6 +18,7 @@ class OwnersController < ApplicationController
 
   def index
     @owners = policy_scope(Owner.all)
+    @shares = Owner.building_owners(@building)
   end
 
   def show
@@ -26,5 +28,9 @@ class OwnersController < ApplicationController
 
   def owner_params
     params.require(:owner).permit(:name, :card_number, :phone, :email)
+  end
+
+  def set_building
+    @building = Building.find(params[:building_id])
   end
 end
