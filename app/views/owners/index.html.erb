@@ -19,7 +19,7 @@
             <td> <%= share.owner.phone %> </td>
             <td> <%= share.owner.email %> </td>
             <td> <%= share.property.name %> </td>
-            <td> <%= share.ownerability_percentage %> </td>
+            <td> <%= percentage(share.ownerability_percentage) %>% </td>
           </tr>
         <% end %>
       <% end %>
