@@ -7,7 +7,6 @@ const addListenerToMenus = () => {
       const menu = new MDCMenu(menuHTML);
       const menuButton = menuHTML.parentNode;
       menuButton.addEventListener("click", (event) => {
-        event.preventDefault();
         menu.open = !menu.open;
       })
     }

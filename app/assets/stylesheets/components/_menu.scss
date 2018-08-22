@@ -1,1 +1,14 @@
 @import "@material/menu/mdc-menu";
+.building-list-item{
+  text-align: center;
+  font-size: 16px !important;
+  padding: 8px;
+
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    &:active,&:focus{
+      text-decoration: none;
+    }
+  }
+}
