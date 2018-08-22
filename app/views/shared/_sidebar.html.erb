@@ -43,7 +43,7 @@
         </i>
         <span>Propiedades</span>
       </a>
-      <a class="sidebar-link <%= "active" if controller_name == "owners" %>" href="/owners">
+      <a class="sidebar-link <%= "active" if controller_name == "owners" %>" href="/buildings/<%= @building.id %>/owners">
         <i class="material-icons">
           people
         </i>
