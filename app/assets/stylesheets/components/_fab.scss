@@ -1,0 +1,12 @@
+@import "@material/fab/mdc-fab";
+
+.fab-bottom-right {
+  position: fixed;
+  bottom: 16px;
+  right: 16px
+}
+
+.fab-color {
+  background-color: $brand-primary;
+  color: white;
+}

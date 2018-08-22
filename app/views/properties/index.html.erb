@@ -13,18 +13,24 @@
         <th>Matricula Inmobiliaria</th>
       </tr>
       <% @properties.each do |property| %>
-        <tr>
-          <td><%=property.property_type%></td>
-          <td><%=property.name%></td>
-          <td><%= property.owners.map(&:name).join(", ") %></td>
-          <td><%="#{property.building_coeficient * 100}%"%></td>
-          <td><%=property.area%></td>
-          <td><%=property.phone%></td>
-          <td><%=property.matricula_inmobiliaria%></td>
-        </tr>
+          <tr class="table-row-link" onclick= "location.href= '<%= building_property_path(@building, property)%>'">
+            <td><%=property.property_type%></td>
+            <td><%=property.name%></td>
+            <td><%= property.owners.map(&:name).join(", ") %></td>
+            <td><%="#{property.building_coeficient * 100}%"%></td>
+            <td><%=property.area%></td>
+            <td><%=property.phone%></td>
+            <td><%=property.matricula_inmobiliaria%></td>
+          </tr>
       <% end %>
     </table>
   </div>
+  <button class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite">
+   <i class="material-icons">
+    account_balance
+   </i>
+   +
+  </button>
 </div>
 
 

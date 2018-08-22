@@ -3,6 +3,10 @@ class BuildingPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def show_properties?
+    record.user == user
+  end
+
   def new?
     true
   end
