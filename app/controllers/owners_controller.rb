@@ -2,11 +2,12 @@ class OwnersController < ApplicationController
 
   def new
     @owner = Owner.new
-    # authorize @owner
+    authorize @owner
   end
 
   def create
     @owner = Owner.new(owner_params)
+    authorize @owner
     if @owner.save
       redirect_to owners_path
     else
@@ -15,7 +16,7 @@ class OwnersController < ApplicationController
   end
 
   def index
-    @owners = Owner.all
+    @owners = policy_scope(Owner.all)
   end
 
   def show
