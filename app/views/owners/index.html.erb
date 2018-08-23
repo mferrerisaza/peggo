@@ -1,16 +1,17 @@
 <%= render 'shared/sidebar' %>
 <div class="page-content-wrapper">
   <h1 class="properties-index-title">Lista de propietarios</h1>
-    <div class="table-container">
-      <table>
-        <tr>
-          <th>Propietario</th>
-          <th>Cédula</th>
-          <th>Teléfono</th>
-          <th>Email</th>
-        </tr>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Propietario</th>
+        <th>Cédula</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+      </tr>
       <% @owners.each do |owner| %>
         <tr>
+        <!-- <tr onclick= "location.href= '<%#= building_owner_path(@building, owner %>' "> -->
           <td> <%= owner.name %> </td>
           <td> <%= owner.card_number  %> </td>
           <td> <%= owner.phone %> </td>
@@ -20,3 +21,4 @@
     </table>
   </div>
 </div>
+
