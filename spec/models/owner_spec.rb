@@ -31,4 +31,16 @@ RSpec.describe Owner, type: :model do
       expect(owner.properties.size).to eq 2
     end
   end
+
+  it "is invalid without card_number" do
+    owner = FactoryBot.build(:owner, card_number: nil)
+    expect(owner).to_not be_valid
+    expect(owner.errors.messages).to have_key(:card_number)
+  end
+
+  it "has a unique card_number" do
+    older_owner = FactoryBot.create(:owner)
+    owner = FactoryBot.build(:owner, card_number: older_owner.card_number)
+    expect(owner).to_not be_valid
+  end
 end
