@@ -1,6 +1,6 @@
 class OwnerPolicy < ApplicationPolicy
   def show?
-    record.user == user
+    true
   end
 
   def new?

@@ -1,0 +1,60 @@
+.show-image-cover {
+  background-image: url("2.jpg");
+  height: 35vh;
+  background-size: cover;
+}
+
+.show-image-avatar {
+  height: 40px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.avatar-big {
+  border-radius: 50%;
+  background-size: cover;
+  position: relative;
+  background-color: white;
+}
+
+.boy-avatar {
+  background-image: url("boy.png");
+}
+
+@media only screen
+and (max-width: 320px) {
+  .responsive-avatar{
+    height: 46px;
+    width: 46px;
+    bottom: 23px;
+  }
+}
+
+@media only screen
+and (min-width: 321px)
+and (max-width: 380px) {
+  .responsive-avatar{
+    height: 50px;
+    width: 50px;
+    bottom: 25px;
+  }
+}
+
+@media only screen
+and (min-width: 1224px) {
+  .responsive-avatar {
+    height: 70px;
+    width: 70px;
+    bottom: 35px;
+  }
+}
+
+.margin-bottom-end {
+  margin-bottom: 30px;
+}
