@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
-  before_action :set_building, only: %i[index show new create]
-  before_action :set_property, only: [:show]
+  before_action :set_building
+  before_action :set_property, only: %i[show edit destroy]
 
   def index
     @properties = policy_scope(Property.where(building: @building))
@@ -13,18 +13,28 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
-    authorize @property
+    authorize @building, :create_property?
   end
 
   def create
-    raise
     @property = Property.new(property_params)
-    authorize @property
+    authorize @building, :create_property?
     if @property.save
       redirect_to building_property_path(@building, @property)
     else
       render 'new'
     end
+  end
+
+  def edit
+    authorize @property
+  end
+
+  def destroy
+    authorize @property
+    @property.destroy
+    flash[:notice] = "Propiedad eliminada con éxito"
+    redirect_to building_properties_path(@building)
   end
 
   private
