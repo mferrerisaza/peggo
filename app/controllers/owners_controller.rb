@@ -1,6 +1,13 @@
 class OwnersController < ApplicationController
   before_action :set_building, only: [:index, :new, :create]
 
+  def index
+    @owners = policy_scope(@building.owners)
+  end
+
+  def show
+  end
+
   def new
     @owner = Owner.new
     authorize @owner
@@ -14,14 +21,6 @@ class OwnersController < ApplicationController
     else
       render :new
     end
-  end
-
-  def index
-    @owners = policy_scope(Owner.all)
-    @shares = Owner.building_owners(@building)
-  end
-
-  def show
   end
 
   private
