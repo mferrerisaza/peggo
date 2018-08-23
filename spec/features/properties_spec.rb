@@ -63,7 +63,6 @@ RSpec.feature "Properties features", type: :feature do
     user = FactoryBot.create(:user)
     building = FactoryBot.create(:building, :with_propierties)
     property = building.properties.first
-    property_name = building.properties.first.name
     user.buildings << building
 
     visit root_path
@@ -76,14 +75,13 @@ RSpec.feature "Properties features", type: :feature do
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
     find("tr[data-id='#{property.id}']").click
-    expect(page).to have_content("#{property.name}")
+    expect(page).to have_content(property.name)
   end
 
   scenario "user deletes a property", js: true do
     user = FactoryBot.create(:user)
     building = FactoryBot.create(:building, :with_propierties)
     property = building.properties.first
-    property_name = building.properties.first.name
     user.buildings << building
 
     visit root_path
@@ -102,7 +100,6 @@ RSpec.feature "Properties features", type: :feature do
       expect(page.driver.browser.switch_to.alert.text).to eq "¿Estás seguro?"
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content "Propiedad eliminada con éxito"
-    end.to change(building.properties, :count).by -1
+    end.to change(building.properties, :count).by(-1)
   end
 end
-

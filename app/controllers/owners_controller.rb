@@ -1,11 +1,14 @@
 class OwnersController < ApplicationController
-  before_action :set_building, only: [:index, :new, :create]
+  before_action :set_building, only: [:index, :show, :new, :create]
+  before_action :set_owner, only: [:show]
+
 
   def index
     @owners = policy_scope(@building.owners)
   end
 
   def show
+    authorize @owner
   end
 
   def new
@@ -31,5 +34,9 @@ class OwnersController < ApplicationController
 
   def set_building
     @building = Building.find(params[:building_id])
+  end
+
+  def set_owner
+    @owner = Owner.find(params[:id])
   end
 end

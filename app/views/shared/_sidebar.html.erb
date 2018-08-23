@@ -12,16 +12,19 @@
         <i class="fas fa-cog"></i>
       </div>
 
-      <div class="sidebar-top-building mdc-menu-anchor menu-button" style="cursor: pointer;">
-          <div class="mdc-menu" tabindex="-1">
-            <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-              <% current_user.buildings.where.not(id: @building.id).each do |building|%>
-                <li class="mdc-list-item building-list-item" role="menuitem" tabindex="0">
-                  <%= link_to building.name,building_path(building)%>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+      <div class="sidebar-top-building menu-button mdc-menu-anchor" style="cursor: pointer;">
+          <% other_buildings_of_current_user =  current_user.buildings.where.not(id: @building.id)%>
+          <% unless other_buildings_of_current_user.empty? %>
+            <div class="mdc-menu" tabindex="-1">
+              <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                <% other_buildings_of_current_user.each do |building|%>
+                  <li class="mdc-list-item building-list-item" role="menuitem" tabindex="0">
+                    <%= link_to building.name,building_path(building)%>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         <h6>
           <%= @building.name %>
           <i class="fas fa-caret-down"></i>

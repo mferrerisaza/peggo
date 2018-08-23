@@ -1,2 +1,44 @@
-<h1>Owners#show</h1>
-<p>Find me in app/views/owners/show.html.erb</p>
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <div class="show-image-cover">
+  </div>
+  <div class="show-image-avatar flex flex-center">
+    <div class="avatar-big boy-avatar responsive-avatar">
+    </div>
+  </div>
+  <h4 class="text-center"><%= @owner.name %></h4>
+  <div class="table-container-simple flex flex-center">
+    <table>
+      <tr>
+        <td> <strong> Cédula: </strong> </td>
+        <td class="text-align-right"><%= @owner.card_number %></td>
+      </tr>
+      <tr>
+        <td> <strong> Teléfono: </strong> </td>
+        <td class="text-align-right"><%= @owner.phone %></td>
+      </tr>
+      <tr>
+        <td> <strong> Correo: </strong> </td>
+        <td class="text-align-right"><%= @owner.email %></td>
+      </tr>
+    </table>
+  </div>
+  <h4 class="text-center">Propiedades en el edificio</h4>
+  <div class="show-table table-container margin-bottom-end">
+    <table>
+        <tr>
+          <th>Propiedad</th>
+          <th>Porcentaje de participación</th>
+          <th>Porcentaje de pago de cuota</th>
+        </tr>
+        <% @owner.shares.each do |share| %>
+          <tr>
+            <td> <%= share.property.name  %> </td>
+            <td> <%= percentage(share.ownerability_percentage) %>% </td>
+            <td> <%= percentage(share.payment_percentage) %>% </td>
+          </tr>
+        <% end %>
+    </table>
+  </div>
+</div>
+
