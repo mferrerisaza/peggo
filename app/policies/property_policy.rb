@@ -3,12 +3,12 @@ class PropertyPolicy < ApplicationPolicy
     record.building.user == user
   end
 
-  def new?
-    true
+  def edit?
+    show?
   end
 
-  def create?
-    true
+  def destroy?
+    show?
   end
 
   class Scope < Scope

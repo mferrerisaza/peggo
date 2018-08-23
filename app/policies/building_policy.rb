@@ -7,6 +7,10 @@ class BuildingPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def create_property?
+    record.user == user
+  end
+
   def new?
     true
   end
