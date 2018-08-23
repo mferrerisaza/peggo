@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root to: 'buildings#index'
   resources :buildings, only: [:index, :show, :new, :create] do
     resources :properties, only: [:index]
-    resources :owners, only: [:new, :create, :index]
+    resources :owners, only: [:index, :show, :new, :create]
   end
 end
