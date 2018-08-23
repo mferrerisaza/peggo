@@ -1,0 +1,16 @@
+<div class="new-building-form-container">
+  <div class="new-building-form-heading">
+    <h1>Agregar un nuevo propietario</h1>
+  </div>
+  <%#= simple_form_for @owner, url: url_for(action: :create, controller: 'owners'), method: :post do |f| %>
+  <%= simple_form_for [@building, @owner]  do |f| %>
+    <%= f.input :name, label: "Nombre del propietario"%>
+    <%= f.input :card_number, label: "Cédula del propietario"%>
+    <%= f.input :phone, label: "Teléfono del propietario"%>
+    <%= f.input :email, label: "Correo electrónico del propietario"%>
+    <span class="new-building-form-btns">
+      <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
+      <%= f.submit "Crear Propietario", class:"btn form-btn" %>
+    </span>
+  <% end %>
+</div>
