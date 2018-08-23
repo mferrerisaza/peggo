@@ -9,6 +9,10 @@
   <%= f.input :building_id, as: :hidden, input_html: { value: @building.id } %>
   <span class="new-property-form-btns">
     <%= link_to "cancelar", building_properties_path(@building), class:"form-btn--no-background" %>
-    <%= f.submit "Crear", class:"btn form-btn" %>
+    <% if action_name == "new" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
   </span>
 <% end %>
