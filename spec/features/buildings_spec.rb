@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Buildings", type: :feature do
+RSpec.feature "Buildings features", type: :feature do
   scenario "user creates a building" do
     user = FactoryBot.create(:user)
     visit root_path
