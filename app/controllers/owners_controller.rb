@@ -1,5 +1,5 @@
 class OwnersController < ApplicationController
-  before_action :set_building, only: [:index]
+  before_action :set_building, only: [:index, :new, :create]
 
   def new
     @owner = Owner.new
@@ -10,7 +10,7 @@ class OwnersController < ApplicationController
     @owner = Owner.new(owner_params)
     authorize @owner
     if @owner.save
-      redirect_to owners_path
+      redirect_to building_owners_path
     else
       render :new
     end
