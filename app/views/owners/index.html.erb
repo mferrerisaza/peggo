@@ -8,20 +8,14 @@
           <th>Cédula</th>
           <th>Teléfono</th>
           <th>Email</th>
-          <th>Propiedad</th>
-          <th>Participación en la prop </th>
         </tr>
-      <% @shares.each do |array| %>
-        <% array.each do |share| %>
-          <tr>
-            <td> <%= share.owner.name %> </td>
-            <td> <%= share.owner.card_number  %> </td>
-            <td> <%= share.owner.phone %> </td>
-            <td> <%= share.owner.email %> </td>
-            <td> <%= share.property.name %> </td>
-            <td> <%= percentage(share.ownerability_percentage) %>% </td>
-          </tr>
-        <% end %>
+      <% @owners.each do |owner| %>
+        <tr>
+          <td> <%= owner.name %> </td>
+          <td> <%= owner.card_number  %> </td>
+          <td> <%= owner.phone %> </td>
+          <td> <%= owner.email %> </td>
+        </tr>
       <% end %>
     </table>
   </div>
