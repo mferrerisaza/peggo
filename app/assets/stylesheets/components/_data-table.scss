@@ -3,7 +3,7 @@
   border-radius: 8px;
   padding: 0px !important;
   margin: 32px;
-  margin-bottom: 8px;
+  margin-bottom: 64px;
   overflow-x: scroll;
   table{
     width: 100%;
@@ -39,6 +39,12 @@
       &:hover{
         background-color: $brand-primary;
         color: white;
+        i {
+          color: white;
+          &:hover{
+            color: $my-secondary-blue;
+          }
+        }
       }
    }
   }
