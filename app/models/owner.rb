@@ -4,9 +4,4 @@ class Owner < ApplicationRecord
 
   validates :name, :email, :card_number, presence: true
   validates :card_number, uniqueness: true
-
-  def self.building_owners(building)
-    properties = Property.where(building: building)
-    shares = properties.map { |e| e.shares }
-  end
 end
