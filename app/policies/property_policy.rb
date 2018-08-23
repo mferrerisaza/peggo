@@ -7,6 +7,10 @@ class PropertyPolicy < ApplicationPolicy
     show?
   end
 
+  def update?
+    edit?
+  end
+
   def destroy?
     show?
   end
