@@ -102,4 +102,33 @@ RSpec.feature "Properties features", type: :feature do
       expect(page).to have_content "Propiedad eliminada con éxito"
     end.to change(building.properties, :count).by(-1)
   end
+
+  scenario "edit a property building with other users building", js: true do
+    user = FactoryBot.create(:user)
+    building = FactoryBot.create(:building, :with_propierties)
+    property = building.properties.first
+    user.buildings << building
+
+    other_user = FactoryBot.create(:user, :with_buildings)
+    other_building = other_user.buildings.first
+
+    visit root_path
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    click_button "Log in"
+
+    click_link building.name
+    # Acomodar el size de la pantalla para que no se oculte el sidebar
+    page.driver.browser.manage.window.resize_to(1024, 768)
+    click_link "Propiedades"
+    within find("tr[data-id='#{property.id}']") do
+      find(".edit-property").click
+    end
+    expect do
+      page.execute_script("document.getElementById('property_building_id').value = '#{other_building.id}'")
+      click_button "Editar"
+      expect(page).to have_content "You are not authorized to perform this action."
+      property.reload
+    end.to_not change(building.properties, :count)
+  end
 end
