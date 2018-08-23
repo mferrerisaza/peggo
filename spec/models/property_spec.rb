@@ -59,5 +59,12 @@ RSpec.describe Property, type: :model do
       property = FactoryBot.create(:property, :fifty_fifty)
       expect(property.owners.size).to eq 2
     end
+
+    it "can have many owners without shares" do
+      owner = FactoryBot.create(:owner)
+      property = FactoryBot.create(:property)
+      property.owners << owner
+      expect(property.owners.size).to eq 1
+    end
   end
 end

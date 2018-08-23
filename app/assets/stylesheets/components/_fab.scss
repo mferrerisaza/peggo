@@ -3,7 +3,10 @@
 .fab-bottom-right {
   position: fixed;
   bottom: 16px;
-  right: 16px
+  right: 16px;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .fab-color {
