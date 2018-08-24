@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :property do
     property_type "Apartamento"
-    sequence(:name) { |n| "#{property_type} #{n}" }
+    sequence(:name) { |n| "#{n}" }
     phone "2660480"
     sequence(:matricula_inmobiliaria) { |n| "50566#{n}" }
     building_coeficient 0.1

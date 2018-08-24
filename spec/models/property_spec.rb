@@ -47,6 +47,11 @@ RSpec.describe Property, type: :model do
     expect(property.errors.messages).to have_key(:building)
   end
 
+  it "returns a full_name" do
+    property = FactoryBot.build(:property, property_type: "Apartamento", name: "301 torre 1")
+    expect(property.full_name).to eq("Apartamento 301 torre 1")
+  end
+
   context "shares relationship" do
     it "can have many shares" do
       property = FactoryBot.create(:property, :fifty_fifty)
