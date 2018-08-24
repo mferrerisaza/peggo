@@ -1,7 +1,6 @@
 class OwnersController < ApplicationController
-  before_action :set_building, only: [:index, :show, :new, :create]
+  before_action :set_building, only: %i[index show new create]
   before_action :set_owner, only: [:show]
-
 
   def index
     @owners = policy_scope(@building.owners)
@@ -20,7 +19,7 @@ class OwnersController < ApplicationController
     @owner = Owner.new(owner_params)
     authorize @owner
     if @owner.save
-      redirect_to building_owners_path
+      redirect_to building_owner_path(@building, @owner)
     else
       render :new
     end

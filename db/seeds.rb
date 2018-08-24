@@ -44,7 +44,7 @@ mike_building_properties = 10
 mike_building_properties.times do |n|
   p = Property.create!(
     property_type: "Apartamento",
-    name: "Apartamento #{n}",
+    name: "#{n}",
     phone: "#{2660480 + n}",
     matricula_inmobiliaria: "#{50566 + n}",
     building_coeficient: 1 / mike_building_properties.to_f,
