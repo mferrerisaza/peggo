@@ -75,7 +75,7 @@ RSpec.feature "Properties features", type: :feature do
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
     find("tr[data-id='#{property.id}']").click
-    expect(page).to have_content(property.name)
+    expect(page).to have_content(property.full_name)
   end
 
   scenario "user deletes a property", js: true do
