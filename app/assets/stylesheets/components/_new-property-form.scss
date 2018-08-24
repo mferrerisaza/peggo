@@ -10,6 +10,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+    }
+    .invalid-feedback {
+      text-align: right;
+      justify-self: flex-end;
     }
     label {
       width: 50%;
