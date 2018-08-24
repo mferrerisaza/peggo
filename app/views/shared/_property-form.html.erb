@@ -1,0 +1,18 @@
+<%= simple_form_for [@building, @property], html: { class: "form-inline" } do |f| %>
+  <%= f.input :property_type, label: "Tipo de propiedad", collection: Property.property_types.keys %>
+  <%= f.input :name, label: "Número de la propiedad"%>
+  <%= f.input :phone, label: "Teléfono de la propiedad" %>
+  <%= f.input :address, label: "Dirección de la propiedad" %>
+  <%= f.input :matricula_inmobiliaria, label: "Número de matricula inmobiliaria" %>
+  <%= f.input :area, label: "Área de la propiedad en mt2" %>
+  <%= f.input :building_coeficient, label: "Coeficiente de copropiedad", input_html: { step: 0.001 }%>
+  <%= f.input :building_id, as: :hidden, input_html: { value: @building.id } %>
+  <span class="new-property-form-btns">
+    <%= link_to "cancelar", building_properties_path(@building), class:"form-btn--no-background" %>
+    <% if action_name == "new" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

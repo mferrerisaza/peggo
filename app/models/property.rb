@@ -2,7 +2,7 @@ class Property < ApplicationRecord
   enum property_type: ["Apartamento", "Casa", "Parqueadero"]
 
   belongs_to :building
-  has_many :shares
+  has_many :shares, dependent: :destroy
   has_many :owners, through: :shares
 
   validates :building_coeficient,

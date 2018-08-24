@@ -3,6 +3,10 @@ class BuildingPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def building_of_current_user?
+    record.user == user
+  end
+
   def new?
     true
   end

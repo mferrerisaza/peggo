@@ -7,7 +7,7 @@
     <%= f.input :name, label: "Nombre de la copropiedad"%>
     <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
     <span class="new-building-form-btns">
-      <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
+      <%= link_to "cancelar", buildings_path, class:"form-btn--no-background" %>
       <%= f.submit "Crear", class:"btn form-btn" %>
     </span>
   <% end %>

@@ -2,6 +2,7 @@
   "name": "peggo",
   "private": true,
   "dependencies": {
+    "@material/fab": "^0.38.1",
     "@material/menu": "^0.38.0",
     "@rails/webpacker": "3.5",
     "bootstrap": "3",

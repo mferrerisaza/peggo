@@ -11,20 +11,39 @@
         <th>Area (mt2)</th>
         <th>Teléfono de la propiedad</th>
         <th>Matricula Inmobiliaria</th>
+        <th>Acciones</th>
       </tr>
       <% @properties.each do |property| %>
-        <tr>
-          <td><%=property.property_type%></td>
-          <td><%=property.name%></td>
-          <td><%= property.owners.map(&:name).join(", ") %></td>
-          <td><%="#{property.building_coeficient * 100}%"%></td>
-          <td><%=property.area%></td>
-          <td><%=property.phone%></td>
-          <td><%=property.matricula_inmobiliaria%></td>
-        </tr>
+          <tr data-id="<%=property.id%>" class="table-row-link" onclick= "location.href= '<%= building_property_path(@building, property)%>'">
+            <td><%=property.property_type%></td>
+            <td><%=property.name%></td>
+            <td><%= property.owners.map(&:name).join(", ") %></td>
+            <td><%="#{property.building_coeficient * 100}%"%></td>
+            <td><%=property.area%></td>
+            <td><%=property.phone%></td>
+            <td><%=property.matricula_inmobiliaria%></td>
+            <td>
+              <%= link_to edit_building_property_path(@building, property), class: "edit-property" do %>
+                <i class="material-icons">
+                  create
+                </i>
+              <% end %>
+              <%= link_to building_property_path(@building, property), class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+                <i class="material-icons">
+                  delete
+                </i>
+              <% end %>
+            </td>
+          </tr>
       <% end %>
     </table>
   </div>
+  <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_building_property_path %>">
+   <i class="material-icons">
+    account_balance
+   </i>
+   +
+  </a>
 </div>
 
 
