@@ -3,10 +3,11 @@
   <div class="show-image-cover">
   </div>
   <div class="show-image-avatar flex flex-center">
-    <div class="avatar-big boy-avatar responsive-avatar">
+    <div class="avatar-big house-avatar responsive-avatar">
     </div>
   </div>
-  <h4 class="text-center"><%= @property.full_name %></h4>
+  <h3 class="property-title text-center"><%= @property.full_name %></h4>
+  <h4 class="building-title text-center"><%= @property.building.name %></h4>
   <div class="table-container-simple flex flex-center">
     <table>
       <tr>
@@ -27,7 +28,8 @@
       </tr>
     </table>
   </div>
-  <h4 class="text-center">Propietarios de la propiedad</h4>
+  <hr class="show-share-division">
+  <h4 class="shares-title text-center">Propietarios de la propiedad</h4>
   <div class="show-table table-container margin-bottom-end">
     <table>
         <tr>
@@ -37,7 +39,7 @@
         </tr>
         <% @property.shares.each do |share| %>
           <tr>
-            <td> <%= share.property.name  %> </td>
+            <td> <%= share.owner.name  %> </td>
             <td> <%= percentage(share.ownerability_percentage) %></td>
             <td> <%= percentage(share.payment_percentage) %></td>
           </tr>

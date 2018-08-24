@@ -33,7 +33,7 @@
         </tr>
         <% @owner.shares.each do |share| %>
           <tr>
-            <td> <%= share.property.name  %> </td>
+            <td> <%= share.property.full_name  %> </td>
             <td> <%= percentage(share.ownerability_percentage) %></td>
             <td> <%= percentage(share.payment_percentage) %></td>
           </tr>
