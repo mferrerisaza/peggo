@@ -12,4 +12,8 @@ class Property < ApplicationRecord
               message: "debe ser un valor númerico entre 0 y 100%"
             }
   validates :property_type, :name, presence: true
+
+  def full_name
+    "#{property_type} #{name}"
+  end
 end
