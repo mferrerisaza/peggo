@@ -122,3 +122,11 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.item-hidden{
+  visibility: hidden;
+}
+
+#mySidenav {
+  transition: width .5s
+}
