@@ -1,6 +1,8 @@
 <% if render_blue_sidebar %>
-  <div id="mySidenav" class="sidebar hidden-xs">
-    <a class="closebtn">&times;</a>
+  <div id="mySidenav" class="sidebar">
+    <div class="hidden-md hidden-lg">
+      <a class="closebtn">&times;</a>
+    </div>
     <div class="sidebar-logo"">
       <%= link_to root_path do %>
         <%= image_tag "logo.png"%>
@@ -59,4 +61,5 @@
       <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "sidebar-signout"%>
     </div>
   </div>
+
 <% end %>
