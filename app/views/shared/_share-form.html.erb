@@ -3,10 +3,10 @@
     <%= f.association :owner, collection: current_user.owners, label: false %>
   </td>
   <td>
-    <%= f.input :ownerability_percentage, label: "Porcentaje de participación",  input_html: { step: 0.001 }, placeholder: "Ej: 0.1", label: false%>
+    <%= f.input :ownerability_percentage,  input_html: { step: 0.001 }, placeholder: "Ej: 0.1", label: false%>
   </td>
   <td>
-    <%= f.input :payment_percentage, label: "Porcentaje de pago de cuota",  input_html: { step: 0.001 }, placeholder: "Ej: 0.1", label: false%>
+    <%= f.input :payment_percentage,  input_html: { step: 0.001 }, placeholder: "Ej: 0.1", label: false%>
   </td>
   <td>
     <%= f.association :property, collection: @building.properties, input_html: { value: @property.id }, as: :hidden%>
