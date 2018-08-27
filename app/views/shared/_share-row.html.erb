@@ -1,0 +1,26 @@
+<tr class="hidden edit-share-form">
+  <%= render 'shared/share-form', share: share %>
+</tr>
+<tr class="share-info-row">
+  <td>
+    <%= share.owner.name  %>
+  </td>
+  <td>
+    <%= percentage(share.ownerability_percentage) %>
+  </td>
+  <td>
+    <%= percentage(share.payment_percentage) %>
+  </td>
+  <td>
+    <%= link_to "#", class: "edit-share-info" do %>
+      <i class="material-icons">
+        create
+      </i>
+    <% end %>
+    <%= link_to share_path(share), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "edit-share-info" do %>
+      <i class="material-icons">
+        delete
+      </i>
+    <% end %>
+  </td>
+</tr>
