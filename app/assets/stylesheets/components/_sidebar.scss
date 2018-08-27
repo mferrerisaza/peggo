@@ -103,11 +103,17 @@
   }
   .page-content-wrapper{
     height: 100%;
-    margin-left: 250px;
+    margin-left: 260px;
+    margin-right: 10px;
   }
 @media (max-width: 991px) {
+  .sidebar {
+    width: 0px;
+  }
+
   .page-content-wrapper{
     margin-left: 0px;
+    margin-right: 0px;
   }
 
 }
