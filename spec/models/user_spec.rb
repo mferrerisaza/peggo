@@ -31,4 +31,9 @@ RSpec.describe User, type: :model do
     user = FactoryBot.create(:user, :with_buildings)
     expect(user.buildings.size).to eq 2
   end
+
+  it "can manage many owners" do
+    user = FactoryBot.create(:user, :with_owners)
+    expect(user.owners.size).to eq 10
+  end
 end

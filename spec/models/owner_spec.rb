@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Owner, type: :model do
-  it "is valid with name, card_number, phone, and email" do
+  it "is valid with name, card_number, phone, email and user" do
     owner = FactoryBot.build(:owner)
     expect(owner).to be_valid
   end
@@ -16,6 +16,12 @@ RSpec.describe Owner, type: :model do
     owner = FactoryBot.build(:owner, email: nil)
     expect(owner).to_not be_valid
     expect(owner.errors.messages).to have_key(:email)
+  end
+
+  it "is invalid without user" do
+    owner = FactoryBot.build(:owner, user: nil)
+    expect(owner).to_not be_valid
+    expect(owner.errors.messages).to have_key(:user)
   end
 
   context 'shares relationship' do
