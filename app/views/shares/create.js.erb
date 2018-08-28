@@ -49,10 +49,16 @@ function addShare(shareHTML) {
   if (editButton) {
     addEditButtonListener(editButton);
   }
+  const editForm = document.getElementById("edit_share_<%= @share.id %>");
+  const closeEditFormBtn =  editForm.querySelector(".close-form-btn");
+  if (closeEditFormBtn) {
+    addCloseBtnListener(closeEditFormBtn);
+  }
 }
 
 <% if @share.errors.any? %>
   refreshForm('<%= j render "shared/share-form", share: @share, form_class:"" %>', false);
 <% else %>
   addShare('<%= j render "shared/share-row", share: @share %>');
+  refreshForm('<%= j render "shared/share-form", share: Share.new, form_class:"" %>', true);
 <% end %>
