@@ -3,6 +3,7 @@ class Share < ApplicationRecord
   belongs_to :owner
   has_many :bills
 
+  validates :owner, uniqueness: { scope: :property, message: "ya tiene participación en esta propiedad" }
   validates :ownerability_percentage,
             numericality: {
               greater_than: 0,

@@ -17,6 +17,7 @@ class OwnersController < ApplicationController
 
   def create
     @owner = Owner.new(owner_params)
+    @owner.user = current_user
     authorize @owner
     if @owner.save
       redirect_to building_owner_path(@building, @owner)

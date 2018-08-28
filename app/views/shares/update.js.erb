@@ -1,0 +1,21 @@
+function refreshForm(innerHTML, hide) {
+  const editShareForm = document.querySelector('#edit_share_<%=@share.id%>');
+  editShareForm.innerHTML = innerHTML;
+  if (hide) {
+    editShareForm.classList.toggle("hidden")
+  }
+}
+
+function addShare(shareHTML) {
+  const share = document.querySelector("[data-share-id = '<%=@share.id%>']");
+  const editShareForm = document.querySelector('#edit_share_<%=@share.id%>');
+  share.insertAdjacentHTML("beforebegin", shareHTML);
+  share.remove();
+  editShareForm.remove();
+}
+
+<% if @share.errors.any? %>
+  refreshForm('<%= j render "shared/share-form", share: @share, form_class:"edit-share-form" %>', false);
+<% else %>
+  addShare('<%= j render "shared/share-row", share: @share %>');
+<% end %>

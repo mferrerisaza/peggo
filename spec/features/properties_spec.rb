@@ -5,10 +5,7 @@ RSpec.feature "Properties features", type: :feature do
     user = FactoryBot.create(:user, :with_buildings)
     building = user.buildings.first
 
-    visit root_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
+    sign_in_as user
 
     click_link building.name
     # Acomodar el size de la pantalla para que no se oculte el sidebar
@@ -37,10 +34,7 @@ RSpec.feature "Properties features", type: :feature do
     property_name = building.properties.first.name
     user.buildings << building
 
-    visit root_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
+    sign_in_as user
 
     click_link building.name
     # Acomodar el size de la pantalla para que no se oculte el sidebar
@@ -65,10 +59,7 @@ RSpec.feature "Properties features", type: :feature do
     property = building.properties.first
     user.buildings << building
 
-    visit root_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
+    sign_in_as user
 
     click_link building.name
     # Acomodar el size de la pantalla para que no se oculte el sidebar
@@ -84,10 +75,7 @@ RSpec.feature "Properties features", type: :feature do
     property = building.properties.first
     user.buildings << building
 
-    visit root_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
+    sign_in_as user
 
     click_link building.name
     # Acomodar el size de la pantalla para que no se oculte el sidebar
@@ -112,10 +100,7 @@ RSpec.feature "Properties features", type: :feature do
     other_user = FactoryBot.create(:user, :with_buildings)
     other_building = other_user.buildings.first
 
-    visit root_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
+    sign_in_as user
 
     click_link building.name
     # Acomodar el size de la pantalla para que no se oculte el sidebar

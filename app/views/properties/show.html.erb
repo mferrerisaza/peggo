@@ -31,19 +31,18 @@
   <hr class="show-share-division">
   <h4 class="shares-title text-center">Propietarios de la propiedad</h4>
   <div class="show-table table-container margin-bottom-end">
-    <table>
-        <tr>
-          <th>Propietario</th>
-          <th>Porcentaje de participación</th>
-          <th>Porcentaje de pago de cuota</th>
-        </tr>
-        <% @property.shares.each do |share| %>
-          <tr>
-            <td> <%= share.owner.name  %> </td>
-            <td> <%= percentage(share.ownerability_percentage) %></td>
-            <td> <%= percentage(share.payment_percentage) %></td>
-          </tr>
+    <div class="table">
+        <div class="table-row" id="shares-table">
+          <div class="table-header">Propietario</div>
+          <div class="table-header">Porcentaje de participación</div>
+          <div class="table-header">Porcentaje de pago de cuota</div>
+          <div class="table-header">Acciones</div>
+        </div>
+        <% @property.shares.order(created_at: :desc).each do |share| %>
+          <%= render 'shared/share-row', share: share %>
         <% end %>
-    </table>
+      <%= render 'shared/share-form', share: @share, form_class: "hidden" %>
+    </div>
   </div>
+    <%= link_to "Agregar propertario", "#", class: "show-new-share-form" %>
 </div>
