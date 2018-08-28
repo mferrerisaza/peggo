@@ -5,13 +5,14 @@ class BillsController < ApplicationController
   end
 
   def new
+    @properties = @building.building_properties
     @bill = Bill.new
     authorize @bill
-    @properties = @building.building_properties
-
+    @bills_array = [@bill]
   end
 
   def create
+    raise
     @bill = Building.new(bill_params)
     authorize @bill
     if @bill.save
