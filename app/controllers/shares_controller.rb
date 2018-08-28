@@ -36,7 +36,10 @@ class SharesController < ApplicationController
   def destroy
     authorize @share
     @share.destroy
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
   end
 
   private
