@@ -6,7 +6,7 @@ function toggleEditFormHiddenClases(editButton) {
 }
 
 function toggleNewFormHiddenClases(addButton) {
-  const form = document.querySelector("#new_share")
+  const form = document.querySelector("#new_share");
   form.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
 }
@@ -54,5 +54,6 @@ function init() {
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
+  // setInterval(init, 500);
 })
 

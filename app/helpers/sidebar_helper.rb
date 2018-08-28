@@ -4,7 +4,7 @@ module SidebarHelper
       buildings: %w[show],
       properties: %w[index show new create edit update],
       owners: %w[index show],
-      shares: %w[create]
+      shares: %w[create update]
     }
     allowed_controllers[controller_name.to_sym].include?(action_name)
   end

@@ -1,11 +1,26 @@
 class SharesController < ApplicationController
-  before_action :set_share, only: :destroy
-  before_action :set_property_owner_and_building, only: :create
+  before_action :set_share, except: :create
+  before_action :set_property_owner_and_building, except: :destroy
 
   def create
     @share = Share.new(share_params)
     authorize @share
     if @share.save
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render template: "#{params[:render][:name]}/show" }
+        format.js
+      end
+    end
+  end
+
+  def update
+    authorize @share
+    if @share.update(share_params)
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
         format.js

@@ -87,12 +87,13 @@
       border-top-left-radius: 8px;
     }
   }
-  .table-row:not(.hidden) {
+  .table-row {
     &:nth-of-type(odd) {
       background-color: #364f6b20;
     }
   }
   .table-data{
+
     white-space: nowrap;
     font-size: 14px;
     font-weight: lighter;
