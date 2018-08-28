@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.feature "Buildings features", type: :feature do
   scenario "user creates a building" do
     user = FactoryBot.create(:user)
-    visit root_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
+    sign_in_as user
 
     expect do
       click_link "Crea una nueva copropiedad"
