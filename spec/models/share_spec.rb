@@ -53,6 +53,24 @@ RSpec.describe Share, type: :model do
     expect(share.errors.messages).to have_key(:payment_percentage)
   end
 
+  it "is invalid with duplicated owner within the same property" do
+    owner = FactoryBot.create(:owner)
+    property = FactoryBot.create(:property)
+    share = FactoryBot.create(:share, owner: owner, property: property)
+    other_share = FactoryBot.build(:share, owner: owner, property: property)
+    expect(other_share).to_not be_valid
+    expect(other_share.errors.messages).to have_key(:owner)
+  end
+
+  it "is valid with same owner within the different properties" do
+    owner = FactoryBot.create(:owner)
+    property = FactoryBot.create(:property)
+    other_property = FactoryBot.create(:property)
+    share = FactoryBot.create(:share, owner: owner, property: property)
+    other_share = FactoryBot.build(:share, owner: owner, property: other_property)
+    expect(other_share).to be_valid
+  end
+
   context "bill relationship" do
     it "can have many bills" do
       share = FactoryBot.create(:share, :with_bills)

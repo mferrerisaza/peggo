@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     resources :properties
     resources :owners, only: [:index, :show, :new, :create]
   end
-  resources :shares, only: [:create]
+  resources :shares, only: [:create, :update, :destroy]
 end
