@@ -6,7 +6,7 @@ function toggleEditFormHiddenClases(editButton) {
 }
 
 function toggleNewFormHiddenClases(addButton) {
-  const form = document.querySelector(".new-share-form")
+  const form = document.querySelector("#new_share")
   form.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
 }

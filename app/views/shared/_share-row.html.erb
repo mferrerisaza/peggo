@@ -1,17 +1,15 @@
-<tr class="hidden edit-share-form" data-share-id="<%= share.id %>">
-  <%= render 'shared/share-form', share: share %>
-</tr>
-<tr class="share-info-row" data-share-id="<%= share.id %>">
-  <td>
+<%= render 'shared/share-form', share: share, form_class: "edit-share-form hidden" %>
+<div class="table-row share-info-row" data-share-id="<%= share.id %>">
+  <div class="table-data">
     <%= share.owner.name  %>
-  </td>
-  <td>
+  </div>
+  <div class="table-data">
     <%= percentage(share.ownerability_percentage) %>
-  </td>
-  <td>
+  </div>
+  <div class="table-data">
     <%= percentage(share.payment_percentage) %>
-  </td>
-  <td>
+  </div>
+  <div class="table-data">
     <%= link_to "#", class: "edit-share-info" do %>
       <i class="material-icons">
         create
@@ -22,5 +20,5 @@
         delete
       </i>
     <% end %>
-  </td>
-</tr>
+  </div>
+</div>

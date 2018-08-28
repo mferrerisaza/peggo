@@ -70,3 +70,39 @@
 .text-align-right {
   text-align: right !important;
 }
+.table {
+  display: table;
+  margin-bottom: 0px;
+  .table-header{
+    white-space: nowrap;
+    background-color: $brand-primary;
+    color: white;
+    font-size: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    &:last-child {
+      border-top-right-radius: 8px;
+    }
+    &:first-child {
+      border-top-left-radius: 8px;
+    }
+  }
+  .table-row:not(.hidden) {
+    &:nth-of-type(odd) {
+      background-color: #364f6b20;
+    }
+  }
+  .table-data{
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: lighter;
+    padding: 8px 16px;
+    text-align: center;
+  }
+}
+.table>* {
+  display: table-row;
+}
+.table>*>* {
+  display: table-cell;
+}
