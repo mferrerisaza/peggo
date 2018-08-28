@@ -1,0 +1,36 @@
+<div class="new-building-form-container">
+  <div class="new-building-form-heading">
+    <h1>Cobrar una nueva cuota ordinaria</h1>
+  </div>
+  <%= simple_form_for [building, bill] do |f| %>
+    <i class="fas fa-money"></i>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Tipo Propiedad</th>
+          <th>Número</th>
+          <th>Cuota</th>
+          <th>Acciones</th>
+        </tr>
+        <% @properties.each do |property| %>
+            <tr data-id="<%=property.id%>" class="table-row-link">
+              <td><%=property.property_type%></td>
+              <td><%=property.name%></td>
+              <td>$ 3000</td>
+              <td> <%= f.check_box :send, options = {checked: true}, "true", "false" %> </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+    <span class="new-building-form-btns">
+      <%= link_to "cancelar", root_path, class:"form-btn--no-background" %>
+      <% byebug %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    </span>
+
+  <% end %>
+</div>
+
+
+
