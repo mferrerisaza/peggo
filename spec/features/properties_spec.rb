@@ -40,7 +40,7 @@ RSpec.feature "Properties features", type: :feature do
     # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
-    within find("tr[data-id='#{property.id}']") do
+    within find("div[data-id='#{property.id}']") do
       find(".edit-property").click
     end
     expect do
@@ -48,7 +48,7 @@ RSpec.feature "Properties features", type: :feature do
       fill_in "Número de la propiedad", with: "Casa 1"
       click_button "Editar"
       expect(page).to have_content "Propiedad editada existosamente"
-      expect(find("tr[data-id='#{property.id}']")).to have_content "Casa 1"
+      expect(find("div[data-id='#{property.id}']")).to have_content "Casa 1"
       property.reload
     end.to change(property, :name).from(property_name).to("Casa 1")
   end
@@ -65,7 +65,7 @@ RSpec.feature "Properties features", type: :feature do
     # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
-    find("tr[data-id='#{property.id}']").click
+    find("div[data-id='#{property.id}']").click
     expect(page).to have_content(property.full_name)
   end
 
@@ -81,7 +81,7 @@ RSpec.feature "Properties features", type: :feature do
     # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
-    within find("tr[data-id='#{property.id}']") do
+    within find("div[data-id='#{property.id}']") do
       find(".destroy-property").click
     end
     expect do
@@ -106,7 +106,7 @@ RSpec.feature "Properties features", type: :feature do
     # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
-    within find("tr[data-id='#{property.id}']") do
+    within find("div[data-id='#{property.id}']") do
       find(".edit-property").click
     end
     expect do

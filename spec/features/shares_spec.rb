@@ -14,7 +14,7 @@ RSpec.feature "Shares features", type: :feature do
     # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
-    find("tr[data-id='#{property.id}']").click
+    find("div[data-id='#{property.id}']").click
     aggregate_failures do
       expect(page).to have_content(property.full_name)
       expect(page).to have_content("Agregar propertario")
@@ -51,7 +51,7 @@ RSpec.feature "Shares features", type: :feature do
     # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
-    find("tr[data-id='#{property.id}']").click
+    find("div[data-id='#{property.id}']").click
     within "div[data-share-id='#{share.id}']" do
       find(".edit-share-info").click
     end
@@ -81,14 +81,13 @@ RSpec.feature "Shares features", type: :feature do
     # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
-    find("tr[data-id='#{property.id}']").click
+    find("div[data-id='#{property.id}']").click
     within "div[data-share-id='#{share.id}']" do
       find(".delete-share").click
     end
     expect do
       expect(page.driver.browser.switch_to.alert.text).to eq "¿Estás seguro?"
       page.driver.browser.switch_to.alert.accept
-      save_and_open_screenshot
       expect(page).to_not have_css("div[data-share-id='#{share.id}']")
       expect(page).to_not have_content(share.owner.name)
     end.to change(property.shares, :count).by(-1)
