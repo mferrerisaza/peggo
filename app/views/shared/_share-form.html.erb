@@ -1,4 +1,4 @@
-<%= simple_form_for(share) do |f| %>
+<%= simple_form_for(share, remote: true) do |f| %>
   <td>
     <%= f.association :owner, collection: current_user.owners, label: false %>
   </td>
@@ -10,15 +10,16 @@
   </td>
   <td>
     <%= f.association :property, collection: @building.properties, input_html: { value: @property.id }, as: :hidden%>
-    <%= button_tag(type: 'submit') do %>
+    <input class="hidden" value="<%= controller_name %>" type="hidden" name="render[name]" >
+    <button type="submit">
       <i class="material-icons">
         check
       </i>
-    <% end %>
-    <%= button_tag class: "show-edit-share-form" do %>
+    </button>
+<% end %>
+    <button class="close-form-btn">
       <i class="material-icons">
         clear
       </i>
-    <% end %>
+    </button>
   </td>
-<% end %>

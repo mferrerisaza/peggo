@@ -1,0 +1,23 @@
+function refreshForm(innerHTML, hide) {
+  const newShareForm = document.querySelector('.new-share-form');
+  const addOwnerBtn = document.querySelector(".show-new-share-form");
+  console.log(innerHTML);
+  console.log(newShareForm.innerHTML)
+  newShareForm.innerHTML = innerHTML;
+  if (hide) {
+    newShareForm.classList.toggle("hidden");
+    addOwnerBtn.classList.toggle("hidden");
+  }
+}
+
+function addShare(shareHTML) {
+  const shares = document.getElementById('shares-table');
+  shares.insertAdjacentHTML('afterend', shareHTML);
+}
+
+<% if @share.errors.any? %>
+  refreshForm('<%= j render "shared/share-form", share: @share %>', false);
+<% else %>
+  addShare('<%= j render "shared/share-row", share: @share %>');
+  refreshForm('<%= j render "shared/share-form", share: Share.new %>', true);
+<% end %>

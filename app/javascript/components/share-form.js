@@ -5,40 +5,54 @@ function toggleEditFormHiddenClases(editButton) {
   dataRow.classList.toggle("hidden");
 }
 
-function toggleNewFormHiddenClases() {
+function toggleNewFormHiddenClases(addButton) {
   const form = document.querySelector(".new-share-form")
-  const addButton = document.querySelector(".show-edit-share-form.no-form-btn")
   form.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
 }
 
-function addEditButtonsListener(editButtons) {
-  for (let i = 0; i < editButtons.length; i++) {
-    editButtons[i].addEventListener("click", (event) => {
+function closeForm(closeBtn) {
+  const form = closeBtn.parentNode.parentNode;
+  const dataRow = form.nextElementSibling;
+  const addButton = document.querySelector(".show-new-share-form");
+  form.classList.toggle("hidden");
+
+  if (dataRow){
+    dataRow.classList.toggle("hidden");
+  }
+
+  if(addButton.classList.contains("hidden")) {
+    addButton.classList.remove("hidden")
+  }
+}
+
+function addClickListeners(elements, callback) {
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", (event) => {
       event.preventDefault();
-      toggleEditFormHiddenClases(event.currentTarget);
+      callback(event.currentTarget);
     })
   }
 }
 
-function addShowFormBtnsListener(showFormButtons) {
-  for (let i = 0; i < showFormButtons.length; i++) {
-    showFormButtons[i].addEventListener("click", (event) => {
-      event.preventDefault();
-      toggleNewFormHiddenClases();
-    })
+function init() {
+  const editButtons = document.querySelectorAll(".edit-share-info");
+  const showFormButtons = document.querySelectorAll(".show-new-share-form");
+  const closeFormBtns = document.querySelectorAll(".close-form-btn");
+  if (editButtons) {
+    addClickListeners(editButtons, toggleEditFormHiddenClases);
+  }
+
+  if (showFormButtons){
+    addClickListeners(showFormButtons, toggleNewFormHiddenClases);
+  }
+
+  if (closeFormBtns) {
+    addClickListeners(closeFormBtns, closeForm);
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const editButtons = document.querySelectorAll(".edit-share-info");
-  const showFormButtons = document.querySelectorAll(".show-edit-share-form");
-
-  if (editButtons) {
-    addEditButtonsListener(editButtons);
-  }
-
-  if (showFormButtons){
-    addShowFormBtnsListener(showFormButtons);
-  }
+  init();
 })
+

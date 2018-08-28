@@ -32,19 +32,20 @@
   <h4 class="shares-title text-center">Propietarios de la propiedad</h4>
   <div class="show-table table-container margin-bottom-end">
     <table>
-        <tr>
+        <tr id="shares-table">
           <th>Propietario</th>
           <th>Porcentaje de participación</th>
           <th>Porcentaje de pago de cuota</th>
           <th>Acciones</th>
         </tr>
-        <% @property.shares.each do |share| %>
+        <% @property.shares.order(created_at: :desc).each do |share| %>
           <%= render 'shared/share-row', share: share %>
         <% end %>
-        <tr class="new-share-form hidden">
+        <tr class="new-share-form <%= 'hidden' if @share.errors.messages.size.zero? %>">
           <%= render 'shared/share-form', share: @share %>
         </tr>
     </table>
   </div>
-    <%= link_to "Agregar propertario", "#", class: "show-edit-share-form no-form-btn"  %>
+  <% class_list = "show-new-share-form no-form-btn" %>
+    <%= link_to "Agregar propertario", "#", class: class_list %>
 </div>
