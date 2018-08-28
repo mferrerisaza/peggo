@@ -54,6 +54,5 @@ function init() {
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
-  // setInterval(init, 500);
 })
 
