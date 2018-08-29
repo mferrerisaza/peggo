@@ -10,7 +10,7 @@
         <th>Email</th>
       </tr>
       <% @owners.each do |owner| %>
-        <tr onclick= "location.href= '<%= building_owner_path(@building, owner) %>' ">
+        <tr class="table-row-link" onclick= "location.href= '<%= building_owner_path(@building, owner) %>' ">
           <td> <%= owner.name %> </td>
           <td> <%= owner.card_number  %> </td>
           <td> <%= owner.phone %> </td>

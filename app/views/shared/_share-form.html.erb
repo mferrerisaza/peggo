@@ -1,6 +1,6 @@
 <%= simple_form_for(share, remote: true, html: { class: "#{form_class} table-row" }) do |f| %>
   <div class="table-data">
-    <%= f.association :owner, collection: current_user.owners, label: false %>
+    <%= f.association :owner, collection: @building.owners, label: false %>
   </div>
   <div class="table-data">
     <%= f.input :ownerability_percentage,  input_html: { step: 0.001 }, placeholder: "Ej: 0.1", label: false%>
