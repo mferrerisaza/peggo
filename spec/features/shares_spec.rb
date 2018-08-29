@@ -5,6 +5,7 @@ RSpec.feature "Shares features", type: :feature do
     scenario "user creates a share on property show", js: true do
       user = FactoryBot.create(:user, :with_owners)
       building = FactoryBot.create(:building, :with_propierties)
+      building.owners << user.owners
       owner = user.owners.first
       property = building.properties.first
       user.buildings << building
@@ -39,6 +40,7 @@ RSpec.feature "Shares features", type: :feature do
     scenario "user updates a share on property show", js: true do
       user = FactoryBot.create(:user, :with_owners)
       building = FactoryBot.create(:building)
+      building.owners << user.owners
       owner = user.owners.first
       property = FactoryBot.create(:property, :fifty_fifty)
       share = property.shares.first
@@ -97,6 +99,7 @@ RSpec.feature "Shares features", type: :feature do
     scenario "user creates and edit a share on property show and then reopen and closes edit form", js: true do
       user = FactoryBot.create(:user, :with_owners)
       building = FactoryBot.create(:building, :with_propierties)
+      building.owners << user.owners
       owner = user.owners.first
       property = building.properties.first
       user.buildings << building
