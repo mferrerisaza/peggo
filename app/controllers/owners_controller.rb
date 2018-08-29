@@ -8,6 +8,7 @@ class OwnersController < ApplicationController
 
   def show
     authorize @owner
+    @share = Share.new
   end
 
   def new

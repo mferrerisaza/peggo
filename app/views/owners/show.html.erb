@@ -25,20 +25,24 @@
   </div>
   <h4 class="text-center">Propiedades en el edificio</h4>
   <div class="show-table table-container margin-bottom-end">
-    <table>
-        <tr>
-          <th>Propiedad</th>
-          <th>Porcentaje de participación</th>
-          <th>Porcentaje de pago de cuota</th>
-        </tr>
+    <div class="table">
+        <div class="table-row">
+          <div class="table-header">Propiedad</div>
+          <div class="table-header">Porcentaje de participación</div>
+          <div class="table-header">Porcentaje de pago de cuota</div>
+          <div class="table-header">Acciones</div>
+        </div>
         <% @owner.shares.each do |share| %>
-          <tr>
-            <td> <%= share.property.full_name  %> </td>
-            <td> <%= percentage(share.ownerability_percentage) %></td>
-            <td> <%= percentage(share.payment_percentage) %></td>
-          </tr>
+          <%= render 'shared/share-row', share: share %>
         <% end %>
-    </table>
+        <%= render 'shared/share-form', share: @share, form_class: "new-share-form hidden" %>
+    </div>
   </div>
+  <%= link_to "#", class: "show-new-share-form"  do %>
+    <i class="material-icons">
+      add
+    </i>
+    <span>Agregar propertario</span>
+  <% end %>
 </div>
 
