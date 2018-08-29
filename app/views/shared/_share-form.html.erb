@@ -11,12 +11,12 @@
   <div class="table-data">
     <%= f.association :property, collection: @building.properties, input_html: { value: @property.id }, as: :hidden%>
     <input class="hidden" value="<%= controller_name %>" type="hidden" name="render[name]" >
-    <button type="submit" class="submit-share-form">
+    <button type="submit" class="submit-share-form no-style-btn">
       <i class="material-icons">
         check
       </i>
     </button>
-    <button class="close-form-btn">
+    <button class="close-form-btn no-style-btn">
       <i class="material-icons">
         clear
       </i>

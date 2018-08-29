@@ -54,3 +54,10 @@
   right: 32px;
   margin-bottom: 32px;
 }
+.no-style-btn{
+  background: none;
+  border: none;
+  i {
+    font-weight: bold;
+  }
+}

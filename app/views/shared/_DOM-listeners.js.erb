@@ -1,0 +1,27 @@
+function addCloseBtnListener(element) {
+  element.addEventListener("click", (event) => {
+    event.preventDefault();
+    const form = event.currentTarget.parentNode.parentNode;
+    const dataRow = form.nextElementSibling;
+    const addButton = document.querySelector(".show-new-share-form");
+    form.classList.toggle("hidden");
+
+    if (dataRow){
+      dataRow.classList.toggle("hidden");
+    }
+
+    if(addButton.classList.contains("hidden")) {
+      addButton.classList.remove("hidden")
+    }
+  })
+}
+
+function addEditButtonListener(element) {
+  element.addEventListener("click", (event) => {
+    event.preventDefault();
+    const dataRow = event.currentTarget.parentNode.parentNode;
+    const form = dataRow.previousElementSibling;
+    form.classList.toggle("hidden");
+    dataRow.classList.toggle("hidden");
+  })
+}
