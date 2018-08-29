@@ -31,9 +31,9 @@ function addShare(shareHTML) {
 }
 
 <% if @share.errors.any? %>
-  refreshForm('<%= j render "shared/share-form", share: @share, form_class:"" %>', false);
+  refreshForm('<%= j render "shared/share-form", share: @share, form_class:"new-share-form" %>', false);
 <% else %>
   addShare('<%= j render "shared/share-row", share: @share %>');
-  refreshForm('<%= j render "shared/share-form", share: Share.new, form_class:"" %>', true);
+  refreshForm('<%= j render "shared/share-form", share: Share.new, form_class:"new-share-form" %>', true);
 <% end %>
 

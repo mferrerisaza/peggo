@@ -53,6 +53,23 @@
   position: absolute;
   right: 32px;
   margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  color: $my-secondary-blue;
+  font-weight: bold;
+  span {
+    font-size: 16px;
+  }
+  i{
+    font-size: 32px;
+  }
+  &:hover,:active,:focus {
+    text-decoration: none;
+  }
+  &:hover {
+    color: $brand-primary;
+  }
+
 }
 .no-style-btn{
   background: none;

@@ -129,3 +129,15 @@
 .table>*>* {
   display: table-cell;
 }
+.edit-share-form, .new-share-form {
+  padding: 32px;
+  height: 100%;
+  select {
+    font-weight: lighter !important;
+    font-size: 14px !important;
+  }
+  input{
+    font-weight: normal !important;
+    font-size: 14px !important;
+  }
+}

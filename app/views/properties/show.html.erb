@@ -41,8 +41,13 @@
         <% @property.shares.order(created_at: :desc).each do |share| %>
           <%= render 'shared/share-row', share: share %>
         <% end %>
-      <%= render 'shared/share-form', share: @share, form_class: "hidden" %>
+      <%= render 'shared/share-form', share: @share, form_class: "new-share-form hidden" %>
     </div>
   </div>
-    <%= link_to "Agregar propertario", "#", class: "show-new-share-form" %>
+    <%= link_to "#", class: "show-new-share-form"  do %>
+    <i class="material-icons">
+      add
+    </i>
+    <span>Agregar propertario</span>
+    <% end %>
 </div>
