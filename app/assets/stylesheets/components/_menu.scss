@@ -1,12 +1,18 @@
-@import "@material/menu/mdc-menu";
+// @import "@material/menu/mdc-menu";
+.dropdown-menu{
+  width: 100%;
+  position: relative;
+  border-radius: 3px;
+}
 .building-list-item{
   text-align: center;
   font-size: 16px !important;
   padding: 8px;
 
   a {
-    font-weight: bold;
+    font-weight: bold !important;
     text-decoration: none;
+    color: $brand-primary !important;
     &:active,&:focus{
       text-decoration: none;
     }
