@@ -1,35 +1,35 @@
-<div class="new-building-form-container">
-  <div class="new-building-form-heading">
-    <h1>Cobrar una nueva cuota ordinaria</h1>
-  </div>
-  <i class="fas fa-money"></i>
-  <div class="table-container">
-    <table>
-      <tr>
-        <th>Tipo Propiedad</th>
-        <th>Número</th>
-        <th>Cuota</th>
-        <th>Acciones</th>
-      </tr>
-      <%= simple_form_for [building, bill] do |f| %>
-        <% bills_array.each do |b| %>
-          <%= simple_fields_for 'bills_array[]', b do |p| %>
-            <% @properties.each do |property| %>
-                <tr data-id="<%=property.id%>" class="table-row-link">
-                  <td> <%=property.property_type%> </td>
-                  <td> <%=property.name%> </td>
-                  <td> $ 3000 </td>
-                  <td> <%= p.input :enviar, label: false, as: :boolean, checked_value: true, unchecked_value: false %> </td>
-                  <%= p.input :share, as: :hidden, input_html: { value: Share.all.first } %>
-                  <%= p.input :status, as: :hidden, input_html: { value: "Pendiente" } %>
-                  <%= p.input :property, as: :hidden, input_html: { value: property.id } %>
-                  <%= p.input :name, as: :hidden, input_html: { value: property.name } %>
-                </tr>
-            <% end %>
-          <%end %>
-        <% end %>
-        <%= f.button :submit %>
-      <% end %>
-    </table>
+<div class="page-content-wrapper">
+  <h4 class="bill-title text-center">Cobrar nueva cuota ordinaria</h4>
+  <div class="show-table table-container margin-bottom-end">
+    <div class="table">
+      <div class="table-row" id="bill-table">
+        <div class="table-header table-cell-large-width">Tipo de propiedad</div>
+        <div class="table-header table-cell-small-width">Número</div>
+        <div class="table-header table-cell-small-width">Cuota</div>
+        <div class="table-header table-cell-small-width">Acciones</div>
+      </div>
+    </div>
+    <form action="/buildings/2/bills" method="post">
+      <input type="hidden" name="authenticity_token" valur="<%= form_authenticity_token %>">
+        <div class="table">
+          <% @properties.each do |property| %>
+            <div class="table-row text-center-vertical">
+              <div class="table-data table-cell-large-width"> <%= property.property_type %> </div>
+              <div class="table-data table-cell-small-width"> <%= property.name %> </div>
+              <div class="table-data table-cell-small-width"> $ 3000 </div>
+              <input type="hidden" name="bill[][status]" value="Pendiente"><br>
+              <input type="hidden" name="bill[][property_id]" value="<%= property.id %>"><br>
+              <input type="hidden" name="bill[][property_name]" value="<%= property.name %>"><br>
+              <div class="table-data table-cell-small-width">
+                <input type="checkbox" name="bill[][enviar]" value="true" unchecked><br>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <button class="mdc-fab fab-bottom-right fab-color" type="submit" name="action">
+            <i class="material-icons">send</i>
+        </button>
+      </form>
+    </div>
   </div>
 </div>
