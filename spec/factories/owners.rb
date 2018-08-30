@@ -5,6 +5,7 @@ FactoryBot.define do
     phone "3148509472"
     sequence(:email) { |n| "test#{n}@peggo.com" }
     association :user
+    association :building
     trait :with_shares do
       after(:create) { |owner| create_list(:share, 2, owner: owner) }
     end

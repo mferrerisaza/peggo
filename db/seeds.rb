@@ -82,7 +82,8 @@ number_of_owners.times do |n|
     card_number: Faker::IDNumber.valid,
     phone: Faker::PhoneNumber.cell_phone,
     email: Faker::Internet.free_email,
-    user: mike
+    user: mike,
+    building: mike_building
   )
   instance_variable_set("@mike_building_owner_#{n}", o)
 end
@@ -95,7 +96,8 @@ number_of_owners.times do |n|
     card_number: Faker::IDNumber.valid,
     phone: Faker::PhoneNumber.cell_phone,
     email: Faker::Internet.free_email,
-    user: dan
+    user: dan,
+     building: dan_building,
   )
   instance_variable_set("@dan_building_owner_#{n}", o)
 end

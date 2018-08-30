@@ -1,5 +1,6 @@
 class SharesController < ApplicationController
   before_action :set_share, except: :create
+  before_action :set_render, except: :destroy
   before_action :set_property_owner_and_building, except: :destroy
 
   def create
@@ -12,7 +13,7 @@ class SharesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render template: "#{params[:render][:name]}/show" }
+        format.html { render template: "#{@render}/show" }
         format.js
       end
     end
@@ -27,7 +28,7 @@ class SharesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render template: "#{params[:render][:name]}/show" }
+        format.html { render template: "#{@render}/show" }
         format.js
       end
     end
@@ -51,7 +52,15 @@ class SharesController < ApplicationController
   def set_property_owner_and_building
     @property = Property.find(share_params[:property_id]) if share_params[:property_id].present?
     @owner = Owner.find(share_params[:owner_id]) if share_params[:owner_id].present?
-    @building = @property.building
+    if @render == "properties"
+      @building = @property.building
+    elsif @render == "owners"
+      @building = @owner.building
+    end
+  end
+
+  def set_render
+    @render = params[:render][:name]
   end
 
   def share_params

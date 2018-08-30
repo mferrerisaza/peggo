@@ -10,6 +10,7 @@ class PropertiesController < ApplicationController
   def show
     authorize @property
     @share = Share.new
+    @render = "properties"
   end
 
   def new

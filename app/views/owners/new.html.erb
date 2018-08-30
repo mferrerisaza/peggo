@@ -8,6 +8,7 @@
     <%= f.input :card_number, label: "Cédula del propietario"%>
     <%= f.input :phone, label: "Teléfono del propietario"%>
     <%= f.input :email, label: "Correo electrónico del propietario"%>
+    <%= f.input :building_id, as: :hidden, input_html: { value: @building.id } %>
     <span class="new-building-form-btns">
       <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
       <%= f.submit "Crear Propietario", class:"btn form-btn" %>
