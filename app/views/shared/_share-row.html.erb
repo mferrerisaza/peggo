@@ -1,7 +1,11 @@
 <%= render 'shared/sidebar' %>
 <div class="table-row share-info-row" data-share-id="<%= share.id %>">
   <div class="table-data">
-    <%= share.owner.name  %>
+    <% if @render == "properties" %>
+      <%= share.owner.name  %>
+    <% elsif @render == "owners" %>
+      <%= share.property.full_name %>
+    <% end %>
   </div>
   <div class="table-data">
     <%= percentage(share.ownerability_percentage) %>
