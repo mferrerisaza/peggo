@@ -107,3 +107,17 @@
 .table>*>* {
   display: table-cell;
 }
+
+.table-cell-large-width {
+  width: 40% !important;
+}
+
+.table-cell-small-width {
+  width: 20% !important;
+}
+
+.text-center-vertical {
+  display: flex;
+  align-items: center;
+  height: 2em;
+}
