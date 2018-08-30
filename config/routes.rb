@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :buildings, only: [:index, :show, :new, :create] do
     resources :properties
     resources :owners, only: [:index, :show, :new, :create]
-    resources :bills, only: [:index,  :new, :create]
+    resources :bills, only: [:new, :create]
   end
   resources :shares, only: [:create, :update, :destroy]
 end
