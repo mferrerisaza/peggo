@@ -1,5 +1,4 @@
 class Bill < ApplicationRecord
-  attr_accessor :enviar
 
   enum status: ["Pagada", "Pendiente"]
 
