@@ -9,17 +9,17 @@
         <div class="table-header table-cell-small-width">Acciones</div>
       </div>
     </div>
-    <form action="/buildings/2/bills" method="post">
+    <form action="/buildings/<%= building.id %>/bills" method="post">
       <input type="hidden" name="authenticity_token" valur="<%= form_authenticity_token %>">
         <div class="table">
-          <% @properties.each do |property| %>
+          <% properties.each do |property| %>
             <div class="table-row text-center-vertical">
               <div class="table-data table-cell-large-width"> <%= property.property_type %> </div>
               <div class="table-data table-cell-small-width"> <%= property.name %> </div>
               <div class="table-data table-cell-small-width"> $ 3000 </div>
               <input type="hidden" name="bill[][status]" value="Pendiente"><br>
               <input type="hidden" name="bill[][property_id]" value="<%= property.id %>"><br>
-              <input type="hidden" name="bill[][property_name]" value="<%= property.name %>"><br>
+              <input type="hidden" name="bill[][share_id]" value="<%= property.shares.first.id %>"><br>
               <div class="table-data table-cell-small-width">
                 <input type="checkbox" name="bill[][enviar]" value="true" unchecked><br>
               </div>
