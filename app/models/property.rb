@@ -5,6 +5,7 @@ class Property < ApplicationRecord
   belongs_to :building
   has_many :shares, dependent: :destroy
   has_many :owners, through: :shares
+  has_many :bills, through: :shares
 
   validates :building_coeficient,
             numericality: {

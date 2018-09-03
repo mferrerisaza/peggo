@@ -4,7 +4,8 @@ module SidebarHelper
       buildings: %w[show],
       properties: %w[index show new create edit update],
       owners: %w[index show],
-      shares: %w[create update]
+      shares: %w[create update],
+      bills: %w[new create]
     }
     return if allowed_controllers[controller_name.to_sym].nil?
     allowed_controllers[controller_name.to_sym].include?(action_name)

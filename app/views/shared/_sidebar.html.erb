@@ -54,6 +54,12 @@
         </i>
         <span>Copropietarios</span>
       </a>
+      <a class="sidebar-link <%= "active" if controller_name == "bills" %>" href="/buildings/<%= @building.id %>/bills/new">
+        <i class="material-icons">
+          people
+        </i>
+        <span>Cobrar Cuota</span>
+      </a>
 
     </div>
     <div class="sidebar-bottom">

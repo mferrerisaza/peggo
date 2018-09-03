@@ -1,4 +1,5 @@
 class Bill < ApplicationRecord
+
   enum status: ["Pagada", "Pendiente"]
 
   belongs_to :share

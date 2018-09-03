@@ -1,0 +1,35 @@
+<div class="page-content-wrapper">
+  <h4 class="bill-title text-center">Cobrar nueva cuota ordinaria</h4>
+  <div class="show-table table-container margin-bottom-end">
+    <div class="table">
+      <div class="table-row" id="bill-table">
+        <div class="table-header table-cell-large-width">Tipo de propiedad</div>
+        <div class="table-header table-cell-small-width">Número</div>
+        <div class="table-header table-cell-small-width">Cuota</div>
+        <div class="table-header table-cell-small-width">Acciones</div>
+      </div>
+    </div>
+    <form action="/buildings/<%= building.id %>/bills" method="post">
+      <input type="hidden" name="authenticity_token" valur="<%= form_authenticity_token %>">
+        <div class="table">
+          <% properties.each do |property| %>
+            <div class="table-row text-center-vertical">
+              <div class="table-data table-cell-large-width"> <%= property.property_type %> </div>
+              <div class="table-data table-cell-small-width"> <%= property.name %> </div>
+              <div class="table-data table-cell-small-width"> $ 3000 </div>
+              <input type="hidden" name="bill[][status]" value="Pendiente"><br>
+              <input type="hidden" name="bill[][property_id]" value="<%= property.id %>"><br>
+              <input type="hidden" name="bill[][share_id]" value="<%= property.shares.first.id %>"><br>
+              <div class="table-data table-cell-small-width">
+                <input type="checkbox" name="bill[][enviar]" value="true" checked><br>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <button class="mdc-fab fab-bottom-right fab-color" type="submit" name="action">
+            <i class="material-icons">send</i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
