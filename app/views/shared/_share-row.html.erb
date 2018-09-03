@@ -1,4 +1,4 @@
-<%= render 'shared/sidebar' %>
+<%= render 'shared/share-form', share: share, form_class: "edit-share-form hidden" %>
 <div class="table-row share-info-row" data-share-id="<%= share.id %>">
   <div class="table-data">
     <% if @render == "properties" %>
