@@ -5,14 +5,14 @@ class BillsController < ApplicationController
   end
 
   def new
-    @properties = @building.building_properties
+    @properties = @building.properties
     @bill = Bill.new
     authorize @bill
     @bills_array = [@bill]
   end
 
   def create
-    @properties = @building.building_properties
+    @properties = @building.properties
     params[:bill].each do |b|
       if b[:enviar].present?
         @bill = Bill.new(bill_params(b))

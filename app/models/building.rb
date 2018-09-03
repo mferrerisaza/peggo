@@ -10,8 +10,4 @@ class Building < ApplicationRecord
   def building_coeficients_sum
     properties.sum(:building_coeficient)
   end
-
-  def building_properties
-    self.properties
-  end
 end
