@@ -109,6 +109,9 @@
       color: $my-green;
     }
   }
+  .no-owners {
+    color: $my-red !important;
+  }
   .table-row-link {
      cursor: pointer;
      &:hover{

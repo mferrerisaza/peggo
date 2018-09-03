@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
   before_action :set_property, only: %i[show edit update destroy]
 
   def index
-    @properties = policy_scope(Property.where(building: @building))
+    @properties = policy_scope(Property.where(building: @building).order(created_at: :asc))
     authorize @building, :building_of_current_user?
   end
 
