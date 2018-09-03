@@ -6,4 +6,8 @@ Rails.application.routes.draw do
     resources :owners, only: [:index, :show, :new, :create]
   end
   resources :shares, only: [:create, :update, :destroy]
+  require "sidekiq/web"
+    authenticate :user, lambda { |u| u.admin } do
+      mount Sidekiq::Web => '/sidekiq'
+    end
 end

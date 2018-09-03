@@ -1,7 +1,7 @@
 <%= render 'shared/sidebar' %>
 <div class="page-content-wrapper">
   <h1 class="properties-index-title">Lista de propiedades</h1>
-  <div class="alert alert-danger alert-dismissible" role="alert">
+  <div class="alert alert-danger alert-dismissible <%#= "hidden" if @building.building_coeficients_sum <= 1 %>" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     Los coeficientes de copropiedad superan el 100% (Suma actual: <%= percentage(@building.building_coeficients_sum) %>)
   </div>

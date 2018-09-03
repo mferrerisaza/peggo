@@ -40,10 +40,15 @@ RSpec.describe Building, type: :model do
     expect(building.properties.size).to eq 10
   end
 
-  context "sum of properties building_coeficients" do
+  context "sum of properties building_properties" do
     it "returns the corrert sum of propierties building_coeficient" do
       building = FactoryBot.create(:building, :with_propierties)
       expect(building.building_coeficients_sum).to eq 1
+    end
+
+    it "returns the corrert sum of propierties area" do
+      building = FactoryBot.create(:building, :with_propierties)
+      expect(building.area_sum).to eq 500
     end
   end
 

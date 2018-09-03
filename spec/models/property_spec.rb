@@ -18,10 +18,15 @@ RSpec.describe Property, type: :model do
     expect(property.errors.messages).to have_key(:name)
   end
 
-  it "is invalid without a building_coeficient" do
+  it "is valid without a building_coeficient" do
     property = FactoryBot.build(:property, building_coeficient: nil)
+    expect(property).to be_valid
+  end
+
+  it "is invalid without a area" do
+    property = FactoryBot.build(:property, area: nil)
     expect(property).to_not be_valid
-    expect(property.errors.messages).to have_key(:building_coeficient)
+    expect(property.errors.messages).to have_key(:area)
   end
 
   it "is invalid with a building_coeficient greater_than 1" do
@@ -50,6 +55,13 @@ RSpec.describe Property, type: :model do
   it "returns a full_name" do
     property = FactoryBot.build(:property, property_type: "Apartamento", name: "301 torre 1")
     expect(property.full_name).to eq("Apartamento 301 torre 1")
+  end
+
+  it "calculates the correct building coeficient" do
+    building = FactoryBot.create(:building, :with_propierties)
+    property = FactoryBot.create(:property, area: 50, building_coeficient: nil)
+    building.properties << property
+    expect(property.calc_building_coeficient).to eq(50 / 550.to_f)
   end
 
   context "shares relationship" do
