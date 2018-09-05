@@ -34,10 +34,6 @@ class OwnersController < ApplicationController
     params.require(:owner).permit(:name, :card_number, :phone, :email, :building_id)
   end
 
-  def set_building
-    @building = Building.find(params[:building_id])
-  end
-
   def set_owner
     @owner = Owner.find(params[:id])
   end

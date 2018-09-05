@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_building
+    controller_name == "buildings" ? symbol = :id : symbol = :building_id
+    @building = Building.find(params[symbol])
+  end
+
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end

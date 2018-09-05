@@ -26,10 +26,6 @@ class BuildingsController < ApplicationController
 
   private
 
-  def set_building
-    @building = Building.find(params[:id])
-  end
-
   def building_params
     params.require(:building).permit(:name, :user_id)
   end
