@@ -1,2 +1,17 @@
-<h1>Budgets#index</h1>
-<p>Find me in app/views/budgets/index.html.erb</p>
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <h3 class="property-title text-center">Presupuesto Activo</h3>
+  <div class="table-container">
+    <%= render 'shared/budget-table', budgets: @active_budget %>
+  </div>
+  <h3 class="property-title text-center">Otros Presupuestos</h3>
+  <div class="table-container">
+    <%= render 'shared/budget-table', budgets: @other_budgets %>
+  </div>
+  <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_building_budget_path %>">
+   <i class="material-icons">
+    bar_chart
+   </i>
+   +
+  </a>
+</div>

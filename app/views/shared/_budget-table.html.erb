@@ -1,0 +1,31 @@
+<div class="table">
+    <div class="table-row">
+      <div class="table-header">Válido desde</div>
+      <div class="table-header">Válido hasta</div>
+      <div class="table-header">Monto Anual</div>
+      <% if budgets.any?(&:status) %>
+        <div class="table-header">Acciones</div>
+      <% end %>
+    </div>
+    <% budgets.each do |budget| %>
+      <div class="table-row">
+        <div class="table-data"><%=budget.start_date%></div>
+        <div class="table-data"><%=budget.end_date%></div>
+        <div class="table-data"><%=humanized_money_with_symbol budget.amount%></div>
+        <% if budget.status? %>
+          <div class="table-data">
+            <%= link_to '#', class: "edit-property" do %>
+              <i class="material-icons">
+                create
+              </i>
+            <% end %>
+            <%= link_to '#', class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+              <i class="material-icons">
+                delete
+              </i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+</div>

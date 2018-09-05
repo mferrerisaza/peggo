@@ -17,7 +17,7 @@ class Budget < ApplicationRecord
 
   def only_one_active_budget?
     active_budgets = Budget.where(building: building).where(status: true).size
-    return if active_budgets < 1
+    return true if active_budgets < 1
     errors.add(:building, "solo puede tener un presupuesto activo")
   end
 end

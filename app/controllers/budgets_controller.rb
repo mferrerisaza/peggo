@@ -3,6 +3,7 @@ class BudgetsController < ApplicationController
 
   def index
     authorize @building, :building_of_current_user?
-    @bugets = policy_scope(Budget.where(building: @building))
+    @active_budget = Budget.where(building: @building).where(status: true)
+    @other_budgets = policy_scope(Budget.where(building: @building)).where(status: false)
   end
 end
