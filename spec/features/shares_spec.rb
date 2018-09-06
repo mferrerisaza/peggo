@@ -261,7 +261,7 @@ RSpec.feature "Shares features", type: :feature do
       scenario "user updates a share on owners show", js: true do
         user = FactoryBot.create(:user)
         building = FactoryBot.create(:building, :with_owners)
-        owner = FactoryBot.create(:owner, :with_shares, building: building)
+        owner = FactoryBot.create(:owner, :with_shares, building: building, user: user)
         share = owner.shares.first
         property = FactoryBot.create(:property, building: building)
         original_property = share.property
@@ -290,7 +290,7 @@ RSpec.feature "Shares features", type: :feature do
       scenario "user deletes a share on owners show", js: true do
         user = FactoryBot.create(:user, :with_owners)
         building = FactoryBot.create(:building)
-        owner = FactoryBot.create(:owner, :with_shares, building: building)
+        owner = FactoryBot.create(:owner, :with_shares, building: building, user: user)
         share = owner.shares.first
         building.properties << owner.properties
 
@@ -363,8 +363,9 @@ RSpec.feature "Shares features", type: :feature do
       scenario "user try to create a share on owners show and fails", js: true do
         user = FactoryBot.create(:user, :with_owners)
         building = FactoryBot.create(:building, :with_owners)
-        owner = building.owners.first
         user.buildings << building
+        owner = building.owners.first
+        owner.update(user: user)
 
         sign_in_as user
 
@@ -394,7 +395,7 @@ RSpec.feature "Shares features", type: :feature do
       scenario "user try to update a share on ownsers show and fails", js: true do
         user = FactoryBot.create(:user)
         building = FactoryBot.create(:building, :with_owners)
-        owner = FactoryBot.create(:owner, :with_shares, building: building)
+        owner = FactoryBot.create(:owner, :with_shares, building: building, user: user)
         property = FactoryBot.create(:property)
         share = owner.shares.first
         original_property = share.property
