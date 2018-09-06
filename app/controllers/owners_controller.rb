@@ -4,6 +4,7 @@ class OwnersController < ApplicationController
 
   def index
     @owners = policy_scope(@building.owners)
+    authorize @building, :building_of_current_user?
   end
 
   def show
@@ -14,13 +15,13 @@ class OwnersController < ApplicationController
 
   def new
     @owner = Owner.new
-    authorize @owner
+    authorize @building, :building_of_current_user?
   end
 
   def create
     @owner = Owner.new(owner_params)
     @owner.user = current_user
-    authorize @owner
+    authorize @building, :building_of_current_user?
     if @owner.save
       redirect_to building_owner_path(@building, @owner)
     else

@@ -1,18 +1,10 @@
 class OwnerPolicy < ApplicationPolicy
   def show?
-    true
+    record.user == user
   end
 
-  def new?
-    true
-  end
-
-  def create?
-    new?
-  end
-
-  def index?
-    true
+  def delete?
+    show?
   end
 
   class Scope < Scope

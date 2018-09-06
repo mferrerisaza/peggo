@@ -5,7 +5,7 @@ class SharesController < ApplicationController
 
   def create
     @share = Share.new(share_params)
-    authorize @share
+    authorize @building, :building_of_current_user?
     if @share.save
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
@@ -20,7 +20,7 @@ class SharesController < ApplicationController
   end
 
   def update
-    authorize @share
+    authorize @building, :building_of_current_user?
     if @share.update(share_params)
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
