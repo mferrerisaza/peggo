@@ -16,13 +16,11 @@ class OwnersController < ApplicationController
   def new
     @owner = Owner.new
     authorize @building, :building_of_current_user?
-    authorize @owner
   end
 
   def create
     @owner = Owner.new(owner_params)
     @owner.user = current_user
-    authorize @owner
     authorize @building, :building_of_current_user?
     if @owner.save
       redirect_to building_owner_path(@building, @owner)
