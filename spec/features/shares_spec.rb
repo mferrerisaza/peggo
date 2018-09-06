@@ -73,11 +73,10 @@ RSpec.feature "Shares features", type: :feature do
 
       scenario "user deletes a share on property show", js: true do
         user = FactoryBot.create(:user, :with_owners)
-        building = FactoryBot.create(:building)
-        property = FactoryBot.create(:property, :fifty_fifty)
-        share = property.shares.first
-        building.properties << property
-        user.buildings << building
+        building = FactoryBot.create(:building, user: user)
+        property = FactoryBot.create(:property, building: building)
+        owner = FactoryBot.create(:owner, user: user)
+        share = FactoryBot.create(:share, property: property, owner: owner)
 
         sign_in_as user
 
@@ -394,10 +393,10 @@ RSpec.feature "Shares features", type: :feature do
 
       scenario "user try to update a share on ownsers show and fails", js: true do
         user = FactoryBot.create(:user)
-        building = FactoryBot.create(:building, :with_owners)
-        owner = FactoryBot.create(:owner, :with_shares, building: building, user: user)
-        property = FactoryBot.create(:property)
-        share = owner.shares.first
+        building = FactoryBot.create(:building, :with_owners, user: user)
+        owner = FactoryBot.create(:owner, building: building, user: user)
+        property = FactoryBot.create(:property, building: building)
+        share = FactoryBot.create(:share, property: property, owner: owner)
         original_property = share.property
         building.properties << property
 
