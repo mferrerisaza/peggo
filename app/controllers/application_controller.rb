@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_building
-    controller_name == "buildings" ? symbol = :id : symbol = :building_id
+    symbol = controller_name == "buildings" ? :id : :building_id
     @building = Building.find(params[symbol])
   end
 
