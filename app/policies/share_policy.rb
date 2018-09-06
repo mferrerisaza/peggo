@@ -1,14 +1,6 @@
 class SharePolicy < ApplicationPolicy
-  def create?
-    true
-  end
-
-  def update?
-    create?
-  end
-
   def destroy?
-    true
+    record.owner.user == user
   end
 
   class Scope < Scope
