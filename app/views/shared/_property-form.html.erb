@@ -1,5 +1,5 @@
 <%= simple_form_for [@building, @property], html: { class: "form-inline" } do |f| %>
-  <%= f.input :property_type, label: "Tipo de propiedad", placeholder: "test", collection: Property.property_types.keys %>
+  <%= f.input :property_type, label: "Tipo de propiedad", collection: Property.property_types.keys %>
   <%= f.input :name, label: "Número de la propiedad", placeholder: "Ej: 302 Torre 1"%>
   <%= f.input :phone, label: "Teléfono de la propiedad", placeholder: "Ej: 2660480" %>
   <%= f.input :address, label: "Dirección de la propiedad", placeholder: "Ej: Calle 11a # 42 18"%>

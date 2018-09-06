@@ -28,10 +28,4 @@ class BillsController < ApplicationController
   def bill_params(params)
     params.permit(:status, :share_id)
   end
-
-  def set_building
-    @building = Building.find(params[:building_id])
-  end
-
-
 end

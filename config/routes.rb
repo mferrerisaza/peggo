@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :properties
     resources :owners
     resources :bills, only: [:new, :create]
+    resources :budgets, except: :show
   end
   resources :shares, only: [:create, :update, :destroy]
   require "sidekiq/web"

@@ -53,6 +53,22 @@ RSpec.describe Budget, type: :model do
     expect(other_budget).to_not be_valid
   end
 
+  it "is valid while updating the only active budget to inactive" do
+    building = FactoryBot.create(:building)
+    budget = FactoryBot.create(:budget, building: building)
+    budget.status = false
+    expect(budget).to be_valid
+  end
+
+  it "is invalid while updating and inactive budget to active, on a building with an active budget" do
+    building = FactoryBot.create(:building, :with_budgets)
+    inactive_budget = building.budgets.first
+    budget = FactoryBot.create(:budget, building: building)
+    inactive_budget.status = true
+    expect(inactive_budget).to_not be_valid
+    expect(inactive_budget.errors.messages).to have_key(:building)
+  end
+
   context "expenses relationship" do
     it "can have many expenses" do
       budget = FactoryBot.create(:budget, :with_expenses)

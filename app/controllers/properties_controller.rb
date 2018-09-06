@@ -53,10 +53,6 @@ class PropertiesController < ApplicationController
 
   private
 
-  def set_building
-    @building = Building.find(params[:building_id])
-  end
-
   def set_property
     @property = Property.find(params[:id])
   end

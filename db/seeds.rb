@@ -23,11 +23,59 @@ dan_building = Building.create!(name: "Puebla", user: dan)
 puts "Creating budgets"
 
 mike_budget = Budget.create!(
+  start_date: "2017-01-01",
+  end_date: "2017-12-31",
+  building: mike_building,
+  amount: 90_000_000,
+  status: false
+)
+
+mike_budget = Budget.create!(
+  start_date: "2016-01-01",
+  end_date: "2016-12-31",
+  building: mike_building,
+  amount: 80_000_000,
+  status: false
+)
+
+mike_budget = Budget.create!(
+  start_date: "2015-01-01",
+  end_date: "2015-12-31",
+  building: mike_building,
+  amount: 70_000_000,
+  status: false
+)
+
+mike_budget = Budget.create!(
   start_date: "2018-01-01",
   end_date: "2018-12-31",
   building: mike_building,
   amount: 100_000_000,
   status: true
+)
+
+dan_budget = Budget.create!(
+  start_date: "2018-01-01",
+  end_date: "2018-12-31",
+  building: dan_building,
+  amount: 900_000_000,
+  status: false
+)
+
+dan_budget = Budget.create!(
+  start_date: "2018-01-01",
+  end_date: "2018-12-31",
+  building: dan_building,
+  amount: 800_000_000,
+  status: false
+)
+
+dan_budget = Budget.create!(
+  start_date: "2018-01-01",
+  end_date: "2018-12-31",
+  building: dan_building,
+  amount: 700_000_000,
+  status: false
 )
 
 dan_budget = Budget.create!(

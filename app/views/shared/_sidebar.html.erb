@@ -42,6 +42,12 @@
         </i>
         <span>Dashboard</span>
       </a>
+      <a class="sidebar-link <%= "active" if controller_name == "budgets" %>" href="/buildings/<%= @building.id %>/budgets">
+        <i class="material-icons">
+          bar_chart
+        </i>
+        <span>Presupuesto</span>
+      </a>
       <a class="sidebar-link <%= "active" if controller_name == "properties" %>" href="/buildings/<%= @building.id %>/properties">
         <i class="material-icons">
           account_balance
