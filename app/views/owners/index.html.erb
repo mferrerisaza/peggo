@@ -8,6 +8,8 @@
         <th>Cédula</th>
         <th>Teléfono</th>
         <th>Email</th>
+        <th>Acciones</th>
+
       </tr>
       <% @owners.each do |owner| %>
         <tr class="table-row-link" onclick= "location.href= '<%= building_owner_path(@building, owner) %>' ">
@@ -15,10 +17,28 @@
           <td> <%= owner.card_number  %> </td>
           <td> <%= owner.phone %> </td>
           <td> <%= owner.email %> </td>
+          <td>
+            <%= link_to edit_building_owner_path(@building, owner), class: "edit-property" do %>
+              <i class="material-icons">
+                create
+              </i>
+            <% end %>
+            <%= link_to building_owner_path(@building, owner), class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+              <i class="material-icons">
+                delete
+              </i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </table>
   </div>
+  <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_building_owner_path(@building) %>">
+   <i class="material-icons">
+    person
+   </i>
+   +
+  </a>
 </div>
 
 

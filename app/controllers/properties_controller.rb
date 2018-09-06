@@ -47,7 +47,7 @@ class PropertiesController < ApplicationController
   def destroy
     authorize @property
     @property.destroy
-    flash[:notice] = "Propiedad eliminada con éxito"
+    flash[:notice] = "Propiedad eliminada existosamente"
     redirect_to building_properties_path(@building)
   end
 

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'buildings#index'
   resources :buildings, only: [:index, :show, :new, :create] do
     resources :properties
-    resources :owners, only: [:index, :show, :new, :create]
+    resources :owners
     resources :bills, only: [:new, :create]
   end
   resources :shares, only: [:create, :update, :destroy]
