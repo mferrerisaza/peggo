@@ -14,7 +14,7 @@
         <div class="table-data"><%=humanized_money_with_symbol budget.amount%></div>
         <% if budget.status? %>
           <div class="table-data">
-            <%= link_to '#', class: "edit-property" do %>
+            <%= link_to edit_building_budget_path(@building, budget), class: "edit-property" do %>
               <i class="material-icons">
                 create
               </i>
