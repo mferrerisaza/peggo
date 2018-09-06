@@ -1,5 +1,6 @@
 class BudgetsController < ApplicationController
-  before_action :set_building, only: %i[index new create]
+  before_action :set_building, only: %i[index new create edit]
+  before_action :set_budget, only: %i[edit update]
 
   def index
     authorize @building, :building_of_current_user?
@@ -15,8 +16,6 @@ class BudgetsController < ApplicationController
   def create
     authorize @building, :building_of_current_user?
     @budget = Budget.new(budget_params)
-    @budget.start_date = @budget.start_date.beginning_of_month
-    @budget.end_date = @budget.end_date.end_of_month
     if @budget.save
       redirect_to building_budgets_path @building
     else
@@ -24,9 +23,27 @@ class BudgetsController < ApplicationController
     end
   end
 
+  def edit
+    authorize @budget
+  end
+
+  def update
+    @building = Building.find(budget_params[:building_id])
+    authorize @building, :building_of_current_user?
+    if @budget.update(budget_params)
+      redirect_to building_budgets_path @building
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def budget_params
     params.require(:budget).permit(:start_date, :end_date, :building_id, :amount, :status)
+  end
+
+  def set_budget
+    @budget = Budget.find(params[:id])
   end
 end
