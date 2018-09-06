@@ -1,9 +1,10 @@
 class Owner < ApplicationRecord
-  has_many :shares
+  has_many :shares, dependent: :destroy
   has_many :properties, through: :shares
   belongs_to :user
   belongs_to :building
 
   validates :name, :email, :card_number, presence: true
   validates :card_number, uniqueness: true
+  validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP, message: "no válido"
 end
