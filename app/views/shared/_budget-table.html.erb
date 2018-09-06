@@ -14,12 +14,12 @@
         <div class="table-data"><%=humanized_money_with_symbol budget.amount%></div>
         <% if budget.status? %>
           <div class="table-data">
-            <%= link_to edit_building_budget_path(@building, budget), class: "edit-property" do %>
+            <%= link_to edit_building_budget_path(@building, budget), class: "edit-budget" do %>
               <i class="material-icons">
                 create
               </i>
             <% end %>
-            <%= link_to '#', class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+            <%= link_to building_budget_path(@building, budget), class: "destroy-budget", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
               <i class="material-icons">
                 delete
               </i>
