@@ -31,7 +31,7 @@ class OwnersController < ApplicationController
   end
 
   def edit
-    authorize @owner
+    authorize @building, :building_of_current_user?
   end
 
   def update
