@@ -1,6 +1,6 @@
 class OwnersController < ApplicationController
-  before_action :set_building, only: %i[index show new create]
-  before_action :set_owner, only: [:show]
+  before_action :set_building, except: :update
+  before_action :set_owner, only: %i[show edit update destroy]
 
   def index
     @owners = policy_scope(@building.owners)
@@ -23,10 +23,33 @@ class OwnersController < ApplicationController
     @owner.user = current_user
     authorize @building, :building_of_current_user?
     if @owner.save
+      flash[:notice] = "Propietario creado existosamente"
       redirect_to building_owner_path(@building, @owner)
     else
       render :new
     end
+  end
+
+  def edit
+    authorize @owner
+  end
+
+  def update
+    @building = Building.find(owner_params[:building_id])
+    authorize @building, :building_of_current_user?
+    if @owner.update(owner_params)
+      flash[:notice] = "Propietario actualizado existosamente"
+      redirect_to building_owner_path(@building, @owner)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    authorize @owner
+    @owner.destroy
+    flash[:notice] = "Propietario eliminado existosamente"
+    redirect_to building_owners_path(@building)
   end
 
   private
