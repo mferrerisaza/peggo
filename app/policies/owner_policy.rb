@@ -3,7 +3,7 @@ class OwnerPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def delete?
+  def destroy?
     show?
   end
 
