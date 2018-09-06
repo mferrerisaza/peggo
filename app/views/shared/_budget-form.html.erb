@@ -9,12 +9,12 @@
   <% end %>
   <%= f.input :start_date, as: :string , label: "Mes de inicio" , input_html: { class: "datepicker" }, placeholder: "Ej: Ene #{Date.today.year}" %>
   <%= f.input :end_date, as: :string , label: "Mes de vencimiento" , input_html: { class: "datepicker" }, placeholder: "Ej: Dic #{Date.today.year}" %>
-  <%= f.input :amount, label: "Presupuesto Anual", placeholder: "Ej: 100.000.000" %>
+  <%= f.input :amount, label: "Presupuesto para el período", placeholder: "Ej: 100.000.000", label_method: :humanized_money_with_symbol %>
   <%= f.input :building_id, as: :hidden, input_html: { value: @building.id } %>
   <% if action_name == "new" || action_name == "create" %>
     <%= f.input :status, as: :hidden, input_html: { value: true } %>
   <% elsif action_name == "edit" || action_name == "update" %>
-    <%= f.input :status %>
+    <%= f.input :status, label: "Utilizar como presupuesto activo" %>
   <% end %>
   <span class="new-property-form-btns">
     <%= link_to "cancelar", building_budgets_path(@building), class:"form-btn--no-background" %>
