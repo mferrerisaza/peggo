@@ -11,6 +11,10 @@ FactoryBot.define do
       after(:create) { |building| create_list(:budget, 11, status: false, building: building) }
     end
 
+    trait :with_active_budget do
+      after(:create) { |building| create_list(:budget, 1, building: building) }
+    end
+
     trait :with_owners do
       after(:create) { |building| create_list(:owner, 10, building: building) }
     end
