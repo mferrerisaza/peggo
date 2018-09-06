@@ -1,6 +1,6 @@
 class BudgetsController < ApplicationController
-  before_action :set_building, only: %i[index new create edit]
-  before_action :set_budget, only: %i[edit update]
+  before_action :set_building, except: :show
+  before_action :set_budget, only: %i[edit update destroy]
 
   def index
     authorize @building, :building_of_current_user?
@@ -17,6 +17,7 @@ class BudgetsController < ApplicationController
     authorize @building, :building_of_current_user?
     @budget = Budget.new(budget_params)
     if @budget.save
+      flash[:notice] = "Presupuesto creado con éxito"
       redirect_to building_budgets_path @building
     else
       render 'new'
@@ -35,6 +36,13 @@ class BudgetsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    authorize @budget
+    @budget.destroy
+    flash[:notice] = "Presupuesto eliminado con éxito"
+    redirect_to building_properties_path(@building)
   end
 
   private
