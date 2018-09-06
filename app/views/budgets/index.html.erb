@@ -1,13 +1,24 @@
 <%= render 'shared/sidebar' %>
 <div class="page-content-wrapper">
-  <h3 class="property-title text-center">Presupuesto Activo</h3>
-  <div class="table-container">
-    <%= render 'shared/budget-table', budgets: @active_budget %>
-  </div>
-  <h3 class="property-title text-center">Otros Presupuestos</h3>
-  <div class="table-container">
-    <%= render 'shared/budget-table', budgets: @other_budgets %>
-  </div>
+  <% if @active_budget.empty? %>
+    <h3 class="alert alert-blue property-title text-center">
+      <i class="material-icons">
+       info
+      </i>
+      Aún no tienes ningún presupuesto activo, agrega uno para comenzar
+    </h3>
+  <% else %>
+    <h3 class="property-title text-center">Presupuesto Activo</h3>
+    <div class="table-container">
+      <%= render 'shared/budget-table', budgets: @active_budget %>
+    </div>
+  <% end %>
+  <% unless @other_budgets.empty? %>
+    <h3 class="property-title text-center">Otros Presupuestos</h3>
+    <div class="table-container">
+      <%= render 'shared/budget-table', budgets: @other_budgets %>
+    </div>
+  <% end %>
   <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_building_budget_path %>">
    <i class="material-icons">
     bar_chart
