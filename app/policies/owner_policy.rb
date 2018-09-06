@@ -3,12 +3,8 @@ class OwnerPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def new?
+  def delete?
     show?
-  end
-
-  def create?
-    new?
   end
 
   class Scope < Scope
