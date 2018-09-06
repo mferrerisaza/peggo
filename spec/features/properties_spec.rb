@@ -87,7 +87,7 @@ RSpec.feature "Properties features", type: :feature do
     expect do
       expect(page.driver.browser.switch_to.alert.text).to eq "¿Estás seguro?"
       page.driver.browser.switch_to.alert.accept
-      expect(page).to have_content "Propiedad eliminada con éxito"
+      expect(page).to have_content "Propiedad eliminada existosamente"
     end.to change(building.properties, :count).by(-1)
   end
 
