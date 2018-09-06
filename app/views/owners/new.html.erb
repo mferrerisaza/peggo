@@ -1,17 +1,11 @@
-<div class="new-building-form-container">
-  <div class="new-building-form-heading">
-    <h1>Agregar un nuevo propietario</h1>
+<%= render "shared/sidebar" %>
+<div class="page-content-wrapper">
+  <div class="form-container">
+    <div class="new-property-form-container new-owner-form-container">
+      <div class="new-property-form-heading">
+        <h1>Agregar un nuevo propietario</h1>
+      </div>
+      <%= render 'shared/owner-form' %>
+    </div>
   </div>
-  <%#= simple_form_for @owner, url: url_for(action: :create, controller: 'owners'), method: :post do |f| %>
-  <%= simple_form_for [@building, @owner]  do |f| %>
-    <%= f.input :name, label: "Nombre del propietario"%>
-    <%= f.input :card_number, label: "Cédula del propietario"%>
-    <%= f.input :phone, label: "Teléfono del propietario"%>
-    <%= f.input :email, label: "Correo electrónico del propietario"%>
-    <%= f.input :building_id, as: :hidden, input_html: { value: @building.id } %>
-    <span class="new-building-form-btns">
-      <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
-      <%= f.submit "Crear Propietario", class:"btn form-btn" %>
-    </span>
-  <% end %>
 </div>
