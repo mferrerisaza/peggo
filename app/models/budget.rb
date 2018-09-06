@@ -1,14 +1,21 @@
 class Budget < ApplicationRecord
+  before_save :transpose_dates
   belongs_to :building
   has_many :expenses
   monetize :amount_cents, disable_validation: true
 
   validates :amount, numericality: { greater_than: 0 }
-  validates :start_date, :end_date, presence: true
+  validates :start_date, :end_date, :amount, presence: true
   validate :end_date_is_after_start_date
   validate :only_one_active_budget?
 
   private
+
+  def transpose_dates
+    return if start_date.blank? || end_date.blank?
+    self.start_date = start_date.beginning_of_month
+    self.end_date = end_date.end_of_month
+  end
 
   def end_date_is_after_start_date
     return if end_date.blank? || start_date.blank?
