@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Bill, type: :model do
-  it "is valid with a share and a status" do
+  it "is valid with a share, a status and a period" do
     bill = FactoryBot.build(:bill)
     expect(bill).to be_valid
   end
@@ -16,6 +16,17 @@ RSpec.describe Bill, type: :model do
     bill = FactoryBot.build(:bill, status: nil)
     expect(bill).to_not be_valid
     expect(bill.errors.messages).to have_key(:status)
+  end
+
+
+  it "is invalid without a period" do
+    bill = FactoryBot.build(:bill, period: nil)
+    expect(bill).to_not be_valid
+    expect(bill.errors.messages).to have_key(:period)
+  end
+
+  it "gets the actual month on bills create" do
+    bill = FactoryBot.build(:bill, status: nil)
   end
 
   context "concepts relationship" do
