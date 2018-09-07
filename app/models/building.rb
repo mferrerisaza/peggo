@@ -14,4 +14,8 @@ class Building < ApplicationRecord
   def area_sum
     properties.sum(:area)
   end
+
+  def active_budget
+    budgets.find_by(status: true)
+  end
 end
