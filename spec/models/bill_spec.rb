@@ -20,8 +20,11 @@ RSpec.describe Bill, type: :model do
 
   context "concepts relationship" do
     it "can have many concepts" do
-      bill = FactoryBot.create(:bill, :with_concepts)
-      expect(bill.concepts.size).to eq 5
+      building = FactoryBot.create(:building, :with_active_budget)
+      owner = FactoryBot.create(:owner, building: building)
+      share = FactoryBot.create(:share, owner: owner)
+      bill = FactoryBot.create(:bill, share: share)
+      expect(bill.concepts.size).to eq 1
     end
   end
 end

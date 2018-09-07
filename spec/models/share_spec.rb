@@ -81,7 +81,9 @@ RSpec.describe Share, type: :model do
 
   context "bill relationship" do
     it "can have many bills" do
-      share = FactoryBot.create(:share, :with_bills)
+      building = FactoryBot.create(:building, :with_active_budget)
+      owner = FactoryBot.create(:owner, building: building)
+      share = FactoryBot.create(:share, :with_bills, owner: owner)
       expect(share.bills.size).to eq 5
     end
   end
