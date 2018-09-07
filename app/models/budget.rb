@@ -9,6 +9,14 @@ class Budget < ApplicationRecord
   validate :end_date_is_after_start_date
   validate :only_one_active_budget?
 
+  def months
+    (end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month) + 1
+  end
+
+  def monthly_budget
+    amount / months
+  end
+
   private
 
   def transpose_dates

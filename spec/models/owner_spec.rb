@@ -6,6 +6,12 @@ RSpec.describe Owner, type: :model do
     expect(owner).to be_valid
   end
 
+  it "returns shares bill_payment sum" do
+    building = FactoryBot.create(:building, :with_active_budget)
+    owner = FactoryBot.create(:owner, :with_shares, building: building)
+    expect(owner.bill_amount).to eq building.active_budget.amount / 12 * 0.1 * 2
+  end
+
   it "is invalid without name" do
     owner = FactoryBot.build(:owner, name: nil)
     expect(owner).to_not be_valid
