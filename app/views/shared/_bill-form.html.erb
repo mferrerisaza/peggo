@@ -3,25 +3,24 @@
   <div class="show-table table-container margin-bottom-end">
     <div class="table">
       <div class="table-row" id="bill-table">
-        <div class="table-header table-cell-large-width">Tipo de propiedad</div>
-        <div class="table-header table-cell-small-width">Número</div>
-        <div class="table-header table-cell-small-width">Cuota</div>
-        <div class="table-header table-cell-small-width">Acciones</div>
+        <div class="table-header table-cell-large-width">Nombre del propietario</div>
+        <div class="table-header table-cell-small-width">Correo electrónico</div>
+        <div class="table-header table-cell-small-width">Valor cuota</div>
+        <div class="table-header table-cell-small-width">Enviar</div>
       </div>
     </div>
     <form action="/buildings/<%= building.id %>/bills" method="post">
-      <input type="hidden" name="authenticity_token" valur="<%= form_authenticity_token %>">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="table">
-          <% properties.each do |property| %>
+          <% owners.each do |owner| %>
             <div class="table-row text-center-vertical">
-              <div class="table-data table-cell-large-width"> <%= property.property_type %> </div>
-              <div class="table-data table-cell-small-width"> <%= property.name %> </div>
-              <div class="table-data table-cell-small-width"> $ 3000 </div>
-              <input type="hidden" name="bill[][status]" value="Pendiente"><br>
-              <input type="hidden" name="bill[][property_id]" value="<%= property.id %>"><br>
-              <input type="hidden" name="bill[][share_id]" value="<%= property.shares.first.id %>"><br>
+              <div class="table-data table-cell-large-width"> <%= owner.name %> </div>
+              <% properties_array = owner.properties.map(&:full_name)  %>
+              <div class="table-data table-cell-small-width"> <%= properties_array.join(", ") %> </div>
+              <div class="table-data table-cell-small-width"> <%=money_without_cents_and_with_symbol(owner.bill_amount) %> </div>
+              <input type="hidden" name="bills[][owner_id]" value="<%= owner.id %>"><br>
               <div class="table-data table-cell-small-width">
-                <input type="checkbox" name="bill[][enviar]" value="true" checked><br>
+                <input type="checkbox" name="bills[][enviar]" value="true" checked><br>
               </div>
             </div>
           <% end %>

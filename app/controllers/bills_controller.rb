@@ -1,31 +1,30 @@
 class BillsController < ApplicationController
-  before_action :set_building, only: %i[show new create]
-
-  def index
-  end
+  before_action :set_building, only: %i[new create]
 
   def new
-    @properties = @building.properties
-    @bill = Bill.new
-    authorize @bill
-    @bills_array = [@bill]
+    authorize @building, :building_of_current_user?
+    @owners = @building.owners
   end
 
   def create
-    @properties = @building.properties
-    params[:bill].each do |b|
-      if b[:enviar].present?
-        @bill = Bill.new(bill_params(b))
-        authorize @bill
-        @bill.save
-      end
+    authorize @building, :building_of_current_user?
+    params[:bills].each do |owner|
+      next unless owner[:enviar].present?
+      create_bill(owner_params(owner))
     end
-    render :new
   end
 
   private
 
-  def bill_params(params)
-    params.permit(:status, :share_id)
+  def create_bill(owner_params)
+    @owner = Owner.find(owner_params[:owner_id])
+    @owner.shares.each do |share|
+      next if share.payment_percentage.zero?
+      Bill.create(share: share, status: "Pendiente")
+    end
+  end
+
+  def owner_params(params)
+    params.permit(:enviar, :owner_id)
   end
 end
