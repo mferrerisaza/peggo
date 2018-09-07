@@ -69,6 +69,31 @@ RSpec.describe Budget, type: :model do
     expect(inactive_budget.errors.messages).to have_key(:building)
   end
 
+  it "returns the correct months of the budget time line" do
+    budget = FactoryBot.create(:budget)
+    expect(budget.months).to eq 12
+  end
+
+  it "returns the correct monthly budget" do
+    budget = FactoryBot.create(:budget)
+    expect(budget.monthly_budget).to eq budget.amount / 12
+  end
+
+  it "returns the correct months of the budget time line if it is equal to 1 month" do
+    budget = FactoryBot.create(:budget, start_date: "2018-01-01", end_date: "2018-01-31")
+    expect(budget.months).to eq 1
+  end
+
+  it "returns the correct months of the budget time line if it exceeds 1 year" do
+    budget = FactoryBot.create(:budget, start_date: "2018-01-01", end_date: "2019-01-31")
+    expect(budget.months).to eq 13
+  end
+
+  it "returns the correct months of the budget time line if its less than a 1 year and more than 1 month" do
+    budget = FactoryBot.create(:budget, start_date: "2018-01-01", end_date: "2018-02-28")
+    expect(budget.months).to eq 2
+  end
+
   context "expenses relationship" do
     it "can have many expenses" do
       budget = FactoryBot.create(:budget, :with_expenses)
