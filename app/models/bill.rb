@@ -5,7 +5,7 @@ class Bill < ApplicationRecord
   belongs_to :share
   has_many :concepts, dependent: :destroy
 
-  validates :status, presence: true
+  validates :status, :period, presence: true
 
   def add_property_monthly_fee
     concept = Concept.new(
