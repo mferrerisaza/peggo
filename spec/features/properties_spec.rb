@@ -8,7 +8,6 @@ RSpec.feature "Properties features", type: :feature do
     sign_in_as user
 
     click_link building.name
-    # Acomodar el size de la pantalla para que no se oculte el sidebar
     page.driver.browser.manage.window.resize_to(1024, 768)
     click_link "Propiedades"
 
