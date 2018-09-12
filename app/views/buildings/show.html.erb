@@ -1,4 +1,29 @@
 <%= render 'shared/sidebar' %>
-<div class="page-content-wrapper">
-  <h1> TODO: Implement property dashboard here</h1>
+<div class="page-content-wrapper margin-right-dashboard">
+  <h1 class="properties-index-title">Resumen <%= @building.name %></h1>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <h5 class="properties-index-title">Estado de cartera</h5>
+      <div class="table-container dashboard-table">
+        <div class="table">
+          <div class="table-row">
+            <div class="table-header">Propietario</div>
+            <div class="table-header">Deuda</div>
+            <div class="table-header">Estado</div>
+          </div>
+          <% @owners.each do |owner| %>
+              <div data-id="<%=owner.id%>" class="table-row-link table-row" onclick= "location.href= '<%= building_owner_path(@building, owner)%>'">
+                <div class="table-data"><%=owner.name%></div>
+                <div class="table-data"><%=money_without_cents_and_with_symbol(owner.owner_debt)%></div>
+                <div class="flex flex-center">
+                  <div class="table-data debt-status-mid status-padding <%= status_color_class(owner.owner_debt) %>"></div>
+                </div>
+              </div>
+          <% end %>
+        </div class="table">
+      </div>
+    </div>
+  </div>
 </div>
+
+

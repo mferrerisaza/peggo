@@ -82,3 +82,11 @@
 .new-owner-form-container {
   width: 50%;
 }
+
+.no-padding-form {
+  padding: 0 !important;
+}
+
+.no-scroll-bar {
+  overflow-x: unset;
+}

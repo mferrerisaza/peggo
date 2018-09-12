@@ -13,4 +13,8 @@ class Owner < ApplicationRecord
     amounts = shares.map(&:bill_payment)
     amounts.reduce(:+)
   end
+
+  def owner_debt
+    shares.reduce(0) {|sum, share| sum + share.bills_debt}
+  end
 end

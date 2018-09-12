@@ -24,6 +24,10 @@ class Property < ApplicationRecord
     area / building.area_sum.to_f
   end
 
+  def property_debt
+    shares.reduce(0) {|sum, share| sum + share.bills_debt}
+  end
+
   private
 
   def update_building_coeficients
