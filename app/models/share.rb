@@ -19,4 +19,13 @@ class Share < ApplicationRecord
   def bill_payment
     payment_percentage * property.building_coeficient * owner.building.active_budget.monthly_budget
   end
+
+  def unpaid_bills
+    bills.select{|bill| bill.status == "Pendiente"}
+  end
+
+  def bills_debt
+    return 0 if unpaid_bills.empty?
+    unpaid_bills.reduce(0) { |sum, bill| sum + bill.sum_concepts_amount }
+  end
 end

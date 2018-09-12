@@ -55,9 +55,19 @@ and (min-width: 1224px) {
   }
 }
 
-.margin-bottom-end {
+.margin-bottom-end-small {
   margin-bottom: 8px;
 }
+
+.margin-bottom-end-med {
+  margin-bottom: 24px;
+}
+
+.margin-top-big {
+  margin-top: 36px;
+}
+
+
 .show-share-division{
   margin: 24px 80px;
   border: 0;
