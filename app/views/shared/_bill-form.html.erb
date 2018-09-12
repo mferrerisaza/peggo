@@ -25,7 +25,7 @@
               <div class="table-data table-cell-small-width"> <%=money_without_cents_and_with_symbol(owner.bill_amount) %></div>
               <input type="hidden" name="bills[][owner_id]" value="<%= owner.id %>"><br>
               <div class="table-data table-cell-small-width">
-                <input type="checkbox" name="bills[][enviar]" value="true" unchecked><br>
+                <input type="checkbox" name="bills[][enviar]" value="true" checked><br>
               </div>
             </div>
           <% end %>
