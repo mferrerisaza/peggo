@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController
-  before_action :set_building, only: [:show]
+  before_action :set_building, only: %w[show dashboard]
 
   def index
     @buildings = policy_scope(Building)
@@ -7,6 +7,7 @@ class BuildingsController < ApplicationController
 
   def show
     authorize @building
+    @owners = @building.owners.sort_by {|owner| owner.owner_debt}.reverse!
   end
 
   def new
