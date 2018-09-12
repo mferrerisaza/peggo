@@ -15,14 +15,11 @@ RSpec.feature "Buildings features", type: :feature do
 
   scenario "redirects to back after rendering errors" do
     user = FactoryBot.create(:user)
-    visit root_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
+    sign_in_as user
     click_link "Crea una nueva copropiedad"
     fill_in "Nombre de la copropiedad", with: ""
     click_button "Crear"
-    expect(page).to have_content "Name can't be blank"
+    expect(page).to have_content "Name no puede estar en blanco"
     click_link "cancelar"
     expect(page.current_path).to eq buildings_path
   end

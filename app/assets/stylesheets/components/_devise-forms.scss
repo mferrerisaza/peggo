@@ -1,0 +1,80 @@
+.edit-user-form-wrapper {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  overflow: auto;
+}
+.login-links{
+  padding-top: 16px;
+  text-align: right;
+  font-size: 16px;
+  a {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+}
+
+.logo-sessions-position{
+  padding: 0px 16px;
+  svg {
+    margin-top: 16px;
+    margin-left: 16px;
+    transform: scale(1.3);
+  }
+}
+
+.devise-form-container{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.new-devise-form-container{
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  form {
+    padding: 32px 50px;
+    height: 100%;
+    label {
+      font-weight: lighter;
+      font-size: 14px;
+    }
+    input{
+      font-weight: normal;
+      font-size: 14px;
+    }
+  }
+  .new-devise-form-heading{
+    padding: 48px;
+    width: 110%;
+    height: 30%;
+    background: linear-gradient(90deg, #3FC1C9 0%, #364F6B 100%);
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.12), 0px 5px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    font-size: 34px;
+    text-align: center;
+    position: relative;
+    top: 0px;
+    right: 5%;
+    h1 {
+      color: white;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .logo-sessions-position {
+    text-align: center;
+    svg {
+      transform: scale(1);
+    }
+  }
+  .devise-form-container{
+    display: block;
+  }
+}

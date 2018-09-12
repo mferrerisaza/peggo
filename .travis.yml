@@ -11,7 +11,7 @@ before_install:
 addons:
   postgresql: '9.6'
 before_script:
-- psql -c 'create database product_hunt_clone_test;' -U postgres
+- psql -c 'create database peggo_test;' -U postgres
 script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate RAILS_ENV=test
@@ -19,3 +19,6 @@ script:
 - bundle exec rake db:test:prepare
 - SECRET_KEY_BASE=a RAILS_ENV=production bundle exec rake assets:precompile
 - bundle exec rspec
+env:
+  global:
+    secure: 7FGX9Yk9r2knwYkNI8aSVm04Wx3jfIjxqoRxrCo2vUjXikiV1PZgI+AqEy9dUrQWvOHF4DTth4IGON0mhSP25mE+fTiqfX6Yc1A2J+LhYM+FEQPFfI+UTolHsnAjm4/MZ/fhEKxemubF1izXL6EbEa+Uu+dJjLVEk54vq4Ez1riJ3BGk4NkswVGfOgMIeHsXtqQ3Y0sOuS74OMR1FUK9f8z6uKqBEPI3fsaHtjUc4+3hexAsSdfqYk9TvWQ2SNNHzXG9Y+ulqdnx4ZNIl4OKFs1YovPpKKsTg3aYYv9L47/vMAnJ9x1cmbAUKdT7oKjOxlhttqxxFPMIsq0+T9osqeIXxR5EHEiUKMtB6cTqXmd2u7dHPelbe4Stx0+29jyaxZzHCKbuX8mC/G7IAzM37wa+wzyrPtaIHFmX2s/NW3CD9ghT8y/I2NZtdqVsD1sdyd+XtQTx59EGpIpKYoCgJDHZZYMKrGweSyJZqvopciIwBwsBEYpCGEtmKl6DzI0kD+Eav5WTldBLKqZT9Afp+XXKfJuCO8kO+5ZqfoIo1veqnsHUlyrTSe63N8WDIwLk0iHQH9do/k61YA2FiHSfAjd8zpaVO27ZAD24ij7bg2YLptq6JkjtzpcDTjRFiIGa/PMMqgkV867RghNUOXixwnHx9BHOY9G1n9zwzoeGmiA=
