@@ -25,10 +25,6 @@ RSpec.describe Bill, type: :model do
     expect(bill.errors.messages).to have_key(:period)
   end
 
-  it "gets the actual month on bills create" do
-    bill = FactoryBot.build(:bill, status: nil)
-  end
-
   it "returns 0 if payment_percentage is zero" do
     @building = FactoryBot.create(:building, :with_active_budget, :with_propierties)
     @owner = FactoryBot.create(:owner, building: @building)

@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController
-  before_action :set_building, only: %w[show dashboard]
+  before_action :set_building, only: %w[show]
 
   def index
     @buildings = policy_scope(Building)
