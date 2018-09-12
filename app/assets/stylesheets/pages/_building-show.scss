@@ -1,0 +1,13 @@
+.margin-right-dashboard {
+  margin-right: 16px !important;
+}
+
+.dashboard-table {
+  height: 75vh;
+}
+
+@media (max-width: 768px) {
+  .dashboard-table {
+    height: 60vh;
+  }
+}
