@@ -3,7 +3,6 @@
 }
   .sidebar {
     position: fixed;
-    // flex: 0 0 250px;
     z-index: 1;
     overflow-x: hidden;
     height: 100%;
@@ -104,8 +103,8 @@
   }
   .page-content-wrapper{
     height: 100%;
-    margin-left: 260px;
-    margin-right: 10px;
+    margin-left: 250px;
+    margin-right: 0px;
   }
 
   .table-content-wrapper{

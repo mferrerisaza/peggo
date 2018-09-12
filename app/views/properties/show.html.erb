@@ -1,9 +1,9 @@
 <%= render 'shared/sidebar' %>
 <div class="page-content-wrapper">
-  <div class="show-image-cover">
+  <div class="show-image-cover" style="background-image: url('<%= cl_image_path('Default Pics/show-banner.jpg') %>');">
   </div>
   <div class="show-image-avatar flex flex-center">
-    <div class="avatar-big house-avatar responsive-avatar">
+    <div class="avatar-big house-avatar responsive-avatar" style="background-image: url('<%= cl_image_path('Default Pics/house.png') %>');">
     </div>
   </div>
   <h3 class="property-title text-center"><%= @property.full_name %></h4>
