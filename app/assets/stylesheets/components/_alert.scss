@@ -26,3 +26,9 @@
   justify-content: center;
   align-items: flex-start;
 }
+@media (max-width: 991px) {
+  .alert-with-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
