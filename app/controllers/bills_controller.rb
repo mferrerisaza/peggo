@@ -23,16 +23,26 @@ class BillsController < ApplicationController
   private
 
   def check_bill_conditions
-    conditions = {}
-    conditions[:active_budget] = false if @building.active_budget
-    conditions[:building_coeficients] = false if @building.building_coeficients_sum == 1
-    conditions[:properties_payment_sum] = false if @building.properties.all? { |property| property.payment_sum == 1 }
+    failing_conditions = {}
+    failing_conditions[:presupuesto_activo] = true unless @building.active_budget
+    failing_conditions[:coeficientes_de_copropiedad] = true unless @building.building_coeficients_sum == 1
+    failing_conditions[:porcentajes_de_pago] = true unless @building.properties.all? { |property| property.payment_sum == 1 }
 
-    render_bill_creation_errors(conditions) if conditions.any? { |_k, v| v == false }
+    render_bill_creation_errors(failing_conditions) if failing_conditions.any? { |_k, v| v }
   end
 
   def render_bill_creation_errors(conditions = {})
-    redirect_to bills_errors_building_path(@building)
+    conditions.each do |k, _v|
+      if k == :presupuesto_activo
+        conditions[k] = ["No hay un presupuesto activo sobre el cual calcular la cuota.", building_budgets_path(@building)]
+      elsif k == :coeficientes_de_copropiedad
+        conditions[k] = ["Los coefientes de la copropiedad no suman 100%.", building_properties_path(@building)]
+      elsif k == :porcentajes_de_pago
+        conditions[k] = ["Una o varias propiedades tienen porcentajes de pago que no suman 100%.", building_properties_path(@building)]
+      end
+    end
+    @messages = conditions
+    render 'errors'
   end
 
   def owner_params(params)
