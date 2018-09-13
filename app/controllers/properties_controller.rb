@@ -23,7 +23,7 @@ class PropertiesController < ApplicationController
     authorize @building, :building_of_current_user?
     if @property.save
       flash[:notice] = "Propiedad creada existosamente"
-      redirect_to building_property_path(@building, @property)
+      redirect_to building_properties_path(@building)
     else
       render 'new'
     end
