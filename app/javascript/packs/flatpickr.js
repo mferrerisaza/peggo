@@ -15,7 +15,7 @@ const dateInputBill = flatpickr(".datepicker-bill", {
   // minDate: false,
   altInput: true,
   altFormat: "M Y",
-  dateFormat: "Y-m",
+  dateFormat: "Y/m",
   "locale": Spanish,
 });
 
