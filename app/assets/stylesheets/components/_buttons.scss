@@ -43,6 +43,7 @@
   text-transform: uppercase;
   color: $my-secondary-blue;
   font-weight: bold;
+  white-space: normal;
   &:hover,&:active {
     text-decoration: none;
     color: $brand-primary;
