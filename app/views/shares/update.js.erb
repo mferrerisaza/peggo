@@ -26,4 +26,7 @@ function updateShare(shareHTML) {
   refreshForm('<%= j render "shared/share-form", share: @share, form_class:"edit-share-form" %>', false);
 <% else %>
   updateShare('<%= j render "shared/share-row", share: @share %>');
+  <% if @property %>
+    togglePaymentAlert('<%= j percentage(@property.payment_sum) %>');
+  <% end %>
 <% end %>

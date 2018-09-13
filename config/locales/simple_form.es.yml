@@ -16,6 +16,7 @@ es:
          password: 'Contraseña'
          password_confirmation: 'Confirmar contraseña'
          current_password: 'Contraseña actual'
+         remember_me: 'Recordarme'
     #   user:
     #     new:
     #       email: 'E-mail to sign in.'

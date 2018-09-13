@@ -24,8 +24,16 @@ class Property < ApplicationRecord
     area / building.area_sum.to_f
   end
 
+  def ownerability_sum
+    shares.sum(:ownerability_percentage)
+  end
+
+  def payment_sum
+    shares.sum(:payment_percentage)
+  end
+
   def property_debt
-    shares.reduce(0) {|sum, share| sum + share.bills_debt}
+    shares.reduce(0) { |sum, share| sum + share.bills_debt }
   end
 
   private

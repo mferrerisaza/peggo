@@ -110,8 +110,15 @@
     .submit-share-form {
       color: $my-green;
     }
+    .table-data-with-alert{
+      display: flex;
+      align-items: center;
+      i {
+        padding-left: 8px;
+      }
+    }
   }
-  .no-owners {
+  .no-owners, .bad-payment-sum {
     color: $my-red !important;
   }
   .table-row-link {
