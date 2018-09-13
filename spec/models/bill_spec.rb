@@ -79,7 +79,6 @@ RSpec.describe Bill, type: :model do
     end
   end
 
-
   context "concepts relationship" do
     it "can have many concepts" do
       building = FactoryBot.create(:building, :with_active_budget)
