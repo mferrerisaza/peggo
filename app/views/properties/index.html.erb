@@ -19,9 +19,16 @@
       </div>
       <% @properties.each do |property| %>
           <div data-id="<%=property.id%>" class="table-row-link table-row" onclick= "location.href= '<%= building_property_path(@building, property)%>'">
-            <div class="table-data"><%=property.property_type%></div>
+            <div class="table-data">
+              <span class="table-data-with-alert">
+                <%=property.property_type%>
+                <i class="material-icons bad-payment-sum <%= "hidden" if property.payment_sum == 1 %>">
+                  info
+                </i>
+              </span>
+            </div>
             <div class="table-data"><%=property.name%></div>
-            <div class="table-data <%= "no-owners" if no_owners?(property.owners)%>"><%= property_owners(property.owners) %></div>
+            <div class="table-data"><%= property_owners(property.owners) %></div>
             <div class="table-data"><%= percentage(property.building_coeficient) %></div>
             <div class="table-data"><%=property.area%></div>
             <div class="table-data"><%=property.phone%></div>

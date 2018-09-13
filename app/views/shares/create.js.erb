@@ -28,6 +28,7 @@ function addShare(shareHTML) {
   if (closeEditFormBtn) {
     addCloseBtnListener(closeEditFormBtn);
   }
+
 }
 
 <% if @share.errors.any? %>
@@ -35,5 +36,8 @@ function addShare(shareHTML) {
 <% else %>
   addShare('<%= j render "shared/share-row", share: @share %>');
   refreshForm('<%= j render "shared/share-form", share: Share.new, form_class:"new-share-form" %>', true);
+  <% if @property %>
+    togglePaymentAlert('<%= j percentage(@property.payment_sum) %>');
+  <% end %>
 <% end %>
 

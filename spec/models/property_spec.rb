@@ -57,6 +57,16 @@ RSpec.describe Property, type: :model do
     expect(property.full_name).to eq("Apartamento 301 torre 1")
   end
 
+  it "returns shares ownerability_perc sum" do
+    property = FactoryBot.create(:property, :fifty_fifty)
+    expect(property.ownerability_sum).to eq 1
+  end
+
+  it "returns shares payment_percentage sum" do
+    property = FactoryBot.create(:property, :fifty_fifty)
+    expect(property.payment_sum).to eq 1
+  end
+
   it "calculates the correct building coeficient" do
     building = FactoryBot.create(:building, :with_propierties)
     property = FactoryBot.create(:property, area: 50, building_coeficient: nil)

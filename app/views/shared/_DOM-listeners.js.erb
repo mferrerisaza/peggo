@@ -25,3 +25,15 @@ function addEditButtonListener(element) {
     dataRow.classList.toggle("hidden");
   })
 }
+
+function togglePaymentAlert(percentage) {
+  const percentageNumber = parseInt(percentage, 10);
+  const alert = document.getElementById("payment-percentage-alert");
+  const percentageText = document.getElementById("percentage-value");
+  if (percentageNumber === 100) {
+    alert.classList.add("hidden");
+  } else {
+    alert.classList.remove("hidden");
+  }
+  percentageText.innerHTML = percentage;
+}
