@@ -100,7 +100,7 @@
     font-size: 14px;
     font-weight: lighter;
     padding: 8px 16px;
-    text-align: center;
+    text-align: left;
     .form-group{
       margin: 0px;
     }
@@ -111,7 +111,7 @@
       color: $my-green;
     }
   }
-  .no-owners {
+  .no-owners, .bad-payment-sum {
     color: $my-red !important;
   }
   .table-row-link {
