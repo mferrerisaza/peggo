@@ -20,7 +20,7 @@
       <% @properties.each do |property| %>
           <div data-id="<%=property.id%>" class="table-row-link table-row" onclick= "location.href= '<%= building_property_path(@building, property)%>'">
             <div class="table-data">
-              <span style="display: flex; align-items: center;">
+              <span class="table-data-with-alert">
                 <%=property.property_type%>
                 <i class="material-icons bad-payment-sum <%= "hidden" if property.payment_sum == 1 %>">
                   info

@@ -100,7 +100,7 @@
     font-size: 14px;
     font-weight: lighter;
     padding: 8px 16px;
-    text-align: left;
+    text-align: center;
     .form-group{
       margin: 0px;
     }
@@ -109,6 +109,13 @@
     }
     .submit-share-form {
       color: $my-green;
+    }
+    .table-data-with-alert{
+      display: flex;
+      align-items: center;
+      i {
+        padding-left: 8px;
+      }
     }
   }
   .no-owners, .bad-payment-sum {
