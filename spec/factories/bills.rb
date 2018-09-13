@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :bill do
     association :share
     status "Pendiente"
-    sequence(:period) { |n| "#{Time.now.year}-0#{Time.now.month-(n-1)}" }
+    sequence(:period) { |n| (Date.today - n.month).strftime("%Y/%m") }
     # period Time.current.strftime("%Y-%m")
 
     trait :with_concepts do
