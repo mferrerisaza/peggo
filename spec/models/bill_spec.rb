@@ -25,6 +25,17 @@ RSpec.describe Bill, type: :model do
     expect(bill.errors.messages).to have_key(:period)
   end
 
+  it "is invalid without the proper period format" do
+    bill = FactoryBot.build(:bill, period: "Some string")
+    expect(bill).to_not be_valid
+    expect(bill.errors.messages). to have_key(:period)
+  end
+
+  it "is valid with the proper period format" do
+    bill = FactoryBot.build(:bill, period: "2018/01")
+    expect(bill).to be_valid
+  end
+
   it "returns 0 if payment_percentage is zero" do
     @building = FactoryBot.create(:building, :with_active_budget, :with_propierties)
     @owner = FactoryBot.create(:owner, building: @building)
@@ -67,6 +78,7 @@ RSpec.describe Bill, type: :model do
       expect(@share.bills_debt).to eq 0
     end
   end
+
 
   context "concepts relationship" do
     it "can have many concepts" do
