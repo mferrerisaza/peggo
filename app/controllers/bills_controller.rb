@@ -1,7 +1,8 @@
 class BillsController < ApplicationController
-  before_action :set_building, only: %i[new create]
+  before_action :set_building, only: %i[new create errors]
 
   def new
+    check_bill_conditions
     authorize @building, :building_of_current_user?
     @owners = @building.owners
   end
@@ -15,7 +16,24 @@ class BillsController < ApplicationController
     redirect_to building_path(@building)
   end
 
+  def errors
+    authorize @building, :building_of_current_user?
+  end
+
   private
+
+  def check_bill_conditions
+    conditions = {}
+    conditions[:active_budget] = false if @building.active_budget
+    conditions[:building_coeficients] = false if @building.building_coeficients_sum == 1
+    conditions[:properties_payment_sum] = false if @building.properties.all? { |property| property.payment_sum == 1 }
+
+    render_bill_creation_errors(conditions) if conditions.any? { |_k, v| v == false }
+  end
+
+  def render_bill_creation_errors(conditions = {})
+    redirect_to bills_errors_building_path(@building)
+  end
 
   def owner_params(params)
     params.permit(:enviar, :owner_id)
