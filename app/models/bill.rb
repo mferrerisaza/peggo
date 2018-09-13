@@ -6,6 +6,7 @@ class Bill < ApplicationRecord
   has_many :concepts, dependent: :destroy
 
   validates :status, :period, presence: true
+  validates_format_of :period, with: /(?<year>\d{4})\/(?<month>\d{1,2})/, message: "Ingesa una fecha válida"
 
   def add_property_monthly_fee
     concept = Concept.new(
