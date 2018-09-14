@@ -8,6 +8,8 @@
             <li><%= link_to "Cerrar Sesión", destroy_user_session_path , method: :delete, class: "navbar-wagon-item navbar-wagon-link" %></li>
           <% else %>
             <li><a href="#features" class="navbar-wagon-item navbar-wagon-link">Caracteristicas</a></li>
+            <li><a href="#contact" class="navbar-wagon-item navbar-wagon-link">Contacto</a></li>
+
             <li><%= link_to "Iniciar Sesión", new_user_session_path, class: "navbar-wagon-item navbar-wagon-link"  %></li>
           <% end %>
         </ul>
@@ -25,6 +27,7 @@
         <%= link_to "Cerrar Sesión", destroy_user_session_path , method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
       <% else %>
         <a href="#features" class="navbar-wagon-item navbar-wagon-link">Caracteristicas</a>
+        <a href="#contact" class="navbar-wagon-item navbar-wagon-link">Contacto</a>
         <%= link_to "Iniciar Sesión", new_user_session_path, class: "navbar-wagon-item navbar-wagon-link"  %>
       <% end %>
     </div>
