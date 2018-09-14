@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: "http://www.peggo.com.co" }
+  config.action_mailer.default_url_options = { host: "www.peggo.com.co" }
   config.action_mailer.delivery_method = :mailjet_api
 
   # Verifies that versions and hashed value of the package contents in the project's package.json
