@@ -24,6 +24,7 @@ class User < ApplicationRecord
     else
       user = User.new(user_params)
       user.password = Devise.friendly_token[0, 20] # Fake password for validation
+      # user.skip_confirmation! # uncomment when this branch gets merged with devise-confirmable
       user.save
     end
     return user
