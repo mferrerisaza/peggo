@@ -1,19 +1,35 @@
-<h2>Change your password</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
-
-  <div class="form-inputs">
-    <%= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
+<div class="edit-user-form-wrapper" style="background-image:
+      linear-gradient(rgba(255,255,255, 0),
+      rgba(0, 0, 0, 0.4)),
+      url(<%= image_path('https://images.unsplash.com/photo-1511881830150-850572962174?ixlib=rb-0.3.5&s=bfad606b3a48da2ce739a9abe98f0ccf&auto=format&fit=crop&w=1534&q=80')%>);"
+  >
+  <div class="logo-sessions-position">
+    <%= link_to root_path do %>
+      <%= render 'shared/sidebar-logo' %>
+    <% end %>
   </div>
+  <div class="devise-form-container">
+    <div class="new-devise-form-container">
+      <div class="new-devise-form-heading">
+        <h1>Recuperar contraseña</h1>
+      </div>
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
+        <%= f.input :reset_password_token, as: :hidden %>
+        <%= f.full_error :reset_password_token %>
+
+        <div class="form-inputs">
+          <%= f.input :password, label: "Nueva contraseña", required: true, autofocus: true, hint: ("#{@minimum_password_length} caracteres mínimo" if @minimum_password_length) %>
+          <%= f.input :password_confirmation, label: "Confirma tu nueva contraseña", required: true %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Cambiar mi contraseña", class: "btn form-btn" %>
+        </div>
+        <div class="login-links">
+          <%= render "devise/shared/links" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
