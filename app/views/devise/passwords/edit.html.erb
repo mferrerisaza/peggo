@@ -3,7 +3,7 @@
       rgba(0, 0, 0, 0.4)),
       url(<%= image_path('https://images.unsplash.com/photo-1511881830150-850572962174?ixlib=rb-0.3.5&s=bfad606b3a48da2ce739a9abe98f0ccf&auto=format&fit=crop&w=1534&q=80')%>);"
   >
-  <div class="logo-sessions-position">
+  <div class="logo-sessions-position hidden-xs hidden-sm">
     <%= link_to root_path do %>
       <%= render 'shared/sidebar-logo' %>
     <% end %>
@@ -11,6 +11,9 @@
   <div class="devise-form-container">
     <div class="new-devise-form-container">
       <div class="new-devise-form-heading">
+        <%= link_to root_path, class: "hidden-md hidden-lg" do %>
+          <%= render 'shared/sidebar-logo' %>
+        <% end %>
         <h1>Recuperar contraseña</h1>
       </div>
       <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
