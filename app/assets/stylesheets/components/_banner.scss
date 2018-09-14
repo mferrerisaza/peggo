@@ -26,11 +26,20 @@
   color: rgb(255, 255, 255);
   margin-bottom: 30px;
 }
+
 @media (max-width: 991px) {
   .banner h1 {
     font-size: 36px;
   }
   .banner p {
     font-size: 16px;
+  }
+}
+@media (max-width: 355px) {
+  .banner-call-to-actions {
+    display: flex;
+    a {
+      padding: 8px;
+    }
   }
 }
