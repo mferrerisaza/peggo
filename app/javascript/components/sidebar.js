@@ -1,24 +1,22 @@
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
+function openNav(sidebar) {
+  sidebar.style.width = "250px";
 }
 
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
+function closeNav(sidebar) {
+  sidebar.style.width = "0";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const closeBtns = document.querySelectorAll(".closebtn")
   const hambMenu = document.querySelector(".navbar-wagon-dropicon")
-
-  if(hambMenu && closeBtns){
-  // if(closeBtns){
+  const sidebar = document.getElementById("mySidenav");
+  if(hambMenu && closeBtns && sidebar){
     hambMenu.addEventListener("click", (event) => {
-      openNav();
+      openNav(sidebar);
     })
     for (let i = 0; i < closeBtns.length; i++) {
       closeBtns[i].addEventListener("click", (event) => {
-        closeNav();
+        closeNav(sidebar);
       })
     }
   }
