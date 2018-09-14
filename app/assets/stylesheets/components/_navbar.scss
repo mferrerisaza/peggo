@@ -10,6 +10,20 @@
   justify-content: space-between;
   z-index: 1;
 }
+.navbar-wagon-white {
+  background-color: white !important;
+  .navbar-wagon-item {
+    color: $brand-primary !important;
+      i {
+      font-size: 35px;
+      color: $brand-primary;
+    }
+  }
+  .navbar-wagon-link:hover {
+    color: $my-secondary-blue !important;
+    text-decoration: none !important;
+  }
+}
 .navbar-wagon-blue{
    background-color: $brand-primary;
 }
