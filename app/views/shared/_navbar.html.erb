@@ -15,15 +15,13 @@
         </ul>
       </div>
     </div>
-    <a href="/" class="navbar-wagon-brand" id="white-logo">
+    <a href="/" class="navbar-wagon-brand <%= "hidden" unless action_name == "home" %>" id="white-logo">
       <%= render 'shared/sidebar-logo' %>
     </a>
-    <a href="/" class="navbar-wagon-brand hidden" id="color-logo">
+    <a href="/" class="navbar-wagon-brand <%= "hidden" if action_name == "home" %>" id="color-logo">
       <%= render 'shared/navbar-logo' %>
     </a>
-    <div class="navbar-wagon-item navbar-wagon-invisible hidden-md hidden-lg">
-
-    </div>
+    <div class="navbar-wagon-item navbar-wagon-invisible hidden-md hidden-lg"></div>
 
     <div class="navbar-wagon-right hidden-xs hidden-sm">
       <% if current_user %>

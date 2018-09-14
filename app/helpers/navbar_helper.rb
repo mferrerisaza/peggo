@@ -3,7 +3,7 @@ module NavbarHelper
     if controller_name == "pages" && action_name == "home"
       "navbar-wagon-transparent"
     else
-      "navbar-wagon-blue"
+      "navbar-wagon-white"
     end
   end
 
