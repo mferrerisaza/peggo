@@ -1,7 +1,7 @@
 /* Main navbar */
 .navbar-wagon {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: white;
+  width: 100%;
   transition: all 0.3s ease;
   height: 70px;
   padding: 0px 30px;
@@ -9,8 +9,26 @@
   align-items: center;
   justify-content: space-between;
 }
+.navbar-wagon-blue{
+   background-color: $brand-primary;
+}
+.navbar-wagon-transparent{
+   background-color: transparent;
+   position: fixed;
+   top: 0px;
+}
+.navbar-wagon-fixed{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
 
 /* Logo */
+.navbar-wagon-brand{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .navbar-wagon-brand img {
   height: 50px;
 }
@@ -32,29 +50,37 @@
 /* Basic navbar item */
 .navbar-wagon-item {
   cursor: pointer;
-  padding: 0 20px;
+  // padding: 0 20px;
+    i {
+    font-size: 35px;
+    color: white;
+  }
 }
-
+.navbar-wagon-invisible{
+  min-width: 31px;
+  min-height: 35px;
+}
 /* Navbar link */
 .navbar-wagon-link {
-  color: #616668;
+  color: white;
   font-size: 14px;
 }
 .navbar-wagon-link:hover {
-  color: #da552f;
+  color: $my-secondary-blue;
   text-decoration: none;
 }
 
 /* Dropdown menu */
 .navbar-wagon-dropdown-menu {
   margin-top: 15px;
-  box-shadow: 1px 1px 4px #E6E6E6;
-  border-color: #E6E6E6;
+  border-radius: 3px;
+  // box-shadow: 1px 1px 4px #E6E6E6;
+  // border-color: #E6E6E6;
 }
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;
-  font-weight: lighter !important;
-  color: #999999 !important;
+  font-weight: bold !important;
+  color: #rgba(0, 0, 0,0.5) !important;
   font-size: 15px !important;
   line-height: 22px !important;
   padding: 10px 20px;
@@ -63,15 +89,4 @@
   background: transparent !important;
   color: black !important;
 }
-.navbar-wagon-dropdown-menu:before {
-  content: ' ';
-  height: 10px;
-  width: 10px;
-  position: absolute;
-  right: 10px;
-  top: -6px;
-  background-color: white;
-  transform: rotate(45deg);
-  border-left: 1px solid #E6E6E6;
-  border-top: 1px solid #E6E6E6;
-}
+
