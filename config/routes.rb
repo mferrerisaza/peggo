@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'buildings#index'
+  authenticated :user do
+    root to: 'buildings#index'
+  end
+  root :to => 'pages#home'
   resources :buildings, only: [:index, :show, :new, :create] do
     resources :properties
     resources :owners
