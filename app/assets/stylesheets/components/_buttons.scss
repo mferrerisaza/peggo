@@ -92,3 +92,31 @@
     font-weight: bold;
   }
 }
+.google-login-btn{
+  color: $brand-primary;
+  margin-top: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  &:hover,:active, :focus {
+    text-decoration: none;
+  }
+  span{
+    text-decoration: none;
+    width: 80%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+
+    i {
+      font-weight: normal;
+      padding-right: 8px;
+    }
+  }
+}
