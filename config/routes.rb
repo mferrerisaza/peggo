@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     resources :properties
     resources :owners
     resources :bills, only: [:new, :create]
+    member do
+      get 'bills/errors', to: "bills#errors"
+    end
     resources :budgets, except: :show
   end
   resources :shares, only: [:create, :update, :destroy]

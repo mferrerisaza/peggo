@@ -36,6 +36,20 @@
   }
 }
 
+.alert-btn {
+  font-size: 14px;
+  text-align: center;
+  background-color: none;
+  text-transform: uppercase;
+  color: $my-secondary-blue;
+  font-weight: bold;
+  white-space: normal;
+  &:hover,&:active {
+    text-decoration: none;
+    color: $brand-primary;
+  }
+}
+
 .form-btn--no-background {
   width: 100%;
   font-size: 14px;
