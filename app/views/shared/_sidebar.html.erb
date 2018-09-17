@@ -10,10 +10,16 @@
     </div>
 
     <% if @building %>
+
       <div class="sidebar-top">
         <div class="sidebar-top-user">
-          <i class="far fa-user-circle"></i>
-          <i class="fas fa-cog"></i>
+          <% if current_user.google_picture_url %>
+            <%= image_tag current_user.google_picture_url, class: "sidebar-top-user-image" %>
+            <i class="fas fa-cog"></i>
+          <% else %>
+              <i class="far fa-user-circle"></i>
+              <i class="fas fa-cog"></i>
+          <% end %>
         </div>
 
         <div class="sidebar-top-building menu-button" style="cursor: pointer;">

@@ -16,6 +16,13 @@
         <% end %>
         <h1>Crea una cuenta</h1>
       </div>
+      <%= link_to user_google_oauth2_omniauth_authorize_path , class: "google-login-btn" do%>
+        <span>
+        <i class="fab fa-google"></i>
+          Crea una cuenta con Google
+        </span>
+      <% end %>
+      <p class="text-center login-separator">O llenando los siguientes datos...</p>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
 

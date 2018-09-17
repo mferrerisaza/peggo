@@ -28,6 +28,11 @@
       color: white;
       .sidebar-top-user{
         padding-left: 16px;
+        .sidebar-top-user-image{
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+        }
         .far.fa-user-circle {
           font-size: 50px;
         }
@@ -84,8 +89,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: absolute;
-      bottom: 16px;
+      margin-top: 16px;
       .sidebar-signout{
         color: white;
         font-weight: lighter;

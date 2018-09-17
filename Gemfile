@@ -21,6 +21,7 @@ gem "pundit"
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'cloudinary'
+gem 'omniauth-google-oauth2'
 gem 'mailjet'
 
 group :development do

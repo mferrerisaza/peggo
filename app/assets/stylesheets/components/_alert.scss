@@ -27,6 +27,12 @@
   justify-content: center;
   align-items: flex-start;
 }
+.alert-red{
+  color: $my-red !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 
 .insider-with-margin{
   margin-left: 16px;
