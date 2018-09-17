@@ -1,11 +1,37 @@
-<div class="hidden-lg hidden-md">
-  <div class="navbar-wagon">
-    <!-- Dropdown list appearing on mobile only -->
-    <div class="navbar-wagon-item hidden-md-up navbar-wagon-dropicon">
+<% unless devise_controller? %>
+  <div class="navbar-wagon <%= navbar_color %> <%= do_not_render_navbar_web %>">
+    <div class="navbar-wagon-item navbar-wagon-dropicon hidden-md hidden-lg">
       <div class="dropdown">
         <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu <%= "hidden" unless render_navbar_dropdown %>">
+          <% if current_user %>
+            <li><%= link_to "Cerrar Sesión", destroy_user_session_path , method: :delete, class: "navbar-wagon-item navbar-wagon-link" %></li>
+          <% else %>
+            <li><a href="#features" class="navbar-wagon-item navbar-wagon-link">Caracteristicas</a></li>
+            <li><a href="#contact" class="navbar-wagon-item navbar-wagon-link">Contacto</a></li>
+
+            <li><%= link_to "Iniciar Sesión", new_user_session_path, class: "navbar-wagon-item navbar-wagon-link"  %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
-  </div>
-</div>
+    <a href="/" class="navbar-wagon-brand <%= "hidden" unless action_name == "home" %>" id="white-logo">
+      <%= render 'shared/sidebar-logo' %>
+    </a>
+    <a href="/" class="navbar-wagon-brand <%= "hidden" if action_name == "home" %>" id="color-logo">
+      <%= render 'shared/navbar-logo' %>
+    </a>
+    <div class="navbar-wagon-item navbar-wagon-invisible hidden-md hidden-lg"></div>
 
+    <div class="navbar-wagon-right hidden-xs hidden-sm">
+      <% if current_user %>
+        <%= link_to "Cerrar Sesión", destroy_user_session_path , method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% else %>
+        <a href="#features" class="navbar-wagon-item navbar-wagon-link">Caracteristicas</a>
+        <a href="#contact" class="navbar-wagon-item navbar-wagon-link">Contacto</a>
+        <%= link_to "Iniciar Sesión", new_user_session_path, class: "navbar-wagon-item navbar-wagon-link"  %>
+      <% end %>
+    </div>
+
+  </div>
+<% end %>
