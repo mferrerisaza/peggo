@@ -1,8 +1,8 @@
 <%= render 'shared/sidebar' %>
   <div class="banner" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1429823040067-2c31b1d637ae?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=66e6203a23411a1b8a09a6da85a33fca&auto=format&fit=crop&w=1534&q=80');">
     <div class="banner-content">
-      <h1>Administra unidades residenciales de forma eficiente</h1>
-      <p>Centraliza toda la información necesaria para la administración de unidades residenciales en un solo lugar.</p>
+      <h1>¿Administras propiedad horizontal y aún no tienes la información centralizada?</h1>
+      <p>Organiza la información, ajusta las cuentas con los copropietarios y  haz tu vida mas fácil con Peggo.</p>
       <div class="banner-call-to-actions">
         <%= link_to "Iniciar Sesión", new_user_session_path, class: "banner-btn--no-background" %>
         <%= link_to "Regístrarse", new_user_registration_path, class: "banner-btn" %>
@@ -12,7 +12,7 @@
   <div class="after-banner">
     <div class="section-content-div" id="features">
       <h2>Conoce Peggo</h2>
-      <p>Administra todas las unidades a las que estés vinculado en un mismo lugar y de forma estandarizada.  Reduce el tiempo y evita reprocesos.  Cobra y recibe confirmación de pagos para mantener tus cuentas organizadas.</p>
+      <p>Administra todas tus copropiedades en un mismo lugar y de forma estandarizada. Reduce el tiempo y evita reprocesos.  Registra deudas y pagos para mantener tus cuentas organizadas.</p>
       <div class="section-list-container">
         <div class="row">
           <div class="col-xs-12 col-sm-4">
@@ -21,20 +21,9 @@
                 <%= render 'shared/pc-icon' %>
                 <!-- <i class="fas fa-money-bill"></i> -->
               </div>
-              <h4>Mantente informado</h4>
+              <h4>Reporte de Cartera</h4>
               <p>
-                 Con Peggo tendras toda la información de las diferentes copropiedades que administres en un solo lugar en tiempo real. Podras registar quien ya ha pagado la cuota de administración e identificar quien se encuentra en mora.
-              </p>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <div class="section-content-div-element">
-              <div class="list-element-icon">
-                <%= render 'shared/checklist-icon' %>
-              </div>
-              <h4>Envía facturas masivas</h4>
-              <p>
-                Envía cuotas masivas a todos los propietarios. No gastes más tiempo enviando la factura a cada propietario y no pagues más por diligenciar facturas a mano.
+                 Mantente informado en tiempo real sobre el estado de tu cartera, podras registar quien ya ha pagado la cuota de administración e identificar quien se encuentra en mora.
               </p>
             </div>
           </div>
@@ -43,9 +32,52 @@
               <div class="list-element-icon">
                 <%= render 'shared/centralized-icon' %>
               </div>
-              <h4>Información centralizada</h4>
+              <h4>Directorio de Información</h4>
               <p>
-                Ten siempre disponible la información de pago y mora de los copropietarios así como su información de contacto ante cualquier eventualidad.
+                Ten siempre disponible y desde cualquier lugar los datos de contacto de los copropietarios como: correos, teléfonos, coeficientes de copropiedad, propiedades y pagos.
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="section-content-div-element">
+              <div class="list-element-icon">
+                <%= render 'shared/checklist-icon' %>
+              </div>
+              <h4>Registro de cobros</h4>
+              <p>
+               Podrás registrar los cobros de la cuota de administración de una misma propiedad <strong>incluso si cuenta con varios propietarios</strong>, asignando diferentes porcentajes de pago a cada uno.
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="section-content-div-element">
+              <div class="list-element-icon">
+                <%= render 'shared/buildings-icon' %>
+              </div>
+              <h4>Multiples copropiedades</h4>
+              <p>
+               No te limites a administar solo una copropiedad, aprovecha las ventajas de Peggo, haz creecer tu negocio y comienza a organizar la información de cuantas desees.
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="section-content-div-element">
+              <div class="list-element-icon">
+                <%= render 'shared/budget' %>
+              </div>
+              <h4>Registro de Presupuestos</h4>
+              <p>
+               Asigna un presupuesto a la copropiedad, lleva un registro histórico de los que has ejecutado. Y calcula la cuota de administración y los cobros en base al presupuesto activo.
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="section-content-div-element">
+              <div class="list-element-icon">
+                <%= render 'shared/email-icon' %>
+              </div>
+              <h4>Cobros por correo electrónico (proximamente)</h4>
+              <p>
+               Envía de forma automática el cobro de la cuota de administración a todos los copropietarios y registra los pagos realizados virtualmente.
               </p>
             </div>
           </div>
