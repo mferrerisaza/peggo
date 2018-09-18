@@ -1,39 +1,31 @@
-<div class="table-content-wrapper">
-  <!-- <h5 class="bill-title text-center">Cobrar nueva cuota ordinaria</h5> -->
-    <form action="/buildings/<%= building.id %>/bills" method="post" class="no-padding-form">
-      <!-- Seleccion de Mes -->
-      <label>Seleccione el mes a cobrar</label>
-      <input type="string" class="datepicker-bill margin-bottom-end-med" name="bill_period" value="<%= Time.current.strftime("%Y-%m") %> ">
-      <!-- Seleccion de propietarios -->
-      <label class="margin-bottom-end-med">Seleccione los propiedatios a los que les desea generar cobro</label>
-      <div class="show-table table-container margin-bottom-end-med no-scroll-bar">
-      <div class="table">
-        <div class="table-row" id="bill-table">
-          <div class="table-header table-cell-large-width">Nombre del propietario</div>
-          <div class="table-header table-cell-small-width">Correo electrónico</div>
-          <div class="table-header table-cell-small-width">Valor cuota</div>
-          <div class="table-header table-cell-small-width">Enviar</div>
+<form action="/buildings/<%= building.id %>/bills" method="post">
+  <!-- Seleccion de Mes -->
+  <label>Seleccione el mes a cobrar</label>
+  <input type="string" class="datepicker-bill margin-bottom-end-med" name="bill_period" value="<%= Time.current.strftime("%Y-%m") %> ">
+  <!-- Seleccion de propietarios -->
+  <label class="margin-bottom-end-med">Seleccione los propiedatios a los que les desea generar cobro</label>
+  <div class="table-container">
+  <div class="table">
+    <div class="table-row" id="bill-table">
+      <div class="table-header table-cell-large-width">Nombre del propietario</div>
+      <div class="table-header table-cell-small-width">Correo electrónico</div>
+      <div class="table-header table-cell-small-width">Valor cuota</div>
+      <div class="table-header table-cell-small-width">Enviar</div>
+    </div>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <% owners.each do |owner| %>
+      <div class="table-row">
+        <div class="table-data"> <%= owner.name %> </div>
+        <div class="table-data"> <%= owner.email %> </div>
+        <div class="table-data"> <%=money_without_cents_and_with_symbol(owner.bill_amount) %></div>
+        <div class="table-data">
+          <input type="checkbox" name="bills[][enviar]" value="true" checked>
         </div>
+        <input type="hidden" name="bills[][owner_id]" value="<%= owner.id %>">
       </div>
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <div class="table">
-          <% owners.each do |owner| %>
-            <div class="table-row text-center-vertical">
-              <div class="table-data table-cell-large-width"> <%= owner.name %> </div>
-              <% properties_array = owner.properties.map(&:full_name)  %>
-              <div class="table-data table-cell-small-width"> <%= owner.email %> </div>
-              <div class="table-data table-cell-small-width"> <%=money_without_cents_and_with_symbol(owner.bill_amount) %></div>
-              <input type="hidden" name="bills[][owner_id]" value="<%= owner.id %>"><br>
-              <div class="table-data table-cell-small-width">
-                <input type="checkbox" name="bills[][enviar]" value="true" checked><br>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <button class="mdc-fab fab-bottom-right fab-color" type="submit" name="action">
-            <i class="material-icons">send</i>
-        </button>
-      </div>
-    </form>
+    <% end %>
+    <button class="mdc-fab fab-bottom-right fab-color" type="submit" name="action">
+        <i class="material-icons">send</i>
+    </button>
   </div>
-</div>
+</form>
