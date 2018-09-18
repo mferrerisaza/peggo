@@ -26,12 +26,15 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  z-index: 0;
 }
 .alert-red{
   color: $my-red !important;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  z-index: 0;
+
 }
 
 .insider-with-margin{
