@@ -72,7 +72,12 @@
           </i>
           <span>Cobrar Cuota</span>
         </a>
-
+        <a class="sidebar-link <%= "active" if controller_name == "bills" %>" href="/buildings/<%= @building.id %>/bills/new">
+          <i class="material-icons">
+            help
+          </i>
+          <span>Soporte</span>
+        </a>
       </div>
     <% else %>
       <div class="sidebar-links">
