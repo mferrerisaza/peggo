@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :bills, only: [:new, :create]
     member do
       get 'bills/errors', to: "bills#errors"
+      get '/support', to: "pages#support"
     end
     resources :budgets, except: :show
   end
