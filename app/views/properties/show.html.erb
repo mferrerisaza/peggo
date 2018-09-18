@@ -30,6 +30,9 @@
   </div>
   <hr class="show-share-division">
   <h4 class="shares-title text-center">Propietarios de la propiedad</h4>
+  <div id="payment-percentage-alert" class="alert alert-danger insider-with-margin <%= "hidden" if @property.payment_sum == 1 %>" role="alert">
+    Los porcentajes de pago de la cuota no suman el 100% (Suma actual: <strong id="percentage-value"><%= percentage(@property.payment_sum) %></strong>)
+  </div>
   <div class="show-table table-container margin-bottom-end-small">
     <div class="table">
         <div class="table-row" id="shares-table">
