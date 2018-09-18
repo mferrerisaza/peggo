@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ForestLiana::Engine => '/forest'
   authenticated :user do
     root to: 'buildings#index'
   end
