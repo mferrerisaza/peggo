@@ -1,5 +1,8 @@
 class BillsController < ApplicationController
-  before_action :set_building, only: %i[new create errors]
+  before_action :set_building, only: %i[show new create errors]
+
+  def show
+  end
 
   def new
     check_bill_conditions
