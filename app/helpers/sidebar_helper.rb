@@ -7,7 +7,6 @@ module SidebarHelper
       shares: %w[create update],
       bills: %w[new create errors],
       budgets: %w[index new create edit update],
-      pages: %w[support]
     }
     return if allowed_controllers[controller_name.to_sym].nil?
     allowed_controllers[controller_name.to_sym].include?(action_name)

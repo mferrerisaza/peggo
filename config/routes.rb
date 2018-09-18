@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     resources :bills, only: [:new, :create]
     member do
       get 'bills/errors', to: "bills#errors"
-      get '/support', to: "pages#support"
     end
     resources :budgets, except: :show
   end
@@ -20,4 +19,5 @@ Rails.application.routes.draw do
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'
     end
+  get '/support', to: "pages#support"
 end
