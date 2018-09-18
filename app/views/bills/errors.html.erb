@@ -1,0 +1,23 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <h3 class="alert alert-red property-title text-center">
+    <i class="material-icons">
+     info
+    </i>
+    No es posible crear una nueva cuota porque hemos encontrado los siguientes errores:
+  </h3>
+  <ul class="errors-list">
+    <% @messages.each do |k, v| %>
+      <li>
+        <span class="errors-list-text">
+          <%= v[0] %>
+        </span>
+        <span>
+          <%= link_to "ir a #{k.to_s.gsub("_", " ").capitalize}", v[1], class: "btn alert-btn"%>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+

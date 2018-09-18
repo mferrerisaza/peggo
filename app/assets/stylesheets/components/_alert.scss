@@ -3,12 +3,13 @@
 * ------------------------------------- */
 
 .alert {
-  // margin: 0;
+  margin: 0;
   text-align: center;
   color: white;
   border-radius: 8px;
-  z-index: 10000;
+  z-index: 100000;
   border: none;
+  position: relative
 }
 .alert-info {
   background: $green;
@@ -22,6 +23,12 @@
 }
 .alert-blue{
   color: $blue !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.alert-red{
+  color: $my-red !important;
   display: flex;
   justify-content: center;
   align-items: flex-start;

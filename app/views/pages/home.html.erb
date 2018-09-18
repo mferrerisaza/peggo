@@ -1,2 +1,65 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= render 'shared/sidebar' %>
+  <div class="banner" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1429823040067-2c31b1d637ae?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=66e6203a23411a1b8a09a6da85a33fca&auto=format&fit=crop&w=1534&q=80');">
+    <div class="banner-content">
+      <h1>Administra unidades residenciales de forma eficiente</h1>
+      <p>Centraliza toda la información necesaria para la administración de unidades residenciales en un solo lugar.</p>
+      <div class="banner-call-to-actions">
+        <%= link_to "Iniciar Sesión", new_user_session_path, class: "banner-btn--no-background" %>
+        <%= link_to "Regístrarse", new_user_registration_path, class: "banner-btn" %>
+      </div>
+    </div>
+  </div>
+  <div class="after-banner">
+    <div class="section-content-div" id="features">
+      <h2>Conoce Peggo</h2>
+      <p>Administra todas las unidades a las que estés vinculado en un mismo lugar y de forma estandarizada.  Reduce el tiempo y evita reprocesos.  Cobra y recibe confirmación de pagos para mantener tus cuentas organizadas.</p>
+      <div class="section-list-container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <div class="section-content-div-element">
+              <div class="list-element-icon">
+                <%= render 'shared/pc-icon' %>
+                <!-- <i class="fas fa-money-bill"></i> -->
+              </div>
+              <h4>Mantente informado</h4>
+              <p>
+                 Con Peggo tendras toda la información de las diferentes copropiedades que administres en un solo lugar en tiempo real. Podras registar quien ya ha pagado la cuota de administración e identificar quien se encuentra en mora.
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="section-content-div-element">
+              <div class="list-element-icon">
+                <%= render 'shared/checklist-icon' %>
+              </div>
+              <h4>Envía facturas masivas</h4>
+              <p>
+                Envía cuotas masivas a todos los propietarios. No gastes más tiempo enviando la factura a cada propietario y no pagues más por diligenciar facturas a mano.
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="section-content-div-element">
+              <div class="list-element-icon">
+                <%= render 'shared/centralized-icon' %>
+              </div>
+              <h4>Información centralizada</h4>
+              <p>
+                Ten siempre disponible la información de pago y mora de los copropietarios así como su información de contacto ante cualquier eventualidad.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer" id="contact">
+      <div class="footer-links">
+        <a href="https://www.instagram.com/12_startups/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/573216458798" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="footer-copyright">
+        <i class="fas fa-copyright"></i>2018 made with <i class="fa fa-heart"></i> by Scuad Team
+      </div>
+    </div>
+  </div>
+<%= render 'shared/tawk-chat' %>

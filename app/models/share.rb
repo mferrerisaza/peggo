@@ -21,7 +21,7 @@ class Share < ApplicationRecord
   end
 
   def unpaid_bills
-    bills.select{|bill| bill.status == "Pendiente"}
+    bills.select { |bill| bill.status == "Pendiente" }
   end
 
   def bills_debt

@@ -36,6 +36,20 @@
   }
 }
 
+.alert-btn {
+  font-size: 14px;
+  text-align: center;
+  background-color: none;
+  text-transform: uppercase;
+  color: $my-secondary-blue;
+  font-weight: bold;
+  white-space: normal;
+  &:hover,&:active {
+    text-decoration: none;
+    color: $brand-primary;
+  }
+}
+
 .form-btn--no-background {
   width: 100%;
   font-size: 14px;
@@ -76,5 +90,67 @@
   border: none;
   i {
     font-weight: bold;
+  }
+}
+.banner-btn {
+  padding: 18px;
+  font-size: 14px;
+  text-align: center;
+  background-color: $my-secondary-blue;
+  text-transform: uppercase;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0px 2px 2px rgba(156, 39, 176, 0.2);
+  &:hover,&:active {
+    text-decoration: none;
+    color: white;
+    background-color: $brand-primary;
+  }
+}
+
+.banner-btn--no-background {
+  padding: 18px;
+  font-size: 14px;
+  text-align: center;
+  background-color: none;
+  text-transform: uppercase;
+  color: white;
+  font-weight: normal;
+  border-radius: 3px;
+  &:hover,&:active {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: bold;
+  }
+}
+
+.google-login-btn{
+  color: $brand-primary;
+  margin-top: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  &:hover,:active, :focus {
+    text-decoration: none;
+  }
+  span{
+    text-decoration: none;
+    width: 80%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+
+    i {
+      font-weight: normal;
+      padding-right: 8px;
+    }
   }
 }

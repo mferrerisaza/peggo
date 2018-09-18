@@ -3,7 +3,7 @@
       rgba(0, 0, 0, 0.4)),
       url(<%= image_path('https://images.unsplash.com/photo-1511881830150-850572962174?ixlib=rb-0.3.5&s=bfad606b3a48da2ce739a9abe98f0ccf&auto=format&fit=crop&w=1534&q=80')%>);"
   >
-  <div class="logo-sessions-position">
+  <div class="logo-sessions-position hidden-xs hidden-sm">
     <%= link_to root_path do %>
       <%= render 'shared/sidebar-logo' %>
     <% end %>
@@ -11,8 +11,18 @@
   <div class="devise-form-container">
     <div class="new-devise-form-container">
       <div class="new-devise-form-heading">
+        <%= link_to root_path, class: "hidden-md hidden-lg" do %>
+          <%= render 'shared/sidebar-logo' %>
+        <% end %>
         <h1>Inicia Sesión</h1>
       </div>
+      <%= link_to user_google_oauth2_omniauth_authorize_path , class: "google-login-btn" do%>
+        <span>
+        <i class="fab fa-google"></i>
+          Inicia sesion con Google
+        </span>
+      <% end %>
+      <p class="text-center login-separator">O llenando los siguientes datos...</p>
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-inputs">
           <%= f.input :email, required: false, autofocus: true %>

@@ -62,7 +62,8 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  margin-top: 16px;
 }
 @media (max-width: 768px) {
   .new-property-form-heading{
@@ -77,10 +78,6 @@
     width: 100% !important;
     right: 0% !important;
   }
-}
-
-.new-owner-form-container {
-  width: 50%;
 }
 
 .no-padding-form {

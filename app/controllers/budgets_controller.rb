@@ -29,7 +29,7 @@ class BudgetsController < ApplicationController
   end
 
   def update
-    @building = Building.find(budget_params[:building_id])
+    # @building = Building.find(budget_params[:building_id])
     authorize @building, :building_of_current_user?
     if @budget.update(budget_params)
       redirect_to building_budgets_path @building
