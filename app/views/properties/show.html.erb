@@ -30,15 +30,12 @@
   </div>
   <hr class="show-share-division">
   <h4 class="shares-title text-center">Propietarios de la propiedad</h4>
-  <div id="payment-percentage-alert" class="alert alert-danger insider-with-margin <%= "hidden" if @property.payment_sum == 1 %>" role="alert">
-    Los porcentajes de pago de la cuota no suman el 100% (Suma actual: <strong id="percentage-value"><%= percentage(@property.payment_sum) %></strong>)
-  </div>
   <div class="show-table table-container margin-bottom-end-small">
     <div class="table">
         <div class="table-row" id="shares-table">
           <div class="table-header">Propietario</div>
           <div class="table-header">Porcentaje de participación</div>
-          <div class="table-header">Porcentaje pago de cuota</div>
+          <div class="table-header">Porcentaje de pago de cuota</div>
           <div class="table-header">Acciones</div>
         </div>
         <% @property.shares.order(created_at: :desc).each do |share| %>
@@ -57,18 +54,17 @@
   <div class="show-table table-container">
     <div class="table">
       <div class="table-row">
-        <div class="table-header">Responsable</div>
         <div class="table-header">Periodo</div>
         <div class="table-header">Monto</div>
         <div class="table-header">Estado</div>
       </div>
-      <% @property.bills.each do |bill| %>
-        <div data-id="<%=bill.id%>" class="table-row">
-          <div class="table-data"><%=bill.share.owner.name%></div>
-          <div class="table-data"><%=bill.period%></div>
-          <div class="table-data"><%=money_without_cents_and_with_symbol(bill.sum_concepts_amount)%></div>
+      <% group_bills_by_period(@property.bills).each do |period, bills_array| %>
+        <div data-id="<%=period%>" class="table-row">
+          <div class="table-data"><%=period%></div>
+          <% amount = amount_by_bill_period(bills_array) %>
+          <div class="table-data"><%=money_without_cents_and_with_symbol(amount)%></div>
           <div class="flex flex-center">
-            <div class="table-data debt-status-mid status-padding <%= status_color_class(bill.sum_concepts_amount) %>"></div>
+            <div class="table-data debt-status-mid status-padding <%= status_color_class(amount) %>"></div>
           </div>
         </div>
       <% end %>
