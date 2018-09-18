@@ -42,7 +42,7 @@ class BudgetsController < ApplicationController
     authorize @budget
     @budget.destroy
     flash[:notice] = "Presupuesto eliminado con éxito"
-    redirect_to building_properties_path(@building)
+    redirect_to building_budgets_path(@building)
   end
 
   private
