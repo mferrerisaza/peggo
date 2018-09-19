@@ -1,6 +1,7 @@
 class BillPolicy < ApplicationPolicy
+
   def new?
-    true
+    record.user == user
   end
 
   def create?
@@ -9,7 +10,7 @@ class BillPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where(user: user)
+      scope.all
     end
   end
 end
