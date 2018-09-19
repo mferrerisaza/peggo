@@ -47,6 +47,15 @@ and (max-width: 380px) {
 }
 
 @media only screen
+and (min-width: 381px) {
+  .responsive-avatar {
+    height: 60px;
+    width: 60px;
+    bottom: 30px;
+  }
+}
+
+@media only screen
 and (min-width: 1224px) {
   .responsive-avatar {
     height: 70px;
