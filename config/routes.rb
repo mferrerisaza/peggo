@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :buildings, only: [:index, :show, :new, :create] do
     resources :properties
     resources :owners
-    resources :bills, only: [:new, :create]
+    resources :bills, only: [:index, :new, :create]
     member do
       get 'bills/errors', to: "bills#errors"
     end
