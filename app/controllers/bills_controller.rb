@@ -1,7 +1,9 @@
 class BillsController < ApplicationController
-  before_action :set_building, only: %i[show new create errors]
+  before_action :set_building, only: %i[index new create errors]
 
-  def show
+  def index
+    @bills = policy_scope(Bill.where(id: params[:bills]))
+    authorize @building, :building_of_current_user?
   end
 
   def new
