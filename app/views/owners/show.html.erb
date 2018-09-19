@@ -53,7 +53,9 @@
         <div class="table-header">Estado</div>
       </div>
       <% group_bills_by_period(@owner.bills).each do |period, bills_array| %>
-        <div data-id="<%=period%>" class="table-row">
+        <% data = { bills: bills_array.map(&:id) } %>
+        <% query = CGI.unescape data.to_query %>
+        <div data-id="<%=period%>" class="table-row-link table-row" onclick= "location.href= '/buildings/<% @building.id %>/bills/<% query %>'">
           <div class="table-data"><%=period%></div>
           <% amount = amount_by_bill_period(bills_array)  %>
           <div class="table-data"><%=money_without_cents_and_with_symbol(amount)%></div>
