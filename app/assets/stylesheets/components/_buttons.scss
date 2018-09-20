@@ -154,3 +154,12 @@
     }
   }
 }
+
+.btn-pay {
+  background-color: $brand-primary;
+  color: white !important;
+  width: 100%;
+  padding: 8px;
+  margin: 0 16px;
+  border-radius: 0 0 8px 8px;
+}
