@@ -7,7 +7,7 @@
     <%= f.label "Total adeudado" %>
     <%= money_without_cents_and_with_symbol @bill.bill_debt %>
   </div>
-  <%= f.input :amount_paid_cents, label: "Monto pagado", placeholder: '100.000', label_method: :humanized_money_with_symbol %>
+  <%= f.input :amount_paid_cents, input_html: { value: 0 }, label: "Monto pagado", label_method: :humanized_money_with_symbol, class:"amount_paid"%>
   <span class="new-property-form-btns">
     <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
     <%= f.submit "Registrar pago", class:"btn form-btn" %>
