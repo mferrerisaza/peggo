@@ -1,0 +1,15 @@
+<%= simple_form_for [@building, @bill, @concept], html: { class: "form-inline" } do |f| %>
+  <div class="input-row flex flex-justify-space-between">
+    <%= f.label "Valor cuota" %>
+    <%= money_without_cents_and_with_symbol @bill.sum_concepts_amount %>
+  </div>
+  <div class="input-row flex flex-justify-space-between">
+    <%= f.label "Total adeudado" %>
+    <%= money_without_cents_and_with_symbol @bill.bill_debt %>
+  </div>
+  <%= f.input :amount_paid_cents, label: "Monto pagado", placeholder: '100.000', label_method: :humanized_money_with_symbol %>
+  <span class="new-property-form-btns">
+    <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
+    <%= f.submit "Registrar pago", class:"btn form-btn" %>
+  </span>
+<% end %>
