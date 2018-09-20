@@ -56,18 +56,18 @@
               Total Pagado:
             </div>
             <div class="bill-info-row-right">
-              $ 0
+              <%= money_without_cents_and_with_symbol(bill.sum_concepts_amount_paid) %>
             </div>
           </div>
           <div class="bill-info-row flex flex-justify-space-between">
             <div class="bill-info-row-left">
               <strong>
-                Total Adeuaddo:
+                Total Adeudado:
               </strong>
             </div>
             <div class="bill-info-row-right">
               <strong>
-                <%= money_without_cents_and_with_symbol(bill.sum_concepts_amount) %>
+                <%= money_without_cents_and_with_symbol(bill.bill_debt) %>
               </strong>
             </div>
           </div>
@@ -75,4 +75,7 @@
       </div>
     </div>
   </div>
+</div>
+<div class="flex flex-center">
+  <%= link_to "+ Registar pago", edit_building_bill_concept_path(@building, bill, bill.concepts.first), class:"btn btn-pay text-center" %>
 </div>
