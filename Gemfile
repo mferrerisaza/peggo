@@ -23,6 +23,7 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'cloudinary'
 gem 'omniauth-google-oauth2'
 gem 'mailjet'
+gem 'forest_liana'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

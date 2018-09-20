@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ForestLiana::Engine => '/forest'
   authenticated :user do
     root to: 'buildings#index'
   end
@@ -21,4 +22,5 @@ Rails.application.routes.draw do
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'
     end
+  get '/support', to: "pages#support"
 end
