@@ -13,7 +13,7 @@ class ConceptsController < ApplicationController
     if @concept.update(amount_paid_cents: (@concept.amount_paid_cents + concept_params[:amount_paid_cents].to_i))
       flash[:notice] = "Pago registrado existosamente"
       if @bill.bill_debt.zero?
-        @bill.status == "Pagada"
+        @bill.update(status: "Pagada")
       end
       redirect_to building_bills_path(@building, @bill)
     else
