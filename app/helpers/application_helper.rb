@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def amount_by_bill_period(bills)
-    bills.reduce(0) { |sum, bill| sum + bill.sum_concepts_amount }
+    bills.reduce(0) { |sum, bill| sum + bill.bill_debt }
   end
 
   def order_by_period(bills)
