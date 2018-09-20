@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def status_color_class(debt)
-    return "green-status" if debt.zero?
+    return "green-status" if debt <= 0
     "red-status"
   end
 
