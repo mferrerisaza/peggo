@@ -8,9 +8,8 @@
 .bill-card {
   background-color: white;
   padding: 8px;
-  margin: 16px;
-  // height: 200px;
-  margin-top: 40px;
+  margin: 40px 16px 0 16px;
+  border-radius: 8px 8px 0 0;
 }
 
 .in-card-avatar {
@@ -20,10 +19,6 @@
 .card-image-avatar{
   height: auto;
   margin-bottom: -4px;
-}
-
-.avatar-bottom-text {
-  // margin-top: 4px;
 }
 
 .position-relative {
@@ -54,6 +49,6 @@
 }
 
 .info-conainer {
-  padding: 4px 16px;
+  padding: 4px 40px;
   font-size: 16px;
 }
