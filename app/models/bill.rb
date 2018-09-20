@@ -19,4 +19,12 @@ class Bill < ApplicationRecord
   def sum_concepts_amount
     concepts.sum(:amount_cents)
   end
+
+  def sum_concepts_amount_paid
+    concepts.sum(:amount_paid_cents)
+  end
+
+  def bill_debt
+    sum_concepts_amount - sum_concepts_amount_paid
+  end
 end

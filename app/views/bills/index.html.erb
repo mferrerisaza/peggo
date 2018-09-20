@@ -1,0 +1,9 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <h3 class="property-title text-center">Cuotas cobradas</h3>
+  <div class="cards-container">
+    <% @bills.each do |bill| %>
+      <%= render 'shared/bill-card', building: @building, bill: bill  %>
+    <% end %>
+  </div>
+</div>

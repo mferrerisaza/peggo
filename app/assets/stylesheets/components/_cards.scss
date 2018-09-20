@@ -1,0 +1,54 @@
+
+@media (min-width: 991px) {
+  .cards-container {
+    padding: 0 80px;
+  }
+}
+
+.bill-card {
+  background-color: white;
+  padding: 8px;
+  margin: 40px 16px 0 16px;
+  border-radius: 8px 8px 0 0;
+}
+
+.in-card-avatar {
+  bottom: 0px !important;
+}
+
+.card-image-avatar{
+  height: auto;
+  margin-bottom: -4px;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.flex-justify-flex-end {
+  justify-content: flex-end;
+}
+
+.flex-justify-space-around {
+  justify-content: space-around;
+}
+
+.flex-justify-space-between {
+  justify-content: space-between;
+}
+
+.bill-number {
+  height: 0px;
+  font-size: 12px;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+.card-top {
+  bottom: 40px;
+}
+
+.info-conainer {
+  padding: 4px 40px;
+  font-size: 16px;
+}
