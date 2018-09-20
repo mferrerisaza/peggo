@@ -70,6 +70,12 @@ RSpec.describe Bill, type: :model do
       expect(@owner.owner_debt).to eq 10000000/12
     end
 
+    it "return 0 if bill is already paid" do
+      @bill_concepts_paid = FactoryBot.create(:bill, share: @share)
+      @bill_concepts_paid.concepts.first.update(amount_paid_cents: 10000000/12)
+      expect(@bill_concepts_paid.bill_debt).to eq 0
+    end
+
     it "returns 0 if all bills are paid" do
       @share = FactoryBot.create(:share, :with_bills, property: @property, owner: @owner, payment_percentage: 0)
       @share.bills.each do |bill|
