@@ -26,6 +26,6 @@ class Share < ApplicationRecord
 
   def bills_debt
     return 0 if unpaid_bills.empty?
-    unpaid_bills.reduce(0) { |sum, bill| sum + bill.sum_concepts_amount }
+    unpaid_bills.reduce(0) { |sum, bill| sum + bill.bill_debt }
   end
 end
