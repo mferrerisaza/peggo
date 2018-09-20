@@ -1,5 +1,4 @@
 class BillPolicy < ApplicationPolicy
-
   def new?
     record.user == user
   end
