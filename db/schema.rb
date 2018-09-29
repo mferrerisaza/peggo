@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_000230) do
+ActiveRecord::Schema.define(version: 2018_09_29_040016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2018_09_20_000230) do
     t.string "name"
     t.string "phone"
     t.string "matricula_inmobiliaria"
-    t.decimal "building_coeficient", precision: 15, scale: 2
+    t.decimal "building_coeficient", precision: 15, scale: 10
     t.bigint "building_id"
     t.integer "area"
     t.string "address"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 2018_09_20_000230) do
   create_table "shares", force: :cascade do |t|
     t.bigint "property_id"
     t.bigint "owner_id"
-    t.decimal "ownerability_percentage", precision: 15, scale: 2
-    t.decimal "payment_percentage", precision: 15, scale: 2
+    t.decimal "ownerability_percentage", precision: 15, scale: 10
+    t.decimal "payment_percentage", precision: 15, scale: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_shares_on_owner_id"
