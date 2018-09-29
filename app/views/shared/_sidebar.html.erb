@@ -15,10 +15,10 @@
         <div class="sidebar-top-user">
           <% if current_user.google_picture_url %>
             <%= image_tag current_user.google_picture_url, class: "sidebar-top-user-image" %>
-            <i class="fas fa-cog"></i>
+            <i class="fas fa-cog hidden"></i>
           <% else %>
               <i class="far fa-user-circle"></i>
-              <i class="fas fa-cog"></i>
+              <i class="fas fa-cog hidden"></i>
           <% end %>
         </div>
 
@@ -27,7 +27,9 @@
           <div class="dropdown">
             <h6 id="dLabel" type="button" data-toggle="<%="dropdown" unless other_buildings_of_current_user.empty? %>" aria-haspopup="true" aria-expanded="false">
               <%= @building.name %>
-              <i class="fas fa-caret-down"></i>
+              <% unless other_buildings_of_current_user.empty?%>
+                <i class="fas fa-caret-down"></i>
+              <% end %>
             </h6>
             <hr>
             <ul class="dropdown-menu dropdown-sidebar" aria-labelledby="dLabel">
