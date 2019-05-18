@@ -52,10 +52,11 @@ RSpec.feature "Budgets", type: :feature do
 
   def fill_budget_form
     expect do
-      find("input[placeholder='Ej: Ene 2018']").click
+      year = Date.today.year
+      find("input[placeholder='Ej: Ene #{year}']").click
       expect(page).to have_css(".flatpickr-calendar.animate.open.arrowTop")
       find(".flatpickr-day.today").click
-      find("input[placeholder='Ej: Dic 2018']").click
+      find("input[placeholder='Ej: Dic #{year}']").click
       expect(page).to have_css(".flatpickr-calendar.animate.open.arrowTop")
       find(".flatpickr-day.today").click
       fill_in "Presupuesto para el período", with: 120_000_000
