@@ -3,7 +3,7 @@ module SidebarHelper
     allowed_controllers = {
       buildings: %w[show],
       properties: %w[index show new create edit update],
-      expenses: %w[index new],
+      expenses: %w[index new create],
       owners: %w[index show new create edit update],
       shares: %w[create update],
       bills: %w[index new create errors],

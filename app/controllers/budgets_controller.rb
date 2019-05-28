@@ -48,7 +48,9 @@ class BudgetsController < ApplicationController
   private
 
   def budget_params
-    params.require(:budget).permit(:start_date, :end_date, :building_id, :amount, :status)
+    strong_params = params.require(:budget).permit(:start_date, :end_date, :building_id, :amount, :status)
+    strong_params[:amount] = strong_params[:amount].gsub(",", "")
+    strong_params
   end
 
   def set_budget
