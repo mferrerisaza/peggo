@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if($amountInput) {
     const cleave = new Cleave('.amount-input', {
         numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
+        numeralDecimalMark: ',',
+        delimiter: '.',
     });
 
   }

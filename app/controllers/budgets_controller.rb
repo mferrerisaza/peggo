@@ -49,7 +49,7 @@ class BudgetsController < ApplicationController
 
   def budget_params
     strong_params = params.require(:budget).permit(:start_date, :end_date, :building_id, :amount, :status)
-    strong_params[:amount] = strong_params[:amount].gsub(",", "")
+    strong_params[:amount] = strong_params[:amount].gsub(".", "")
     strong_params
   end
 
