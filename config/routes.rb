@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :buildings, only: [:index, :show, :new, :create] do
     resources :properties
     resources :owners
+    resources :expenses
     resources :bills, only: [:index, :new, :create] do
       resources :concepts, only: [ :edit, :update]
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_013121) do
+ActiveRecord::Schema.define(version: 2019_05_28_021956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,9 @@ ActiveRecord::Schema.define(version: 2019_05_28_013121) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "amount_cents", default: 0, null: false
+    t.bigint "building_id"
     t.index ["budget_id"], name: "index_expenses_on_budget_id"
+    t.index ["building_id"], name: "index_expenses_on_building_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_013121) do
   add_foreign_key "buildings", "users"
   add_foreign_key "concepts", "bills"
   add_foreign_key "expenses", "budgets"
+  add_foreign_key "expenses", "buildings"
   add_foreign_key "owners", "buildings"
   add_foreign_key "owners", "users"
   add_foreign_key "properties", "buildings"
