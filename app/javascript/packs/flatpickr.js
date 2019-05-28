@@ -19,4 +19,11 @@ const dateInputBill = flatpickr(".datepicker-bill", {
   "locale": Spanish,
 });
 
+const dateInputExpense = flatpickr(".datepicker-expense", {
+  altInput: true,
+  altFormat: "d-m-Y",
+  dateFormat: "Y-m-d",
+  "locale": Spanish,
+});
+
 
