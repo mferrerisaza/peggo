@@ -29,6 +29,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'spring-commands-rspec'
   gem "letter_opener"
+  gem 'rails-erd'
 end
 
 group :development, :test do

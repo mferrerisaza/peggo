@@ -3,6 +3,7 @@ class Building < ApplicationRecord
   has_many :properties, dependent: :destroy
   has_many :budgets, dependent: :destroy
   has_many :owners, dependent: :destroy
+  has_many :expenses, dependent: :destroy
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user }
 

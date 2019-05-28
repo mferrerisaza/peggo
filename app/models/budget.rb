@@ -1,7 +1,6 @@
 class Budget < ApplicationRecord
   before_save :transpose_dates
   belongs_to :building
-  has_many :expenses, dependent: :destroy
   monetize :amount_cents, disable_validation: true
 
   validates :amount, numericality: { greater_than: 0 }
