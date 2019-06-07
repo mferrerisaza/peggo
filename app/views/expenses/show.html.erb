@@ -25,7 +25,7 @@
             <td class="text-align-right">
               <% @attachments.each do |attachment| %>
               <div>
-                <%= link_to attachment.file.filename, cl_image_path(attachment.file.filename), target: :blank  %>
+                <%= link_to attachment.name, cl_image_path(attachment.file.filename), target: :blank  %>
               </div>
               <% end %>
             </td>
