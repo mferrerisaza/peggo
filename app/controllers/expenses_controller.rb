@@ -54,7 +54,7 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "print", layout: 'pdf.html'   # Excluding ".pdf" extension.
+        render pdf: @expense.pdf_file_name, layout: 'pdf.html'   # Excluding ".pdf" extension.
       end
     end
   end

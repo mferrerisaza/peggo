@@ -12,6 +12,10 @@ class Expense < ApplicationRecord
     "%03d" % number
   end
 
+  def pdf_file_name
+    "CP #{formated_number} #{description}"
+  end
+
   private
 
   def add_expense_number
