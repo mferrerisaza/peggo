@@ -15,7 +15,7 @@
             expense: { building_id: @building.id, attachments_attributes: { id: attachment.id, _destroy: true } },
           }
         %>
-        <%= attachment.file_name %>
+        <%= attachment.file.filename %>
         <%= link_to "Delete", building_expense_path(f.object.id, attachments_delete_params), method: :patch, data: { confirm: 'Are you sure?' } %>
 
         <br><br>

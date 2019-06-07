@@ -5,5 +5,5 @@ class Expense < ApplicationRecord
   validates :date, :description, presence: true
   validates :amount, numericality: { greater_than: 0 }
   has_many :attachments
-  accepts_nested_attributes_for :attachments
+  accepts_nested_attributes_for :attachments, allow_destroy: true
 end
