@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :buildings, only: [:index, :show, :new, :create] do
     resources :properties
     resources :owners
-    resources :expenses
+    resources :expenses do
+      member do
+        get '/print', to: "expenses#print", defaults: { format: 'pdf' }
+      end
+    end
     resources :bills, only: [:index, :new, :create] do
       resources :concepts, only: [ :edit, :update]
     end

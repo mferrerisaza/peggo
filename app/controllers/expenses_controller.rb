@@ -1,6 +1,6 @@
 class ExpensesController < ApplicationController
   before_action :set_building, except: :update
-  before_action :set_expense, only: %i[show edit update destroy]
+  before_action :set_expense, only: %i[show edit update destroy print]
 
   def index
     @expenses = policy_scope(Expense.where(building: @building).order(created_at: :asc))
@@ -47,6 +47,16 @@ class ExpensesController < ApplicationController
     @expense.destroy
     flash[:notice] = "Egreso eliminado existosamente"
     redirect_to building_expenses_path(@building)
+  end
+
+  def print
+    authorize @expense
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "print", layout: 'pdf.html'   # Excluding ".pdf" extension.
+      end
+    end
   end
 
   private

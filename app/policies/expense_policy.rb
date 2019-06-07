@@ -7,6 +7,10 @@ class ExpensePolicy < ApplicationPolicy
     show?
   end
 
+  def print?
+    show?
+  end
+
   class Scope < Scope
     def resolve
       scope
