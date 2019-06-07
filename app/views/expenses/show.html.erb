@@ -1,0 +1,36 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <h3 class="property-title text-center">Egreso num.<%= @expense.id %></h4>
+  <h4 class="building-title text-center">Por concepto de: <%= @expense.description %></h4>
+  <div class="table-container-simple flex flex-center">
+    <table>
+      <tr>
+        <td> <strong> Beneficiario: </strong> </td>
+        <td class="text-align-right"><%= @expense.beneficiary %></td>
+      </tr>
+      <tr>
+        <td> <strong> Fecha: </strong> </td>
+        <td class="text-align-right"><%= @expense.date %></td>
+      </tr>
+      <tr>
+        <td> <strong> Método de pago: </strong> </td>
+        <td class="text-align-right"><%= @expense.payment_method %></td>
+      </tr>
+      <tr>
+        <td> <strong> Monto: </strong> </td>
+        <td class="text-align-right"><%= humanized_money_with_symbol(@expense.amount) %></td>
+      </tr>
+      <tr>
+        <td> <strong> Adjuntos: </strong> </td>
+            <td class="text-align-right">
+              <% @attachments.each do |attachment| %>
+              <div>
+                <%= link_to attachment.file.filename, cl_image_path(attachment.file.filename), target: :blank  %>
+              </div>
+                <%#= link_to "Edit Attachment", edit_post_attachment_path(p) %>
+              <% end %>
+            </td>
+      </tr>
+    </table>
+  </div>
+</div>

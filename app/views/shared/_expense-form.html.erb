@@ -4,6 +4,25 @@
   <%= f.input :date, as: :string, input_html: { class: "datepicker-expense" }, label: "Fecha del egreso"%>
   <%= f.input :description, label: "Descripción"%>
   <%= f.input :amount, label: "Monto", input_html: { class: "amount-input" }%>
+  <%= f.input :observation, label: "Observaciones"%>
+  <%= f.simple_fields_for :attachments, Attachment.new do |p| %>
+      <%= p.input :file, label: "Achivos Adjuntos", as: :file, input_html: { multiple: true,  name: "expense[attachments_attributes][][file]"} %>
+  <% end %>
+  <% f.object.attachments.each do |attachment| %>
+      <% if attachment.id %>
+        <% attachments_delete_params =
+          {
+            expense: { building_id: @building.id, attachments_attributes: { id: attachment.id, _destroy: true } },
+          }
+        %>
+        <%= attachment.file_name %>
+        <%= link_to "Delete", building_expense_path(f.object.id, attachments_delete_params), method: :patch, data: { confirm: 'Are you sure?' } %>
+
+        <br><br>
+      <% end %>
+    <% end %>
+  <%#= f.file_field :attachments, multiple: true %>
+  <%#= f.hidden_field :attachments_cache %>
   <%= f.input :building_id, as: :hidden, input_html: { value: @building.id } %>
   <span class="new-property-form-btns">
     <%= link_to "cancelar", building_expenses_path, class:"form-btn--no-background" %>

@@ -1,9 +1,14 @@
 class ExpensesController < ApplicationController
   before_action :set_building, except: :update
-  before_action :set_expense, only: [:edit, :update]
+  before_action :set_expense, only: %i[show edit update destroy]
 
   def index
     @expenses = policy_scope(Expense.where(building: @building).order(created_at: :asc))
+  end
+
+  def show
+    @attachments = @expense.attachments
+    authorize @expense
   end
 
   def new
@@ -40,8 +45,8 @@ class ExpensesController < ApplicationController
   private
 
   def expense_params
-    strong_params = params.require(:expense).permit(:beneficiary, :payment_method, :date, :description, :amount, :building_id)
-    strong_params[:amount] = strong_params[:amount].gsub(".", "")
+    strong_params = params.require(:expense).permit(:beneficiary, :payment_method, :date, :description, :amount, :building_id, :observation, attachments_attributes: [:id, :file, "@original_filename", "@content_type", "@headers", "_destroy"])
+    strong_params[:amount] = strong_params[:amount].gsub(".", "") if strong_params[:amount]
     strong_params
   end
 

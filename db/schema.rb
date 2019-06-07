@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_030104) do
+ActiveRecord::Schema.define(version: 2019_05_31_060514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.bigint "expense_id"
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_name"
+    t.index ["expense_id"], name: "index_attachments_on_expense_id"
+  end
 
   create_table "bills", force: :cascade do |t|
     t.bigint "share_id"
@@ -62,13 +71,14 @@ ActiveRecord::Schema.define(version: 2019_05_28_030104) do
     t.integer "category"
     t.date "date"
     t.string "description"
-    t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "amount_cents", default: 0, null: false
     t.bigint "building_id"
     t.string "beneficiary"
     t.integer "payment_method"
+    t.text "observation"
+    t.json "attachments"
     t.index ["building_id"], name: "index_expenses_on_building_id"
   end
 
@@ -139,6 +149,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_030104) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attachments", "expenses"
   add_foreign_key "bills", "shares"
   add_foreign_key "budgets", "buildings"
   add_foreign_key "buildings", "users"
