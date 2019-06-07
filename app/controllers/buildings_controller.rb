@@ -48,6 +48,6 @@ class BuildingsController < ApplicationController
   private
 
   def building_params
-    params.require(:building).permit(:name, :user_id,:address, :tax_id, :cell_phone, :logo, :logo_cache)
+    params.require(:building).permit(:name, :user_id, :address, :email, :tax_id, :cell_phone, :logo, :logo_cache)
   end
 end
