@@ -26,12 +26,6 @@
         justify-content: space-between;
         align-items: center;
       }
-      .delete-attachement {
-        display: flex;
-        align-items: center;
-        margin-left: 16px;
-        font-weight: normal;
-      }
     }
     label {
       width: 50%;
@@ -106,4 +100,17 @@
 
 .no-scroll-bar {
   overflow-x: unset;
+}
+
+.delete-attachement {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  font-weight: normal;
+}
+
+.attachments-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

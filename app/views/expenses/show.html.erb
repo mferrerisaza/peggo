@@ -24,8 +24,22 @@
         <td> <strong> Adjuntos: </strong> </td>
             <td class="text-align-right">
               <% @attachments.each do |attachment| %>
-              <div>
+              <div class="attachments-container">
+                <% attachments_delete_params = {
+                    expense: {
+                      building_id: @building.id,
+                      attachments_attributes: {
+                        id: attachment.id,
+                        _destroy: true
+                      }
+                    },
+                  }
+                %>
                 <%= link_to attachment.name, cl_image_path(attachment.file.filename), target: :blank  %>
+                <%= link_to building_expense_path(@expense, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
+                  Eliminar
+                  <i class="material-icons"> delete </i>
+                <% end %>
               </div>
               <% end %>
             </td>
