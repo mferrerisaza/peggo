@@ -17,13 +17,29 @@
       text-align: right;
       justify-self: flex-end;
     }
+    .attachments-list {
+      font-size: 14px;
+      font-weight: lighter;
+      padding-left: 8px;
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .delete-attachement {
+        display: flex;
+        align-items: center;
+        margin-left: 16px;
+        font-weight: normal;
+      }
+    }
     label {
       width: 50%;
       font-weight: lighter;
       font-size: 14px;
       margin-top: 8px;
     }
-    input:not(.form-btn), select {
+    input:not(.form-btn), select, textarea {
       width: 50% !important;
       font-weight: normal;
       font-size: 14px;

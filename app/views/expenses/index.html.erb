@@ -14,7 +14,7 @@
       </div>
       <% @expenses.each do |expense| %>
           <div data-id="<%=expense.id%>" class="table-row-link table-row" onclick= "location.href= '<%= building_expense_path(@building, expense)%>'">
-            <div class="table-data"><%=expense.id%></div>
+            <div class="table-data"><%=expense.formated_number%></div>
             <div class="table-data"><%= "Miguel Ferrer" %></div>
             <div class="table-data"><%= expense.description %></div>
             <div class="table-data"><%= expense.date %></div>

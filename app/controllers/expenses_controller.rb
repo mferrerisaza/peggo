@@ -42,10 +42,17 @@ class ExpensesController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @expense
+    @expense.destroy
+    flash[:notice] = "Egreso eliminado existosamente"
+    redirect_to building_expenses_path(@building)
+  end
+
   private
 
   def expense_params
-    strong_params = params.require(:expense).permit(:beneficiary, :payment_method, :date, :description, :amount, :building_id, :observation, attachments_attributes: [:id, :file, "@original_filename", "@content_type", "@headers", "_destroy"])
+    strong_params = params.require(:expense).permit(:number, :beneficiary, :payment_method, :date, :description, :amount, :building_id, :observation, attachments_attributes: [:id, :file, "@original_filename", "@content_type", "@headers", "_destroy"])
     strong_params[:amount] = strong_params[:amount].gsub(".", "") if strong_params[:amount]
     strong_params[:attachments_attributes].each { |attachment| attachment[:name] = attachment[:file].original_filename } if strong_params[:attachments_attributes].is_a?(Array)
     strong_params

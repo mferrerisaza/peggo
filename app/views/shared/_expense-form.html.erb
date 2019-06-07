@@ -1,4 +1,7 @@
 <%= simple_form_for [@building, @expense]  do |f| %>
+  <% unless action_name == "new" || action_name == "create" %>
+    <%= f.input :number, label: "Comp. Egreso Num" %>
+  <% end %>
   <%= f.input :beneficiary, label: "Beneficiario", value: "Miguel Ferrer"%>
   <%= f.input :payment_method, label: "Método de pago", collection: Expense.payment_methods.keys%>
   <%= f.input :date, as: :string, input_html: { class: "datepicker-expense" }, label: "Fecha del egreso"%>
@@ -8,17 +11,27 @@
   <%= f.simple_fields_for :attachments, Attachment.new do |p| %>
       <%= p.input :file, label: "Achivos Adjuntos", as: :file, input_html: { multiple: true,  name: "expense[attachments_attributes][][file]"} %>
   <% end %>
-  <% f.object.attachments.each do |attachment| %>
+  <% f.object.attachments.each_with_index do |attachment, index| %>
       <% if attachment.id %>
-        <% attachments_delete_params =
-          {
-            expense: { building_id: @building.id, attachments_attributes: { id: attachment.id, _destroy: true } },
+        <% attachments_delete_params = {
+            expense: {
+              building_id: @building.id,
+              attachments_attributes: {
+                id: attachment.id,
+                _destroy: true
+              }
+            },
           }
         %>
-        <%= attachment.name %>
-        <%= link_to "Delete", building_expense_path(f.object.id, attachments_delete_params), method: :patch, data: { confirm: 'Are you sure?' } %>
-
-        <br><br>
+        <ul class="attachments-list">
+          <li>
+            <%= index + 1 %>. <%= attachment.name %>
+            <%= link_to building_expense_path(f.object.id, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
+              Eliminar
+              <i class="material-icons"> delete </i>
+            <% end %>
+          </li>
+        </ul>
       <% end %>
     <% end %>
   <%#= f.file_field :attachments, multiple: true %>
