@@ -7,6 +7,9 @@ class Building < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user }
 
+  mount_uploader :logo, LogoUploader
+
+
   def building_coeficients_sum
     properties.sum(:building_coeficient)
   end

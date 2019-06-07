@@ -13,10 +13,33 @@
     background: linear-gradient(-45deg, #3FC1C9 100%, #364F6B 0%);
   }
 }
-.card-user {
+.card-user-container {
+  background-color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   right: 10px;
   top: 10px;
+  box-shadow: 0 0 1em rgba(0,0,0,0.5)
+}
+.card-actions {
+  position: absolute;
+  bottom: 8px;
+  right: 24px;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $brand-primary;
+  }
+}
+.card-user {
   width: 40px;
   border-radius: 50%;
 }

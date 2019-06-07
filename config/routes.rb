@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   devise_for :users,
   controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-  resources :buildings, only: [:index, :show, :new, :create] do
+  resources :buildings do
     resources :properties
     resources :owners
     resources :expenses do
