@@ -16,6 +16,10 @@ class Expense < ApplicationRecord
     "CP #{formated_number} #{description}"
   end
 
+  def formated_date
+    date.strftime("%d/%m/%Y")
+  end
+
   private
 
   def add_expense_number

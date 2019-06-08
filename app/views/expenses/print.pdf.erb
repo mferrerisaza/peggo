@@ -1,2 +1,83 @@
 <%= content_for :title, @expense.pdf_file_name %>
-<h1 style="color: red">Hola Mundo</h1>
+
+<div class="pdf-container">
+  <div class="pdf-top">
+    <div class="bussines-logo" style="background-image: url('<%= cl_image_path @building.logo, width: 300, height: 100, crop: :fill; %>')">
+    </div>
+    <div class="bussines-info">
+      <h3 class="text-center"><%= @building.name %></h3>
+      <p class="text-center" >NIT <%= @building.tax_id %></p>
+      <p class="text-center" ><%= @building.address %></p>
+      <p class="text-center" ><%= @building.cell_phone %></p>
+      <p class="text-center" ><%= @building.email %></p>
+    </div>
+    <div class="expense-number-box">
+      <h4 class="text-center">Comprobante de egreso</h4>
+      <h3 class="text-center">No. <%= @expense.formated_number %></h3>
+    </div>
+  </div>
+  <div class="pdf-center">
+    <table class="benificary-info">
+      <tr>
+        <th colspan="1">Beneficiario</th>
+        <td colspan="3"><%= @expense.beneficiary %></td>
+        <th colspan="1" rowspan="1" class="expense-date-header">Fecha (DD/MM/AA)</td>
+      </tr>
+      <tr>
+        <th colspan="1">Dirección</th>
+        <td colspan="3">Calle 11a # 42-18</td>
+        <td rowspan="4" class="expense-date-value"><h3><%= @expense.formated_date %></h3></td>
+      </tr>
+      <tr>
+        <th colspan="1">Ciudad</th>
+        <td colspan="3">Medellín</td>
+      </tr>
+      <tr>
+        <th colspan="1">Teléfono</th>
+        <td colspan="1">3148509471</td>
+        <th colspan="1">Método de Pago</th>
+        <td colspan="1"><%= @expense.payment_method %></td>
+      </tr>
+      <tr>
+        <th colspan="1">NIT</th>
+        <td colspan="1">1040182869</td>
+        <th colspan="1">Cuenta</th>
+        <td colspan="1">Bancolombia</td>
+      </tr>
+    </table>
+    <table class="expense-info">
+      <thead>
+        <tr>
+          <th colspan="4">Concepto</th>
+          <th colspan="1">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="4"><%= @expense.description %></td>
+          <td colspan="1" class="concept-value"><%= humanized_money_with_symbol(@expense.amount) %></td>
+        </tr>
+        <% 9.times do %>
+          <tr>
+            <td colspan="4"> </td>
+            <td colspan="1" class="concept-value"> </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="3" rowspan="2" class="observations-box">Observaciones: <%= @expense.observation %></tb>
+          <td colspan="1" rowspan="2" class="total-text">Total</td>
+          <td colspan="1" rowspan="2" class="total-value"><%= humanized_money_with_symbol(@expense.amount) %></td>
+        </tr>
+        <tr>
+          <!-- Dejar esta fila en blanco para el rowspan -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pdf-bottom">
+    <span class="text-center made-by">ELABORADO POR</span>
+    <span class="text-center accepeted-by">ACEPTADA, FIRMA Y/O SELLO Y FECHA</span>
+  </div>
+
+
+</div>
