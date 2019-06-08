@@ -13,7 +13,7 @@ module NavbarHelper
 
   def render_navbar_dropdown
     allowed_controllers = {
-      buildings: %w[index new create],
+      businesses: %w[index new create],
       pages: %w[home support]
     }
     return false if allowed_controllers[controller_name.to_sym].nil?

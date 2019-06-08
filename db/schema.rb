@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_005738) do
+ActiveRecord::Schema.define(version: 2019_06_08_194754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,27 +24,7 @@ ActiveRecord::Schema.define(version: 2019_06_08_005738) do
     t.index ["expense_id"], name: "index_attachments_on_expense_id"
   end
 
-  create_table "bills", force: :cascade do |t|
-    t.bigint "share_id"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "period"
-    t.index ["share_id"], name: "index_bills_on_share_id"
-  end
-
-  create_table "budgets", force: :cascade do |t|
-    t.date "start_date"
-    t.date "end_date"
-    t.bigint "building_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "amount_cents", default: 0, null: false
-    t.boolean "status", default: false, null: false
-    t.index ["building_id"], name: "index_budgets_on_building_id"
-  end
-
-  create_table "buildings", force: :cascade do |t|
+  create_table "businesses", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -54,17 +34,7 @@ ActiveRecord::Schema.define(version: 2019_06_08_005738) do
     t.string "email"
     t.string "cell_phone"
     t.string "logo"
-    t.index ["user_id"], name: "index_buildings_on_user_id"
-  end
-
-  create_table "concepts", force: :cascade do |t|
-    t.bigint "bill_id"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "amount_cents", default: 0, null: false
-    t.bigint "amount_paid_cents", default: 0, null: false
-    t.index ["bill_id"], name: "index_concepts_on_bill_id"
+    t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
   create_table "expenses", force: :cascade do |t|
@@ -74,51 +44,13 @@ ActiveRecord::Schema.define(version: 2019_06_08_005738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "amount_cents", default: 0, null: false
-    t.bigint "building_id"
+    t.bigint "business_id"
     t.string "beneficiary"
     t.integer "payment_method"
     t.text "observation"
     t.json "attachments"
     t.bigint "number"
-    t.index ["building_id"], name: "index_expenses_on_building_id"
-  end
-
-  create_table "owners", force: :cascade do |t|
-    t.string "name"
-    t.string "card_number"
-    t.string "phone"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "building_id"
-    t.index ["building_id"], name: "index_owners_on_building_id"
-    t.index ["user_id"], name: "index_owners_on_user_id"
-  end
-
-  create_table "properties", force: :cascade do |t|
-    t.integer "property_type"
-    t.string "name"
-    t.string "phone"
-    t.string "matricula_inmobiliaria"
-    t.decimal "building_coeficient", precision: 15, scale: 10
-    t.bigint "building_id"
-    t.integer "area"
-    t.string "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["building_id"], name: "index_properties_on_building_id"
-  end
-
-  create_table "shares", force: :cascade do |t|
-    t.bigint "property_id"
-    t.bigint "owner_id"
-    t.decimal "ownerability_percentage", precision: 15, scale: 10
-    t.decimal "payment_percentage", precision: 15, scale: 10
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_shares_on_owner_id"
-    t.index ["property_id"], name: "index_shares_on_property_id"
+    t.index ["business_id"], name: "index_expenses_on_business_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -151,14 +83,6 @@ ActiveRecord::Schema.define(version: 2019_06_08_005738) do
   end
 
   add_foreign_key "attachments", "expenses"
-  add_foreign_key "bills", "shares"
-  add_foreign_key "budgets", "buildings"
-  add_foreign_key "buildings", "users"
-  add_foreign_key "concepts", "bills"
-  add_foreign_key "expenses", "buildings"
-  add_foreign_key "owners", "buildings"
-  add_foreign_key "owners", "users"
-  add_foreign_key "properties", "buildings"
-  add_foreign_key "shares", "owners"
-  add_foreign_key "shares", "properties"
+  add_foreign_key "businesses", "users"
+  add_foreign_key "expenses", "businesses"
 end

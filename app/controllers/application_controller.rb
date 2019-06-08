@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_building
-    symbol = params[:building_id].blank? ? :id : :building_id
-    @building = Building.find(params[symbol])
+  def set_business
+    symbol = params[:business_id].blank? ? :id : :business_id
+    @business = Business.find(params[symbol])
   end
 
   def skip_pundit?

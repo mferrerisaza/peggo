@@ -1,6 +1,6 @@
 class ExpensePolicy < ApplicationPolicy
   def show?
-    record.building.user == user
+    record.business.user == user
   end
 
   def destroy?

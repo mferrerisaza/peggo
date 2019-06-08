@@ -1,6 +1,6 @@
 class Expense < ApplicationRecord
   before_validation :add_expense_number, on: :create
-  belongs_to :building
+  belongs_to :business
   enum payment_method: ["Tarjeta Crédito", "Banco", "Otro"]
   monetize :amount_cents
   validates :date, :description, :number,  presence: true
@@ -23,6 +23,6 @@ class Expense < ApplicationRecord
   private
 
   def add_expense_number
-    self.number = building.expenses.size + 1
+    self.number = business.expenses.size + 1
   end
 end

@@ -1,0 +1,41 @@
+<div class="buildings-container">
+  <h1>
+    <i class="fas fa-building"></i>
+    Tus Empresas
+  </h1>
+    <%@businesses.each do |business| %>
+      <div class="col-xs-12 col-sm-3">
+        <%= link_to business_path(business) do %>
+          <div class="card">
+            <div class="card-description">
+              <h2><%= business.name %></h2>
+              <p><%= distance_of_time_in_words(Time.current, business.created_at) %></p>
+            </div>
+            <% if business.logo.present? %>
+              <div class="card-user-container">
+                <%= cl_image_tag business.logo, class: "card-user", width: 50 %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="card-actions">
+          <%= link_to edit_business_path(business) do %>
+            <i class="material-icons">
+              create
+            </i>
+          <% end %>
+          <%= link_to business_path(business), method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+            <i class="material-icons">
+              delete
+            </i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-xs-12 col-sm-3">
+      <%= link_to new_business_path, class:"add-new-button" do %>
+          <p>Crea una nueva empresa</p>
+          <i class="fas fa-plus-circle"></i>
+      <% end %>
+    </div>
+</div>

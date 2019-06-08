@@ -2,14 +2,16 @@
 
 <div class="pdf-container">
   <div class="pdf-top">
-    <div class="bussines-logo" style="background-image: url('<%= cl_image_path @building.logo, width: 300, height: 100, crop: :fill; %>')">
-    </div>
+    <% if @business.logo.present? %>
+      <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 300, height: 100, crop: :fill; %>')">
+      </div>
+    <% end %>
     <div class="bussines-info">
-      <h3 class="text-center"><%= @building.name %></h3>
-      <p class="text-center" >NIT <%= @building.tax_id %></p>
-      <p class="text-center" ><%= @building.address %></p>
-      <p class="text-center" ><%= @building.cell_phone %></p>
-      <p class="text-center" ><%= @building.email %></p>
+      <h3 class="text-center"><%= @business.name %></h3>
+      <p class="text-center" >NIT <%= @business.tax_id %></p>
+      <p class="text-center" ><%= @business.address %></p>
+      <p class="text-center" ><%= @business.cell_phone %></p>
+      <p class="text-center" ><%= @business.email %></p>
     </div>
     <div class="expense-number-box">
       <h4 class="text-center">Comprobante de egreso</h4>

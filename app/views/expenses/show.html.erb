@@ -27,7 +27,7 @@
               <div class="attachments-container">
                 <% attachments_delete_params = {
                     expense: {
-                      building_id: @building.id,
+                      business_id: @business.id,
                       attachments_attributes: {
                         id: attachment.id,
                         _destroy: true
@@ -36,7 +36,7 @@
                   }
                 %>
                 <%= link_to attachment.name, cl_image_path(attachment.file.filename), target: :blank  %>
-                <%= link_to building_expense_path(@expense, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
+                <%= link_to business_expense_path(@expense, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
                   Eliminar
                   <i class="material-icons"> delete </i>
                 <% end %>
@@ -44,6 +44,7 @@
               <% end %>
             </td>
       </tr>
+
     </table>
   </div>
 </div>
