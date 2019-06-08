@@ -21,6 +21,9 @@
             <div class="table-data"><%= "Banco" %></div>
             <div class="table-data"><%= humanized_money_with_symbol expense.amount %></div>
             <div class="table-data">
+              <%= link_to print_building_expense_path(@building, expense), target: :blank  do %>
+                <i class="material-icons"> print </i>
+              <% end %>
               <%= link_to edit_building_expense_path(@building, expense), class: "edit-property" do %>
                 <i class="material-icons"> create </i>
               <% end %>
