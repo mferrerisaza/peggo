@@ -22,7 +22,7 @@
           <% end %>
         </div>
 
-        <div class="sidebar-top-building menu-button" style="cursor: pointer;">
+        <div class="sidebar-top-business menu-button" style="cursor: pointer;">
           <% other_businesses_of_current_user =  current_user.businesses.where.not(id: @business.id)%>
           <div class="dropdown">
             <h6 id="dLabel" type="button" data-toggle="<%="dropdown" unless other_businesses_of_current_user.empty? %>" aria-haspopup="true" aria-expanded="false">
@@ -34,7 +34,7 @@
             <hr>
             <ul class="dropdown-menu dropdown-sidebar" aria-labelledby="dLabel">
               <% other_businesses_of_current_user.each do |business|%>
-                <li class="building-list-item">
+                <li class="business-list-item">
                   <%= link_to business.name, business_path(business)%>
                 </li>
               <% end %>
