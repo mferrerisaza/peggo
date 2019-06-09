@@ -83,12 +83,6 @@
     font-size: 16px;
     padding: 16px 12px;
     text-align: center;
-    &:last-child {
-      border-top-right-radius: 8px;
-    }
-    &:first-child {
-      border-top-left-radius: 8px;
-    }
   }
   .table-row {
     &:nth-of-type(odd) {
@@ -167,4 +161,14 @@
     font-weight: normal !important;
     font-size: 14px !important;
   }
+}
+.white-space-wrap{
+  white-space: normal !important;
+}
+.table-container.show-table{
+  margin-bottom: 16px;
+}
+.show-table .table-header {
+  max-width: 135px;
+  white-space: normal;
 }

@@ -1,0 +1,22 @@
+<%= simple_form_for [@business, @contact]  do |f| %>
+  <%= f.input :name, label: "Nombre", value: "Miguel Ferrer"%>
+  <%= f.input :tax_id_type, label: "Tipo de Identificación", collection: Contact.tax_id_types.keys%>
+  <%= f.input :tax_id, label: "Número de Identificación"%>
+  <%= f.input :phone, label: "Teléfono"%>
+  <%= f.input :cell_phone, label: "Celular"%>
+  <%= f.input :email, label: "Correo Electrónico"%>
+  <%= f.input :province, label: "Departamento"%>
+  <%= f.input :city, label: "Ciudad"%>
+  <%= f.input :address, label: "Dirección"%>
+  <%= f.input :client, label: "Agregar como Cliente"%>
+  <%= f.input :provider, label: "Agregar como Proveedor"%>
+  <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
+  <span class="new-property-form-btns">
+    <%= link_to "cancelar", business_contacts_path, class:"form-btn--no-background" %>
+    <% if action_name == "new" || action_name == "create" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

@@ -27,6 +27,10 @@
         align-items: center;
       }
     }
+    .form-check {
+      display: flex;
+      flex-direction: row-reverse;
+    }
     label {
       width: 50%;
       font-weight: lighter;
@@ -111,6 +115,6 @@
 
 .attachments-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }

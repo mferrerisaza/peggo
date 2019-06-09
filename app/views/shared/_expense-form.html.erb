@@ -2,9 +2,9 @@
   <% unless action_name == "new" || action_name == "create" %>
     <%= f.input :number, label: "Comp. Egreso Num" %>
   <% end %>
-  <%= f.input :beneficiary, label: "Beneficiario", value: "Miguel Ferrer"%>
+  <%= f.association :contact, label: "Beneficiario", value: "Miguel Ferrer", collection: Contact.where(provider: true).order(name: :asc)%>
   <%= f.input :payment_method, label: "Método de pago", collection: Expense.payment_methods.keys%>
-  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense" }, label: "Fecha del egreso"%>
+  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense" }, placeholder: "Seleccionar...", label: "Fecha del egreso"%>
   <%= f.input :description, label: "Descripción"%>
   <%= f.input :amount, label: "Monto", input_html: { class: "amount-input" }%>
   <%= f.input :observation, label: "Observaciones"%>

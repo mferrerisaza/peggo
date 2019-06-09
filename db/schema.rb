@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_194754) do
+ActiveRecord::Schema.define(version: 2019_06_09_001835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,24 @@ ActiveRecord::Schema.define(version: 2019_06_08_194754) do
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.integer "tax_id_type"
+    t.string "tax_id"
+    t.boolean "provider", default: false
+    t.boolean "client", default: false
+    t.string "phone"
+    t.string "cell_phone"
+    t.string "province"
+    t.string "city"
+    t.string "address"
+    t.string "email"
+    t.bigint "business_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_contacts_on_business_id"
+  end
+
   create_table "expenses", force: :cascade do |t|
     t.integer "category"
     t.date "date"
@@ -45,12 +63,13 @@ ActiveRecord::Schema.define(version: 2019_06_08_194754) do
     t.datetime "updated_at", null: false
     t.bigint "amount_cents", default: 0, null: false
     t.bigint "business_id"
-    t.string "beneficiary"
     t.integer "payment_method"
     t.text "observation"
     t.json "attachments"
     t.bigint "number"
+    t.bigint "contact_id"
     t.index ["business_id"], name: "index_expenses_on_business_id"
+    t.index ["contact_id"], name: "index_expenses_on_contact_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,5 +103,7 @@ ActiveRecord::Schema.define(version: 2019_06_08_194754) do
 
   add_foreign_key "attachments", "expenses"
   add_foreign_key "businesses", "users"
+  add_foreign_key "contacts", "businesses"
   add_foreign_key "expenses", "businesses"
+  add_foreign_key "expenses", "contacts"
 end

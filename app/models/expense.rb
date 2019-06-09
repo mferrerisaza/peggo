@@ -1,9 +1,10 @@
 class Expense < ApplicationRecord
   before_validation :add_expense_number, on: :create
   belongs_to :business
-  enum payment_method: ["Tarjeta Crédito", "Banco", "Otro"]
+  belongs_to :contact
+  enum payment_method: ["Efectivo", "Consignación", "Transferencia", "Cheque", "Tarjeta crédito", "Tarjeta débito", "Otro"]
   monetize :amount_cents
-  validates :date, :description, :number,  presence: true
+  validates :date, :description, :number, :amount,  presence: true
   validates :amount, numericality: { greater_than: 0 }
   has_many :attachments
   accepts_nested_attributes_for :attachments, allow_destroy: true

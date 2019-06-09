@@ -163,3 +163,22 @@
   margin: 0 16px;
   border-radius: 0 0 8px 8px;
 }
+
+.show-action-btn {
+  color: $brand-primary;
+  font-weight: lighter;
+  font-size: 14px;
+  border: 1px solid $brand-primary;
+  padding: 0px 8px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 4px;
+
+  &:hover, &:active {
+    background-color: $brand-primary;
+    color: white;
+    text-decoration: none;
+  }
+}

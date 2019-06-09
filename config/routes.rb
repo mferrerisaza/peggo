@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   devise_for :users,
   controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   resources :businesses do
+    resources :contacts
     resources :expenses do
       member do
         get '/print', to: "expenses#print", defaults: { format: 'pdf' }

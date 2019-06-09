@@ -1,0 +1,48 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <% if @contacts.size == 0 %>
+    <h3 class="alert alert-blue property-title text-center">
+      <i class="material-icons">
+       info
+      </i>
+      Aún no tienes contactos, agrega uno para comenzar
+    </h3>
+  <% else %>
+    <h1 class="app-index-title">Lista de Contactos</h1>
+    <div class="table-container">
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">Nombre</div>
+          <div class="table-header">Identificación</div>
+          <div class="table-header">Teléfono</div>
+          <div class="table-header">Celular</div>
+          <div class="table-header">Acciones</div>
+        </div>
+        <% @contacts.each do |contact| %>
+            <div data-id="<%=contact.id%>" class="table-row-link table-row" onclick= "location.href= '<%= business_contact_path(@business, contact)%>'">
+              <div class="table-data" ><%= contact.name %></div>
+              <div class="table-data"><%= contact.tax_id %></div>
+              <div class="table-data"><%= contact.phone %></div>
+              <div class="table-data"><%= contact.cell_phone %></div>
+              <div class="table-data">
+                <%= link_to edit_business_contact_path(@business, contact), class: "edit-property" do %>
+                  <i class="material-icons"> create </i>
+                <% end %>
+                <%= link_to business_contact_path(@business, contact), class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+                  <i class="material-icons"> delete </i>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_business_contact_path %>">
+   <i class="material-icons">
+    people
+   </i>
+   +
+  </a>
+</div>
+
+

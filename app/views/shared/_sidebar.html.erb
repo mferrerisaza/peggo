@@ -50,6 +50,12 @@
           </i>
           <span>Dashboard</span>
         </a>
+        <a class="sidebar-link <%= "active" if controller_name == "contacts" %>" href="/businesses/<%= @business.id %>/contacts">
+          <i class="material-icons">
+            people
+          </i>
+          <span>Contactos</span>
+        </a>
         <a class="sidebar-link <%= "active" if controller_name == "expenses" %>" href="/businesses/<%= @business.id %>/expenses">
           <i class="material-icons">
             credit_card

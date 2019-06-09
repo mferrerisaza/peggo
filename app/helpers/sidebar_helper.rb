@@ -3,6 +3,7 @@ module SidebarHelper
     allowed_controllers = {
       businesses: %w[show],
       expenses: %w[index show new create edit update],
+      contacts: %w[index show new create edit update],
       budgets: %w[index new create edit update]
     }
     return if allowed_controllers[controller_name.to_sym].nil?
