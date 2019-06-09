@@ -9,7 +9,8 @@ class Contact < ApplicationRecord
     "CE - Cédula de extranjería",
     "TE - Tarjeta de extranjería",
     "TI - Tarjeta de identidad",
-    "RC - Registro civil"
+    "RC - Registro civil",
+    "NA - No Aplica"
   ]
 
   validates :name, :tax_id_type, :tax_id, presence: true
