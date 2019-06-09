@@ -6,7 +6,7 @@ class Expense < ApplicationRecord
   monetize :amount_cents
   validates :date, :description, :number, :amount,  presence: true
   validates :amount, numericality: { greater_than: 0 }
-  has_many :attachments
+  has_many :attachments, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   def formated_number
