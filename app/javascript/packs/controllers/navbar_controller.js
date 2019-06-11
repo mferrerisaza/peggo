@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = [ "whiteLogo", "colorLogo" ]
 
   scroll(){
-    console.log(window.scrollY);
     if (window.scrollY >= 100) {
       this.element.classList.add('navbar-wagon-white');
       this.whiteLogoTarget.classList.add("hidden");
