@@ -2,10 +2,6 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
 
-  conect(){
-    console.log("conectado");
-  }
-
   toggle(){
     const sidebarElement = document.querySelector(this.data.get("selector"));
     if(sidebarElement) {
