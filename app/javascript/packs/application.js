@@ -1,8 +1,7 @@
 import "bootstrap";
-import "../components/sidebar.js";
-import "./flatpickr.js";
-import "../components/form-currency.js";
-import "../components/contactSelect.js";
-import { initUpdateNavbarOnScroll } from '../components/navbar';
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
 
-initUpdateNavbarOnScroll();
+const application = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))

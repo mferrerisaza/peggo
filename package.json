@@ -9,7 +9,8 @@
     "cleave.js": "^1.5.0",
     "flatpickr": "^4.5.2",
     "jquery": "^3.3.1",
-    "slim-select": "^1.21.1"
+    "slim-select": "^1.21.1",
+    "stimulus": "^1.1.1"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
