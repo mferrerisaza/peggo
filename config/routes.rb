@@ -13,7 +13,14 @@ Rails.application.routes.draw do
         get '/print', to: "expenses#print", defaults: { format: 'pdf' }
       end
     end
+    resources :invoices do
+      member do
+        get '/print', to: "invoices#print", defaults: { format: 'pdf' }
+      end
+    end
+    resources :items, only: [:create, :update, :destroy]
   end
+
   require "sidekiq/web"
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'

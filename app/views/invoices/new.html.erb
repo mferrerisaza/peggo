@@ -1,0 +1,11 @@
+<%= render "shared/sidebar" %>
+<div class="page-content-wrapper">
+  <div class="form-container">
+    <div class="new-property-form-container new-expense-form-container">
+      <div class="new-property-form-heading">
+        <h1>Nueva factura de venta en <%= @business.name %></h1>
+      </div>
+      <%= render 'shared/invoice-form' %>
+    </div>
+  </div>
+</div>

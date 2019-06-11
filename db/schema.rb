@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_09_040427) do
+ActiveRecord::Schema.define(version: 2019_06_11_015710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,33 @@ ActiveRecord::Schema.define(version: 2019_06_09_040427) do
     t.index ["contact_id"], name: "index_expenses_on_contact_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "number"
+    t.bigint "contact_id"
+    t.date "date"
+    t.string "signature"
+    t.string "terms_and_conditions"
+    t.string "notes"
+    t.string "resolution_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "business_id"
+    t.index ["business_id"], name: "index_invoices_on_business_id"
+    t.index ["contact_id"], name: "index_invoices_on_contact_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.integer "quantity"
+    t.bigint "price_cents", default: 0, null: false
+    t.decimal "vat", precision: 15, scale: 10
+    t.decimal "discount", precision: 15, scale: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "invoice_id"
+    t.index ["invoice_id"], name: "index_items_on_invoice_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -104,4 +131,7 @@ ActiveRecord::Schema.define(version: 2019_06_09_040427) do
   add_foreign_key "contacts", "businesses"
   add_foreign_key "expenses", "businesses"
   add_foreign_key "expenses", "contacts"
+  add_foreign_key "invoices", "businesses"
+  add_foreign_key "invoices", "contacts"
+  add_foreign_key "items", "invoices"
 end

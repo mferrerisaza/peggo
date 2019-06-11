@@ -1,0 +1,32 @@
+<div class="table-row item-info-row" data-item-id="<%= item.id %>">
+  <div class="table-data">
+    <%= item.name %>
+  </div>
+  <div class="table-data">
+    <%= item.quantity %>
+  </div>
+  <div class="table-data">
+    <%= humanized_money_with_symbol(item.price) %>
+  </div>
+  <div class="table-data">
+    <%= percentage(item.vat) %>
+  </div>
+  <div class="table-data">
+    <%= percentage(item.discount) %>
+  </div>
+  <div class="table-data">
+    <%= humanized_money_with_symbol(item.total) %>
+  </div>
+  <div class="table-data">
+    <%= link_to "#", class: "edit-share-info" do %>
+      <i class="material-icons">
+        create
+      </i>
+    <% end %>
+    <%= link_to business_item_path(@business, item), remote: true, class: "delete-share", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+      <i class="material-icons">
+        delete
+      </i>
+    <% end %>
+  </div>
+</div>

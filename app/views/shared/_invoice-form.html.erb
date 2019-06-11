@@ -1,0 +1,36 @@
+<%= simple_form_for([@business, @invoice])  do |f| %>
+  <%= f.input :number, label: "Factura de venta Num" %>
+  <%= f.association :contact, label: "Beneficiario", value: "Miguel Ferrer", collection: Contact.where(provider: true).order(name: :asc)%>
+  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr"} }, placeholder: "Seleccionar...", label: "Fecha de la factura"%>
+    <div class="table" id="items-table">
+      <div class="table-row" >
+        <div class="table-header">Item</div>
+        <div class="table-header">Cantidad</div>
+        <div class="table-header">Precio Unitario</div>
+        <div class="table-header">IVA(%)</div>
+        <div class="table-header">Descuento(%)</div>
+        <div class="table-header">Total</div>
+        <div class="table-header">Acciones</div>
+      </div>
+        <%= f.simple_fields_for :items do |p| %>
+          <%= render 'shared/item-fields', f: p %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association f, :items, partial: 'shared/item-fields', class: "" do %>
+            <i class="material-icons">
+              add
+            </i>
+            <span>Agregar item</span>
+          <% end %>
+        </div>
+    </div>
+  <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
+  <span class="new-property-form-btns">
+    <%= link_to "cancelar", business_invoices_path, class:"form-btn--no-background" %>
+    <% if action_name == "new" || action_name == "create" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

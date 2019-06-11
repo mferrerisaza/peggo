@@ -1,0 +1,16 @@
+<div class="table-row nested-fields">
+  <div class="table-data"><%= f.input :name, label: false %></div>
+  <div class="table-data"><%= f.input :quantity, label: false %></div>
+  <div class="table-data"><%= f.input :price, label: false, input_html: { data: { controller: "cleave"}, class: "amount-input" } %></div>
+  <div class="table-data"><%= f.input :vat, input_html: { step: 0.01, value: 0.19 }, label: false %></div>
+  <div class="table-data"><%= f.input :discount,  input_html: { step: 0.001, value: 0 }, label: false  %></div>
+  <div class="table-data">
+    <%= link_to_remove_association f do %>
+      <button class="close-form-btn no-style-btn">
+        <i class="material-icons">
+          clear
+        </i>
+      </button>
+    <% end %>
+  </div>
+</div>

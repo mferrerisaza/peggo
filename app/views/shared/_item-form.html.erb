@@ -1,0 +1,16 @@
+<%= simple_form_for [@business, item], remote: true do |f| %>
+  <%= f.input :name, label: "Nombre del item" %>
+  <%= f.input :quantity, label: "Cantidad" %>
+  <%= f.input :price, label: "Precio unitario", input_html: { class: "amount-input" } %>
+  <%= f.input :vat, input_html: { step: 0.01, value: 0.19 }, label: "IVA"%>
+  <%= f.input :discount,  input_html: { step: 0.001, value: 0 }, label: "Descuento"  %>
+  <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
+  <span class="new-property-form-btns">
+    <button type="button" class="close form-btn--no-background" data-dismiss="modal" aria-label="Close">cancelar</button>
+    <% if action_name == "new" || action_name == "create" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

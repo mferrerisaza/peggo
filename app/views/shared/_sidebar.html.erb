@@ -1,7 +1,7 @@
 <% if render_blue_sidebar %>
-  <div id="mySidenav" class="sidebar">
+  <div id="mySidenav" class="sidebar" data-controller="sidebar" data-sidebar-selector="#mySidenav">
     <div class="hidden-md hidden-lg">
-      <a class="closebtn">&times;</a>
+      <a class="closebtn" data-action="click->sidebar#toggle">&times;</a>
     </div>
     <div class="sidebar-logo">
       <%= link_to root_path, class: "hidden-xs hidden-sm" do %>
@@ -55,6 +55,12 @@
             people
           </i>
           <span>Contactos</span>
+        </a>
+        <a class="sidebar-link <%= "active" if controller_name == "invoices" %>" href="/businesses/<%= @business.id %>/invoices">
+          <i class="material-icons">
+            ballot
+          </i>
+          <span>Facturas</span>
         </a>
         <a class="sidebar-link <%= "active" if controller_name == "expenses" %>" href="/businesses/<%= @business.id %>/expenses">
           <i class="material-icons">
