@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :set_business
+  before_action :set_business, except: :update
   before_action :set_invoice, only: %i[show edit update destroy print]
 
   def index

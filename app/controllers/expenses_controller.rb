@@ -1,5 +1,5 @@
 class ExpensesController < ApplicationController
-  before_action :set_business
+  before_action :set_business, except: :update
   before_action :set_expense, only: %i[show edit update destroy print]
 
   def index
@@ -32,6 +32,7 @@ class ExpensesController < ApplicationController
   end
 
   def update
+    @business = Business.find(expense_params[:business_id])
     authorize @business, :business_of_current_user?
     if @expense.update(expense_params)
       flash[:notice] = "Egreso actualizado existosamente"

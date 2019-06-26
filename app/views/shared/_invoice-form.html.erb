@@ -1,6 +1,6 @@
 <%= simple_form_for([@business, @invoice])  do |f| %>
   <%= f.input :number, label: "Factura de venta Num" %>
-  <%= f.association :contact, label: "Beneficiario", value: "Miguel Ferrer", collection: Contact.where(provider: true).order(name: :asc)%>
+  <%= f.association :contact, label: "Beneficiario", value: "Miguel Ferrer", collection: Contact.where(client: true).order(name: :asc) , input_html: { data: {controller: "slim-select", slim_select_type: "contactSelect"} }%>
   <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr"} }, placeholder: "Seleccionar...", label: "Fecha de la factura"%>
     <div class="table" id="items-table">
       <div class="table-row" >
@@ -16,12 +16,13 @@
           <%= render 'shared/item-fields', f: p %>
         <% end %>
         <div class="links">
-          <%= link_to_add_association f, :items, partial: 'shared/item-fields', class: "" do %>
+          <%= link_to_add_association f, :items, partial: 'shared/item-fields' do %>
             <i class="material-icons">
               add
             </i>
-            <span>Agregar item</span>
+            <span>Agregar item a la factura</span>
           <% end %>
+
         </div>
     </div>
   <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>

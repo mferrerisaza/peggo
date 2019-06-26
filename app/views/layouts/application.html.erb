@@ -19,10 +19,10 @@
     <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application', async: true, defer: true %>
-    <%= javascript_pack_tag 'application', async: true, defer: true %>
+    <%= stylesheet_link_tag 'application', media: 'all', "data-turbolinks-track": "reload"  %>
+    <%= stylesheet_pack_tag 'application', media: 'all', "data-turbolinks-track": "reload"  %>
+    <%= javascript_include_tag 'application', defer: true, "data-turbolinks-track": "reload"  %>
+    <%= javascript_pack_tag 'application', defer: true, "data-turbolinks-track": "reload" %>
   </head>
   <body>
     <%= render 'shared/flashes' %>

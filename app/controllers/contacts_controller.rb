@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :set_business
+  before_action :set_business, except: :update
   before_action :set_contact, only: %i[show edit update destroy]
 
   def index
@@ -31,6 +31,7 @@ class ContactsController < ApplicationController
   end
 
   def update
+    @business = Business.find(contact_params[:business_id])
     authorize @business, :business_of_current_user?
     if @contact.update(contact_params)
       flash[:notice] = "Contacto actualizado existosamente"

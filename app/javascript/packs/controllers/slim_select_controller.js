@@ -10,9 +10,17 @@ export default class extends Controller {
   }
 
   mountSlimSelect() {
-    new SlimSelect({
-      select: this.element
-    })
+    const selectType = this.data.get("type");
+
+    if (selectType === "contactSelect") {
+      new SlimSelect({
+        select: this.element
+      })
+    } else if (selectType === "itemSelector") {
+      new SlimSelect({
+        select: this.element
+      })
+    }
   }
 
 }
