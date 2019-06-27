@@ -17,6 +17,13 @@ class Item < ApplicationRecord
 
   monetize :price_cents
 
+  include PgSearch
+  pg_search_scope :search_by_name,
+    against: :name,
+    using: {
+      tsearch: { prefix: true }
+    }
+
   def total
     price * (1 + vat) * (1 - discount)
   end

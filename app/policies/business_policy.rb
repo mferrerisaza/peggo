@@ -27,6 +27,10 @@ class BusinessPolicy < ApplicationPolicy
     show?
   end
 
+  def items?
+    business_of_current_user?
+  end
+
   class Scope < Scope
     def resolve
       scope.where(user: user)

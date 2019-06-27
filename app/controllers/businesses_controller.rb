@@ -1,5 +1,5 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: %w[show edit update destroy]
+  before_action :set_business, only: %w[show edit update destroy items]
 
   def index
     @businesses = policy_scope(Business)
@@ -42,6 +42,13 @@ class BusinessesController < ApplicationController
     @business.destroy
     flash[:notice] = "Empresa eliminada existosamente"
     redirect_to businesses_path
+  end
+
+  def items
+    authorize @business
+    @items = @business.items.where(nil)
+    @items = @business.items.search_by_name(params[:query]) if params[:query].present?
+    render json: @items
   end
 
   private

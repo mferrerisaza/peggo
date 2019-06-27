@@ -19,6 +19,7 @@ class InvoicesController < ApplicationController
       flash[:notice] = "Factura guardada existosamente"
       redirect_to business_invoices_path @business
     else
+      # raise
       @item = Item.new
       render :new
     end
