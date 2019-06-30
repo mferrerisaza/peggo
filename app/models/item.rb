@@ -25,6 +25,6 @@ class Item < ApplicationRecord
     }
 
   def total
-    price * (1 + vat) * (1 - discount)
+    quantity * price * (1 + vat) * (1 - discount)
   end
 end
