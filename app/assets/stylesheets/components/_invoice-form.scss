@@ -77,18 +77,21 @@
       border-top-right-radius: 8px;
     }
   }
-  .table-row:last-child {
+  .table-row.links {
+    background: none;
+  }
+  .table-row:nth-last-child(2)  {
     .table-data {
       border-bottom: 1px solid #364f6b20 !important;
     }
-   .table-data:first-child {
+    .table-data:first-child {
       border-left: 1px solid #364f6b20;
       border-bottom-left-radius: 8px;
-   }
-   .table-data:last-child {
+    }
+    .table-data:last-child {
       border-right: 1px solid #364f6b20;
       border-bottom-right-radius: 8px;
-   }
+    }
   }
 
 }

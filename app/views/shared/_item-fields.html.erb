@@ -1,13 +1,78 @@
-<div class="table-row nested-fields" data-controller="item-form" data-action="keyup->item-form#recalculateTotal change->item-form#recalculateTotal">
+<div  class="table-row nested-fields"
+      data-controller="item-form"
+      data-action="keyup->item-form#recalculateTotal change->item-form#recalculateTotal"
+>
   <div class="table-data">
-    <%= f.input :name, collection: [ ["" ,"", data: { placeholder: true }] ], label: false, input_html: { data: { controller: "slim-select", slim_select_type: "itemSelector", slim_select_fetch_url: business_items_path(@business) } } %>
+    <%= f.input :name,
+                collection: [ ["" ,"", data: { placeholder: true }] ],
+                label: false,
+                input_html: {
+                  data: {
+                    controller: "slim-select",
+                    slim_select_type: "itemSelector",
+                    slim_select_fetch_url: business_items_path(@business)
+                  }
+                }
+    %>
   </div>
-  <div class="table-data" colspan="2"><%= f.input :quantity, label: false, input_html: { class: "item-quantity", data: { target: "item-form.quantity" } }%></div>
-  <div class="table-data"><%= f.input :price, label: false, input_html: { data: { controller: "cleave", action: "focus->cleave#mountCleave", target: "item-form.price"}, class: "amount-input item-price" } %></div>
-  <div class="table-data"><%= f.input :vat, input_html: { step: 0.01, value: 0.19, class: "item-vat", data: { target: "item-form.vat" } }, label: false %></div>
-  <div class="table-data"><%= f.input :discount,  input_html: { step: 0.001, value: 0, class: "item-discount", data: { target: "item-form.discount" } }, label: false  %></div>
   <div class="table-data">
-    <%= f.input :fake_total, as: :fake,label: false, disabled: true, input_html: { data: { controller: "cleave", action: "focus->cleave#mountCleave", target: "item-form.total" }, class: "item-total" } %>
+    <%= f.input :quantity,
+                label: false,
+                input_html: {
+                  class: "item-quantity",
+                  data: { target: "item-form.quantity" }
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :price,
+                label: false,
+                input_html: {
+                  class: "amount-input item-price",
+                  data: {
+                    controller: "cleave",
+                    action: "focus->cleave#mountCleave",
+                    target: "item-form.price"
+                  }
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :vat,
+                label: false,
+                input_html: {
+                  step: 0.01,
+                  value: 0.19,
+                  class: "item-vat",
+                  data: { target: "item-form.vat" }
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :discount,
+                label: false,
+                input_html: {
+                  step: 0.001,
+                  value: 0,
+                  class: "item-discount",
+                  data: { target: "item-form.discount" }
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :fake_total,
+                as: :fake,
+                label: false,
+                disabled: true,
+                input_html: {
+                  class: "item-total",
+                  data: {
+                    controller: "cleave",
+                    action: "focus->cleave#mountCleave",
+                    target: "item-form.total"
+                  }
+                }
+    %>
   </div>
   <div class="table-data">
     <%= link_to_remove_association f do %>
