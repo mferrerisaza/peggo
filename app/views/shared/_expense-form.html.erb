@@ -4,7 +4,7 @@
   <% end %>
   <%= f.association :contact, label: "Beneficiario", value: "Miguel Ferrer", collection: Contact.where(provider: true).order(name: :asc), input_html: {data: { controller: "slim-select", slim_select_type: "contactSelect" } }%>
   <%= f.input :payment_method, label: "Método de pago", collection: Expense.payment_methods.keys%>
-  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr"} }, placeholder: "Seleccionar...", label: "Fecha del egreso"%>
+  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr", "flatpickr-type": "expense" } }, placeholder: "Seleccionar...", label: "Fecha del egreso"%>
   <%= f.input :description, label: "Descripción"%>
   <%= f.input :amount, label: "Monto", input_html: { class: "amount-input", data: { controller: "cleave"} }%>
   <%= f.input :observation, label: "Observaciones"%>
@@ -33,7 +33,7 @@
           </li>
         </ul>
       <% end %>
-    <% end %>
+  <% end %>
   <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
   <span class="new-property-form-btns">
     <%= link_to "cancelar", business_expenses_path, class:"form-btn--no-background" %>

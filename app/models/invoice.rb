@@ -4,7 +4,7 @@ class Invoice < ApplicationRecord
   belongs_to :business
   belongs_to :contact
   has_many :items, dependent: :nullify, inverse_of: :invoice
-  accepts_nested_attributes_for :items, allow_destroy: true
+  accepts_nested_attributes_for :items, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
 
   def formated_number
     "%03d" % number

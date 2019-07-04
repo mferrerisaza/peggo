@@ -19,7 +19,27 @@ class InvoicesController < ApplicationController
       flash[:notice] = "Factura guardada existosamente"
       redirect_to business_invoices_path @business
     else
-      # raise
+      @item = Item.new
+      render :new
+    end
+  end
+
+  def edit
+    authorize @business, :business_of_current_user?
+  end
+
+  def update
+    @business = Business.find(invoice_params[:business_id])
+    authorize @business, :business_of_current_user?
+    if @invoice.update(invoice_params)
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "Factura actualizada existosamente"
+          redirect_to business_invoices_path @business
+        end
+        format.js
+      end
+    else
       @item = Item.new
       render :new
     end
@@ -32,16 +52,20 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_params
-    params.require(:invoice).permit(
-      :number,
-      :contact_id,
-      :date,
-      :signature,
-      :terms_and_conditions,
-      :notes,
-      :resolution_number,
-      :business_id,
-      items_attributes: [:name, :quantity, :price, :vat, :discount]
-    )
+    strong_params = params.require(:invoice).permit(
+                                              :number,
+                                              :contact_id,
+                                              :date,
+                                              :expiration_date,
+                                              :signature,
+                                              :terms_and_conditions,
+                                              :notes,
+                                              :resolution_number,
+                                              :business_id,
+                                              items_attributes: [:id, :name, :quantity, :price, :vat, :discount, "_destroy", "id"]
+                                            )
+    strong_params[:items_attributes].each {|_key, item| item[:price] = item[:price].gsub(".","") } unless strong_params[:items_attributes][:_destroy] == "true"
+
+    strong_params
   end
 end

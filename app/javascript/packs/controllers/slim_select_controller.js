@@ -22,8 +22,15 @@ export default class extends Controller {
 
       new SlimSelect({
         select: this.element,
+        placeholder: 'Busca o Agrega un Item',
+        searchingText: 'Buscando...', // Optional - Will show during ajax request
         addable: value => value,
         ajax: (search, callback) => {
+
+          if (search.length < 1) {
+            callback(false)
+            return
+          }
 
           fetch(`${fetchUrl}?query=${search}`)
           .then(response => response.json())
@@ -48,7 +55,7 @@ export default class extends Controller {
           })
         },
         onChange: (selectedValue) => {
-          if (selectedValue.data) {
+          if (Object.keys(selectedValue.data).length > 0) {
             const $itemRow = this.element.parentElement.parentElement.parentElement;
             const $quantity = $itemRow.querySelector(".item-quantity");
             const $price = new Cleave($itemRow.querySelector(".item-price"), {
@@ -69,14 +76,6 @@ export default class extends Controller {
             $vat.value = selectedValue.data.vat;
             $discount.value = selectedValue.data.discount
             $total.setRawValue(selectedValue.data.quantity * selectedValue.data.price * (1 + parseFloat(selectedValue.data.vat)) * (1 - parseFloat(selectedValue.data.discount)));
-
-            // reload cleave by focusing the inputs, both inputs are listening to focus and will mount cleave on the cleave controller
-            // $total.disabled = false;
-            // $total.focus();
-            // $total.disabled = true;
-            // $price.focus();
-
-            // $quantity.focus();
           }
         }
       })

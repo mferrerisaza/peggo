@@ -19,11 +19,11 @@
           <div class="table-header">Acciones</div>
         </div>
         <% @contacts.each do |contact| %>
-            <div data-id="<%=contact.id%>" class="table-row-link table-row" onclick= "location.href= '<%= business_contact_path(@business, contact)%>'">
-              <div class="table-data" ><%= contact.name %></div>
-              <div class="table-data"><%= contact.tax_id %></div>
-              <div class="table-data"><%= contact.phone %></div>
-              <div class="table-data"><%= contact.cell_phone %></div>
+            <div data-id="<%=contact.id%>" class="table-row-link table-row">
+              <div class="table-data" onclick= "location.href= '<%= business_contact_path(@business, contact)%>'"><%= contact.name %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_contact_path(@business, contact)%>'"><%= contact.tax_id %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_contact_path(@business, contact)%>'"><%= contact.phone %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_contact_path(@business, contact)%>'"><%= contact.cell_phone %></div>
               <div class="table-data">
                 <%= link_to edit_business_contact_path(@business, contact), class: "edit-property" do %>
                   <i class="material-icons"> create </i>

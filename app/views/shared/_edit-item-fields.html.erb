@@ -1,0 +1,32 @@
+<div class="table-row" data-controller="item-form">
+
+  <div class="table-data">
+    <%= item.name %>
+  </div>
+
+  <div class="table-data">
+    <%= item.quantity %>
+  </div>
+
+  <div class="table-data">
+    <%= humanized_money item.price %>
+  </div>
+
+  <div class="table-data">
+    <%= item.vat %>
+  </div>
+
+  <div class="table-data">
+    <%= item.discount %>
+  </div>
+
+  <div class="table-data">
+    <%= humanized_money item.total %>
+  </div>
+
+  <div class="table-data">
+    <%= link_to business_invoice_path(invoice_id, items_delete_params), class: "delete-attachement", remote: true,  method: :patch, data: { confirm: "¿Estás Seguro?", action: "ajax:success->item-form#deleteItemRow" } do%>
+      <i class="material-icons"> delete </i>
+    <% end %>
+  </div>
+</div>

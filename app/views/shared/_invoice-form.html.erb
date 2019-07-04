@@ -1,7 +1,52 @@
 <%= simple_form_for([@business, @invoice])  do |f| %>
-  <%= f.input :number, label: "Factura de venta Num" %>
+  <div class="invoice-form-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="invoice-header-business-info">
+          <h1 class="text-center">Factura de Venta</h1>
+          <p class="text-center"><%= @business.name %></p>
+          <p class="text-center"><%= @business.tax_id %></p>
+          <p class="text-center">Dir: <%= @business.address %></p>
+          <p class="text-center"><%= @business.cell_phone %></p>
+          <p class="text-center"><%= @business.email %></p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <% disabled = action_name == "new" ? true : false %>
+        <%= f.input :number, label: "No.", disabled: disabled%>
+      </div>
+    </div>
+  </div>
   <%= f.association :contact, label: "Beneficiario", value: "Miguel Ferrer", collection: Contact.where(client: true).order(name: :asc) , input_html: { data: {controller: "slim-select", slim_select_type: "contactSelect"} }%>
-  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr"} }, placeholder: "Seleccionar...", label: "Fecha de la factura"%>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :date,
+                  as: :string,
+                  placeholder: "Seleccionar...",
+                  label: "Fecha de la factura",
+                  input_html: {
+                    class: "datepicker-expense",
+                      data: { controller: "flatpickr", "flatpickr-type": "invoice"}
+                  }
+      %>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :expiration_date,
+                  as: :string,
+                  placeholder: "Seleccionar...",
+                  label: "Fecha de vencimiento",
+                  input_html: {
+                    class: "datepicker-expense",
+                      data: { controller: "flatpickr", "flatpickr-type": "invoice"}
+                  }
+      %>
+    </div>
+  </div>
     <div class="table" id="items-table">
       <div class="table-row" >
         <div class="table-header">Item</div>
@@ -12,15 +57,30 @@
         <div class="table-header">Total</div>
         <div class="table-header">Acciones</div>
       </div>
-        <%= f.simple_fields_for :items do |p| %>
+      <% f.object.items.each_with_index do |item, index| %>
+          <% if item.id %>
+            <% items_delete_params = {
+                invoice: {
+                  business_id: @business.id,
+                  items_attributes: {
+                    id: item.id,
+                    _destroy: true
+                  }
+                },
+              }
+            %>
+            <%= render 'shared/edit-item-fields', item: item, invoice_id: f.object.id, items_delete_params: items_delete_params%>
+          <% end %>
+      <% end %>
+        <%= f.simple_fields_for :items, Item.new do |p| %>
           <%= render 'shared/item-fields', f: p %>
         <% end %>
         <div class="links">
-          <%= link_to_add_association f, :items, partial: 'shared/item-fields' do %>
+          <%= link_to_add_association f, :items, partial: 'shared/item-fields', class: "btn show-action-btn" do %>
             <i class="material-icons">
               add
             </i>
-            <span>Agregar item a la factura</span>
+            <span>Agregar línea</span>
           <% end %>
 
         </div>
