@@ -6,6 +6,11 @@ class InvoicesController < ApplicationController
     @invoices = policy_scope(Invoice.where(business: @business).order(created_at: :asc).includes(:contact))
   end
 
+  def show
+    @items = @invoice.items
+    authorize @invoice
+  end
+
   def new
     @invoice = Invoice.new
     @item = Item.new

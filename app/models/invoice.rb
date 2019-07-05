@@ -52,6 +52,18 @@ class Invoice < ApplicationRecord
     items_net_subtotal + items_vat_subtotal
   end
 
+  def resolution_number?
+    resolution_number ? resolution_number : Business::INVOICE_RESOLUTION_NUMBER
+  end
+
+  def terms_and_conditions?
+    terms_and_conditions ? terms_and_conditions : Business::INVOICE_TERMS_AND_CONDITIONS
+  end
+
+  def notes?
+    notes ? notes : Business::INVOICE_NOTES
+  end
+
   private
 
   def add_invoice_number

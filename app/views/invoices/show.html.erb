@@ -1,0 +1,101 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <div class="invoice-show-page-container">
+
+  </div>
+  <div class="invoice-form-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="invoice-header-business-info">
+          <h1 class="text-center">Factura de Venta</h1>
+          <p class="text-center"><%= @business.name %></p>
+          <p class="text-center"><%= @business.tax_id %></p>
+          <p class="text-center">Dir: <%= @business.address %></p>
+          <p class="text-center"><%= @business.cell_phone %></p>
+          <p class="text-center"><%= @business.email %></p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="invoice-header-dian-info">
+          <p><%= @invoice.number %></p>
+          <p class="text-center text-bold">IVA Régimen Común</p>
+          <p><%= @invoice.resolution_number %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <p><%= @invoice.contact.name %></p>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <p><%= @invoice.date %></p>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <p><%= @invoice.expiration_date %></p>
+    </div>
+  </div>
+  <br>
+  <div class="table"
+       id="items-table"
+       data-controller="invoice-form"
+  >
+    <div class="table-row" >
+      <div class="table-header">Item</div>
+      <div class="table-header">Cantidad</div>
+      <div class="table-header">Precio Unitario</div>
+      <div class="table-header">IVA(%)</div>
+      <div class="table-header">Descuento(%)</div>
+      <div class="table-header">Total</div>
+    </div>
+    <% @items.each do |item| %>
+      <%= render 'shared/edit-item-fields',
+          item: item,
+          invoice_id: nil,
+          items_delete_params: nil
+      %>
+    <% end %>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="invoice-form-bottom">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+        <div class="signature">
+          <% if @invoice.signature %>
+            <%= cl_image_tag  @invoice.signature, width: 200, height: 100%>
+          <% end %>
+          <p class="signature-by">ELABORADO POR</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="totals">
+          <p><%= @invoice.items_gross_subtotal %></p>
+          <p><%= @invoice.items_discount_subtotal %></p>
+          <p><%= @invoice.items_net_subtotal %></p>
+          <p><%= @invoice.items_vat_subtotal %></p>
+          <hr>
+          <p><%= @invoice.total %></p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-xs-12 col-sm-7">
+        <p><%= @invoice.terms_and_conditions %></p>
+      </div>
+      <div class="col-xs-12 col-sm-5">
+        <p><%= @invoice.notes %></p>
+      </div>
+    </div>
+  </div>
+</div>

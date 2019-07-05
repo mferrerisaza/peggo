@@ -23,10 +23,11 @@
   <div class="table-data">
     <%= humanized_money item.gross_total %>
   </div>
-
-  <div class="table-data">
-    <%= link_to business_invoice_path(invoice_id, items_delete_params), class: "delete-attachement", remote: true,  method: :patch, data: { confirm: "¿Estás Seguro?", action: "ajax:success->item-form#deleteItemRow" } do%>
-      <i class="material-icons"> delete </i>
-    <% end %>
-  </div>
+  <% if  items_delete_params %>
+    <div class="table-data">
+      <%= link_to business_invoice_path(invoice_id, items_delete_params), class: "delete-attachement", remote: true,  method: :patch, data: { confirm: "¿Estás Seguro?", action: "ajax:success->item-form#deleteItemRow" } do%>
+        <i class="material-icons"> delete </i>
+      <% end %>
+    </div>
+  <% end %>
 </div>
