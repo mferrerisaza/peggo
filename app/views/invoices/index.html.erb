@@ -14,7 +14,8 @@
         <div class="table-row">
           <div class="table-header">Número</div>
           <div class="table-header">Cliente</div>
-          <div class="table-header">Fecha</div>
+          <div class="table-header">Creación</div>
+          <div class="table-header">Vencimiento</div>
           <div class="table-header">Total</div>
           <div class="table-header">Pagado</div>
           <div class="table-header">Por Pagar</div>
@@ -26,7 +27,8 @@
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.formated_number %></div>
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.contact.name %></div>
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.date %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'">todo</div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.expiration_date %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.total %></div>
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'">todo</div>
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'">todo</div>
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'">todo</div>
