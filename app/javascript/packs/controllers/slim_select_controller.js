@@ -76,6 +76,7 @@ export default class extends Controller {
             $vat.value = selectedValue.data.vat;
             $discount.value = selectedValue.data.discount
             $total.setRawValue(selectedValue.data.quantity * selectedValue.data.price * (1 + parseFloat(selectedValue.data.vat)) * (1 - parseFloat(selectedValue.data.discount)));
+            $quantity.focus();
           }
         }
       })

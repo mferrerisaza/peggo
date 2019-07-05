@@ -22,7 +22,10 @@
                 input_html: {
                   min: '0',
                   class: "item-quantity",
-                  data: { target: "item-form.quantity invoice-form.quantity" }
+                  data: {
+                    action: "focus->invoice-form#calculateTotals",
+                    target: "item-form.quantity invoice-form.quantity"
+                  }
                 }
     %>
   </div>

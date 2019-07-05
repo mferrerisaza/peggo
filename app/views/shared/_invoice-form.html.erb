@@ -16,8 +16,20 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-4">
-        <% disabled = action_name == "new" ? true : false %>
-        <%= f.input :number, label: "No.", disabled: disabled%>
+        <div class="invoice-header-dian-info">
+          <% disabled = action_name == "new" ? true : false %>
+          <%= f.input :number, label: "No.", disabled: disabled%>
+          <p class="text-center text-bold">IVA Régimen Común</p>
+          <%= f.input :resolution_number,
+                      label: false,
+                      disabled: true,
+                      as: :text,
+                      input_html: {
+                        class: "dian-resolution-number",
+                        value: Business::INVOICE_RESOLUTION_NUMBER
+                      }
+          %>
+        </div>
       </div>
     </div>
   </div>
@@ -108,13 +120,17 @@
   <br>
   <br>
   <br>
+  <br>
   <div class="invoice-form-bottom">
     <div class="row">
       <div class="col-xs-12 col-sm-8">
         <div class="signature">
-          <%= cl_image_tag  @business.logo, width: 200, height: 100, crop: :fill %>
-          <hr>
-          <p>ELABORADO POR</p>
+          <%= f.input :signature, label: "Cargar Firma:"%>
+          <%= f.input :signature_cache, as: :hidden %>
+          <% if @invoice.signature %>
+            <%= cl_image_tag  @invoice.signature, width: 200, height: 100%>
+          <% end %>
+          <p class="signature-by">ELABORADO POR</p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-4">
@@ -181,6 +197,27 @@
                       }
           %>
         </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-xs-12 col-sm-7">
+        <%= f.input :terms_and_conditions,
+                    label: "Términos y Condiciones:",
+                    input_html: {
+                      value: Business::INVOICE_TERMS_AND_CONDITIONS
+                    }
+        %>
+      </div>
+      <div class="col-xs-12 col-sm-5">
+        <%= f.input :notes,
+                    label: "Notas:",
+                    input_html: {
+                      value: Business::INVOICE_NOTES
+                    }
+        %>
       </div>
     </div>
   </div>

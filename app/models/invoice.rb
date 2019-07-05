@@ -6,6 +6,8 @@ class Invoice < ApplicationRecord
   has_many :items, dependent: :nullify, inverse_of: :invoice
   accepts_nested_attributes_for :items, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
 
+  mount_uploader :signature, LogoUploader
+
   def formated_number
     "%03d" % number
   end
