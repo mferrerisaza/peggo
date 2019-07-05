@@ -5,6 +5,11 @@
   border-radius: 4px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 
+  .ss-main {
+    width: 100% !important;
+    margin-top: 8px;
+  }
+
   .form-group {
     width: 100%;
     display: flex;
@@ -120,4 +125,45 @@
 }
 .invoice_items_name {
   margin: 0px;
+}
+
+.totals {
+  .form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0;
+  }
+  input {
+    border: none;
+    box-shadow: none;
+    background: none !important;
+    text-align: right;
+    font-size: 16px;
+    height: auto;
+    font-weight: bold !important;
+    cursor: text !important;
+  }
+  label {
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    font-size: 16px;
+    width: 50%;
+    font-weight: bold;
+  }
+  .invoice_invoice_grand_total {
+    label, input {
+      font-size: 18px !important;
+    }
+  }
+
+}
+
+.signature {
+    width: 100%;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }

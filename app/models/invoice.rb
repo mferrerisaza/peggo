@@ -18,6 +18,38 @@ class Invoice < ApplicationRecord
     date.strftime("%d/%m/%Y")
   end
 
+  def items_gross_subtotal
+    sum = 0
+    items.each do |item|
+      sum += item.gross_total
+    end
+    return sum
+  end
+
+  def items_discount_subtotal
+    sum = 0
+    items.each do |item|
+      sum -= item.discount_amount
+    end
+    return sum
+  end
+
+  def items_vat_subtotal
+    sum = 0
+    items.each do |item|
+      sum += item.vat_amount
+    end
+    return sum
+  end
+
+  def items_net_subtotal
+    items_gross_subtotal + items_discount_subtotal
+  end
+
+  def total
+    items_net_subtotal + items_vat_subtotal
+  end
+
   private
 
   def add_invoice_number

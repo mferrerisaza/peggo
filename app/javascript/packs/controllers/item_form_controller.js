@@ -16,8 +16,7 @@ export default class extends Controller {
         numeralDecimalMark: ',',
         delimiter: '.',
     });
-    console.log(cleavePrice.getRawValue());
-    const calculadedTotal = this.quantityTarget.value * cleavePrice.getRawValue() * (1 + parseFloat(this.vatTarget.value)) * (1 - parseFloat(this.discountTarget.value))
+    const calculadedTotal = this.quantityTarget.value * cleavePrice.getRawValue()
 
     if (isNaN(calculadedTotal)) {
       this.totalTarget.value = "";

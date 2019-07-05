@@ -24,7 +24,15 @@ class Item < ApplicationRecord
       tsearch: { prefix: true }
     }
 
-  def total
-    quantity * price * (1 + vat) * (1 - discount)
+  def gross_total
+    quantity * price
+  end
+
+  def discount_amount
+    quantity * price * discount
+  end
+
+  def vat_amount
+    quantity * price * (1 - discount) * vat
   end
 end
