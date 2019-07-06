@@ -7,14 +7,12 @@ export default class extends Controller {
   recalculateTotal() {
     const cleavePrice = new Cleave(this.priceTarget, {
         numeral: true,
-        numeralDecimalMark: ',',
-        delimiter: '.',
+        numeralThousandsGroupStyle: 'thousand'
     });
 
     const cleaveTotal = new Cleave(this.totalTarget, {
         numeral: true,
-        numeralDecimalMark: ',',
-        delimiter: '.',
+        numeralThousandsGroupStyle: 'thousand'
     });
     const calculadedTotal = this.quantityTarget.value * cleavePrice.getRawValue()
 

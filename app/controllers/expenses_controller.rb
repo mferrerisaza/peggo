@@ -64,7 +64,7 @@ class ExpensesController < ApplicationController
 
   def expense_params
     strong_params = params.require(:expense).permit(:number, :contact_id, :payment_method, :date, :description, :amount, :business_id, :observation, attachments_attributes: [:id, :file, "@original_filename", "@content_type", "@headers", "_destroy"])
-    strong_params[:amount] = strong_params[:amount].gsub(".", "") if strong_params[:amount]
+    strong_params[:amount] = strong_params[:amount].gsub(",", "") if strong_params[:amount]
     strong_params[:attachments_attributes].each { |attachment| attachment[:name] = attachment[:file].original_filename } if strong_params[:attachments_attributes].is_a?(Array)
     strong_params
   end

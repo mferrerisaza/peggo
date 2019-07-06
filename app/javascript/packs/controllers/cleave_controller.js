@@ -11,8 +11,7 @@ export default class extends Controller {
   mountCleave(){
     const cleave = new Cleave(this.element, {
         numeral: true,
-        numeralDecimalMark: ',',
-        delimiter: '.',
+        numeralThousandsGroupStyle: 'thousand'
     });
   }
 }

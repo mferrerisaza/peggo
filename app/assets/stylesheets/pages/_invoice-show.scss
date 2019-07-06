@@ -1,0 +1,30 @@
+.invoice-header-number-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  p {
+    font-size: 16px !important;
+  }
+}
+.totals {
+  .totals-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0px;
+    padding-bottom: 4px;
+  }
+  .totals-item--grand-total {
+    font-size: 18px;
+  }
+}
+.bottom-notes-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+.bottom-notes {
+  font-size: 13px;
+}

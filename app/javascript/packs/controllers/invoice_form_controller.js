@@ -14,32 +14,27 @@ export default class extends Controller {
 
     const cleaveGrossTotal = new Cleave($grossTotalInput, {
       numeral: true,
-      numeralDecimalMark: ',',
-      delimiter: '.',
+      numeralThousandsGroupStyle: 'thousand'
     });
 
     const cleaveTotalDiscount = new Cleave($discountInput, {
       numeral: true,
-      numeralDecimalMark: ',',
-      delimiter: '.',
+      numeralThousandsGroupStyle: 'thousand'
     });
 
     const cleaveNetTotal = new Cleave($netTotalInput, {
       numeral: true,
-      numeralDecimalMark: ',',
-      delimiter: '.',
+      numeralThousandsGroupStyle: 'thousand'
     });
 
     const cleaveTotalVAT = new Cleave($totalVatInput, {
       numeral: true,
-      numeralDecimalMark: ',',
-      delimiter: '.',
+      numeralThousandsGroupStyle: 'thousand'
     });
 
     const cleaveGrandTotal = new Cleave($grandTotalInput, {
       numeral: true,
-      numeralDecimalMark: ',',
-      delimiter: '.',
+      numeralThousandsGroupStyle: 'thousand'
     });
 
     cleaveGrossTotal.setRawValue(totals.grossSubtotal);
@@ -61,8 +56,7 @@ export default class extends Controller {
       const quantity = this.rowTargets[i].querySelector(".item-quantity").value;
       const cleavePrice = new Cleave(this.rowTargets[i].querySelector(".item-price"), {
           numeral: true,
-          numeralDecimalMark: ',',
-          delimiter: '.',
+          numeralThousandsGroupStyle: 'thousand'
       });
       const discount = parseFloat(this.rowTargets[i].querySelector(".item-discount").value);
       const vat = parseFloat(this.rowTargets[i].querySelector(".item-vat").value);

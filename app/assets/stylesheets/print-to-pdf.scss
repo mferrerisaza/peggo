@@ -3,8 +3,9 @@
 }
 body {
   margin: 0;
+  background-repeat: no-repeat;
 }
-h3, h4 {
+h1, h2, h3, h4 {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -57,6 +58,34 @@ p {
     padding: 4px 0px;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+  }
+}
+.invoice-number-box {
+  position: absolute;
+  width: 25%;
+  top: 14.5px;
+  left: 75%;
+  height: 60%;
+
+  h4, h3 {
+    border: none;
+  }
+  h3 {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 8px 0px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+  h4 {
+    background-color: lightgray;
+    padding: 4px 0px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  p {
+    padding: 8px 0px;
+    font-size: 12px;
+    text-align: center !important;
   }
 }
 .bussines-logo {
@@ -168,9 +197,70 @@ p {
     top: 0px;
     right: 0%;
   }
+  .invoice-pdf-signature {
+    top: -100px;
+    left: 10%;
+    position: absolute;
+  }
 }
 .pdf-bottom > span {
   width: 40%;
   position: absolute;
   border-top: 1px solid gray;
+}
+.notes-box {
+  background-color: lightgray;
+  padding: 16px;
+  height: auto;
+  text-align: justify;
+  border-radius: 8px;
+}
+.terms-and-conditions-box {
+  height: auto;
+  padding: 16px;
+  .terms_and_conditions-list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: justify;
+    li {
+      padding-bottom: 8px;
+    }
+  }
+}
+.subtotal-value, .subtotal-title {
+  min-width: 150px;
+  width: 150px;
+  max-width: 150px;
+  padding: 0px 16px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: bold;
+}
+.subtotal-value, .grand-total-value {
+  text-align: right;
+}
+.subtotal-title, .grand-total-title {
+  text-align: left;
+}
+.grand-total-title, .grand-total-value {
+  min-width: 150px;
+  width: 150px;
+  max-width: 150px;
+  padding: 8px 16px;
+  // padding-bottom: 8px;
+  box-sizing: border-box;
+  font-size: 18px;
+  background-color: lightgray;
+  font-weight: bold;
+}
+.grand-total-title {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-right: 1px solid lightgray;
+}
+.grand-total-value {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }

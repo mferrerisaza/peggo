@@ -50,6 +50,24 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @invoice
+    @invoice.destroy
+    flash[:notice] = "Factura eliminada existosamente"
+    redirect_to business_invoices_path(@business)
+  end
+
+  def print
+    authorize @invoice
+    @contact = @invoice.contact
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: @invoice.pdf_file_name, layout: 'pdf.html', show_as_html: params.key?('debug')   # Excluding ".pdf" extension.
+      end
+    end
+  end
+
   private
 
   def set_invoice
@@ -69,7 +87,7 @@ class InvoicesController < ApplicationController
                                               :business_id,
                                               items_attributes: [:id, :name, :quantity, :price, :vat, :discount, "_destroy", "id"]
                                             )
-    strong_params[:items_attributes].each {|_key, item| item[:price] = item[:price].gsub(".","") } unless strong_params[:items_attributes][:_destroy] == "true"
+    strong_params[:items_attributes].each {|_key, item| item[:price] = item[:price].gsub(",","") } unless strong_params[:items_attributes][:_destroy] == "true"
 
     strong_params
   end

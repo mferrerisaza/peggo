@@ -1,27 +1,56 @@
-<div class="table-row" data-controller="item-form">
+<div class="table-row" data-controller="item-form" data-target="invoice-form.row">
 
   <div class="table-data">
     <%= item.name %>
   </div>
 
   <div class="table-data">
-    <%= item.quantity %>
+    <input
+      class="item-quantity no-style-input text-center"
+      data-target="invoice-form.quantity"
+      type="number"
+      disabled="disabled"
+      value="<%= item.quantity %>"
+    >
   </div>
 
   <div class="table-data">
-    <%= humanized_money item.price %>
+    <input
+      class="item-price no-style-input text-center"
+      data-controller="cleave"
+      type="text"
+      value="<%= item.price %>"
+      disabled="disabled"
+    >
   </div>
 
   <div class="table-data">
-    <%= item.vat %>
+    <input
+      class="item-vat no-style-input text-center"
+      value="<%= item.vat %>"
+      data-target="invoice-form.vat"
+      type="number"
+      disabled="disabled"
+    >
   </div>
 
   <div class="table-data">
-    <%= item.discount %>
+    <input
+      class="item-discount no-style-input text-center"
+      value="<%= item.discount %>"
+      data-target="invoice-form.discount"
+      type="number"
+      disabled="disabled"
+    >
   </div>
 
   <div class="table-data">
-    <%= humanized_money item.gross_total %>
+    <input
+      type="text"
+      class="item-total no-style-input text-center"
+      value="<%= item.gross_total %>"
+      data-controller="cleave"
+      disabled="disabled">
   </div>
   <% if  items_delete_params %>
     <div class="table-data">

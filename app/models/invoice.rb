@@ -5,7 +5,7 @@ class Invoice < ApplicationRecord
   belongs_to :contact
   has_many :items, dependent: :nullify, inverse_of: :invoice
   accepts_nested_attributes_for :items, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
-
+  validates :date, :expiration_date, presence: true
   mount_uploader :signature, LogoUploader
 
   def formated_number
@@ -13,11 +13,15 @@ class Invoice < ApplicationRecord
   end
 
   def pdf_file_name
-    "Factura de venta num #{formated_number}"
+    "#{formated_number} FV #{contact.name} #{date}"
   end
 
   def formated_date
     date.strftime("%d/%m/%Y")
+  end
+
+  def formated_expiration_date
+    expiration_date.strftime("%d/%m/%Y")
   end
 
   def items_gross_subtotal
@@ -62,6 +66,10 @@ class Invoice < ApplicationRecord
 
   def notes?
     notes ? notes : Business::INVOICE_NOTES
+  end
+
+  def term
+    (date..expiration_date).count
   end
 
   private

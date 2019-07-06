@@ -1,3 +1,4 @@
+
 <%= simple_form_for([@business, @invoice])  do |f| %>
   <div class="invoice-form-header">
     <div class="row">
@@ -36,7 +37,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4">
       <%= f.association :contact,
-                        label: "Beneficiario",
+                        label: "Cliente",
                         value: "Miguel Ferrer",
                         collection: Contact.where(client: true).order(name: :asc),
                         input_html: {
@@ -71,49 +72,52 @@
     </div>
   </div>
   <br>
-  <div class="table"
-       id="items-table"
-       data-controller="invoice-form"
-  >
-    <div class="table-row" >
-      <div class="table-header">Item</div>
-      <div class="table-header">Cantidad</div>
-      <div class="table-header">Precio Unitario</div>
-      <div class="table-header">IVA(%)</div>
-      <div class="table-header">Descuento(%)</div>
-      <div class="table-header">Total</div>
-      <div class="table-header">Acciones</div>
-    </div>
-    <% f.object.items.each_with_index do |item, index| %>
-        <% if item.id %>
-          <% items_delete_params = {
-              invoice: {
-                business_id: @business.id,
-                items_attributes: {
-                  id: item.id,
-                  _destroy: true
-                }
-              },
-            }
-          %>
-          <%= render 'shared/edit-item-fields',
-              item: item,
-              invoice_id: f.object.id,
-              items_delete_params: items_delete_params
-          %>
-        <% end %>
-    <% end %>
-    <%= f.simple_fields_for :items, Item.new do |p| %>
-      <%= render 'shared/item-fields', f: p %>
-    <% end %>
-    <div class="links table-row">
-      <%= link_to_add_association f, :items, partial: 'shared/item-fields', class: "btn show-action-btn" do %>
-        <i class="material-icons">
-          add
-        </i>
-        <span>Agregar línea</span>
+  <div class="items-table-container">
+    <div class="table"
+         id="items-table"
+         data-controller="invoice-form"
+    >
+      <div class="table-row" >
+        <div class="table-header">Item</div>
+        <div class="table-header">Cantidad</div>
+        <div class="table-header">Precio Unitario</div>
+        <div class="table-header">IVA(%)</div>
+        <div class="table-header">Descuento(%)</div>
+        <div class="table-header">Total</div>
+        <div class="table-header">Acciones</div>
+      </div>
+      <% f.object.items.each_with_index do |item, index| %>
+          <% if item.id %>
+            <% items_delete_params = {
+                invoice: {
+                  business_id: @business.id,
+                  items_attributes: {
+                    id: item.id,
+                    _destroy: true
+                  }
+                },
+              }
+            %>
+            <%= render 'shared/edit-item-fields',
+                item: item,
+                invoice_id: f.object.id,
+                items_delete_params: items_delete_params
+            %>
+          <% end %>
       <% end %>
+      <%= f.simple_fields_for :items, Item.new do |p| %>
+        <%= render 'shared/item-fields', f: p %>
+      <% end %>
+      <div class="links table-row">
+        <%= link_to_add_association f, :items, partial: 'shared/item-fields', class: "btn show-action-btn" do %>
+          <i class="material-icons">
+            add
+          </i>
+          <span>Agregar línea</span>
+        <% end %>
+      </div>
     </div>
+
   </div>
   <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
   <br>

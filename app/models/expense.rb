@@ -14,7 +14,7 @@ class Expense < ApplicationRecord
   end
 
   def pdf_file_name
-    "CP #{formated_number} #{description}"
+    "#{formated_number} CP #{description}"
   end
 
   def formated_date

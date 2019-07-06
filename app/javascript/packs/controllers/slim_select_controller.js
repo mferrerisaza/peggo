@@ -60,15 +60,13 @@ export default class extends Controller {
             const $quantity = $itemRow.querySelector(".item-quantity");
             const $price = new Cleave($itemRow.querySelector(".item-price"), {
                 numeral: true,
-                numeralDecimalMark: ',',
-                delimiter: '.',
+                numeralThousandsGroupStyle: 'thousand'
             });
             const $vat = $itemRow.querySelector(".item-vat");
             const $discount = $itemRow.querySelector(".item-discount");
             const $total = new Cleave($itemRow.querySelector(".item-total"), {
                 numeral: true,
-                numeralDecimalMark: ',',
-                delimiter: '.',
+                numeralThousandsGroupStyle: 'thousand'
             });
 
             $quantity.value = selectedValue.data.quantity;
