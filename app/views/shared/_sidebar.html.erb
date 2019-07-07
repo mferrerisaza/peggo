@@ -62,6 +62,12 @@
           </i>
           <span>Facturas</span>
         </a>
+        <a class="sidebar-link <%= "active" if controller_name == "payments" %>" href="/businesses/<%= @business.id %>/payments">
+          <i class="material-icons">
+            attach_money
+          </i>
+          <span>Pagos</span>
+        </a>
         <a class="sidebar-link <%= "active" if controller_name == "expenses" %>" href="/businesses/<%= @business.id %>/expenses">
           <i class="material-icons">
             credit_card

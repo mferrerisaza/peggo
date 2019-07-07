@@ -1,0 +1,55 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <% if @payments.size == 0 %>
+    <h3 class="alert alert-blue property-title text-center">
+      <i class="material-icons">
+       info
+      </i>
+      Aún no tienes ningún pago recibido registrado, agrega uno para comenzar
+    </h3>
+  <% else %>
+    <h1 class="app-index-title">Lista de Pagos Recibidos</h1>
+    <div class="table-container">
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">Número</div>
+          <div class="table-header">Clientes</div>
+          <div class="table-header">Detalle</div>
+          <div class="table-header">Fecha</div>
+          <div class="table-header">Forma de Pago</div>
+          <div class="table-header">Monto</div>
+          <div class="table-header">Acciones</div>
+        </div>
+        <% @payments.each do |payment| %>
+            <div data-id="<%=payment.id%>" class="table-row-link table-row">
+              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.formated_number %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.contact.name %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.description %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.date %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.payment_method %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= humanized_money_with_symbol payment.amount %></div>
+              <div class="table-data">
+                <%= link_to print_business_payment_path(@business, payment), target: :blank  do %>
+                  <i class="material-icons"> print </i>
+                <% end %>
+                <%= link_to edit_business_payment_path(@business, payment), class: "edit-property" do %>
+                  <i class="material-icons"> create </i>
+                <% end %>
+                <%= link_to business_payment_path(@business, payment), class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+                  <i class="material-icons"> delete </i>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_business_payment_path %>">
+    <i class="material-icons">
+      attach_money
+    </i>
+   +
+  </a>
+</div>
+
+

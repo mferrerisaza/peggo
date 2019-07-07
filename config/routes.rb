@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   resources :businesses do
     resources :items, only: :index, to: "businesses#items"
-    resources :contacts
+    resources :contacts do
+      member do
+        get '/invoices', to: "contacts#invoices", defaults: { format: 'pdf' }
+      end
+    end
+
     resources :expenses do
       member do
         get '/print', to: "expenses#print", defaults: { format: 'pdf' }

@@ -78,6 +78,38 @@ export default class extends Controller {
           }
         }
       })
+    } else if (selectType === "paymentContactSelect") {
+      new SlimSelect({
+        select: this.element,
+        onChange: (selectedOption) => {
+          let url = this.data.get("fetchInvoicesUrl");
+          url = `${url}/${selectedOption.value}/invoices`;
+          fetch(url)
+          .then(response => response.json())
+          .then((data) => {
+            let json = [];
+
+            json.push( {text: "", data: { placeholder: true } } )
+
+            for (let i = 0; i < data.length; i++) {
+              json.push( { text: data[i].name, value: data[i].id } )
+            }
+
+            const invoiceSelect = new SlimSelect({
+              select: '.payment_invoice select',
+              placeholder: "No Asociar",
+              onChange: (invoiceOption) => {
+                this.updateInvoiceInfo(invoiceOption);
+              }
+            })
+            invoiceSelect.setData(json)
+          })
+        }
+      })
     }
+  }
+
+  updateInvoiceInfo(invoiceOption) {
+    console.log(this, invoiceOption);
   }
 }

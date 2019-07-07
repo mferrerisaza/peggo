@@ -9,6 +9,7 @@ class Invoice < ApplicationRecord
   accepts_nested_attributes_for :items, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
   validates :date, :expiration_date, presence: true
   mount_uploader :signature, LogoUploader
+  monetize :amount_paid_cents
 
   def formated_number
     "%03d" % number
@@ -16,6 +17,18 @@ class Invoice < ApplicationRecord
 
   def pdf_file_name
     "#{formated_number} FV #{contact.name} #{date}"
+  end
+
+  def name
+    "Factura de Venta #{formated_number}"
+  end
+
+  def status
+    if debt == 0
+      "Cobrada"
+    else
+      "Por Cobrar"
+    end
   end
 
   def formated_date
@@ -56,6 +69,14 @@ class Invoice < ApplicationRecord
 
   def total
     items_net_subtotal + items_vat_subtotal
+  end
+
+  def amount_paid_cents
+    payments.sum(:amount_cents)
+  end
+
+  def debt
+    total - amount_paid
   end
 
   def resolution_number?

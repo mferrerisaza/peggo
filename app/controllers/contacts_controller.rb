@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_business, except: :update
-  before_action :set_contact, only: %i[show edit update destroy]
+  before_action :set_contact, only: %i[show edit update destroy invoices]
 
   def index
     @contacts = policy_scope(Contact.where(business: @business).order(created_at: :asc))
@@ -46,6 +46,12 @@ class ContactsController < ApplicationController
     @contact.destroy
     flash[:notice] = "Contact eliminado existosamente"
     redirect_to business_contacts_path(@business)
+  end
+
+  def invoices
+    authorize @business, :business_of_current_user?
+    @invoices = @contact.invoices
+    render json: @invoices, methods: [:name], only: :id
   end
 
   private

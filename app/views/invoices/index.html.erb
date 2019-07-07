@@ -29,9 +29,9 @@
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.date %></div>
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.expiration_date %></div>
               <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.total %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'">todo</div>
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'">todo</div>
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'">todo</div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.amount_paid %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.debt %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.status %></div>
               <div class="table-data">
                 <%= link_to print_business_invoice_path(@business, invoice), target: :blank  do %>
                   <i class="material-icons"> print </i>
