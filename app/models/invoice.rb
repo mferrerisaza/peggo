@@ -10,6 +10,7 @@ class Invoice < ApplicationRecord
   validates :date, :expiration_date, presence: true
   mount_uploader :signature, LogoUploader
   monetize :amount_paid_cents
+  monetize :amount_retained_cents
 
   def formated_number
     "%03d" % number
@@ -75,8 +76,12 @@ class Invoice < ApplicationRecord
     payments.sum(:amount_cents)
   end
 
+  def amount_retained_cents
+    payments.sum(:retention_cents)
+  end
+
   def debt
-    total - amount_paid
+    total - amount_paid - amount_retained
   end
 
   def resolution_number?

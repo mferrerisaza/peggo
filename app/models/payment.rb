@@ -1,5 +1,7 @@
 class Payment < ApplicationRecord
   before_validation :add_payment_number, on: :create
+  validate :amount_is_less_than_debt
+
 
   belongs_to :business
   belongs_to :contact
@@ -22,10 +24,19 @@ class Payment < ApplicationRecord
     date.strftime("%d/%m/%Y")
   end
 
+  def total
+    amount + retention
+  end
+
   private
 
   def add_payment_number
     self.number = business.payments.size + 1
+  end
+
+  def amount_is_less_than_debt
+    debt_amount = invoice ? invoice.debt + ((amount_cents_was + retention_cents_was)/100).to_money : 0
+    errors.add(:amount, "la suma de retención y valor recibido supera la deuda ") if total > debt_amount
   end
 
 end
