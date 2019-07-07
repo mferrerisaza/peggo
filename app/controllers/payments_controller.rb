@@ -6,6 +6,10 @@ class PaymentsController < ApplicationController
     @payments = policy_scope(Payment.where(business: @business).order(created_at: :asc).includes(:contact))
   end
 
+  def show
+    authorize @payment
+  end
+
   def new
     @payment = Payment.new
     authorize @business, :business_of_current_user?
@@ -22,10 +26,25 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def edit
+    authorize @business, :business_of_current_user?
+  end
+
+  def update
+    @business = Business.find(payment_params[:business_id])
+    authorize @business, :business_of_current_user?
+    if @payment.update(payment_params)
+      flash[:notice] = "Pago actualizado existosamente"
+      redirect_to business_payment_path @business, @payment
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def set_payment
-    @expense = Payment.includes(:contact).find(params[:id])
+    @payment = Payment.includes(:contact).find(params[:id])
   end
 
   def payment_params

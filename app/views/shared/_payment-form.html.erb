@@ -13,9 +13,10 @@
                       }
                     }
   %>
+  <% collection = @payment.id ?  @payment.contact.invoices: [ ["No Asociar" ,"", data: { placeholder: true }] ] %>
   <%= f.association :invoice,
                     label: "Asociar a factura:",
-                    collection: [ ["No Asociar" ,"", data: { placeholder: true }] ],
+                    collection: collection,
                     input_html: {
                       data: {
                         controller: "slim-select",
@@ -23,7 +24,7 @@
                       }
                     }
   %>
-  <%= f.input :amount,
+  <%= f.input :retention,
               label: "Retención:",
               input_html: {
                 class: "amount-input",
