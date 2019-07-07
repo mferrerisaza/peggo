@@ -2,6 +2,7 @@ class Contact < ApplicationRecord
   belongs_to :business
   has_many :expenses, dependent: :destroy
   has_many :invoices, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   enum tax_id_type: [
     "NIT - Número de identificación tributaria",

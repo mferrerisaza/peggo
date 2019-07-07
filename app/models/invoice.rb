@@ -4,6 +4,8 @@ class Invoice < ApplicationRecord
   belongs_to :business
   belongs_to :contact
   has_many :items, dependent: :nullify, inverse_of: :invoice
+  has_many :payments, dependent: :destroy
+
   accepts_nested_attributes_for :items, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
   validates :date, :expiration_date, presence: true
   mount_uploader :signature, LogoUploader

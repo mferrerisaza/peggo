@@ -19,6 +19,11 @@ Rails.application.routes.draw do
         get '/print', to: "invoices#print", defaults: { format: 'pdf' }
       end
     end
+    resources :payments do
+      member do
+        get '/print', to: "payments#print", defaults: { format: 'pdf' }
+      end
+    end
   end
 
   require "sidekiq/web"

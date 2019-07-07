@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_151437) do
+ActiveRecord::Schema.define(version: 2019_07_07_135902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,24 @@ ActiveRecord::Schema.define(version: 2019_07_05_151437) do
     t.index ["invoice_id"], name: "index_items_on_invoice_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.bigint "contact_id"
+    t.bigint "invoice_id"
+    t.bigint "number"
+    t.date "date"
+    t.integer "payment_method"
+    t.string "description"
+    t.integer "amount_cents", default: 0, null: false
+    t.integer "retention_cents", default: 0, null: false
+    t.text "observation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "business_id"
+    t.index ["business_id"], name: "index_payments_on_business_id"
+    t.index ["contact_id"], name: "index_payments_on_contact_id"
+    t.index ["invoice_id"], name: "index_payments_on_invoice_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -135,4 +153,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_151437) do
   add_foreign_key "invoices", "businesses"
   add_foreign_key "invoices", "contacts"
   add_foreign_key "items", "invoices"
+  add_foreign_key "payments", "businesses"
+  add_foreign_key "payments", "contacts"
+  add_foreign_key "payments", "invoices"
 end
