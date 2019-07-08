@@ -41,6 +41,24 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @payment
+    @payment.destroy
+    flash[:notice] = "Pago eliminado existosamente"
+    redirect_to business_payments_path(@business)
+  end
+
+  def print
+    authorize @payment
+    @contact = @payment.contact
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: @payment.pdf_file_name, layout: 'pdf.html', show_as_html: params.key?('debug')   # Excluding ".pdf" extension.
+      end
+    end
+  end
+
   private
 
   def set_payment

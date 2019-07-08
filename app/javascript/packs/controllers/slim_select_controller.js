@@ -87,29 +87,47 @@ export default class extends Controller {
           fetch(url)
           .then(response => response.json())
           .then((data) => {
-            let json = [];
+            const $invoiceFormGroup = document.querySelector(".payment_invoice");
+            const $conceptInput = document.querySelector(".payment_description input");
+            const $amount = new Cleave(document.querySelector(".payment_amount input"), {
+                numeral: true,
+                numeralThousandsGroupStyle: 'thousand'
+            });
 
-            json.push( {text: "", data: { placeholder: true } } )
+            $amount.setRawValue(0);
+            $invoiceFormGroup.classList.add("hidden");
+            $conceptInput.value = "";
 
-            for (let i = 0; i < data.length; i++) {
-              json.push( { text: data[i].name, value: data[i].id } )
-            }
 
-            const invoiceSelect = new SlimSelect({
-              select: '.payment_invoice select',
-              placeholder: "No Asociar",
-              onChange: (invoiceOption) => {
-                this.updateInvoiceInfo(invoiceOption);
+            if(data.length > 0) {
+              let json = [];
+
+              json.push( {text: "", data: { placeholder: true } } )
+
+              for (let i = 0; i < data.length; i++) {
+                json.push({
+                  text: data[i].name,
+                  value: data[i].id,
+                  data: {
+                    debt: parseInt(data[i].debt.fractional) / 100
+                  }
+                })
               }
-            })
-            invoiceSelect.setData(json)
+
+              const invoiceSelect = new SlimSelect({
+                select: '.payment_invoice select',
+                placeholder: "No Asociar",
+                onChange: (invoiceOption) => {
+                  $amount.setRawValue(invoiceOption.data.debt)
+                  $conceptInput.value = `Pago ${invoiceOption.text}`
+                }
+              })
+              invoiceSelect.setData(json)
+              $invoiceFormGroup.classList.remove("hidden");
+            }
           })
         }
       })
     }
-  }
-
-  updateInvoiceInfo(invoiceOption) {
-    console.log(this, invoiceOption);
   }
 }

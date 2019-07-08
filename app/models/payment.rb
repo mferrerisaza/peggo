@@ -35,7 +35,8 @@ class Payment < ApplicationRecord
   end
 
   def amount_is_less_than_debt
-    debt_amount = invoice ? invoice.debt + ((amount_cents_was + retention_cents_was)/100).to_money : 0
+    return unless invoice
+    debt_amount = invoice.debt + ((amount_cents_was + retention_cents_was)/100).to_money
     errors.add(:amount, "la suma de retención y valor recibido supera la deuda ") if total > debt_amount
   end
 

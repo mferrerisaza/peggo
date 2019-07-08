@@ -17,6 +17,7 @@
   <%= f.association :invoice,
                     label: "Asociar a factura:",
                     collection: collection,
+                    wrapper_html: { class: "hidden" },
                     input_html: {
                       data: {
                         controller: "slim-select",

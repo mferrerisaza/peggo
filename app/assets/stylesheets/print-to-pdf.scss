@@ -170,6 +170,11 @@ p {
       border-bottom-left-radius: 8px;
       padding: 0px 16px;
     }
+    .force-border-bottom {
+      td {
+        border-bottom: 1px solid lightgray;
+      }
+    }
     tfoot .table-space{
       background-color: transparent;
       border: none;
