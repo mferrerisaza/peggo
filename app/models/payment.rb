@@ -43,6 +43,16 @@ class Payment < ApplicationRecord
     amount + retention
   end
 
+  def retention_full_name
+    return unless retention
+
+    if retention_type && retention
+      "#{retention_type}: #{ActionController::Base.helpers.humanized_money_with_symbol retention}"
+    elsif retention
+      "#{ActionController::Base.helpers.humanized_money_with_symbol retention}"
+    end
+  end
+
   private
 
   def add_payment_number

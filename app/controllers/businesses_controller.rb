@@ -46,8 +46,7 @@ class BusinessesController < ApplicationController
 
   def items
     authorize @business
-    @items = @business.items.where(nil)
-    @items = @business.items.search_by_name(params[:query]) if params[:query].present?
+    @items = @business.items.search_by_name(params[:query]).limit(100).with_pg_search_rank.uniq(&:name) if params[:query].present?
     render json: @items
   end
 

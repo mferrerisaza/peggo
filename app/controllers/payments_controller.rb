@@ -75,6 +75,7 @@ class PaymentsController < ApplicationController
                                               :description,
                                               :amount,
                                               :retention,
+                                              :retention_type,
                                               :business_id,
                                               :observation
                                             )

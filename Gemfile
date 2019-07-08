@@ -29,6 +29,7 @@ gem 'wkhtmltopdf-binary'
 gem "cocoon"
 gem "jquery-rails"
 gem "pg_search"
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'spring-commands-rspec'

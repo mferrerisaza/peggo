@@ -114,14 +114,16 @@ export default class extends Controller {
               json.push( {text: "", data: { placeholder: true } } )
 
               for (let i = 0; i < data.length; i++) {
-                json.push({
-                  text: data[i].name,
-                  value: data[i].id,
-                  data: {
-                    debt: parseInt(data[i].debt.fractional) / 100,
-                    retentionbase: parseInt(data[i].items_gross_subtotal.fractional) / 100
-                  }
-                })
+                if (data[i].status === "Por Cobrar") {
+                  json.push({
+                    text: data[i].name,
+                    value: data[i].id,
+                    data: {
+                      debt: parseInt(data[i].debt.fractional) / 100,
+                      retentionbase: parseInt(data[i].items_gross_subtotal.fractional) / 100
+                    }
+                  })
+                }
               }
 
               const invoiceSelect = new SlimSelect({

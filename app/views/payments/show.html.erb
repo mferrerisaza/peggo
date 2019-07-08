@@ -45,7 +45,7 @@
         </div>
         <div class="table-row">
           <div class="table-header">Retención</div>
-          <div class="table-data"><%= humanized_money_with_symbol @payment.retention %></div>
+          <div class="table-data"><%= @payment.retention_full_name %></div>
         </div>
         <div class="table-row">
           <div class="table-header">Observaciones</div>

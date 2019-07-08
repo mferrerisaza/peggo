@@ -8,8 +8,10 @@
   .invoice_number {
     flex-wrap: nowrap !important;
   }
-  .items-table-container {
-    overflow-x: auto;
+  @media (max-width: 815px){
+    .items-table-container {
+      overflow-x: auto;
+    }
   }
 
   .ss-main {
