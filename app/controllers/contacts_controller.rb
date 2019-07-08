@@ -51,7 +51,7 @@ class ContactsController < ApplicationController
   def invoices
     authorize @business, :business_of_current_user?
     @invoices = @contact.invoices
-    render json: @invoices, methods: [:name, :debt], only: :id
+    render json: @invoices, methods: [:name, :debt, :items_gross_subtotal], only: :id
   end
 
   private

@@ -25,6 +25,41 @@
                       }
                     }
   %>
+  <div class="items-table-container hidden">
+    <div class="table"
+         id="items-table"
+    >
+      <div class="table-row" >
+        <div class="table-header">Factura</div>
+        <div class="table-header">Total</div>
+        <div class="table-header">Pagado</div>
+        <div class="table-header">Por Pagar</div>
+      </div>
+
+      <div class="table-row" >
+        <div class="table-data">
+          <input
+            class="no-style-input text-center"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+          >
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <%= f.input :retention_type,
+              label: "Tipo de Retención",
+              collection: Payment.retention_types.keys,
+              input_html: {
+                data: {
+                  controller: "slim-select",
+                  slim_select_type: "paymentRetentionType"
+                }
+              }
+  %>
   <%= f.input :retention,
               label: "Retención:",
               input_html: {

@@ -79,6 +79,19 @@ export default class extends Controller {
         }
       })
     } else if (selectType === "paymentContactSelect") {
+
+      const $invoiceFormGroup = document.querySelector(".payment_invoice");
+      const $conceptInput = document.querySelector(".payment_description input");
+      const $retentionTypeSelect = document.querySelector(".payment_retention_type select");
+      const $amount = new Cleave(document.querySelector(".payment_amount input"), {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+      });
+      const $retentionAmount = new Cleave(document.querySelector(".payment_retention input"), {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+      });
+
       new SlimSelect({
         select: this.element,
         onChange: (selectedOption) => {
@@ -87,17 +100,13 @@ export default class extends Controller {
           fetch(url)
           .then(response => response.json())
           .then((data) => {
-            const $invoiceFormGroup = document.querySelector(".payment_invoice");
-            const $conceptInput = document.querySelector(".payment_description input");
-            const $amount = new Cleave(document.querySelector(".payment_amount input"), {
-                numeral: true,
-                numeralThousandsGroupStyle: 'thousand'
-            });
 
             $amount.setRawValue(0);
             $invoiceFormGroup.classList.add("hidden");
             $conceptInput.value = "";
-
+            delete $retentionTypeSelect.dataset.slimSelectRetentionBase;
+            $retentionAmount.setRawValue(0);
+            $retentionTypeSelect.slim.set("");
 
             if(data.length > 0) {
               let json = [];
@@ -109,7 +118,8 @@ export default class extends Controller {
                   text: data[i].name,
                   value: data[i].id,
                   data: {
-                    debt: parseInt(data[i].debt.fractional) / 100
+                    debt: parseInt(data[i].debt.fractional) / 100,
+                    retentionbase: parseInt(data[i].items_gross_subtotal.fractional) / 100
                   }
                 })
               }
@@ -117,15 +127,46 @@ export default class extends Controller {
               const invoiceSelect = new SlimSelect({
                 select: '.payment_invoice select',
                 placeholder: "No Asociar",
+                allowDeselect: true,
+                deselectLabel: '<span style="color: red">✖</span>',
                 onChange: (invoiceOption) => {
-                  $amount.setRawValue(invoiceOption.data.debt)
-                  $conceptInput.value = `Pago ${invoiceOption.text}`
+                  delete $retentionTypeSelect.dataset.slimSelectRetentionBase;
+                  $retentionAmount.setRawValue(0);
+                  $retentionTypeSelect.slim.set("");
+                  $amount.setRawValue(0);
+                  $conceptInput.value = "";
+
+                  if (Object.keys(invoiceOption.data).length > 1) {
+                    $amount.setRawValue(invoiceOption.data.debt);
+                    $conceptInput.value = `Pago ${invoiceOption.text}`;
+                    $retentionTypeSelect.dataset.slimSelectRetentionBase = invoiceOption.data.retentionbase;
+                  }
                 }
               })
+
               invoiceSelect.setData(json)
               $invoiceFormGroup.classList.remove("hidden");
             }
           })
+        }
+      })
+    } else if (selectType === "paymentRetentionType") {
+      new SlimSelect({
+        select: this.element,
+        onChange: (selectedOption) => {
+          if (this.data.has("retentionBase")) {
+            const retentionBase = parseFloat(this.data.get("retentionBase"));
+            const retentionPct = parseFloat(selectedOption.text.split("-")[1].replace("(", "").replace("%)", "")) / 100;
+            const $retentionAmountInput = new Cleave(document.querySelector(".payment_retention input"), {
+                numeral: true,
+                numeralThousandsGroupStyle: 'thousand'
+            });
+
+            const retentionAmount = retentionBase * retentionPct;
+
+            $retentionAmountInput.setRawValue(retentionBase * retentionPct)
+          }
+
         }
       })
     }
