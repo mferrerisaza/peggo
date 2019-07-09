@@ -199,7 +199,8 @@ export default class extends Controller {
 
             const retentionAmount = retentionBase * retentionPct;
 
-            $retentionAmountInput.setRawValue(retentionBase * retentionPct)
+            $retentionAmountInput.setRawValue(retentionBase * retentionPct);
+            document.querySelector(".payment_retention input").focus();
           }
 
         }

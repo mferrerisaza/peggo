@@ -1,4 +1,4 @@
-<%= simple_form_for [@business, @payment]  do |f| %>
+<%= simple_form_for [@business, @payment], html: { "data-controller": "payment-form" } do |f| %>
   <% unless action_name == "new" || action_name == "create" %>
     <%= f.input :number, label: "Recibo de Caja Num" %>
   <% end %>
@@ -73,6 +73,7 @@
             data-controller="cleave"
             type="text"
             disabled="disabled"
+            data-target="payment-form.debt"
             value="<%= @invoice ? @invoice.debt : '' %>"
           >
         </div>
@@ -93,18 +94,23 @@
   <%= f.input :retention,
               label: "Retención:",
               input_html: {
+                autocomplete: "off",
                 class: "amount-input",
                   data: {
-                    controller: "cleave"
+                    controller: "cleave",
+                    target: "payment-form.retention",
+                    action: "focus->payment-form#calculateAmountToPay keyup->payment-form#calculateAmountToPay"
                   }
                 }
   %>
   <%= f.input :amount,
               label: "La suma de:",
               input_html: {
+                autocomplete: "off",
                 class: "amount-input",
                   data: {
-                    controller: "cleave"
+                    controller: "cleave",
+                    target: "payment-form.amount"
                   }
                 }
   %>
