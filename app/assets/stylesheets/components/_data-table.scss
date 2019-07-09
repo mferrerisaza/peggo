@@ -173,3 +173,24 @@
   white-space: normal;
   border-top-left-radius: 0px !important;
 }
+#invoice-info-table{
+  .table-data, .table-header {
+    padding: 0px;
+    font-size: 13px;
+  }
+  .table-data {
+    width: 60%;
+    input {
+      font-size: 13px;
+    }
+  }
+  .table-header {
+    width: 40%;
+  }
+}
+
+.new_payment, .edit_payment {
+  .table-container.show-table {
+    margin: 32px;
+  }
+}

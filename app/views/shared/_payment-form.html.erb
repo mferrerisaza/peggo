@@ -14,10 +14,11 @@
                     }
   %>
   <% collection = @payment.id ?  @payment.contact.invoices: [ ["No Asociar" ,"", data: { placeholder: true }] ] %>
+  <% hidden = @invoice ? "" : "hidden" %>
   <%= f.association :invoice,
                     label: "Asociar a factura pendiente:",
                     collection: collection,
-                    wrapper_html: { class: "hidden" },
+                    wrapper_html: { class: hidden },
                     input_html: {
                       data: {
                         controller: "slim-select",
@@ -25,10 +26,8 @@
                       }
                     }
   %>
-  <div class="items-table-container">
-    <div class="table hidden"
-         id="invoice-info-table"
-    >
+  <div class="table-container show-table <%= hidden %>">
+    <div class="table" id="invoice-info-table">
       <div class="table-row">
         <div class="table-header">Total</div>
         <div class="table-data">
@@ -37,6 +36,7 @@
             data-controller="cleave"
             type="text"
             disabled="disabled"
+            value="<%= @invoice ? @invoice.total : '' %>"
           >
         </div>
       </div>
@@ -48,6 +48,7 @@
             data-controller="cleave"
             type="text"
             disabled="disabled"
+            value="<%= @invoice ? @invoice.amount_paid : '' %>"
           >
         </div>
       </div>
@@ -59,6 +60,7 @@
             data-controller="cleave"
             type="text"
             disabled="disabled"
+            value="<%= @invoice ? @invoice.amount_retained : '' %>"
           >
         </div>
 
@@ -71,12 +73,12 @@
             data-controller="cleave"
             type="text"
             disabled="disabled"
+            value="<%= @invoice ? @invoice.debt : '' %>"
           >
         </div>
       </div>
 
     </div>
-
   </div>
   <%= f.input :retention_type,
               label: "Tipo de Retención",

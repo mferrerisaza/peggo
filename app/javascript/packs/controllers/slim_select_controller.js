@@ -83,6 +83,7 @@ export default class extends Controller {
       const $invoiceFormGroup = document.querySelector(".payment_invoice");
       const $conceptInput = document.querySelector(".payment_description input");
       const $retentionTypeSelect = document.querySelector(".payment_retention_type select");
+      const $invoiceInfoTable = document.getElementById("invoice-info-table").parentElement;
       const $amount = new Cleave(document.querySelector(".payment_amount input"), {
           numeral: true,
           numeralThousandsGroupStyle: 'thousand'
@@ -127,7 +128,7 @@ export default class extends Controller {
             delete $retentionTypeSelect.dataset.slimSelectRetentionBase;
             $retentionAmount.setRawValue(0);
             $retentionTypeSelect.slim.set("");
-            document.getElementById("invoice-info-table").classList.add("hidden")
+            $invoiceInfoTable.classList.add("hidden")
 
             if(data.length > 0) {
               let json = [];
@@ -161,7 +162,7 @@ export default class extends Controller {
                   $retentionTypeSelect.slim.set("");
                   $amount.setRawValue(0);
                   $conceptInput.value = "";
-                  document.getElementById("invoice-info-table").classList.add("hidden")
+                  $invoiceInfoTable.classList.add("hidden")
 
                   if (Object.keys(invoiceOption.data).length > 1) {
                     $invoiceTotalInput.setRawValue(invoiceOption.data.total);
@@ -171,7 +172,7 @@ export default class extends Controller {
                     $amount.setRawValue(invoiceOption.data.debt);
                     $conceptInput.value = `Pago ${invoiceOption.text}`;
                     $retentionTypeSelect.dataset.slimSelectRetentionBase = invoiceOption.data.retentionbase;
-                    document.getElementById("invoice-info-table").classList.remove("hidden")
+                    $invoiceInfoTable.classList.remove("hidden")
                   }
                 }
               })

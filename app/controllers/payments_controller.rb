@@ -28,6 +28,7 @@ class PaymentsController < ApplicationController
 
   def edit
     authorize @business, :business_of_current_user?
+    @invoice = @payment.invoice
   end
 
   def update
