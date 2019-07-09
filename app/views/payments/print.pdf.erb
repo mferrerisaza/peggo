@@ -66,11 +66,11 @@
           </tr>
         <% end %>
         <tr>
-          <td colspan="4" class="retention-box">Retenciones: <%= humanized_money_with_symbol @payment.retention %></tb>
+          <td colspan="4" class="retention-box">Retenciones: <%= @payment.retention_full_name %></td>
           <td></td>
         </tr>
         <tr class="force-border-bottom">
-          <td colspan="3" rowspan="2" class="observations-box">Observaciones: <%= @payment.observation %></tb>
+          <td colspan="3" rowspan="2" class="observations-box">Observaciones: <%= @payment.observation %></td>
           <td colspan="1" rowspan="2" class="total-text">Total</td>
           <td colspan="1" rowspan="2" class="total-value"><%= humanized_money_with_symbol(@payment.amount) %></td>
         </tr>

@@ -47,7 +47,7 @@ class Payment < ApplicationRecord
     return unless retention
 
     if retention_type && retention
-      "#{retention_type}: #{ActionController::Base.helpers.humanized_money_with_symbol retention}"
+      "#{ActionController::Base.helpers.humanized_money_with_symbol retention} - #{retention_type}"
     elsif retention
       "#{ActionController::Base.helpers.humanized_money_with_symbol retention}"
     end
