@@ -1,0 +1,271 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+body {
+  margin: 0;
+  background-repeat: no-repeat;
+}
+h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+p {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.text-center {
+  text-align: center;
+}
+.pdf-top {
+  position: relative;
+  min-height: 100px;
+}
+.pdf-top > span {
+  height: 100%;
+}
+.bussines-logo {
+  position: absolute;
+  width: 25%;
+  min-height: 100px;
+}
+.bussines-info {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 50%;
+  margin: auto;
+}
+.expense-number-box {
+  position: absolute;
+  width: 25%;
+  top: 14.5px;
+  left: 75%;
+  height: 60%;
+
+  h4, h3 {
+    border: none;
+  }
+  h3 {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 8px 0px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  h4 {
+    background-color: lightgray;
+    padding: 4px 0px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+}
+.invoice-number-box {
+  position: absolute;
+  width: 25%;
+  top: 14.5px;
+  left: 75%;
+  height: 60%;
+
+  h4, h3 {
+    border: none;
+  }
+  h3 {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 8px 0px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+  h4 {
+    background-color: lightgray;
+    padding: 4px 0px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  p {
+    padding: 8px 0px;
+    font-size: 12px;
+    text-align: center !important;
+  }
+}
+.bussines-logo {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.pdf-center {
+  margin-top: 32px;
+  table {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0px;
+    font-size: 14px;
+  }
+  .benificary-info{
+    tr {
+      page-break-inside: avoid;
+    }
+    th {
+      text-align: center;
+      text-transform: uppercase;
+      background-color: lightgray;
+      border: 1px solid lightgray;
+    }
+    td {
+      padding-left: 16px;
+      border: 1px solid lightgray;
+    }
+    .expense-date-header {
+      border-top-right-radius: 8px;
+    }
+    .expense-date-value {
+      text-align: center;
+      border-bottom-right-radius: 8px;
+    }
+    tr:first-child > th:first-child {
+      border-top-left-radius: 8px;
+    }
+    tr:last-child > th:first-child {
+      border-bottom-left-radius: 8px;
+    }
+  }
+  .expense-info {
+    margin-top: 32px;
+    // border-collapse: collapse;
+    border: 1px solid lightgray;
+    border-bottom: none;
+    border-radius: 8px;
+    tr {
+      height: 21px;
+    }
+    th {
+      text-align: center;
+      text-transform: uppercase;
+      background-color: lightgray;
+      border: 1px solid lightgray;
+    }
+    td + td {
+      border-left: 1px solid lightgray;
+    }
+
+    thead th:first-child {
+      border-top-left-radius: 8px;
+    }
+    thead th:last-child {
+      border-top-right-radius: 8px;
+    }
+    td {
+      padding-left: 16px;
+    }
+    .concept-value {
+      padding-left: 0px;
+      padding-right: 16px;
+      text-align: right;
+      // border: 1px solid lightgray;
+    }
+    .observations-box {
+      height: auto;
+      background-color: lightgray;
+      border-bottom-left-radius: 8px;
+      padding: 0px 16px;
+    }
+    .force-border-bottom {
+      td {
+        border-bottom: 1px solid lightgray;
+      }
+    }
+    tfoot .table-space{
+      background-color: transparent;
+      border: none;
+    }
+    .total-value, .total-text {
+      text-align: right;
+      padding-right: 16px;
+      font-weight: bold;
+      border-top: 1px solid lightgray;
+      font-size: 16px;
+      vertical-align: bottom;
+    }
+  }
+
+}
+
+.pdf-bottom{
+  margin-top: 100px;
+  position: relative;
+  .made-by {
+    top: 0px;
+    left: 0%;
+  }
+  .accepeted-by {
+    top: 0px;
+    right: 0%;
+  }
+  .invoice-pdf-signature {
+    top: -100px;
+    left: 10%;
+    position: absolute;
+  }
+}
+.pdf-bottom > span {
+  width: 40%;
+  position: absolute;
+  border-top: 1px solid gray;
+}
+.notes-box {
+  background-color: lightgray;
+  padding: 16px;
+  height: auto;
+  text-align: justify;
+  border-radius: 8px;
+}
+.terms-and-conditions-box {
+  height: auto;
+  padding: 16px;
+  .terms_and_conditions-list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: justify;
+    li {
+      padding-bottom: 8px;
+    }
+  }
+}
+.subtotal-value, .subtotal-title {
+  min-width: 150px;
+  width: 150px;
+  max-width: 150px;
+  padding: 0px 16px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: bold;
+}
+.subtotal-value, .grand-total-value {
+  text-align: right;
+}
+.subtotal-title, .grand-total-title {
+  text-align: left;
+}
+.grand-total-title, .grand-total-value {
+  min-width: 150px;
+  width: 150px;
+  max-width: 150px;
+  padding: 8px 16px;
+  // padding-bottom: 8px;
+  box-sizing: border-box;
+  font-size: 18px;
+  background-color: lightgray;
+  font-weight: bold;
+}
+.grand-total-title {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-right: 1px solid lightgray;
+}
+.grand-total-value {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}

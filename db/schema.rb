@@ -10,97 +10,111 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_29_040016) do
+ActiveRecord::Schema.define(version: 2019_07_08_014310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bills", force: :cascade do |t|
-    t.bigint "share_id"
-    t.integer "status"
+  create_table "attachments", force: :cascade do |t|
+    t.bigint "expense_id"
+    t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "period"
-    t.index ["share_id"], name: "index_bills_on_share_id"
+    t.string "name"
+    t.index ["expense_id"], name: "index_attachments_on_expense_id"
   end
 
-  create_table "budgets", force: :cascade do |t|
-    t.date "start_date"
-    t.date "end_date"
-    t.bigint "building_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "amount_cents", default: 0, null: false
-    t.boolean "status", default: false, null: false
-    t.index ["building_id"], name: "index_budgets_on_building_id"
-  end
-
-  create_table "buildings", force: :cascade do |t|
+  create_table "businesses", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_buildings_on_user_id"
+    t.string "tax_id"
+    t.string "address"
+    t.string "email"
+    t.string "cell_phone"
+    t.string "logo"
+    t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
-  create_table "concepts", force: :cascade do |t|
-    t.bigint "bill_id"
-    t.string "description"
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.integer "tax_id_type"
+    t.string "tax_id"
+    t.boolean "provider", default: false
+    t.boolean "client", default: false
+    t.string "phone"
+    t.string "cell_phone"
+    t.string "province"
+    t.string "city"
+    t.string "address"
+    t.string "email"
+    t.bigint "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "amount_cents", default: 0, null: false
-    t.bigint "amount_paid_cents", default: 0, null: false
-    t.index ["bill_id"], name: "index_concepts_on_bill_id"
+    t.index ["business_id"], name: "index_contacts_on_business_id"
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.integer "category"
     t.date "date"
-    t.bigint "budget_id"
     t.string "description"
-    t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "amount_cents", default: 0, null: false
-    t.index ["budget_id"], name: "index_expenses_on_budget_id"
+    t.bigint "amount_cents", default: 0, null: false
+    t.bigint "business_id"
+    t.integer "payment_method"
+    t.text "observation"
+    t.bigint "number"
+    t.bigint "contact_id"
+    t.index ["business_id"], name: "index_expenses_on_business_id"
+    t.index ["contact_id"], name: "index_expenses_on_contact_id"
   end
 
-  create_table "owners", force: :cascade do |t|
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "number"
+    t.bigint "contact_id"
+    t.date "date"
+    t.string "signature"
+    t.text "terms_and_conditions"
+    t.text "notes"
+    t.text "resolution_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "business_id"
+    t.date "expiration_date"
+    t.index ["business_id"], name: "index_invoices_on_business_id"
+    t.index ["contact_id"], name: "index_invoices_on_contact_id"
+  end
+
+  create_table "items", force: :cascade do |t|
     t.string "name"
-    t.string "card_number"
-    t.string "phone"
-    t.string "email"
+    t.integer "quantity"
+    t.bigint "price_cents", default: 0, null: false
+    t.decimal "vat", precision: 15, scale: 10
+    t.decimal "discount", precision: 15, scale: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "building_id"
-    t.index ["building_id"], name: "index_owners_on_building_id"
-    t.index ["user_id"], name: "index_owners_on_user_id"
+    t.bigint "invoice_id"
+    t.index ["invoice_id"], name: "index_items_on_invoice_id"
   end
 
-  create_table "properties", force: :cascade do |t|
-    t.integer "property_type"
-    t.string "name"
-    t.string "phone"
-    t.string "matricula_inmobiliaria"
-    t.decimal "building_coeficient", precision: 15, scale: 10
-    t.bigint "building_id"
-    t.integer "area"
-    t.string "address"
+  create_table "payments", force: :cascade do |t|
+    t.bigint "contact_id"
+    t.bigint "invoice_id"
+    t.bigint "number"
+    t.date "date"
+    t.integer "payment_method"
+    t.string "description"
+    t.bigint "amount_cents", default: 0, null: false
+    t.bigint "retention_cents", default: 0, null: false
+    t.text "observation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["building_id"], name: "index_properties_on_building_id"
-  end
-
-  create_table "shares", force: :cascade do |t|
-    t.bigint "property_id"
-    t.bigint "owner_id"
-    t.decimal "ownerability_percentage", precision: 15, scale: 10
-    t.decimal "payment_percentage", precision: 15, scale: 10
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_shares_on_owner_id"
-    t.index ["property_id"], name: "index_shares_on_property_id"
+    t.bigint "business_id"
+    t.integer "retention_type"
+    t.index ["business_id"], name: "index_payments_on_business_id"
+    t.index ["contact_id"], name: "index_payments_on_contact_id"
+    t.index ["invoice_id"], name: "index_payments_on_invoice_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -132,14 +146,15 @@ ActiveRecord::Schema.define(version: 2018_09_29_040016) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bills", "shares"
-  add_foreign_key "budgets", "buildings"
-  add_foreign_key "buildings", "users"
-  add_foreign_key "concepts", "bills"
-  add_foreign_key "expenses", "budgets"
-  add_foreign_key "owners", "buildings"
-  add_foreign_key "owners", "users"
-  add_foreign_key "properties", "buildings"
-  add_foreign_key "shares", "owners"
-  add_foreign_key "shares", "properties"
+  add_foreign_key "attachments", "expenses"
+  add_foreign_key "businesses", "users"
+  add_foreign_key "contacts", "businesses"
+  add_foreign_key "expenses", "businesses"
+  add_foreign_key "expenses", "contacts"
+  add_foreign_key "invoices", "businesses"
+  add_foreign_key "invoices", "contacts"
+  add_foreign_key "items", "invoices"
+  add_foreign_key "payments", "businesses"
+  add_foreign_key "payments", "contacts"
+  add_foreign_key "payments", "invoices"
 end

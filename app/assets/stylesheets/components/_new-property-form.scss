@@ -17,13 +17,27 @@
       text-align: right;
       justify-self: flex-end;
     }
+    .attachments-list {
+      font-size: 14px;
+      font-weight: lighter;
+      padding-left: 8px;
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .form-check {
+      display: flex;
+      flex-direction: row-reverse;
+    }
     label {
       width: 50%;
       font-weight: lighter;
       font-size: 14px;
       margin-top: 8px;
     }
-    input:not(.form-btn), select {
+    input:not(.form-btn), select, textarea {
       width: 50% !important;
       font-weight: normal;
       font-size: 14px;
@@ -32,6 +46,9 @@
     }
     #property_property_type{
       width: 50%;
+    }
+    .table-data input {
+      width: 100% !important;
     }
   }
   .new-property-form-heading{
@@ -71,7 +88,7 @@
     width: 100% !important;
     right: 0% !important;
   }
-  .new-building-form-heading{
+  .new-business-form-heading{
     width: 100% !important;
     right: 0% !important;
   }
@@ -90,4 +107,17 @@
 
 .no-scroll-bar {
   overflow-x: unset;
+}
+
+.delete-attachement {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  font-weight: normal;
+}
+
+.attachments-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,0 +1,55 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <div class="table-container-simple flex flex-center">
+    <div class="show-actions">
+      <%= link_to edit_business_contact_path(@business, @contact), class: "btn show-action-btn" do %>
+        Editar
+        <i class="material-icons"> create </i>
+      <% end %>
+      <%= link_to business_contact_path(@business, @contact), class: "btn show-action-btn", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+        Eliminar
+        <i class="material-icons"> delete </i>
+      <% end %>
+    </div>
+    <div class="table-container show-table">
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">Nombre</div>
+          <div class="table-data"><%= @contact.name %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Tipo de Identificación</div>
+          <div class="table-data"><%= @contact.tax_id_type %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Número de Identificación</div>
+          <div class="table-data"><%= @contact.tax_id %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Cliente</div>
+          <div class="table-data"><%= @contact.client ? "Si" : "No" %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Proveedor</div>
+          <div class="table-data"><%= @contact.provider ? "Si" : "No" %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Telefono</div>
+          <div class="table-data"><%= @contact.phone %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Celular</div>
+          <div class="table-data"><%= @contact.cell_phone %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Email</div>
+          <div class="table-data"><%= @contact.email %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Dirección</div>
+          <div class="table-data"><%= @contact.full_address %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

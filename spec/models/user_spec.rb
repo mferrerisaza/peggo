@@ -27,13 +27,8 @@ RSpec.describe User, type: :model do
     expect(user.errors.messages).to have_key(:email)
   end
 
-  it "can manage many buildings" do
-    user = FactoryBot.create(:user, :with_buildings)
-    expect(user.buildings.size).to eq 2
-  end
-
-  it "can manage many owners" do
-    user = FactoryBot.create(:user, :with_owners)
-    expect(user.owners.size).to eq 10
+  it "can manage many businesses" do
+    user = FactoryBot.create(:user, :with_businesses)
+    expect(user.businesses.size).to eq 2
   end
 end

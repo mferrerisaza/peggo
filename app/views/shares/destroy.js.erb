@@ -1,7 +1,0 @@
-<%= render "shared/DOM-listeners" %>
-
-document.querySelector("[data-share-id = '<%=@share.id%>']").remove();
-document.getElementById("edit_share_<%=@share.id%>").remove();
-<% if @share.property %>
-  togglePaymentAlert('<%= j percentage(@share.property.payment_sum) %>');
-<% end %>

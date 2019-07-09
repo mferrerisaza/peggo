@@ -83,12 +83,6 @@
     font-size: 16px;
     padding: 16px 12px;
     text-align: center;
-    &:last-child {
-      border-top-right-radius: 8px;
-    }
-    &:first-child {
-      border-top-left-radius: 8px;
-    }
   }
   .table-row {
     &:nth-of-type(odd) {
@@ -166,5 +160,37 @@
   input{
     font-weight: normal !important;
     font-size: 14px !important;
+  }
+}
+.white-space-wrap{
+  white-space: normal !important;
+}
+.table-container.show-table{
+  margin-bottom: 16px;
+}
+.show-table .table-header {
+  max-width: 135px;
+  white-space: normal;
+  border-top-left-radius: 0px !important;
+}
+#invoice-info-table{
+  .table-data, .table-header {
+    padding: 0px;
+    font-size: 13px;
+  }
+  .table-data {
+    width: 60%;
+    input {
+      font-size: 13px;
+    }
+  }
+  .table-header {
+    width: 40%;
+  }
+}
+
+.new_payment, .edit_payment {
+  .table-container.show-table {
+    margin: 32px;
   }
 }

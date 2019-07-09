@@ -1,0 +1,235 @@
+
+<%= simple_form_for([@business, @invoice])  do |f| %>
+  <div class="invoice-form-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="invoice-header-business-info">
+          <h1 class="text-center">Factura de Venta</h1>
+          <p class="text-center"><%= @business.name %></p>
+          <p class="text-center"><%= @business.tax_id %></p>
+          <p class="text-center">Dir: <%= @business.address %></p>
+          <p class="text-center"><%= @business.cell_phone %></p>
+          <p class="text-center"><%= @business.email %></p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="invoice-header-dian-info">
+          <% disabled = action_name == "new" ? true : false %>
+          <%= f.input :number, label: "No.", disabled: disabled%>
+          <p class="text-center text-bold">IVA Régimen Común</p>
+          <%= f.input :resolution_number,
+                      label: false,
+                      readonly: true,
+                      input_html: {
+                        class: "dian-resolution-number",
+                        value: @invoice.resolution_number?
+                      }
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <%= f.association :contact,
+                        label: "Cliente",
+                        value: "Miguel Ferrer",
+                        collection: Contact.where(client: true).order(name: :asc),
+                        input_html: {
+                          data: {
+                            controller: "slim-select",
+                            slim_select_type: "contactSelect"
+                          }
+                        }
+      %>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <%= f.input :date,
+                  as: :string,
+                  placeholder: "Seleccionar...",
+                  label: "Fecha de la factura",
+                  input_html: {
+                    class: "datepicker-expense",
+                      data: { controller: "flatpickr", "flatpickr-type": "invoice"}
+                  }
+      %>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <%= f.input :expiration_date,
+                  as: :string,
+                  placeholder: "Seleccionar...",
+                  label: "Fecha de vencimiento",
+                  disabled: true,
+                  input_html: {
+                    class: "expiration-date"
+                  }
+      %>
+    </div>
+  </div>
+  <br>
+  <div class="items-table-container">
+    <div class="table"
+         id="items-table"
+         data-controller="invoice-form"
+    >
+      <div class="table-row" >
+        <div class="table-header">Item</div>
+        <div class="table-header">Cantidad</div>
+        <div class="table-header">Precio Unitario</div>
+        <div class="table-header">IVA(%)</div>
+        <div class="table-header">Descuento(%)</div>
+        <div class="table-header">Total</div>
+        <div class="table-header">Acciones</div>
+      </div>
+      <% f.object.items.each_with_index do |item, index| %>
+          <% if item.id %>
+            <% items_delete_params = {
+                invoice: {
+                  business_id: @business.id,
+                  items_attributes: {
+                    id: item.id,
+                    _destroy: true
+                  }
+                },
+              }
+            %>
+            <%= render 'shared/edit-item-fields',
+                item: item,
+                invoice_id: f.object.id,
+                items_delete_params: items_delete_params
+            %>
+          <% end %>
+      <% end %>
+      <%= f.simple_fields_for :items, Item.new do |p| %>
+        <%= render 'shared/item-fields', f: p %>
+      <% end %>
+      <div class="links table-row">
+        <%= link_to_add_association f, :items, partial: 'shared/item-fields', class: "btn show-action-btn" do %>
+          <i class="material-icons">
+            add
+          </i>
+          <span>Agregar línea</span>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+  <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="invoice-form-bottom">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+        <div class="signature">
+          <%= f.input :signature, label: "Cargar Firma:"%>
+          <%= f.input :signature_cache, as: :hidden %>
+          <% if @invoice.signature %>
+            <%= cl_image_tag  @invoice.signature, width: 200, height: 100%>
+          <% end %>
+          <p class="signature-by">ELABORADO POR</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="totals">
+          <%= f.input :invoice_items_subtotal,
+                      disabled: true,
+                      as: :fake,
+                      label: "Subtotal:",
+                      input_html: {
+                        value: @invoice.items_gross_subtotal,
+                        id: "invoice-gross-total",
+                        data: {
+                          controller: "cleave"
+                        }
+                      }
+          %>
+          <%= f.input :invoice_discount,
+                      disabled: true,
+                      as: :fake,
+                      label: "Descuento:",
+                      input_html: {
+                        value: @invoice.items_discount_subtotal,
+                        id: "invoice-total-discount",
+                        data: {
+                          controller: "cleave"
+                        }
+                      }
+          %>
+          <%= f.input :invoice_subtotal,
+                      disabled: true,
+                      as: :fake,
+                      label: "Subtotal:",
+                      input_html: {
+                        value: @invoice.items_net_subtotal,
+                        id: "invoice-net-total",
+                        data: {
+                          controller: "cleave"
+                        }
+                      }
+          %>
+          <%= f.input :invoice_vat,
+                      disabled: true,
+                      as: :fake,
+                      label: "IVA:",
+                      input_html: {
+                        value: @invoice.items_vat_subtotal,
+                        id: "invoice-total-vat",
+                        data: {
+                          controller: "cleave"
+                        }
+                      }
+          %>
+          <hr>
+          <%= f.input :invoice_grand_total,
+                      disabled: true,
+                      as: :fake,
+                      label: "TOTAL:",
+                      input_html: {
+                        value: @invoice.total,
+                        id: "invoice-grand-total",
+                        data: {
+                          controller: "cleave"
+                        }
+                      }
+          %>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-xs-12 col-sm-7">
+        <%= f.input :terms_and_conditions,
+                    label: "Términos y Condiciones:",
+                    input_html: {
+                      value: @invoice.terms_and_conditions?
+                    }
+        %>
+      </div>
+      <div class="col-xs-12 col-sm-5">
+        <%= f.input :notes,
+                    label: "Notas:",
+                    input_html: {
+                      value: @invoice.notes?
+                    }
+        %>
+      </div>
+    </div>
+  </div>
+  <span class="new-property-form-btns">
+    <%= link_to "cancelar", business_invoices_path, class:"form-btn--no-background" %>
+    <% if action_name == "new" || action_name == "create" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

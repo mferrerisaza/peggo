@@ -1,23 +1,36 @@
 Rails.application.routes.draw do
   mount ForestLiana::Engine => '/forest'
   authenticated :user do
-    root to: 'buildings#index'
+    root to: 'businesses#index'
   end
   root to: 'pages#home'
   devise_for :users,
   controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-  resources :buildings, only: [:index, :show, :new, :create] do
-    resources :properties
-    resources :owners
-    resources :bills, only: [:index, :new, :create] do
-      resources :concepts, only: [ :edit, :update]
+  resources :businesses do
+    resources :items, only: :index, to: "businesses#items"
+    resources :contacts do
+      member do
+        get '/invoices', to: "contacts#invoices", defaults: { format: 'pdf' }
+      end
     end
-    member do
-      get 'bills/errors', to: "bills#errors"
+
+    resources :expenses do
+      member do
+        get '/print', to: "expenses#print", defaults: { format: 'pdf' }
+      end
     end
-    resources :budgets, except: :show
+    resources :invoices do
+      member do
+        get '/print', to: "invoices#print", defaults: { format: 'pdf' }
+      end
+    end
+    resources :payments do
+      member do
+        get '/print', to: "payments#print", defaults: { format: 'pdf' }
+      end
+    end
   end
-  resources :shares, only: [:create, :update, :destroy]
+
   require "sidekiq/web"
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'

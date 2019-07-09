@@ -1,0 +1,22 @@
+.show-actions{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 24px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.expense-title{
+  font-size: 24px;
+  margin: 0px;
+  margin-top: 24px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.business-title{
+  font-weight: normal;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.7);
+}

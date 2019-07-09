@@ -1,13 +1,12 @@
 module SidebarHelper
   def render_blue_sidebar
     allowed_controllers = {
-      buildings: %w[show],
-      properties: %w[index show new create edit update],
-      owners: %w[index show new create edit update],
-      shares: %w[create update],
-      bills: %w[index new create errors],
-      budgets: %w[index new create edit update],
-      concepts: %w[edit update]
+      businesses: %w[show],
+      expenses: %w[index show new create edit update],
+      invoices: %w[index show new create edit update],
+      payments: %w[index show new create edit update],
+      contacts: %w[index show new create edit update],
+      budgets: %w[index new create edit update]
     }
     return if allowed_controllers[controller_name.to_sym].nil?
     allowed_controllers[controller_name.to_sym].include?(action_name)

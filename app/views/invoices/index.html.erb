@@ -1,0 +1,59 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <% if @invoices.size == 0 %>
+    <h3 class="alert alert-blue property-title text-center">
+      <i class="material-icons">
+       info
+      </i>
+      Aún no tienes ningúna factura, agrega una para comenzar
+    </h3>
+  <% else %>
+    <h1 class="app-index-title">Lista de Facturas</h1>
+    <div class="table-container">
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">Número</div>
+          <div class="table-header">Cliente</div>
+          <div class="table-header">Creación</div>
+          <div class="table-header">Vencimiento</div>
+          <div class="table-header">Total</div>
+          <div class="table-header">Pagado</div>
+          <div class="table-header">Por Pagar</div>
+          <div class="table-header">Estado</div>
+          <div class="table-header">Acciones</div>
+        </div>
+        <% @invoices.each do |invoice| %>
+            <div data-id="<%=invoice.id%>" class="table-row-link table-row">
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.formated_number %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.contact.name %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.date %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.expiration_date %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.total %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.amount_paid %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.debt %></div>
+              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.status %></div>
+              <div class="table-data">
+                <%= link_to print_business_invoice_path(@business, invoice), target: :blank  do %>
+                  <i class="material-icons"> print </i>
+                <% end %>
+                <%= link_to edit_business_invoice_path(@business, invoice), class: "edit-property" do %>
+                  <i class="material-icons"> create </i>
+                <% end %>
+                <%= link_to business_invoice_path(@business, invoice), class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+                  <i class="material-icons"> delete </i>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_business_invoice_path %>">
+    <i class="material-icons">
+      ballot
+    </i>
+   +
+  </a>
+</div>
+
+

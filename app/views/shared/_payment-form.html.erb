@@ -1,0 +1,144 @@
+<%= simple_form_for [@business, @payment], html: { "data-controller": "payment-form" } do |f| %>
+  <% unless action_name == "new" || action_name == "create" %>
+    <%= f.input :number, label: "Recibo de Caja Num" %>
+  <% end %>
+  <%= f.association :contact,
+                    label: "Recibimos de:",
+                    collection: Contact.where(client: true).order(name: :asc),
+                    input_html: {
+                      data: {
+                        controller: "slim-select",
+                        slim_select_type: "paymentContactSelect",
+                        slim_select_fetch_invoices_url: "/businesses/#{@business.id}/contacts"
+                      }
+                    }
+  %>
+  <% collection = @payment.id ?  @payment.contact.invoices: [ ["No Asociar" ,"", data: { placeholder: true }] ] %>
+  <% hidden = @invoice ? "" : "hidden" %>
+  <%= f.association :invoice,
+                    label: "Asociar a factura pendiente:",
+                    collection: collection,
+                    wrapper_html: { class: hidden },
+                    input_html: {
+                      data: {
+                        controller: "slim-select",
+                        slim_select_type: "contactSelect"
+                      }
+                    }
+  %>
+  <div class="table-container show-table <%= hidden %>">
+    <div class="table" id="invoice-info-table">
+      <div class="table-row">
+        <div class="table-header">Total</div>
+        <div class="table-data">
+          <input
+            class="no-style-input text-center invoice-total"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+            value="<%= @invoice ? @invoice.total : '' %>"
+          >
+        </div>
+      </div>
+      <div class="table-row">
+        <div class="table-header">Pagado</div>
+        <div class="table-data">
+          <input
+            class="no-style-input text-center invoice-paid"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+            value="<%= @invoice ? @invoice.amount_paid : '' %>"
+          >
+        </div>
+      </div>
+      <div class="table-row">
+        <div class="table-header">Retenido</div>
+        <div class="table-data">
+          <input
+            class="no-style-input text-center invoice-retained"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+            value="<%= @invoice ? @invoice.amount_retained : '' %>"
+          >
+        </div>
+
+      </div>
+      <div class="table-row">
+        <div class="table-header">Por Pagar</div>
+        <div class="table-data">
+          <input
+            class="no-style-input text-center invoice-debt"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+            data-target="payment-form.debt"
+            value="<%= @invoice ? @invoice.debt : '' %>"
+          >
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <%= f.input :retention_type,
+              label: "Tipo de Retención",
+              collection: Payment.retention_types.keys,
+              input_html: {
+                data: {
+                  controller: "slim-select",
+                  slim_select_type: "paymentRetentionType"
+                }
+              }
+  %>
+  <%= f.input :retention,
+              label: "Retención:",
+              input_html: {
+                autocomplete: "off",
+                class: "amount-input",
+                  data: {
+                    controller: "cleave",
+                    target: "payment-form.retention",
+                    action: "focus->payment-form#calculateAmountToPay keyup->payment-form#calculateAmountToPay"
+                  }
+                }
+  %>
+  <%= f.input :amount,
+              label: "La suma de:",
+              input_html: {
+                autocomplete: "off",
+                class: "amount-input",
+                  data: {
+                    controller: "cleave",
+                    target: "payment-form.amount"
+                  }
+                }
+  %>
+  <%= f.input :description, label: "Por concepto de:"%>
+  <%= f.input :payment_method,
+              label: "Método de pago",
+              collection: Payment.payment_methods.keys
+  %>
+  <%= f.input :date,
+              as: :string,
+              placeholder: "Seleccionar...",
+              label: "Fecha del pago",
+              input_html: {
+                class: "datepicker-expense",
+                  data: {
+                    controller: "flatpickr",
+                    "flatpickr-type": "expense"
+                }
+              }
+  %>
+  <%= f.input :observation, label: "Observaciones"%>
+  <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
+  <span class="new-property-form-btns">
+    <%= link_to "cancelar", business_payments_path, class:"form-btn--no-background" %>
+    <% if action_name == "new" || action_name == "create" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

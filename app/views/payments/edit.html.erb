@@ -1,0 +1,11 @@
+<%= render "shared/sidebar" %>
+<div class="page-content-wrapper">
+  <div class="form-container">
+    <div class="new-property-form-container new-owner-form-container">
+      <div class="new-property-form-heading">
+        <h1>Edita el recibo de caja número <%= @payment.formated_number %></h1>
+      </div>
+      <%= render 'shared/payment-form' %>
+    </div>
+  </div>
+</div>

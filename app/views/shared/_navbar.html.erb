@@ -1,6 +1,6 @@
 <% unless devise_controller? %>
-  <div class="navbar-wagon <%= navbar_color %> <%= do_not_render_navbar_web %>">
-    <div class="navbar-wagon-item navbar-wagon-dropicon hidden-md hidden-lg">
+  <div class="navbar-wagon <%= navbar_color %> <%= do_not_render_navbar_web %>" data-controller="navbar" data-action="scroll@window->navbar#scroll" >
+    <div class="navbar-wagon-item navbar-wagon-dropicon hidden-md hidden-lg" data-controller="sidebar" data-action="click->sidebar#toggle" data-sidebar-selector="#mySidenav">
       <div class="dropdown">
         <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
         <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu <%= "hidden" unless render_navbar_dropdown %>">
@@ -17,10 +17,10 @@
         </ul>
       </div>
     </div>
-    <a href="/" class="navbar-wagon-brand <%= "hidden" unless action_name == "home" %>" id="white-logo">
+    <a href="/" class="navbar-wagon-brand <%= "hidden" unless action_name == "home" %>" id="white-logo" data-target="navbar.whiteLogo">
       <%= render 'shared/sidebar-logo' %>
     </a>
-    <a href="/" class="navbar-wagon-brand <%= "hidden" if action_name == "home" %>" id="color-logo">
+    <a href="/" class="navbar-wagon-brand <%= "hidden" if action_name == "home" %>" id="color-logo" data-target="navbar.colorLogo">
       <%= render 'shared/navbar-logo' %>
     </a>
     <div class="navbar-wagon-item navbar-wagon-invisible hidden-md hidden-lg"></div>

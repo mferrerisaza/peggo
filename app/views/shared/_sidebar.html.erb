@@ -1,7 +1,7 @@
 <% if render_blue_sidebar %>
-  <div id="mySidenav" class="sidebar">
+  <div id="mySidenav" class="sidebar" data-controller="sidebar" data-sidebar-selector="#mySidenav">
     <div class="hidden-md hidden-lg">
-      <a class="closebtn">&times;</a>
+      <a class="closebtn" data-action="click->sidebar#toggle">&times;</a>
     </div>
     <div class="sidebar-logo">
       <%= link_to root_path, class: "hidden-xs hidden-sm" do %>
@@ -9,7 +9,7 @@
       <% end %>
     </div>
 
-    <% if @building %>
+    <% if @business %>
 
       <div class="sidebar-top">
         <div class="sidebar-top-user">
@@ -22,20 +22,20 @@
           <% end %>
         </div>
 
-        <div class="sidebar-top-building menu-button" style="cursor: pointer;">
-          <% other_buildings_of_current_user =  current_user.buildings.where.not(id: @building.id)%>
+        <div class="sidebar-top-business menu-button" style="cursor: pointer;">
+          <% other_businesses_of_current_user =  current_user.businesses.where.not(id: @business.id)%>
           <div class="dropdown">
-            <h6 id="dLabel" type="button" data-toggle="<%="dropdown" unless other_buildings_of_current_user.empty? %>" aria-haspopup="true" aria-expanded="false">
-              <%= @building.name %>
-              <% unless other_buildings_of_current_user.empty?%>
+            <h6 id="dLabel" type="button" data-toggle="<%="dropdown" unless other_businesses_of_current_user.empty? %>" aria-haspopup="true" aria-expanded="false">
+              <%= @business.name %>
+              <% unless other_businesses_of_current_user.empty?%>
                 <i class="fas fa-caret-down"></i>
               <% end %>
             </h6>
             <hr>
             <ul class="dropdown-menu dropdown-sidebar" aria-labelledby="dLabel">
-              <% other_buildings_of_current_user.each do |building|%>
-                <li class="building-list-item">
-                  <%= link_to building.name,building_path(building)%>
+              <% other_businesses_of_current_user.each do |business|%>
+                <li class="business-list-item">
+                  <%= link_to business.name, business_path(business)%>
                 </li>
               <% end %>
             </ul>
@@ -44,35 +44,35 @@
 
       </div>
       <div class="sidebar-links">
-        <a class="sidebar-link <%= "active" if controller_name == "buildings" %>" href="/buildings/<%= @building.id %>">
+        <a class="sidebar-link <%= "active" if controller_name == "businesses" %>" href="/businesses/<%= @business.id %>">
           <i class="material-icons">
             home
           </i>
           <span>Dashboard</span>
         </a>
-        <a class="sidebar-link <%= "active" if controller_name == "budgets" %>" href="/buildings/<%= @building.id %>/budgets">
-          <i class="material-icons">
-            bar_chart
-          </i>
-          <span>Presupuesto</span>
-        </a>
-        <a class="sidebar-link <%= "active" if controller_name == "properties" %>" href="/buildings/<%= @building.id %>/properties">
-          <i class="material-icons">
-            account_balance
-          </i>
-          <span>Propiedades</span>
-        </a>
-        <a class="sidebar-link <%= "active" if controller_name == "owners" %>" href="/buildings/<%= @building.id %>/owners">
+        <a class="sidebar-link <%= "active" if controller_name == "contacts" %>" href="/businesses/<%= @business.id %>/contacts">
           <i class="material-icons">
             people
           </i>
-          <span>Copropietarios</span>
+          <span>Contactos</span>
         </a>
-        <a class="sidebar-link <%= "active" if controller_name == "bills" %>" href="/buildings/<%= @building.id %>/bills/new">
+        <a class="sidebar-link <%= "active" if controller_name == "invoices" %>" href="/businesses/<%= @business.id %>/invoices">
           <i class="material-icons">
-            people
+            ballot
           </i>
-          <span>Cobrar Cuota</span>
+          <span>Facturas</span>
+        </a>
+        <a class="sidebar-link <%= "active" if controller_name == "payments" %>" href="/businesses/<%= @business.id %>/payments">
+          <i class="material-icons">
+            attach_money
+          </i>
+          <span>Pagos</span>
+        </a>
+        <a class="sidebar-link <%= "active" if controller_name == "expenses" %>" href="/businesses/<%= @business.id %>/expenses">
+          <i class="material-icons">
+            credit_card
+          </i>
+          <span>Egresos</span>
         </a>
         <a class="sidebar-link <%= "active" if controller_name == "pages" %>" href="<%= support_path %>">
           <i class="material-icons">

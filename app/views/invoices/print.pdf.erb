@@ -1,0 +1,131 @@
+<%= content_for :title, @invoice.pdf_file_name %>
+<!-- Actualizar if con el estado de la factura a anulado -->
+<% if false %>
+  <%= content_for :body_background, cl_image_path("Default%20Pics/cancelled__invoice_pdf_background.png") %>
+<% end %>
+
+<div class="pdf-container">
+  <div class="pdf-top">
+    <% if @business.logo.present? %>
+      <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 300, height: 100, crop: :fill; %>')">
+      </div>
+    <% end %>
+    <div class="bussines-info">
+      <h2 class="text-center">FACTURA DE VENTA</h2>
+      <h3 class="text-center"><%= @business.name %></h3>
+      <p class="text-center" >NIT <%= @business.tax_id %></p>
+      <p class="text-center" ><%= @business.address %></p>
+      <p class="text-center" ><%= @business.cell_phone %></p>
+      <p class="text-center" ><%= @business.email %></p>
+    </div>
+    <div class="invoice-number-box">
+      <h3 class="text-center">No. <%= @invoice.formated_number %></h3>
+      <h4 class="text-center">IVA Régimen Común</h4>
+      <p class="text-center"><%= @invoice.resolution_number %></p>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="pdf-center">
+    <table class="benificary-info">
+      <tr>
+        <th colspan="1">Cliente</th>
+        <td colspan="3"><%= @contact.name %></td>
+        <th colspan="1" rowspan="1" class="expense-date-header">Fecha Expedición(DD/MM/AA)</th>
+      </tr>
+      <tr>
+        <th colspan="1">Dirección</th>
+        <td colspan="3"><%= @contact.address %></td>
+        <td colspan="1" rowspan="2" class="text-center"><h3><%= @invoice.formated_date %></h3></td>
+      </tr>
+      <tr>
+        <th colspan="1">Ciudad</th>
+        <td colspan="3"><%= @contact.city %></td>
+      </tr>
+      <tr>
+        <th colspan="1">Departamento</th>
+        <td colspan="3"><%= @contact.province %></td>
+        <th colspan="1" rowspan="1">Fecha Vencimiento (DD/MM/AA)</th>
+      </tr>
+      <tr>
+        <th colspan="1"><%= @contact.phone_numbers_label_for_pdf %></th>
+        <td colspan="3"><%= @contact.phone_numbers %></td>
+        <td colspan="1" rowspan="2" class="expense-date-value"><h3><%= @invoice.formated_expiration_date %></h3></td>
+      </tr>
+      <tr>
+        <th colspan="1"><%= @contact.tax_id_type.split("-")[0] %></th>
+        <td colspan="3"><%= @contact.tax_id %></td>
+      </tr>
+    </table>
+    <table class="expense-info">
+      <thead>
+        <tr>
+          <th colspan="4">Item</th>
+          <th colspan="1">Cantidad</th>
+          <th colspan="1">Precio</th>
+          <th colspan="1">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invoice.items.each do |item| %>
+          <tr>
+            <td colspan="4"><%= item.name %></td>
+            <td colspan="1" class="concept-value"><%= item.quantity %></td>
+            <td colspan="1" class="concept-value"><%= humanized_money_with_symbol item.price %></td>
+            <td colspan="1" class="concept-value"><%= humanized_money_with_symbol(item.gross_total) %></td>
+          </tr>
+        <% end %>
+        <% size = 20 - @invoice.items.size > 0 ?  20 - @invoice.items.size : 0 %>
+        <% size.times do %>
+          <tr>
+            <td colspan="4"></td>
+            <td colspan="1"></td>
+            <td colspan="1"></td>
+            <td colspan="1" class="concept-value"> </td>
+          </tr>
+        <% end %>
+      </tbody>
+     </table>
+     <br>
+    <table>
+      <tr>
+        <td colspan="4" rowspan="3"  class="notes-box"><%= @invoice.notes %></td>
+        <td colspan="2"  class="subtotal-title">Subtotal</td>
+        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice.items_gross_subtotal) %></td>
+      </tr>
+      <tr>
+        <td colspan="2"  class="subtotal-title">Descuento</td>
+        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice.items_discount_subtotal) %></td>
+      </tr>
+      <tr>
+        <td colspan="2"  class="subtotal-title" >Subtotal</td>
+        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice.items_net_subtotal) %></td>
+      </tr>
+      <tr>
+        <td colspan="4" rowspan="3" class="terms-and-conditions-box">
+          <ul class="terms_and_conditions-list">
+            <% @invoice.terms_and_conditions.split("\n").each do |line| %>
+              <li><%= line %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td colspan="2"  class="subtotal-title">IVA</td>
+        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice.items_vat_subtotal) %></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="grand-total-title">Total</td>
+        <td colspan="2" class="grand-total-value"><%= humanized_money_with_symbol(@invoice.total) %></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="pdf-bottom">
+    <%= cl_image_tag  @invoice.signature, width: 200, height: 100, class: "invoice-pdf-signature" %>
+    <span class="text-center made-by">
+      ELABORADO POR
+    </span>
+    <span class="text-center accepeted-by">ACEPTADA, FIRMA Y/O SELLO Y FECHA</span>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<%= simple_form_for(business) do |f| %>
+  <i class="fas fa-building"></i>
+  <%= f.input :name, label: "Nombre de la empresa"%>
+  <%= f.input :address, label: "Dirección" %>
+  <%= f.input :cell_phone, label: "Teléfono de contacto" %>
+  <%= f.input :email, label: "Email de contacto" %>
+  <%= f.input :tax_id, label: "NIT" %>
+  <%= f.input :logo, label: "Logo" %>
+  <%= f.input :logo_cache, as: :hidden %>
+  <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+  <span class="new-business-form-btns">
+    <%= link_to "cancelar", businesses_path, class:"form-btn--no-background" %>
+    <% if action_name == "new" || action_name == "create" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

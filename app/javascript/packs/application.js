@@ -1,8 +1,9 @@
 import "bootstrap";
-import "../components/share-form.js";
-import "../components/sidebar.js";
-import "./flatpickr.js";
-import "../components/form-currency.js";
-import { initUpdateNavbarOnScroll } from '../components/navbar';
+import Turbolinks from 'turbolinks';
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
 
-initUpdateNavbarOnScroll();
+const application = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
+Turbolinks.start();
