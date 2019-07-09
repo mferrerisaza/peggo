@@ -15,7 +15,7 @@
   %>
   <% collection = @payment.id ?  @payment.contact.invoices: [ ["No Asociar" ,"", data: { placeholder: true }] ] %>
   <%= f.association :invoice,
-                    label: "Asociar a factura:",
+                    label: "Asociar a factura pendiente:",
                     collection: collection,
                     wrapper_html: { class: "hidden" },
                     input_html: {
@@ -25,21 +25,49 @@
                       }
                     }
   %>
-  <div class="items-table-container hidden">
-    <div class="table"
-         id="items-table"
+  <div class="items-table-container">
+    <div class="table hidden"
+         id="invoice-info-table"
     >
-      <div class="table-row" >
-        <div class="table-header">Factura</div>
+      <div class="table-row">
         <div class="table-header">Total</div>
-        <div class="table-header">Pagado</div>
-        <div class="table-header">Por Pagar</div>
-      </div>
-
-      <div class="table-row" >
         <div class="table-data">
           <input
-            class="no-style-input text-center"
+            class="no-style-input text-center invoice-total"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+          >
+        </div>
+      </div>
+      <div class="table-row">
+        <div class="table-header">Pagado</div>
+        <div class="table-data">
+          <input
+            class="no-style-input text-center invoice-paid"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+          >
+        </div>
+      </div>
+      <div class="table-row">
+        <div class="table-header">Retenido</div>
+        <div class="table-data">
+          <input
+            class="no-style-input text-center invoice-retained"
+            data-controller="cleave"
+            type="text"
+            disabled="disabled"
+          >
+        </div>
+
+      </div>
+      <div class="table-row">
+        <div class="table-header">Por Pagar</div>
+        <div class="table-data">
+          <input
+            class="no-style-input text-center invoice-debt"
             data-controller="cleave"
             type="text"
             disabled="disabled"

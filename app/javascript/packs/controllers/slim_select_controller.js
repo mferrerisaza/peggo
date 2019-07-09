@@ -92,6 +92,26 @@ export default class extends Controller {
           numeralThousandsGroupStyle: 'thousand'
       });
 
+      const $invoiceTotalInput = new Cleave(document.querySelector("#invoice-info-table .invoice-total"), {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+      });
+
+      const $invoicePaidInput = new Cleave(document.querySelector("#invoice-info-table .invoice-paid"), {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+      });
+
+      const $invoiceRetainedInput = new Cleave(document.querySelector("#invoice-info-table .invoice-retained"), {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+      });
+
+      const $invoiceDebtInput = new Cleave(document.querySelector("#invoice-info-table .invoice-debt"), {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+      });
+
       new SlimSelect({
         select: this.element,
         onChange: (selectedOption) => {
@@ -107,6 +127,7 @@ export default class extends Controller {
             delete $retentionTypeSelect.dataset.slimSelectRetentionBase;
             $retentionAmount.setRawValue(0);
             $retentionTypeSelect.slim.set("");
+            document.getElementById("invoice-info-table").classList.add("hidden")
 
             if(data.length > 0) {
               let json = [];
@@ -120,7 +141,10 @@ export default class extends Controller {
                     value: data[i].id,
                     data: {
                       debt: parseInt(data[i].debt.fractional) / 100,
-                      retentionbase: parseInt(data[i].items_gross_subtotal.fractional) / 100
+                      retentionbase: parseInt(data[i].items_gross_subtotal.fractional) / 100,
+                      paid: parseInt(data[i].amount_paid.fractional) / 100,
+                      retention: parseInt(data[i].amount_retained.fractional) / 100,
+                      total: parseInt(data[i].total.fractional) / 100
                     }
                   })
                 }
@@ -137,17 +161,25 @@ export default class extends Controller {
                   $retentionTypeSelect.slim.set("");
                   $amount.setRawValue(0);
                   $conceptInput.value = "";
+                  document.getElementById("invoice-info-table").classList.add("hidden")
 
                   if (Object.keys(invoiceOption.data).length > 1) {
+                    $invoiceTotalInput.setRawValue(invoiceOption.data.total);
+                    $invoicePaidInput.setRawValue(invoiceOption.data.paid);
+                    $invoiceRetainedInput.setRawValue(invoiceOption.data.retention);
+                    $invoiceDebtInput.setRawValue(invoiceOption.data.debt);
                     $amount.setRawValue(invoiceOption.data.debt);
                     $conceptInput.value = `Pago ${invoiceOption.text}`;
                     $retentionTypeSelect.dataset.slimSelectRetentionBase = invoiceOption.data.retentionbase;
+                    document.getElementById("invoice-info-table").classList.remove("hidden")
                   }
                 }
               })
 
               invoiceSelect.setData(json)
-              $invoiceFormGroup.classList.remove("hidden");
+              if (json.length > 1) {
+                $invoiceFormGroup.classList.remove("hidden");
+              }
             }
           })
         }
