@@ -7,6 +7,8 @@
   <%= f.input :tax_id, label: "NIT" %>
   <%= f.input :logo, label: "Logo" %>
   <%= f.input :logo_cache, as: :hidden %>
+  <%= f.input :signature, label: "Firma por defecto" %>
+  <%= f.input :signature_cache, as: :hidden %>
   <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
   <span class="new-business-form-btns">
     <%= link_to "cancelar", businesses_path, class:"form-btn--no-background" %>

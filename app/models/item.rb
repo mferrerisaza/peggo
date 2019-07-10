@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   validates :name, :quantity, :price, :vat, presence: true
   validates :vat,
             numericality: {
-              greater_than: 0,
+              greater_than_or_equal_to: 0,
               less_than_or_equal_to: 1,
               message: "debe ser un valor númerico mayor a 0 y  menor a 100%"
             }

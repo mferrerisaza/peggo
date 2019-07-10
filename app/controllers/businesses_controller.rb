@@ -32,7 +32,7 @@ class BusinessesController < ApplicationController
     authorize @business
     if @business.update(business_params)
       redirect_to businesses_path
-    Business
+    else
       render 'new'
     end
   end
@@ -53,6 +53,6 @@ class BusinessesController < ApplicationController
   private
 
   def business_params
-    params.require(:business).permit(:name, :user_id, :address, :email, :tax_id, :cell_phone, :logo, :logo_cache)
+    params.require(:business).permit(:name, :user_id, :address, :email, :tax_id, :cell_phone, :logo, :logo_cache, :signature, :signature_cache)
   end
 end

@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[show edit update destroy print]
 
   def index
-    @payments = policy_scope(Payment.where(business: @business).order(created_at: :asc).includes(:contact))
+    @payments = policy_scope(Payment.where(business: @business).order(number: :desc).includes(:contact))
   end
 
   def show

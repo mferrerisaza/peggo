@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: %i[show edit update destroy invoices]
 
   def index
-    @contacts = policy_scope(Contact.where(business: @business).order(created_at: :asc))
+    @contacts = policy_scope(Contact.where(business: @business).order(created_at: :desc))
   end
 
   def show

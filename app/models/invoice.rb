@@ -100,6 +100,11 @@ class Invoice < ApplicationRecord
     (date..expiration_date).count
   end
 
+  def signature?
+    return unless signature.file || business.signature.file
+    signature.file ? signature : business.signature
+  end
+
   private
 
   def add_invoice_number

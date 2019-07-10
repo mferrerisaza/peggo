@@ -130,8 +130,10 @@
         <div class="signature">
           <%= f.input :signature, label: "Cargar Firma:"%>
           <%= f.input :signature_cache, as: :hidden %>
-          <% if @invoice.signature %>
-            <%= cl_image_tag  @invoice.signature, width: 200, height: 100%>
+          <% if @invoice.id %>
+            <%= cl_image_tag  @invoice.signature?, width: 200, height: 100%>
+          <% elsif @business  %>
+            <%= cl_image_tag  @business.signature, width: 200, height: 100%>
           <% end %>
           <p class="signature-by">ELABORADO POR</p>
         </div>

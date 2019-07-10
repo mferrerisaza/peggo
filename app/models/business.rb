@@ -14,4 +14,5 @@ class Business < ApplicationRecord
   validates :name, uniqueness: { scope: :user }
 
   mount_uploader :logo, LogoUploader
+  mount_uploader :signature, LogoUploader
 end
