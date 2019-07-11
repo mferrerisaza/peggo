@@ -73,6 +73,9 @@ class ContactsController < ApplicationController
       :address,
       :client,
       :provider,
+      :account_type,
+      :account_bank,
+      :account_number,
       :business_id
     )
   end

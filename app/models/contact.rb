@@ -16,6 +16,37 @@ class Contact < ApplicationRecord
     "NA - No Aplica"
   ]
 
+  enum account_type: [
+    "Ahorros",
+    "Corriente"
+  ]
+
+  enum account_bank: [
+    "BANCO AGRARIO",
+    "BANCO AV VILLAS",
+    "BANCO BBVA COLOMBIA S.A.",
+    "BANCO CAJA SOCIAL",
+    "BANCO COLPATRIA",
+    "BANCO COOPERATIVO COOPCENTRAL",
+    "BANCO DAVIVIENDA",
+    "BANCO DE BOGOTA",
+    "BANCO DE OCCIDENTE",
+    "BANCO FALABELLA ",
+    "BANCO GNB SUDAMERIS",
+    "BANCO PICHINCHA S.A.",
+    "BANCO POPULAR",
+    "BANCO PROCREDIT",
+    "BANCO SANTANDER COLOMBIA",
+    "BANCOLOMBIA",
+    "BANCOOMEVA S.A.",
+    "CITIBANK ",
+    "CONFIAR COOPERATIVA FINANCIERA",
+    "DAVIPLATA",
+    "ITAU",
+    "NEQUI"
+  ]
+
+
   validates :name, :tax_id_type, :tax_id, presence: true
 
   def full_address
@@ -35,5 +66,10 @@ class Contact < ApplicationRecord
     return "#{cell_phone}" if cell_phone && phone.blank?
     return "#{phone}" if phone && cell_phone.blank?
     return "#{phone} - #{cell_phone}" if cell_phone && phone
+  end
+
+  def bank_account
+    return if account_number.blank?
+    "#{account_type} #{account_bank} No: #{account_number}"
   end
 end
