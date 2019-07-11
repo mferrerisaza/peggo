@@ -8,6 +8,9 @@
   <%= f.input :province, label: "Departamento"%>
   <%= f.input :city, label: "Ciudad"%>
   <%= f.input :address, label: "Dirección"%>
+  <%= f.input :account_type, label: "Tipo de Cuenta", collection: Contact.account_types.keys %>
+  <%= f.input :account_bank, label: "Banco", collection: Contact.account_banks.keys %>
+  <%= f.input :account_number, label: "Número de cuenta" %>
   <%= f.input :client, label: "Agregar como Cliente"%>
   <%= f.input :provider, label: "Agregar como Proveedor"%>
   <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
