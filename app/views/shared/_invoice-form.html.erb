@@ -227,7 +227,7 @@
     </div>
   </div>
   <span class="new-property-form-btns">
-    <%= link_to "cancelar", business_invoices_path, class:"form-btn--no-background" %>
+    <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
     <% if action_name == "new" || action_name == "create" %>
       <%= f.submit "Crear", class:"btn form-btn" %>
     <% else %>

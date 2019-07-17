@@ -1,0 +1,88 @@
+<%= simple_form_for [@business, @invoice_equivalent], html: { "data-controller": "invoice-equivalent-form" }  do |f| %>
+  <% unless action_name == "new" || action_name == "create" %>
+    <%= f.input :number, label: "Comp. Egreso Num" %>
+  <% end %>
+  <%= f.association :contact, label: "Beneficiario", collection: Contact.where(provider: true).order(name: :asc), input_html: {data: { controller: "slim-select", slim_select_type: "contactSelect" } }%>
+  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr", "flatpickr-type": "expense" } }, placeholder: "Seleccionar...", label: "Fecha operación"%>
+  <%= f.input :description, label: "Descripción"%>
+  <%= f.input :amount,
+              label: "Valor de la operación",
+              input_html: {
+                class: "amount-input",
+                data: {
+                  controller: "cleave",
+                  target: "invoice-equivalent-form.amount",
+                  action: "focus->invoice-equivalent-form#calculateAmountToPay keyup->invoice-equivalent-form#calculateAmountToPay"
+                }
+              }
+  %>
+  <%= f.input :retention_type,
+              label: "Tipo de Retención",
+              collection: InvoiceEquivalent.retention_types.keys,
+              input_html: {
+                data: {
+                  controller: "slim-select",
+                  slim_select_type: "inoviceEquivalentRetentionType"
+                }
+              }
+  %>
+  <%= f.input :retention,
+              label: "Retención en la fuente",
+              input_html: {
+                class: "amount-input",
+                  data: {
+                    controller: "cleave",
+                    target: "invoice-equivalent-form.retention",
+                    action: "focus->invoice-equivalent-form#calculateAmountToPay keyup->invoice-equivalent-form#calculateAmountToPay"
+                  }
+                }
+  %>
+  <%= f.input :total,
+              as: :fake,
+              label: "Total a pagar",
+              readonly: true,
+              input_html: {
+                value: @invoice_equivalent ? @invoice_equivalent.total : '',
+                data: {
+                  controller: "cleave",
+                  target: "invoice-equivalent-form.total"
+                }
+              }
+  %>
+  <%= f.input :observation, label: "Observaciones"%>
+  <%= f.simple_fields_for :attachments, Attachment.new do |p| %>
+      <%= p.input :file, label: "Achivos Adjuntos", as: :file, input_html: { multiple: true,  name: "invoice_equivalent[attachments_attributes][][file]"} %>
+  <% end %>
+  <% f.object.attachments.each_with_index do |attachment, index| %>
+      <% if attachment.id %>
+        <% attachments_delete_params = {
+            invoice_equivalent: {
+              business_id: @business.id,
+              attachments_attributes: {
+                id: attachment.id,
+                _destroy: true
+              }
+            },
+          }
+        %>
+        <ul class="attachments-list">
+          <li>
+            <%= index + 1 %>. <%= attachment.name %>
+            <%= link_to business_invoice_equivalent_path(f.object.id, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
+              Eliminar
+              <i class="material-icons"> delete </i>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
+  <% end %>
+  <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
+  <span class="new-property-form-btns">
+    <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
+    <% if action_name == "new" || action_name == "create" %>
+      <%= f.submit "Crear", class:"btn form-btn" %>
+    <% else %>
+      <%= f.submit "Editar", class:"btn form-btn" %>
+    <% end %>
+  </span>
+<% end %>

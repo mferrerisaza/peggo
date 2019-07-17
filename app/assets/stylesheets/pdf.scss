@@ -5,7 +5,7 @@ body {
   margin: 0;
   background-repeat: no-repeat;
 }
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -44,7 +44,7 @@ p {
   left: 75%;
   height: 60%;
 
-  h4, h3 {
+  h4, h3, h5 {
     border: none;
   }
   h3 {
@@ -53,7 +53,7 @@ p {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
-  h4 {
+  h4, h5 {
     background-color: lightgray;
     padding: 4px 0px;
     border-top-right-radius: 8px;
@@ -132,9 +132,7 @@ p {
   }
   .expense-info {
     margin-top: 32px;
-    // border-collapse: collapse;
     border: 1px solid lightgray;
-    border-bottom: none;
     border-radius: 8px;
     tr {
       height: 21px;

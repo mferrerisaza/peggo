@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_234228) do
+ActiveRecord::Schema.define(version: 2019_07_17_001834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2019_07_10_234228) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.bigint "invoice_equivalent_id"
     t.index ["expense_id"], name: "index_attachments_on_expense_id"
+    t.index ["invoice_equivalent_id"], name: "index_attachments_on_invoice_equivalent_id"
   end
 
   create_table "businesses", force: :cascade do |t|
@@ -72,6 +74,22 @@ ActiveRecord::Schema.define(version: 2019_07_10_234228) do
     t.bigint "contact_id"
     t.index ["business_id"], name: "index_expenses_on_business_id"
     t.index ["contact_id"], name: "index_expenses_on_contact_id"
+  end
+
+  create_table "invoice_equivalents", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "contact_id"
+    t.date "date"
+    t.bigint "number"
+    t.text "observation"
+    t.integer "retention_type"
+    t.string "description"
+    t.bigint "amount_cents", default: 0, null: false
+    t.bigint "retention_cents", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_invoice_equivalents_on_business_id"
+    t.index ["contact_id"], name: "index_invoice_equivalents_on_contact_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -151,10 +169,13 @@ ActiveRecord::Schema.define(version: 2019_07_10_234228) do
   end
 
   add_foreign_key "attachments", "expenses"
+  add_foreign_key "attachments", "invoice_equivalents"
   add_foreign_key "businesses", "users"
   add_foreign_key "contacts", "businesses"
   add_foreign_key "expenses", "businesses"
   add_foreign_key "expenses", "contacts"
+  add_foreign_key "invoice_equivalents", "businesses"
+  add_foreign_key "invoice_equivalents", "contacts"
   add_foreign_key "invoices", "businesses"
   add_foreign_key "invoices", "contacts"
   add_foreign_key "items", "invoices"

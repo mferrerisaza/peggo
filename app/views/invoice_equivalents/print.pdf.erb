@@ -1,0 +1,101 @@
+<%= content_for :title, @invoice_equivalent.pdf_file_name %>
+
+<div class="pdf-container">
+  <div class="pdf-top">
+    <% if @business.logo.present? %>
+      <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 300, height: 100, crop: :fill; %>')">
+      </div>
+    <% end %>
+    <div class="bussines-info">
+      <h3 class="text-center"><%= @business.name %></h3>
+      <p class="text-center" >NIT <%= @business.tax_id %></p>
+      <p class="text-center" ><%= @business.address %></p>
+      <p class="text-center" ><%= @business.cell_phone %></p>
+      <p class="text-center" ><%= @business.email %></p>
+      <p class="text-center" >Decreto N. 522/2003 Art.03</p>
+      <p class="text-center" ><i>Para personas naturales no comerciantes o inscritas en Régimen Simplificado</i></p>
+    </div>
+    <div class="expense-number-box">
+      <h4 class="text-center">Documento Equivalente a Factura De Venta</h4>
+      <h3 class="text-center">No. <%= @invoice_equivalent.formated_number %></h3>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="pdf-center">
+    <table class="benificary-info">
+      <tr>
+        <th colspan="1">Beneficiario</th>
+        <td colspan="3"><%= @contact.name %></td>
+        <th colspan="1" rowspan="1" class="expense-date-header">Fecha (DD/MM/AA)</td>
+      </tr>
+      <tr>
+        <th colspan="1">Dirección</th>
+        <td colspan="3"><%= @contact.address %></td>
+        <td rowspan="4" class="expense-date-value"><h3><%= @invoice_equivalent.formated_date %></h3></td>
+      </tr>
+      <tr>
+        <th colspan="1">Ciudad</th>
+        <td colspan="3"><%= @contact.city %></td>
+      </tr>
+      <tr>
+        <th colspan="1"><%= @contact.phone_numbers_label_for_pdf %></th>
+        <td colspan="1"><%= @contact.phone_numbers %></td>
+      </tr>
+      <tr>
+        <th colspan="1"><%= @contact.tax_id_type.split("-")[0] %></th>
+        <td colspan="1"><%= @contact.tax_id %></td>
+      </tr>
+    </table>
+    <table class="expense-info">
+      <thead>
+        <tr>
+          <th colspan="4">Concepto</th>
+          <th colspan="1">Cantidad</th>
+          <th colspan="1">Valor Unitario</th>
+          <th colspan="1">Valor Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="4"><%= @invoice_equivalent.description %></td>
+          <td colspan="1" class="concept-value">1</td>
+          <td colspan="1" class="concept-value"><%= humanized_money_with_symbol(@invoice_equivalent.amount) %></td>
+          <td colspan="1" class="concept-value"><%= humanized_money_with_symbol(@invoice_equivalent.amount) %></td>
+        </tr>
+        <% 19.times do %>
+          <tr>
+            <td colspan="4"> </td>
+            <td colspan="1"> </td>
+            <td colspan="1"> </td>
+            <td colspan="1" class="concept-value"> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+     <br>
+    <table>
+      <tr>
+        <td colspan="4" rowspan="3"  class="notes-box">Observaciones: <%= @invoice_equivalent.observation %></td>
+        <td colspan="2"  class="subtotal-title">Valor de la operación</td>
+        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.amount) %></td>
+      </tr>
+      <tr>
+        <td colspan="2"  class="subtotal-title">Retención en la fuente</td>
+        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.retention) %></td>
+      </tr>
+      <tr>
+        <td colspan="2"  class="subtotal-title" >Total a pagar</td>
+        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.total) %></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div class="pdf-bottom">
+    <span class="text-center made-by">ELABORADO POR</span>
+    <span class="text-center accepeted-by">ACEPTADA, FIRMA Y/O SELLO Y FECHA</span>
+  </div>
+
+
+</div>
