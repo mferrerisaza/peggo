@@ -56,6 +56,18 @@
           </i>
           <span>Contactos</span>
         </a>
+        <a class="sidebar-link <%= "active" if controller_name == "expenses" %>" href="/businesses/<%= @business.id %>/expenses">
+          <i class="material-icons">
+            credit_card
+          </i>
+          <span>Egresos</span>
+        </a>
+        <a class="sidebar-link <%= "active" if controller_name == "invoice_equivalents" %>" href="/businesses/<%= @business.id %>/invoice_equivalents">
+          <i class="material-icons">
+            description
+          </i>
+          <span>Documentos Equivalentes</span>
+        </a>
         <a class="sidebar-link <%= "active" if controller_name == "invoices" %>" href="/businesses/<%= @business.id %>/invoices">
           <i class="material-icons">
             ballot
@@ -67,12 +79,6 @@
             attach_money
           </i>
           <span>Pagos</span>
-        </a>
-        <a class="sidebar-link <%= "active" if controller_name == "expenses" %>" href="/businesses/<%= @business.id %>/expenses">
-          <i class="material-icons">
-            credit_card
-          </i>
-          <span>Egresos</span>
         </a>
         <a class="sidebar-link <%= "active" if controller_name == "pages" %>" href="<%= support_path %>">
           <i class="material-icons">
