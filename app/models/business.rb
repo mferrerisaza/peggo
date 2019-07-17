@@ -8,6 +8,7 @@ class Business < ApplicationRecord
   has_many :contacts, dependent: :destroy
   has_many :invoices, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :invoice_equivalents, dependent: :destroy
   has_many :items, through: :invoices
 
   validates :name, presence: true
