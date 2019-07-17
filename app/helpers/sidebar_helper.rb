@@ -5,6 +5,7 @@ module SidebarHelper
       expenses: %w[index show new create edit update],
       invoices: %w[index show new create edit update],
       payments: %w[index show new create edit update],
+      invoice_equivalents: %w[index show new create edit update],
       contacts: %w[index show new create edit update],
       budgets: %w[index new create edit update]
     }
