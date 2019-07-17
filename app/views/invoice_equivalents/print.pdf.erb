@@ -78,16 +78,16 @@
     <table>
       <tr>
         <td colspan="4" rowspan="3"  class="notes-box">Observaciones: <%= @invoice_equivalent.observation %></td>
-        <td colspan="2"  class="subtotal-title">Valor de la operación</td>
-        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.amount) %></td>
+        <td colspan="1"  class="subtotal-title">Valor de la operación</td>
+        <td colspan="1"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.amount) %></td>
       </tr>
       <tr>
-        <td colspan="2"  class="subtotal-title">Retención en la fuente</td>
-        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.retention) %></td>
+        <td colspan="1"  class="subtotal-title">Retención en la fuente</td>
+        <td colspan="1"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.retention) %></td>
       </tr>
       <tr>
-        <td colspan="2"  class="subtotal-title" >Total a pagar</td>
-        <td colspan="2"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.total) %></td>
+        <td colspan="1"  class="subtotal-title" >Total a pagar</td>
+        <td colspan="1"  class="subtotal-value"><%= humanized_money_with_symbol(@invoice_equivalent.total) %></td>
       </tr>
     </table>
   </div>
