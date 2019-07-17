@@ -205,6 +205,33 @@ export default class extends Controller {
 
         }
       })
+    } else if (selectType === "inoviceEquivalentRetentionType") {
+      new SlimSelect({
+        select: this.element,
+        onChange: (selectedOption) => {
+          const $retentionBaseInput = new Cleave(document.querySelector(".invoice_equivalent_amount input"), {
+              numeral: true,
+              numeralThousandsGroupStyle: 'thousand'
+          });
+
+          const retentionBase = $retentionBaseInput.getRawValue();
+
+          if (retentionBase) {
+            const retentionPct = parseFloat(selectedOption.text.split("-")[1].replace("(", "").replace("%)", "")) / 100;
+            const $retentionAmountInput = new Cleave(document.querySelector(".invoice_equivalent_retention input"), {
+                numeral: true,
+                numeralThousandsGroupStyle: 'thousand'
+            });
+
+            const retentionAmount = retentionBase * retentionPct;
+
+            $retentionAmountInput.setRawValue(retentionBase * retentionPct);
+            document.querySelector(".invoice_equivalent_retention input").focus();
+          }
+
+        }
+      })
     }
+
   }
 }
