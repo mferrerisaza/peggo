@@ -1,0 +1,82 @@
+<%= render 'shared/sidebar' %>
+<div class="page-content-wrapper">
+  <h3 class="expense-title text-center">Documento equivalente num: <%= @invoice_equivalent.formated_number %></h4>
+  <h4 class="business-title text-center">Por concepto de: <%= @invoice_equivalent.description.downcase %></h4>
+  <div class="table-container-simple flex flex-center">
+    <div class="show-actions">
+      <%= link_to print_business_invoice_equivalent_path(@business, @invoice_equivalent),class: "btn show-action-btn", target: :blank  do %>
+        Imprimir
+        <i class="material-icons"> print </i>
+      <% end %>
+      <%= link_to edit_business_invoice_equivalent_path(@business, @invoice_equivalent), class: "btn show-action-btn" do %>
+        Editar
+        <i class="material-icons"> create </i>
+      <% end %>
+      <%= link_to business_invoice_equivalent_path(@business, @invoice_equivalent), class: "btn show-action-btn", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+        Eliminar
+        <i class="material-icons"> delete </i>
+      <% end %>
+    </div>
+    <div class="table-container show-table">
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">Número</div>
+          <div class="table-data"><%= @invoice_equivalent.formated_number %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Beneficiario</div>
+          <div class="table-data"><%= @invoice_equivalent.contact.name %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Detalle</div>
+          <div class="table-data"><%= @invoice_equivalent.description %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Fecha Operación</div>
+          <div class="table-data"><%= @invoice_equivalent.date %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Valor de la operación</div>
+          <div class="table-data"><%= humanized_money_with_symbol @invoice_equivalent.amount %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Retención en la fuente</div>
+          <div class="table-data"><%= humanized_money_with_symbol @invoice_equivalent.retention %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Total a pagar</div>
+          <div class="table-data"><%= humanized_money_with_symbol @invoice_equivalent.total %></div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
+            Adjuntos:
+          </div>
+          <div class="table-data">
+            <% @attachments.each do |attachment| %>
+            <div class="attachments-container">
+              <% attachments_delete_params = {
+                  invoice_equivalent: {
+                    business_id: @business.id,
+                    attachments_attributes: {
+                      id: attachment.id,
+                      _destroy: true
+                    }
+                  },
+                }
+              %>
+              <%= link_to attachment.name, cl_image_path(attachment.file.filename), target: :blank  %>
+              <%= link_to business_invoice_equivalent_path(@invoice_equivalent, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
+                <i class="material-icons"> delete </i>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">Observaciones</div>
+          <div class="table-data white-space-wrap"><%= @invoice_equivalent.observation %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
