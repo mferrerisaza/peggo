@@ -84,6 +84,7 @@ class ExpensesController < ApplicationController
         :id,
         :name,
         :quantity,
+        :amount,
         :vat,
         :_destroy
       ]

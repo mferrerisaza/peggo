@@ -9,8 +9,8 @@ class Expense < ApplicationRecord
   accepts_nested_attributes_for :concepts,
                                   allow_destroy: true,
                                   reject_if: proc { |attributes|  attributes['name'].blank? }
-  validates :date, :description, :number, :amount,  presence: true
-  validates :amount, numericality: { greater_than: 0 }
+  validates :date, :number,  presence: true
+  # validates :amount, numericality: { greater_than: 0 }
 
   enum payment_method: [
     "Efectivo",

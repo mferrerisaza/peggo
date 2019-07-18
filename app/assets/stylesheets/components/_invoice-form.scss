@@ -1,4 +1,4 @@
-.new_invoice, .edit_invoice, .invoice-show-page-container {
+.new_invoice, .edit_invoice, .invoice-show-page-container, .new_expense, .edit_expense {
   margin: 16px;
   padding: 24px;
   background-color: white;
@@ -98,20 +98,20 @@
     background: none;
   }
 }
-.invoice-form-header {
+.document-form-header {
   .bussines-logo {
     width: 100%;
     height: 100px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
   }
-  .invoice-header-business-info {
+  .document-header-business-info {
     p {
       margin: 0px;
       font-size: 14px;
     }
   }
-  .invoice-header-dian-info {
+  .document-header-dian-info {
     .invoice_number {
       margin-bottom: 16px;
     }
@@ -224,6 +224,14 @@
     }
   }
 }
+.new_expense, .edit_expense {
+  .table-row{
+    .table-data {
+      border-bottom: 1px solid #364f6b20 !important;
+    }
+  }
+}
+
 #items-table .table-row:last-child  {
     .table-data {
       border-bottom: 1px solid #364f6b20 !important;

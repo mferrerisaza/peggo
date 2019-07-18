@@ -15,14 +15,14 @@
     <% end %>
   </div>
   <div class="invoice-show-page-container">
-    <div class="invoice-form-header">
+    <div class="document-form-header">
       <div class="row">
         <div class="col-xs-12 col-sm-4">
           <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <div class="invoice-header-business-info">
+          <div class="document-header-business-info">
             <h1 class="text-center">Factura de Venta</h1>
             <p class="text-center"><%= @business.name %></p>
             <p class="text-center"><%= @business.tax_id %></p>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <div class="invoice-header-dian-info">
+          <div class="document-header-dian-info">
             <div class="invoice-header-number-container">
               <p>No. </p>
               <p><%= @invoice.number %></p>
@@ -94,7 +94,7 @@
     <br>
     <br>
     <br>
-    <div class="invoice-form-bottom">
+    <div class="document-form-bottom">
       <div class="row">
         <div class="col-xs-12 col-sm-8">
           <div class="signature">

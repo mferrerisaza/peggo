@@ -1,0 +1,52 @@
+<div class="table-row nested-fields">
+  <div class="table-data">
+    <%= f.input :name,
+                label: false
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :quantity,
+                label: false,
+                input_html: {
+                  min: "0",
+                  value: 0
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :amount,
+                label: false,
+                input_html: {
+                  min: "0",
+                  data: {
+                    controller: "cleave"
+                  }
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :vat,
+                label: false,
+                input_html: {
+                  step: 0.01,
+                  value: 0
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :fake_total, as: :fake,
+                label: false
+    %>
+  </div>
+
+  <div class="table-data">
+    <%= f.input :_destroy, as: :hidden %>
+    <%= link_to "#", data: { action: "click->nested-form#remove_association" }  do %>
+      <button class="close-form-btn no-style-btn">
+        <i class="material-icons">
+          clear
+        </i>
+      </button>
+    <% end %>
+  </div>
+</div>
