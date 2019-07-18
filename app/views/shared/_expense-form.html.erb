@@ -9,7 +9,7 @@
   <%= f.input :amount, label: "Monto", input_html: { class: "amount-input", data: { controller: "cleave"} }%>
   <%= f.input :observation, label: "Observaciones"%>
   <%= f.simple_fields_for :attachments, Attachment.new do |p| %>
-      <%= p.input :file, label: "Achivos Adjuntos", as: :file, input_html: { multiple: true,  name: "expense[attachments_attributes][][file]"} %>
+      <%= p.input :file, label: "Archivos Adjuntos", as: :file, input_html: { multiple: true,  name: "expense[attachments_attributes][][file]"} %>
   <% end %>
   <% f.object.attachments.each_with_index do |attachment, index| %>
       <% if attachment.id %>
