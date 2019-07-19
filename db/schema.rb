@@ -74,8 +74,10 @@ ActiveRecord::Schema.define(version: 2019_07_19_014529) do
 
   create_table "expenses", force: :cascade do |t|
     t.date "date"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "amount_cents", default: 0, null: false
     t.bigint "business_id"
     t.integer "payment_method"
     t.text "observation"

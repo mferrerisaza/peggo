@@ -84,11 +84,11 @@
       <tr>
         <td colspan="4" rowspan="2"></td>
         <% if @expense.retention_type %>
-          <td colspan="1"  class="subtotal-title negative-value"><%= @expense.retention_type %></td>
-          <td colspan="1"  class="subtotal-value negative-value"><%= humanized_money_with_symbol(@expense.retention) %></td>
+          <td colspan="1"  class="subtotal-title"><%= @expense.retention_type %></td>
+          <td colspan="1"  class="subtotal-value">(<%= humanized_money_with_symbol(@expense.retention) %>)</td>
         <% else %>
-          <td colspan="1"  class="subtotal-title negative-value">Retención en la fuente</td>
-          <td colspan="1"  class="subtotal-value negative-value"><%= humanized_money_with_symbol(-1 * @expense.retention) %></td>
+          <td colspan="1"  class="subtotal-title">Retención en la fuente</td>
+          <td colspan="1"  class="subtotal-value">(<%= humanized_money_with_symbol(-1 * @expense.retention) %>)</td>
         <% end %>
       </tr>
       <tr>
