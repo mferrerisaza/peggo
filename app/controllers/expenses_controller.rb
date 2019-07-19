@@ -8,6 +8,7 @@ class ExpensesController < ApplicationController
 
   def show
     @attachments = @expense.attachments
+    @concepts = @expense.concepts
     authorize @expense
   end
 
@@ -52,6 +53,7 @@ class ExpensesController < ApplicationController
   def print
     authorize @expense
     @contact = @expense.contact
+    @concepts = @expense.concepts
     respond_to do |format|
       format.html
       format.pdf do
@@ -68,8 +70,8 @@ class ExpensesController < ApplicationController
       :contact_id,
       :payment_method,
       :date,
-      :description,
-      :amount,
+      :retention,
+      :retention_type,
       :business_id,
       :observation,
       attachments_attributes: [
