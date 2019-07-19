@@ -8,6 +8,7 @@ class ExpensesController < ApplicationController
 
   def show
     @attachments = @expense.attachments
+    @concepts = @expense.concepts
     authorize @expense
   end
 
@@ -52,6 +53,7 @@ class ExpensesController < ApplicationController
   def print
     authorize @expense
     @contact = @expense.contact
+    @concepts = @expense.concepts
     respond_to do |format|
       format.html
       format.pdf do
@@ -63,7 +65,32 @@ class ExpensesController < ApplicationController
   private
 
   def expense_params
-    strong_params = params.require(:expense).permit(:number, :contact_id, :payment_method, :date, :description, :amount, :business_id, :observation, attachments_attributes: [:id, :file, "@original_filename", "@content_type", "@headers", "_destroy"])
+    strong_params = params.require(:expense).permit(
+      :number,
+      :contact_id,
+      :payment_method,
+      :date,
+      :retention,
+      :retention_type,
+      :business_id,
+      :observation,
+      attachments_attributes: [
+        :id,
+        :file,
+        "@original_filename",
+        "@content_type",
+        "@headers",
+        "_destroy"
+      ],
+      concepts_attributes: [
+        :id,
+        :name,
+        :quantity,
+        :amount,
+        :vat,
+        :_destroy
+      ]
+    )
     strong_params[:amount] = strong_params[:amount].gsub(",", "") if strong_params[:amount]
     strong_params[:attachments_attributes].each { |attachment| attachment[:name] = attachment[:file].original_filename } if strong_params[:attachments_attributes].is_a?(Array)
     strong_params

@@ -55,25 +55,46 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td colspan="4"><%= @expense.description %></td>
-          <td colspan="1" class="concept-value"><%= humanized_money_with_symbol(@expense.amount) %></td>
-        </tr>
-        <% 9.times do %>
+        <% @concepts.each do |concept| %>
           <tr>
-            <td colspan="4"> </td>
+            <td colspan="4"><%= concept.name %></td>
+            <td colspan="1" class="concept-value"><%= humanized_money_with_symbol(concept.gross_total) %></td>
+          </tr>
+        <% end %>
+        <% size = 10 - @concepts.size > 0 ?  10 - @concepts.size : 0 %>
+        <% size.times do %>
+          <tr>
+            <td colspan="4"></td>
             <td colspan="1" class="concept-value"> </td>
           </tr>
         <% end %>
-        <tr>
-          <td colspan="3" rowspan="2" class="observations-box">Observaciones: <%= @expense.observation %></td>
-          <td colspan="1" rowspan="2" class="total-text">Total</td>
-          <td colspan="1" rowspan="2" class="total-value"><%= humanized_money_with_symbol(@expense.amount) %></td>
-        </tr>
-        <tr>
-          <!-- Dejar esta fila en blanco para el rowspan -->
-        </tr>
       </tbody>
+    </table>
+    <br>
+    <table>
+      <tr>
+        <td colspan="4" rowspan="2"  class="notes-box">Observaciones: <%= @expense.observation %></td>
+        <td colspan="1"  class="subtotal-title">Subtotal</td>
+        <td colspan="1"  class="subtotal-value"><%= humanized_money_with_symbol(@expense.concepts_subtotal) %></td>
+      </tr>
+      <tr>
+        <td colspan="1"  class="subtotal-title">IVA</td>
+        <td colspan="1"  class="subtotal-value"><%= humanized_money_with_symbol(@expense.concepts_vat_subtotal) %></td>
+      </tr>
+      <tr>
+        <td colspan="4" rowspan="2"></td>
+        <% if @expense.retention_type %>
+          <td colspan="1"  class="subtotal-title"><%= @expense.retention_type %></td>
+          <td colspan="1"  class="subtotal-value">(<%= humanized_money_with_symbol(@expense.retention) %>)</td>
+        <% else %>
+          <td colspan="1"  class="subtotal-title">Retención en la fuente</td>
+          <td colspan="1"  class="subtotal-value">(<%= humanized_money_with_symbol(-1 * @expense.retention) %>)</td>
+        <% end %>
+      </tr>
+      <tr>
+        <td colspan="1"  class="grand-total-title" >Total</td>
+        <td colspan="1"  class="grand-total-value"><%= humanized_money_with_symbol(@expense.total) %></td>
+      </tr>
     </table>
   </div>
   <div class="pdf-bottom">

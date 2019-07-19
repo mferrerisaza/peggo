@@ -1,39 +1,205 @@
-<%= simple_form_for [@business, @expense]  do |f| %>
-  <% unless action_name == "new" || action_name == "create" %>
-    <%= f.input :number, label: "Comp. Egreso Num" %>
-  <% end %>
-  <%= f.association :contact, label: "Beneficiario", collection: Contact.where(provider: true).order(name: :asc), input_html: {data: { controller: "slim-select", slim_select_type: "contactSelect" } }%>
-  <%= f.input :payment_method, label: "Método de pago", collection: Expense.payment_methods.keys%>
-  <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr", "flatpickr-type": "expense" } }, placeholder: "Seleccionar...", label: "Fecha del egreso"%>
-  <%= f.input :description, label: "Descripción"%>
-  <%= f.input :amount, label: "Monto", input_html: { class: "amount-input", data: { controller: "cleave"} }%>
-  <%= f.input :observation, label: "Observaciones"%>
-  <%= f.simple_fields_for :attachments, Attachment.new do |p| %>
-      <%= p.input :file, label: "Archivos Adjuntos", as: :file, input_html: { multiple: true,  name: "expense[attachments_attributes][][file]"} %>
-  <% end %>
-  <% f.object.attachments.each_with_index do |attachment, index| %>
-      <% if attachment.id %>
-        <% attachments_delete_params = {
-            expense: {
-              business_id: @business.id,
-              attachments_attributes: {
-                id: attachment.id,
-                _destroy: true
-              }
-            },
-          }
+<%= simple_form_for [@business, @expense], html: { data: { controller: "expense-form form-totals" } }  do |f| %>
+  <div class="document-form-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="document-header-business-info">
+          <h1 class="text-center">Comprobante de Egreso</h1>
+          <p class="text-center"><%= @business.name %></p>
+          <p class="text-center"><%= @business.tax_id %></p>
+          <p class="text-center">Dir: <%= @business.address %></p>
+          <p class="text-center"><%= @business.cell_phone %></p>
+          <p class="text-center"><%= @business.email %></p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="document-header-dian-info">
+          <% disabled = action_name == "new" ? true : false %>
+          <%= f.input :number, label: "No.", disabled: disabled%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <%= f.association :contact,
+                          label: "Beneficiario",
+                          collection: Contact.where(provider: true).order(name: :asc),
+                          input_html: {
+                            data: {
+                              controller: "slim-select",
+                              slim_select_type: "contactSelect"
+                            }
+                          }
         %>
-        <ul class="attachments-list">
-          <li>
-            <%= index + 1 %>. <%= attachment.name %>
-            <%= link_to business_expense_path(f.object.id, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
-              Eliminar
-              <i class="material-icons"> delete </i>
-            <% end %>
-          </li>
-        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <%= f.input :payment_method,
+                    label: "Método de pago",
+                    collection: Expense.payment_methods.keys
+        %>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <%= f.input :date,
+                    as: :string,
+                    placeholder: "Seleccionar...",
+                    label: "Fecha del egreso",
+                    input_html: {
+                      class: "datepicker-expense",
+                        data: {
+                          controller: "flatpickr",
+                          "flatpickr-type": "expense"
+                        }
+                      }
+        %>
+      </div>
+  </div>
+  <br>
+  <div data-controller="nested-form" >
+
+    <div class="table"
+         data-target="nested-form.addConcept"
+    >
+      <div class="table-row" >
+        <div class="table-header">Item</div>
+        <div class="table-header">Cantidad</div>
+        <div class="table-header">Precio</div>
+        <div class="table-header">IVA(%)</div>
+        <div class="table-header">Total</div>
+        <div class="table-header">Acciones</div>
+      </div>
+
+      <template data-target="nested-form.template">
+        <%= f.simple_fields_for :concepts, Concept.new, child_index: "TEMPLATE_RECORD" do |c| %>
+          <%= render 'shared/concept-fields', f: c  %>
+        <% end %>
+      </template>
+      <%= f.simple_fields_for :concepts do |c| %>
+        <%= render 'shared/concept-fields', f: c  %>
       <% end %>
-  <% end %>
+
+    </div>
+      <div class="links">
+        <%= link_to "#", class: "btn show-action-btn add-line-btn", data: { action: "nested-form#add_association" } do%>
+          <i class="material-icons">
+            add
+          </i>
+          <span>Agregar línea</span>
+        <% end %>
+      </div>
+  </div>
+  <div class="document-form-bottom">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="signature">
+          <% if @business.signature %>
+            <%= cl_image_tag  @business.signature, width: 200, height: 100%>
+          <% end %>
+          <p class="signature-by">ELABORADO POR</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="totals">
+          <%= f.input :expense_subtotal,
+                      disabled: true,
+                      as: :fake,
+                      label: "Subtotal:",
+                      input_html: {
+                        value: @expense.concepts_subtotal,
+                        data: {
+                          controller: "cleave",
+                          target: "form-totals.subtotal"
+                        }
+                      }
+          %>
+          <%= f.input :retention_type,
+                      label: "Tipo de retención",
+                      collection: Expense.retention_types.keys,
+                      input_html: {
+                        data:  {
+                          action: "change->expense-form#setCalulationsTimer change->form-totals#calculateRetention",
+                          target: "form-totals.retentionType"
+                        }
+                      }
+          %>
+          <%= f.input :retention,
+                      label: "Rte Fuente:",
+                      input_html: {
+                        class: "show-stlye",
+                        data: {
+                          controller: "cleave",
+                          action: "focus->expense-form#calculateTotals keyup->expense-form#calculateTotals",
+                          target: "form-totals.retention"
+                        }
+                      }
+          %>
+          <%= f.input :expense_vat,
+                      disabled: true,
+                      as: :fake,
+                      label: "IVA:",
+                      input_html: {
+                        value: @expense.concepts_vat_subtotal,
+                        data: {
+                          controller: "cleave"
+                        }
+                      }
+          %>
+          <hr>
+          <%= f.input :expense_total,
+                      disabled: true,
+                      as: :fake,
+                      label: "TOTAL:",
+                      input_html: {
+                        value: @expense.total,
+                        data: {
+                          controller: "cleave"
+                        }
+                      }
+          %>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-xs-12 col-sm-7">
+        <%= f.input :observation, label: "Observaciones"%>
+      </div>
+      <div class="col-xs-12 col-sm-5">
+        <%= f.simple_fields_for :attachments, Attachment.new do |p| %>
+            <%= p.input :file, label: "Archivos Adjuntos", as: :file, input_html: { multiple: true,  name: "expense[attachments_attributes][][file]"} %>
+        <% end %>
+        <% f.object.attachments.each_with_index do |attachment, index| %>
+            <% if attachment.id %>
+              <% attachments_delete_params = {
+                  expense: {
+                    business_id: @business.id,
+                    attachments_attributes: {
+                      id: attachment.id,
+                      _destroy: true
+                    }
+                  },
+                }
+              %>
+              <ul class="attachments-list">
+                <li>
+                  <%= index + 1 %>. <%= attachment.name %>
+                  <%= link_to business_expense_path(f.object.id, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
+                    Eliminar
+                    <i class="material-icons"> delete </i>
+                  <% end %>
+                </li>
+              </ul>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
   <%= f.input :business_id, as: :hidden, input_html: { value: @business.id } %>
   <span class="new-property-form-btns">
     <%= link_to "cancelar", :back, class:"form-btn--no-background" %>

@@ -1,0 +1,74 @@
+<div class="table-row nested-fields"
+      data-controller="item-form"
+      data-target="expense-form.row"
+      data-action="keyup->item-form#recalculateTotal change->item-form#recalculateTotal keyup->expense-form#calculateTotals change->expense-form#calculateTotals keyup->form-totals#calculateRetention change->form-totals#calculateRetention "
+>
+  <div class="table-data">
+    <%= f.input :name,
+                label: false
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :quantity,
+                label: false,
+                input_html: {
+                  min: "0",
+                  value: f.object.quantity?,
+                  class: "concept-quantity",
+                  data: {
+                    action: "focus->expense-form#calculateTotals",
+                    target: "item-form.quantity"
+                  }
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :amount,
+                label: false,
+                input_html: {
+                  min: "0",
+                  class: "concept-price",
+                  data: {
+                    action: "focus->expense-form#calculateTotals",
+                    controller: "cleave",
+                    target: "item-form.price"
+                  }
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :vat,
+                label: false,
+                input_html: {
+                  step: 0.01,
+                  value: f.object.vat?,
+                  class: "concept-vat",
+                }
+    %>
+  </div>
+  <div class="table-data">
+    <%= f.input :fake_total,
+                as: :fake,
+                disabled: true,
+                label: false,
+                input_html: {
+                  value: f.object.gross_total?,
+                  data: {
+                    controller: "cleave",
+                    target: "item-form.total"
+                  }
+                }
+    %>
+  </div>
+
+  <div class="table-data">
+    <%= f.input :_destroy, as: :hidden %>
+    <%= link_to "#", data: { action: "click->nested-form#remove_association click->expense-form#calculateTotals click->form-totals#calculateRetention" }  do %>
+      <button class="close-form-btn no-style-btn">
+        <i class="material-icons">
+          clear
+        </i>
+      </button>
+    <% end %>
+  </div>
+</div>
