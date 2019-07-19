@@ -159,7 +159,7 @@
     flex-wrap: nowrap;
     margin: 0;
   }
-  input {
+  input:not(.show-stlye) {
     border: none;
     box-shadow: none;
     background: none !important;
