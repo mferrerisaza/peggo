@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_18_194704) do
+ActiveRecord::Schema.define(version: 2019_07_19_014529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,15 +74,15 @@ ActiveRecord::Schema.define(version: 2019_07_18_194704) do
 
   create_table "expenses", force: :cascade do |t|
     t.date "date"
-    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "amount_cents", default: 0, null: false
     t.bigint "business_id"
     t.integer "payment_method"
     t.text "observation"
     t.bigint "number"
     t.bigint "contact_id"
+    t.integer "retention_type"
+    t.bigint "retention_cents", default: 0, null: false
     t.index ["business_id"], name: "index_expenses_on_business_id"
     t.index ["contact_id"], name: "index_expenses_on_contact_id"
   end
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_194704) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.boolean "admin", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

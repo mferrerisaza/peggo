@@ -1,7 +1,7 @@
 <%= render 'shared/sidebar' %>
 <div class="page-content-wrapper">
   <h3 class="expense-title text-center">Egreso num: <%= @expense.formated_number %></h4>
-  <h4 class="business-title text-center">Por concepto de: <%= @expense.description.downcase %></h4>
+  <h4 class="business-title text-center">Por concepto de: <%= @concepts.map(&:name).join(", ").downcase %></h4>
   <div class="table-container-simple flex flex-center">
     <div class="show-actions">
       <%= link_to print_business_expense_path(@business, @expense),class: "btn show-action-btn", target: :blank  do %>
@@ -29,7 +29,7 @@
         </div>
         <div class="table-row">
           <div class="table-header">Detalle</div>
-          <div class="table-data"><%= @expense.description %></div>
+          <div class="table-data"><%= @concepts.map(&:name).join(", ") %></div>
         </div>
         <div class="table-row">
           <div class="table-header">Fecha</div>
@@ -41,7 +41,7 @@
         </div>
         <div class="table-row">
           <div class="table-header">Monto</div>
-          <div class="table-data"><%= humanized_money_with_symbol @expense.amount %></div>
+          <div class="table-data"><%= humanized_money_with_symbol @expense.total %></div>
         </div>
         <div class="table-row">
           <div class="table-header">
