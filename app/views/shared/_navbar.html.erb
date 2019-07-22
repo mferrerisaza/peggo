@@ -1,8 +1,8 @@
 <% unless devise_controller? %>
   <div class="navbar-wagon <%= navbar_color %> <%= do_not_render_navbar_web %>" data-controller="navbar" data-action="scroll@window->navbar#scroll" >
-    <div class="navbar-wagon-item navbar-wagon-dropicon hidden-md hidden-lg" data-controller="sidebar" data-action="click->sidebar#toggle" data-sidebar-selector="#mySidenav">
+    <div class="navbar-wagon-item navbar-wagon-dropicon hidden-md hidden-lg">
       <div class="dropdown">
-        <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+        <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown" data-controller="sidebar" data-action="click->sidebar#toggle" data-sidebar-selector="#mySidenav"></i>
         <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu <%= "hidden" unless render_navbar_dropdown %>">
           <% if current_user %>
             <li><%= link_to "Inicio", root_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
