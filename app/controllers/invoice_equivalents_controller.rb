@@ -3,7 +3,7 @@ class InvoiceEquivalentsController < ApplicationController
   before_action :set_invoice_equivalent, only: %i[show edit update destroy print]
 
   def index
-    @invoice_equivalents = policy_scope(InvoiceEquivalent.where(business: @business).order(number: :desc).includes(:contact))
+    @invoice_equivalents = policy_scope(InvoiceEquivalent.where(business: @business).order(number: :desc).includes(:contact).paginate(page: params[:page]))
   end
 
   def show

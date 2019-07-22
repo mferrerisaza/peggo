@@ -3,7 +3,7 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: %i[show edit update destroy print]
 
   def index
-    @invoices = policy_scope(Invoice.where(business: @business).order(number: :desc).includes(:contact))
+    @invoices = policy_scope(Invoice.where(business: @business).order(number: :desc).includes(:contact).paginate(page: params[:page]))
   end
 
   def show
@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new
+    @invoice = Invoice.new.paginate(page: params[:page])
     @item = Item.new
     authorize @business, :business_of_current_user?
   end

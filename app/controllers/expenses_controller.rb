@@ -3,7 +3,7 @@ class ExpensesController < ApplicationController
   before_action :set_expense, only: %i[show edit update destroy print]
 
   def index
-    @expenses = policy_scope(Expense.where(business: @business).order(number: :desc).includes(:contact))
+    @expenses = policy_scope(Expense.where(business: @business).order(number: :desc).includes(:contact).paginate(page: params[:page]))
   end
 
   def show
