@@ -38,7 +38,6 @@ class Expense < ApplicationRecord
     "Transporte de carga - (1%)"
   ]
 
-  monetize :amount_cents
   monetize :retention_cents
 
   def formated_number

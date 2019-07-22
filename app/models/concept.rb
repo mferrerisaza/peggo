@@ -16,7 +16,7 @@ class Concept < ApplicationRecord
   end
 
   def quantity?
-    quantity ? quantity : 0
+    quantity ? quantity : 1
   end
 
   def vat?

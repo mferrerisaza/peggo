@@ -91,7 +91,6 @@ class ExpensesController < ApplicationController
         :_destroy
       ]
     )
-    strong_params[:amount] = strong_params[:amount].gsub(",", "") if strong_params[:amount]
     strong_params[:attachments_attributes].each { |attachment| attachment[:name] = attachment[:file].original_filename } if strong_params[:attachments_attributes].is_a?(Array)
     strong_params
   end
