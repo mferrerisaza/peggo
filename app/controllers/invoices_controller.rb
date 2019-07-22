@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new.paginate(page: params[:page])
+    @invoice = Invoice.new
     @item = Item.new
     authorize @business, :business_of_current_user?
   end
