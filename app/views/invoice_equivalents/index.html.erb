@@ -9,7 +9,7 @@
     </h3>
   <% else %>
     <h1 class="app-index-title">Lista de Documentos Equivalentes</h1>
-    <div class="table-container">
+    <div class="table-container table-container--no-margin-bottom">
       <div class="table">
         <div class="table-row">
           <div class="table-header">Número</div>
@@ -45,6 +45,8 @@
         <% end %>
       </div>
     </div>
+    <%= will_paginate @invoice_equivalents, renderer: BootstrapPagination::Rails, class: "hidden-sm hidden-xs" %>
+    <%= will_paginate @invoice_equivalents, renderer: BootstrapPagination::Rails, page_links: false, class: "hidden-lg hidden-md" %>
   <% end %>
   <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_business_invoice_equivalent_path %>">
     <i class="material-icons">
