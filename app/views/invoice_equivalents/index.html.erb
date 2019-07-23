@@ -22,14 +22,17 @@
           <div class="table-header">Acciones</div>
         </div>
         <% @invoice_equivalents.each do |invoice_equivalent| %>
-            <div data-id="<%=invoice_equivalent.id%>" class="table-row-link table-row">
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>'"><%= invoice_equivalent.formated_number %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>'"><%= invoice_equivalent.contact.name %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>'"><%= invoice_equivalent.description %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>'"><%= invoice_equivalent.date %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>'"><%= humanized_money_with_symbol invoice_equivalent.amount %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>'"><%= humanized_money_with_symbol invoice_equivalent.retention %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>'"><%= humanized_money_with_symbol invoice_equivalent.total %></div>
+            <div class="table-row-link table-row"
+                 data-controller="table-row"
+                 data-table-row-location="<%= business_invoice_equivalent_path(@business, invoice_equivalent)%>"
+            >
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= invoice_equivalent.formated_number %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= invoice_equivalent.contact.name %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= invoice_equivalent.description %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= invoice_equivalent.date %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol invoice_equivalent.amount %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol invoice_equivalent.retention %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol invoice_equivalent.total %></div>
               <div class="table-data white-space-no-wrap">
                 <%= link_to print_business_invoice_equivalent_path(@business, invoice_equivalent), target: :blank  do %>
                   <i class="material-icons"> print </i>

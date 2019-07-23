@@ -23,15 +23,18 @@
           <div class="table-header">Acciones</div>
         </div>
         <% @invoices.each do |invoice| %>
-            <div data-id="<%=invoice.id%>" class="table-row-link table-row">
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.formated_number %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.contact.name %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.date %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.expiration_date %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.total %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.amount_paid %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= humanized_money_with_symbol invoice.debt %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_invoice_path(@business, invoice)%>'"><%= invoice.status %></div>
+            <div class="table-row-link table-row"
+                 data-controller="table-row"
+                 data-table-row-location="<%= business_invoice_path(@business, invoice)%>"
+            >
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= invoice.formated_number %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= invoice.contact.name %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= invoice.date %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= invoice.expiration_date %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol invoice.total %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol invoice.amount_paid %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol invoice.debt %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= invoice.status %></div>
               <div class="table-data white-space-no-wrap">
                 <%= link_to print_business_invoice_path(@business, invoice), target: :blank  do %>
                   <i class="material-icons"> print </i>
