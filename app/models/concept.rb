@@ -4,14 +4,15 @@ class Concept < ApplicationRecord
 
   validates :name, :quantity, :amount, :vat, presence: true
 
-
   def gross_total
     return unless quantity && amount
+
     quantity * amount
   end
 
   def vat_amount
     return unless quantity && amount && vat
+
     quantity * amount * vat
   end
 

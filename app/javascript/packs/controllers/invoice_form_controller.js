@@ -53,18 +53,20 @@ export default class extends Controller {
     let totals = {};
 
     for (let i = 0; i < this.rowTargets.length; i++) {
-      const quantity = this.rowTargets[i].querySelector(".item-quantity").value;
-      const cleavePrice = new Cleave(this.rowTargets[i].querySelector(".item-price"), {
-          numeral: true,
-          numeralThousandsGroupStyle: 'thousand'
-      });
-      const discount = parseFloat(this.rowTargets[i].querySelector(".item-discount").value);
-      const vat = parseFloat(this.rowTargets[i].querySelector(".item-vat").value);
-      const price = cleavePrice.getRawValue();
+      if (this.rowTargets[i].getAttribute("style") !== "display: none;") {
+        const quantity = this.rowTargets[i].querySelector(".item-quantity").value;
+        const cleavePrice = new Cleave(this.rowTargets[i].querySelector(".item-price"), {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
+        const discount = parseFloat(this.rowTargets[i].querySelector(".item-discount").value);
+        const vat = parseFloat(this.rowTargets[i].querySelector(".item-vat").value);
+        const price = cleavePrice.getRawValue();
 
-      grossSubtotal += quantity * price;
-      itemsDiscount -= quantity * price * discount;
-      totalVAT += quantity * price * (1 - discount) * vat;
+        grossSubtotal += quantity * price;
+        itemsDiscount -= quantity * price * discount;
+        totalVAT += quantity * price * (1 - discount) * vat;
+      }
     }
     netSubtotal = grossSubtotal + itemsDiscount;
     grandTotal = netSubtotal + totalVAT;

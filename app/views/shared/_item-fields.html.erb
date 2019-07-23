@@ -4,6 +4,9 @@
       data-action="keyup->item-form#recalculateTotal change->item-form#recalculateTotal keyup->invoice-form#calculateTotals change->invoice-form#calculateTotals"
 >
   <div class="table-data min-width-200">
+    <% if f.object.name %>
+      <%= f.input :name, label: false %>
+    <% else %>
     <%= f.input :name,
                 collection: [ ["" ,"", data: { placeholder: true }] ],
                 label: false,
@@ -15,6 +18,7 @@
                   }
                 }
     %>
+    <% end %>
   </div>
   <div class="table-data min-width-100">
     <%= f.input :quantity,
@@ -72,6 +76,7 @@
                 disabled: true,
                 input_html: {
                   class: "item-total",
+                  value: f.object.gross_total?,
                   data: {
                     controller: "cleave",
                     action: "focus->cleave#mountCleave",
@@ -81,7 +86,8 @@
     %>
   </div>
   <div class="table-data">
-    <%= link_to_remove_association f, data: { action: "click->invoice-form#setCalulationsTimer"} do %>
+    <%= f.input :_destroy, as: :hidden %>
+    <%= link_to "#", data: { action: "click->nested-form#remove_association click->invoice-form#setCalulationsTimer" }  do %>
       <button class="close-form-btn no-style-btn">
         <i class="material-icons">
           clear

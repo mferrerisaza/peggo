@@ -1,5 +1,5 @@
 <%= simple_form_for [@business, @contact]  do |f| %>
-  <%= f.input :name, label: "Nombre", value: "Miguel Ferrer"%>
+  <%= f.input :name, label: "Nombre"%>
   <%= f.input :tax_id_type, label: "Tipo de Identificación", collection: Contact.tax_id_types.keys%>
   <%= f.input :tax_id, label: "Número de Identificación"%>
   <%= f.input :phone, label: "Teléfono"%>
