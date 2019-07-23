@@ -30,16 +30,14 @@
     text-align: justify;
   }
   .section-list-container{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    // flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 16px;
     .section-content-div-element{
       flex: 0 0 30%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       h4 {
         font-weight: normal;
@@ -47,7 +45,7 @@
         line-height: 30px;
         color: #3C4858;
         text-align: center;
-        min-height: 60px;
+        min-height: 120px;
         display: flex;
         align-items: center;
       }
