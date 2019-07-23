@@ -25,11 +25,11 @@ MutableConstant:
   Enabled: false
 SignalException:
   Enabled: false
-Casecmp:
-  Enabled: false
 CyclomaticComplexity:
   Enabled: false
-MethodMissing:
+MissingRespondToMissing:
+  Enabled: false
+MethodMissingSuper:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
