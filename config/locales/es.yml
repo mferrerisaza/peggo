@@ -236,5 +236,7 @@ es:
     cancel_my_account: "Cancelar mi cuenta"
     are_you_sure?: "¿Estás seguro?"
     back: "Volver"
-
+  will_paginate:
+    previous_label: "Anterior"
+    next_label: "Siguiente"
 

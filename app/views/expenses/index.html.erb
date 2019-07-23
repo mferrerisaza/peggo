@@ -9,7 +9,7 @@
     </h3>
   <% else %>
     <h1 class="app-index-title">Lista de Egresos</h1>
-    <div class="table-container">
+    <div class="table-container table-container--no-margin-bottom">
       <div class="table">
         <div class="table-row">
           <div class="table-header">Número</div>
@@ -43,6 +43,8 @@
         <% end %>
       </div>
     </div>
+    <%= will_paginate @expenses, renderer: BootstrapPagination::Rails, class: "hidden-sm hidden-xs" %>
+    <%= will_paginate @expenses, renderer: BootstrapPagination::Rails, page_links: false, class: "hidden-lg hidden-md" %>
   <% end %>
   <a class="mdc-fab fab-bottom-right fab-color" aria-label="Favorite" href="<%= new_business_expense_path %>">
    <i class="material-icons">
