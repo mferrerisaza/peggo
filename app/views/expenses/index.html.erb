@@ -21,13 +21,16 @@
           <div class="table-header">Acciones</div>
         </div>
         <% @expenses.each do |expense| %>
-            <div data-id="<%=expense.id%>" class="table-row-link table-row">
-              <div class="table-data" onclick= "location.href= '<%= business_expense_path(@business, expense)%>'"><%= expense.formated_number %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_expense_path(@business, expense)%>'"><%= expense.contact.name %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_expense_path(@business, expense)%>'"><%= expense.concepts.map(&:name).join(", ")%></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_expense_path(@business, expense)%>'"><%= expense.date %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_expense_path(@business, expense)%>'"><%= expense.payment_method %></div>
-              <div class="table-data white-space-no-wrap" onclick= "location.href= '<%= business_expense_path(@business, expense)%>'"><%= humanized_money_with_symbol expense.total %></div>
+            <div class="table-row-link table-row"
+                 data-controller="table-row"
+                 data-table-row-location="<%= business_expense_path(@business, expense)%>"
+            >
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= expense.formated_number %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= expense.contact.name %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= expense.concepts.map(&:name).join(", ")%></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= expense.date %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= expense.payment_method %></div>
+              <div class="table-data white-space-no-wrap" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol expense.total %></div>
               <div class="table-data white-space-no-wrap">
                 <%= link_to print_business_expense_path(@business, expense), target: :blank  do %>
                   <i class="material-icons"> print </i>
