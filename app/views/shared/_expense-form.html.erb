@@ -59,7 +59,9 @@
       </div>
   </div>
   <br>
-  <div class="concepts-table" data-controller="nested-form" >
+  <div class="concepts-table"
+       data-controller="nested-form"
+  >
 
     <div class="table"
          data-target="nested-form.addConcept"
@@ -81,16 +83,15 @@
       <%= f.simple_fields_for :concepts do |c| %>
         <%= render 'shared/concept-fields', f: c  %>
       <% end %>
-
     </div>
-      <div class="links">
-        <%= link_to "#", class: "btn show-action-btn add-line-btn", data: { action: "nested-form#add_association" } do%>
-          <i class="material-icons">
-            add
-          </i>
-          <span>Agregar línea</span>
-        <% end %>
-      </div>
+    <div class="links">
+      <%= link_to "#", class: "btn show-action-btn add-line-btn", data: { action: "nested-form#add_association" } do%>
+        <i class="material-icons">
+          add
+        </i>
+        <span>Agregar línea</span>
+      <% end %>
+    </div>
   </div>
   <div class="document-form-bottom">
     <div class="row">
