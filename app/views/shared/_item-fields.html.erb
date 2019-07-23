@@ -3,7 +3,7 @@
       data-target="invoice-form.row"
       data-action="keyup->item-form#recalculateTotal change->item-form#recalculateTotal keyup->invoice-form#calculateTotals change->invoice-form#calculateTotals"
 >
-  <div class="table-data">
+  <div class="table-data min-width-200">
     <%= f.input :name,
                 collection: [ ["" ,"", data: { placeholder: true }] ],
                 label: false,
@@ -16,7 +16,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-100">
     <%= f.input :quantity,
                 label: false,
                 input_html: {
@@ -29,7 +29,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-200">
     <%= f.input :price,
                 label: false,
                 input_html: {
@@ -43,7 +43,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-100">
     <%= f.input :vat,
                 label: false,
                 input_html: {
@@ -54,7 +54,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-100">
     <%= f.input :discount,
                 label: false,
                 input_html: {
@@ -65,7 +65,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-200">
     <%= f.input :fake_total,
                 as: :fake,
                 label: false,
