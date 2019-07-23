@@ -89,8 +89,11 @@
       background-color: #364f6b20;
     }
   }
-  .table-data{
+  .white-space-no-wrap {
     white-space: nowrap;
+  }
+  .table-data{
+    // white-space: nowrap;
     font-size: 14px;
     font-weight: lighter;
     padding: 8px 16px;
