@@ -19,10 +19,10 @@ class Item < ApplicationRecord
 
   include PgSearch
   pg_search_scope :search_by_name,
-    against: :name,
-    using: {
-      tsearch: { prefix: true }
-    }
+                  against: :name,
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 
   def gross_total
     quantity * price
@@ -34,5 +34,9 @@ class Item < ApplicationRecord
 
   def vat_amount
     quantity * price * (1 - discount) * vat
+  end
+
+  def gross_total?
+    price && quantity ? gross_total : 0
   end
 end
