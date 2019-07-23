@@ -3,12 +3,12 @@
       data-target="expense-form.row"
       data-action="keyup->item-form#recalculateTotal change->item-form#recalculateTotal keyup->expense-form#calculateTotals change->expense-form#calculateTotals keyup->form-totals#calculateRetention change->form-totals#calculateRetention "
 >
-  <div class="table-data">
+  <div class="table-data min-width-200">
     <%= f.input :name,
                 label: false
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-100">
     <%= f.input :quantity,
                 label: false,
                 input_html: {
@@ -22,7 +22,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-200">
     <%= f.input :amount,
                 label: false,
                 input_html: {
@@ -36,7 +36,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-100">
     <%= f.input :vat,
                 label: false,
                 input_html: {
@@ -46,7 +46,7 @@
                 }
     %>
   </div>
-  <div class="table-data">
+  <div class="table-data min-width-200">
     <%= f.input :fake_total,
                 as: :fake,
                 disabled: true,
