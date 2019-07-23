@@ -3,7 +3,7 @@ import { Controller } from "stimulus"
 export default class extends Controller {
 
   visitLocation() {
-    Turbolinks.visit(this.location, { action: "replace" })
+    Turbolinks.visit(this.location)
   }
 
   get location() {
