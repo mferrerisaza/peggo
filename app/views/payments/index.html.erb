@@ -21,13 +21,16 @@
           <div class="table-header">Acciones</div>
         </div>
         <% @payments.each do |payment| %>
-            <div data-id="<%=payment.id%>" class="table-row-link table-row">
-              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.formated_number %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.contact.name %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.description %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.date %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= payment.payment_method %></div>
-              <div class="table-data" onclick= "location.href= '<%= business_payment_path(@business, payment)%>'"><%= humanized_money_with_symbol payment.amount %></div>
+            <div class="table-row-link table-row"
+                 data-controller="table-row"
+                 data-table-row-location="<%= business_payment_path(@business, payment)%>"
+            >
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= payment.formated_number %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= payment.contact.name %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= payment.description %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= payment.date %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= payment.payment_method %></div>
+              <div class="table-data" data-action="click->table-row#visitLocation"><%= humanized_money_with_symbol payment.amount %></div>
               <div class="table-data">
                 <%= link_to print_business_payment_path(@business, payment), target: :blank  do %>
                   <i class="material-icons"> print </i>
