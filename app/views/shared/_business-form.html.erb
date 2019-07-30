@@ -10,8 +10,15 @@
   <hr>
   <div class="photos">
     <h4>Logo y Firma</h4>
+    <% if @business.logo.file  %>
+      <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+      </div>
+    <% end %>
     <%= f.input :logo, label: "Logo" %>
     <%= f.input :logo_cache, as: :hidden %>
+    <% if @business.signature.file  %>
+      <%= cl_image_tag  @business.signature, width: 200, height: 100%>
+    <% end %>
     <%= f.input :signature, label: "Firma por defecto" %>
     <%= f.input :signature_cache, as: :hidden %>
   </div>
