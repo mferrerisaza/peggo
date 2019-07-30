@@ -7,45 +7,41 @@ class Expense < ApplicationRecord
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
   accepts_nested_attributes_for :concepts,
-                                  allow_destroy: true,
-                                  reject_if: proc { |attributes|  attributes['name'].blank? }
-  validates :date, :number,  presence: true
+                                allow_destroy: true,
+                                reject_if: proc { |attributes| attributes['name'].blank? }
+  validates :date, :number, presence: true
   validate :retention_is_less_than_concepts_subtotal
 
-  enum payment_method: [
-    "Efectivo",
-    "Consignación",
-    "Transferencia",
-    "Cheque",
-    "Tarjeta crédito",
-    "Tarjeta débito",
-    "Otro"
-  ]
+  enum payment_method: ["Efectivo",
+                        "Consignación",
+                        "Transferencia",
+                        "Cheque",
+                        "Tarjeta crédito",
+                        "Tarjeta débito",
+                        "Otro"]
 
-  enum retention_type: [
-    "Arrendamiento de bienes muebles - (4%)",
-    "Arrendamiento de bienes raíces - (3.5%)",
-    "Compras - (2.5%)",
-    "Compras - (3.5%)",
-    "Honorarios y comisiones - (10%)",
-    "Honorarios y comisiones - (11%)",
-    "Servicios de aseo y vigilancia - (2%)",
-    "Servicios de hoteles y restaurantes - (3.5%)",
-    "Servicios en general - (4%)",
-    "Servicios en general - (6%)",
-    "ReteICA - (0%)",
-    "ReteIVA - (15%)",
-    "Transporte de carga - (1%)"
-  ]
+  enum retention_type: ["Arrendamiento de bienes muebles - (4%)",
+                        "Arrendamiento de bienes raíces - (3.5%)",
+                        "Compras - (2.5%)",
+                        "Compras - (3.5%)",
+                        "Honorarios y comisiones - (10%)",
+                        "Honorarios y comisiones - (11%)",
+                        "Servicios de aseo y vigilancia - (2%)",
+                        "Servicios de hoteles y restaurantes - (3.5%)",
+                        "Servicios en general - (4%)",
+                        "Servicios en general - (6%)",
+                        "ReteICA - (0%)",
+                        "ReteIVA - (15%)",
+                        "Transporte de carga - (1%)"]
 
   monetize :retention_cents
 
   def formated_number
-    "%03d" % number
+    format("%03d", number)
   end
 
   def pdf_file_name
-    "#{formated_number} CE #{concepts.map(&:name).join(" - ")}"
+    "#{formated_number} CE #{concepts.map(&:name).join(' - ')}"
   end
 
   def formated_date

@@ -2,8 +2,10 @@
   <div class="document-form-header">
     <div class="row">
       <div class="col-xs-12 col-sm-4">
-        <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
-        </div>
+        <% if @business.logo.file %>
+          <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+          </div>
+        <% end %>
       </div>
       <div class="col-xs-12 col-sm-4">
         <div class="document-header-business-info">
@@ -25,7 +27,7 @@
                       readonly: true,
                       input_html: {
                         class: "dian-resolution-number",
-                        value: @invoice.resolution_number?
+                        value: @invoice.resolution_number?(@business)
                       }
           %>
         </div>
@@ -37,7 +39,7 @@
     <div class="col-xs-12 col-sm-4">
       <%= f.association :contact,
                         label: "Cliente",
-                        collection: Contact.where(client: true).order(name: :asc),
+                        collection: Contact.where(business: @business).where(client: true).order(name: :asc),
                         input_html: {
                           data: {
                             controller: "slim-select",
@@ -198,7 +200,7 @@
         <%= f.input :terms_and_conditions,
                     label: "Términos y Condiciones:",
                     input_html: {
-                      value: @invoice.terms_and_conditions?
+                      value: @invoice.terms_and_conditions?(@business)
                     }
         %>
       </div>
@@ -206,7 +208,7 @@
         <%= f.input :notes,
                     label: "Notas:",
                     input_html: {
-                      value: @invoice.notes?
+                      value: @invoice.notes?(@business)
                     }
         %>
       </div>

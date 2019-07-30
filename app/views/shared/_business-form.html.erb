@@ -1,14 +1,51 @@
 <%= simple_form_for(business) do |f| %>
-  <i class="fas fa-building"></i>
-  <%= f.input :name, label: "Nombre de la empresa"%>
-  <%= f.input :address, label: "Dirección" %>
-  <%= f.input :cell_phone, label: "Teléfono de contacto" %>
-  <%= f.input :email, label: "Email de contacto" %>
-  <%= f.input :tax_id, label: "NIT" %>
-  <%= f.input :logo, label: "Logo" %>
-  <%= f.input :logo_cache, as: :hidden %>
-  <%= f.input :signature, label: "Firma por defecto" %>
-  <%= f.input :signature_cache, as: :hidden %>
+  <div class="basic-info">
+    <h4>Información Básica</h4>
+    <%= f.input :name, label: "Nombre de la empresa"%>
+    <%= f.input :address, label: "Dirección" %>
+    <%= f.input :cell_phone, label: "Teléfono de contacto" %>
+    <%= f.input :email, label: "Email de contacto" %>
+    <%= f.input :tax_id, label: "NIT" %>
+  </div>
+  <hr>
+  <div class="photos">
+    <h4>Logo y Firma</h4>
+    <% if @business.logo.file  %>
+      <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+      </div>
+    <% end %>
+    <%= f.input :logo, label: "Logo" %>
+    <%= f.input :logo_cache, as: :hidden %>
+    <% if @business.signature.file  %>
+      <%= cl_image_tag  @business.signature, width: 200, height: 100%>
+    <% end %>
+    <%= f.input :signature, label: "Firma por defecto" %>
+    <%= f.input :signature_cache, as: :hidden %>
+  </div>
+  <hr>
+  <div class="invoice-texts">
+    <h4>Textos por defecto en la factura</h4>
+    <%= f.input :invoice_resolution_number,
+                label: "Resolución de facturación",
+                input_html: {
+                  placeholder: Business::INVOICE_RESOLUTION_NUMBER
+                }
+    %>
+    <%= f.input :invoice_terms_and_conditions,
+                label: "Términos y condiciones",
+                input_html: {
+                  placeholder: Business::INVOICE_TERMS_AND_CONDITIONS
+                }
+    %>
+    <%= f.input :invoice_notes,
+                label: "Notas",
+                input_html: {
+                  placeholder: Business::INVOICE_NOTES
+                }
+
+    %>
+
+  </div>
   <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
   <span class="new-business-form-btns">
     <%= link_to "cancelar", businesses_path, class:"form-btn--no-background" %>

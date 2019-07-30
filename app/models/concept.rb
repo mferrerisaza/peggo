@@ -17,11 +17,11 @@ class Concept < ApplicationRecord
   end
 
   def quantity?
-    quantity ? quantity : 1
+    quantity || 1
   end
 
   def vat?
-    vat ? vat : 0
+    vat || 0
   end
 
   def gross_total?

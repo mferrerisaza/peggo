@@ -9,9 +9,14 @@
       font-weight: lighter;
       font-size: 14px;
     }
-    input{
+    input {
       font-weight: normal;
       font-size: 14px;
+    }
+    textarea {
+      font-weight: normal;
+      font-size: 13px;
+      min-height: 100px;
     }
   }
   .new-business-form-heading{
@@ -35,5 +40,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .bussines-logo {
+    width: 100%;
+    height: 100px;
+    background-repeat: no-repeat;
   }
 }

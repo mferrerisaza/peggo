@@ -4,7 +4,7 @@
   <% end %>
   <%= f.association :contact,
                     label: "Recibimos de:",
-                    collection: Contact.where(client: true).order(name: :asc),
+                    collection: Contact.where(business: @business).where(client: true).order(name: :asc),
                     input_html: {
                       data: {
                         controller: "slim-select",
