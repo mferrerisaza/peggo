@@ -2,7 +2,7 @@
   <% unless action_name == "new" || action_name == "create" %>
     <%= f.input :number, label: "Comp. Egreso Num" %>
   <% end %>
-  <%= f.association :contact, label: "Beneficiario", collection: Contact.where(provider: true).order(name: :asc), input_html: {data: { controller: "slim-select", slim_select_type: "contactSelect" } }%>
+  <%= f.association :contact, label: "Beneficiario", collection: Contact.where(business: @business).where(provider: true).order(name: :asc), input_html: {data: { controller: "slim-select", slim_select_type: "contactSelect" } }%>
   <%= f.input :date, as: :string, input_html: { class: "datepicker-expense", data: { controller: "flatpickr", "flatpickr-type": "expense" } }, placeholder: "Seleccionar...", label: "Fecha operación"%>
   <%= f.input :description, label: "Descripción"%>
   <%= f.input :amount,

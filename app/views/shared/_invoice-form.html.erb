@@ -2,8 +2,10 @@
   <div class="document-form-header">
     <div class="row">
       <div class="col-xs-12 col-sm-4">
-        <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
-        </div>
+        <% if @business.logo.file %>
+          <div class="bussines-logo" style="background-image: url('<%= cl_image_path @business.logo, width: 200, height: 100, crop: :fill; %>')">
+          </div>
+        <% end %>
       </div>
       <div class="col-xs-12 col-sm-4">
         <div class="document-header-business-info">
@@ -37,7 +39,7 @@
     <div class="col-xs-12 col-sm-4">
       <%= f.association :contact,
                         label: "Cliente",
-                        collection: Contact.where(client: true).order(name: :asc),
+                        collection: Contact.where(business: @business).where(client: true).order(name: :asc),
                         input_html: {
                           data: {
                             controller: "slim-select",
