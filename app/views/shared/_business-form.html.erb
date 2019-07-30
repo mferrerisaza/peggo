@@ -26,13 +26,23 @@
   <div class="invoice-texts">
     <h4>Textos por defecto en la factura</h4>
     <%= f.input :invoice_resolution_number,
-                label: "Resolución de facturación"
+                label: "Resolución de facturación",
+                input_html: {
+                  value: @business.invoice_resolution_number?
+                }
     %>
     <%= f.input :invoice_terms_and_conditions,
-                label: "Términos y condiciones"
+                label: "Términos y condiciones",
+                input_html: {
+                  value: @business.invoice_terms_and_conditions?
+                }
     %>
     <%= f.input :invoice_notes,
-                label: "Notas"
+                label: "Notas",
+                input_html: {
+                  value: @business.invoice_notes?
+                }
+
     %>
 
   </div>

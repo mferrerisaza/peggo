@@ -1,7 +1,7 @@
 class Business < ApplicationRecord
   INVOICE_TERMS_AND_CONDITIONS = "1. Esta factura de venta se asimila en todos sus efectos legales a una letra de cambio según el artículo No. 671 y S.S. 772-774 del código de comercio.\n2. En caso de mora se causara el interés autorizado por la ley."
-  INVOICE_NOTES = "Pagos por consignación o transferencia bancaria a la Cuenta de Ahorros BANCOLOMBIA a nombre de SCUAD S.A.S No. 02900017858.\nFavor anunciar su pago al correo electrónico nosotros@scuad.co"
-  INVOICE_RESOLUTION_NUMBER = "Resolución Autorización por Computador DIAN N° 18762013589371 del 20/03/2019 del 1 HASTA 500 - Vigencia 24 Meses"
+  INVOICE_NOTES = "Pagos por consignación o transferencia bancaria a la Cuenta de Ahorros XXXXXXXXXX a nombre de XXXXXXXXX No. XXXXXXXXXXX.\nFavor anunciar su pago al correo electrónico XXXXXXXXXXXXXX"
+  INVOICE_RESOLUTION_NUMBER = "Resolución Autorización por Computador DIAN N° XXXXXXXXXXXX del XX/XX/XXXX del 1 HASTA 500 - Vigencia 24 Meses"
 
   belongs_to :user
   has_many :expenses, dependent: :destroy
@@ -16,4 +16,16 @@ class Business < ApplicationRecord
 
   mount_uploader :logo, LogoUploader
   mount_uploader :signature, LogoUploader
+
+  def invoice_resolution_number?
+    invoice_resolution_number || INVOICE_RESOLUTION_NUMBER
+  end
+
+  def invoice_notes?
+    invoice_notes || INVOICE_NOTES
+  end
+
+  def invoice_terms_and_conditions?
+    invoice_terms_and_conditions || INVOICE_TERMS_AND_CONDITIONS
+  end
 end
