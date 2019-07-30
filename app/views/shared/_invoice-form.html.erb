@@ -27,7 +27,7 @@
                       readonly: true,
                       input_html: {
                         class: "dian-resolution-number",
-                        value: @invoice.resolution_number?
+                        value: @invoice.resolution_number?(@business)
                       }
           %>
         </div>
@@ -200,7 +200,7 @@
         <%= f.input :terms_and_conditions,
                     label: "Términos y Condiciones:",
                     input_html: {
-                      value: @invoice.terms_and_conditions?
+                      value: @invoice.terms_and_conditions?(@business)
                     }
         %>
       </div>
@@ -208,7 +208,7 @@
         <%= f.input :notes,
                     label: "Notas:",
                     input_html: {
-                      value: @invoice.notes?
+                      value: @invoice.notes?(@business)
                     }
         %>
       </div>

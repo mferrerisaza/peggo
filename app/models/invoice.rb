@@ -13,7 +13,7 @@ class Invoice < ApplicationRecord
   monetize :amount_retained_cents
 
   def formated_number
-    "%03d" % number
+    format("%03d", number)
   end
 
   def pdf_file_name
@@ -25,7 +25,7 @@ class Invoice < ApplicationRecord
   end
 
   def status
-    if debt == 0
+    if debt.zero?
       "Cobrada"
     else
       "Por Cobrar"
@@ -84,16 +84,16 @@ class Invoice < ApplicationRecord
     total - amount_paid - amount_retained
   end
 
-  def resolution_number?
-    resolution_number ? resolution_number : Business::INVOICE_RESOLUTION_NUMBER
+  def resolution_number?(business)
+    resolution_number || business.invoice_resolution_number
   end
 
-  def terms_and_conditions?
-    terms_and_conditions ? terms_and_conditions : Business::INVOICE_TERMS_AND_CONDITIONS
+  def terms_and_conditions?(business)
+    terms_and_conditions || business.invoice_terms_and_conditions
   end
 
-  def notes?
-    notes ? notes : Business::INVOICE_NOTES
+  def notes?(business)
+    notes || business.invoice_notes
   end
 
   def term
@@ -102,6 +102,7 @@ class Invoice < ApplicationRecord
 
   def signature?
     return unless signature.file || business.signature.file
+
     signature.file ? signature : business.signature
   end
 
