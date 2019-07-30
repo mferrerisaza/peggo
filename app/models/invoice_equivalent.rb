@@ -6,8 +6,7 @@ class InvoiceEquivalent < ApplicationRecord
   monetize :amount_cents
   monetize :retention_cents
 
-  enum retention_type: [
-                        "Arrendamiento de bienes muebles - (4%)",
+  enum retention_type: ["Arrendamiento de bienes muebles - (4%)",
                         "Arrendamiento de bienes raíces - (3.5%)",
                         "Compras - (2.5%)",
                         "Compras - (3.5%)",
@@ -19,16 +18,15 @@ class InvoiceEquivalent < ApplicationRecord
                         "Servicios en general - (6%)",
                         "ReteICA - (0%)",
                         "ReteIVA - (15%)",
-                        "Transporte de carga - (1%)"
-                      ]
+                        "Transporte de carga - (1%)"]
 
-  validates :date, :description, :number, :amount,  presence: true
+  validates :date, :description, :number, :amount, presence: true
   validates :amount, numericality: { greater_than: 0 }
   has_many :attachments, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   def formated_number
-    "%03d" % number
+    format("%03d", number)
   end
 
   def pdf_file_name

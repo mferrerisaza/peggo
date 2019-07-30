@@ -47,13 +47,13 @@ class Contact < ApplicationRecord
     "NEQUI"
   ]
 
-
   validates :name, :tax_id_type, :tax_id, presence: true
 
   def full_address
     return "" if address.blank?
-    return "#{address}" if city.blank? && province.blank?
+    return address.to_s if city.blank? && province.blank?
     return "#{address} - #{city}" if province.blank?
+
     return "#{address} - #{city}, #{province}"
   end
 
@@ -64,13 +64,14 @@ class Contact < ApplicationRecord
 
   def phone_numbers
     return "" if cell_phone.blank? && phone.blank?
-    return "#{cell_phone}" if cell_phone && phone.blank?
-    return "#{phone}" if phone && cell_phone.blank?
+    return cell_phone.to_s if cell_phone && phone.blank?
+    return phone.to_s if phone && cell_phone.blank?
     return "#{phone} - #{cell_phone}" if cell_phone && phone
   end
 
   def bank_account
     return if account_number.blank?
+
     "#{account_type} #{account_bank} No: #{account_number}"
   end
 end

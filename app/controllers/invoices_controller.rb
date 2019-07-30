@@ -75,20 +75,24 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_params
-    strong_params = params.require(:invoice).permit(
-                                              :number,
-                                              :contact_id,
-                                              :date,
-                                              :expiration_date,
-                                              :signature,
-                                              :terms_and_conditions,
-                                              :notes,
-                                              :resolution_number,
-                                              :business_id,
-                                              items_attributes: [:id, :name, :quantity, :price, :vat, :discount, "_destroy", "id"]
-                                            )
-    strong_params[:items_attributes].each {|_key, item| item[:price] = item[:price].gsub(",","") } unless strong_params[:items_attributes][:_destroy] == "true"
-
-    strong_params
+    params.require(:invoice).permit(
+      :number,
+      :contact_id,
+      :date,
+      :expiration_date,
+      :signature,
+      :terms_and_conditions,
+      :notes,
+      :resolution_number,
+      :business_id,
+      items_attributes: [:id,
+                         :name,
+                         :quantity,
+                         :price,
+                         :vat,
+                         :discount,
+                         "_destroy",
+                         "id"]
+    )
   end
 end

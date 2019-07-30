@@ -74,22 +74,18 @@ class ExpensesController < ApplicationController
       :retention_type,
       :business_id,
       :observation,
-      attachments_attributes: [
-        :id,
-        :file,
-        "@original_filename",
-        "@content_type",
-        "@headers",
-        "_destroy"
-      ],
-      concepts_attributes: [
-        :id,
-        :name,
-        :quantity,
-        :amount,
-        :vat,
-        :_destroy
-      ]
+      attachments_attributes: [:id,
+                               :file,
+                               "@original_filename",
+                               "@content_type",
+                               "@headers",
+                               "_destroy"],
+      concepts_attributes: [:id,
+                            :name,
+                            :quantity,
+                            :amount,
+                            :vat,
+                            :_destroy]
     )
     strong_params[:attachments_attributes].each { |attachment| attachment[:name] = attachment[:file].original_filename } if strong_params[:attachments_attributes].is_a?(Array)
     strong_params
@@ -98,5 +94,4 @@ class ExpensesController < ApplicationController
   def set_expense
     @expense = Expense.includes(:contact).find(params[:id])
   end
-
 end
