@@ -6,5 +6,4 @@ namespace :expense do
       MigrateExpenseDescriptionAndAmountToConceptJob.perform_later(expense.id)
     end
   end
-
 end
