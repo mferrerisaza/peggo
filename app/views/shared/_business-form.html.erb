@@ -28,19 +28,19 @@
     <%= f.input :invoice_resolution_number,
                 label: "Resolución de facturación",
                 input_html: {
-                  value: @business.invoice_resolution_number?
+                  placeholder: Business::INVOICE_RESOLUTION_NUMBER
                 }
     %>
     <%= f.input :invoice_terms_and_conditions,
                 label: "Términos y condiciones",
                 input_html: {
-                  value: @business.invoice_terms_and_conditions?
+                  placeholder: Business::INVOICE_TERMS_AND_CONDITIONS
                 }
     %>
     <%= f.input :invoice_notes,
                 label: "Notas",
                 input_html: {
-                  value: @business.invoice_notes?
+                  placeholder: Business::INVOICE_NOTES
                 }
 
     %>

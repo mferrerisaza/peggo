@@ -16,16 +16,4 @@ class Business < ApplicationRecord
 
   mount_uploader :logo, LogoUploader
   mount_uploader :signature, LogoUploader
-
-  def invoice_resolution_number?
-    invoice_resolution_number || INVOICE_RESOLUTION_NUMBER
-  end
-
-  def invoice_notes?
-    invoice_notes || INVOICE_NOTES
-  end
-
-  def invoice_terms_and_conditions?
-    invoice_terms_and_conditions || INVOICE_TERMS_AND_CONDITIONS
-  end
 end
