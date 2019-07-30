@@ -9,7 +9,7 @@
       font-weight: lighter;
       font-size: 14px;
     }
-    input{
+    input, textarea {
       font-weight: normal;
       font-size: 14px;
     }
@@ -35,5 +35,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .bussines-logo {
+    width: 100%;
+    height: 100px;
+    background-repeat: no-repeat;
   }
 }
