@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_153631) do
+ActiveRecord::Schema.define(version: 2019_07_30_155140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(version: 2019_07_23_153631) do
     t.string "cell_phone"
     t.string "logo"
     t.string "signature"
+    t.text "invoice_terms_and_conditions"
+    t.text "invoice_notes"
+    t.text "invoice_resolution_number"
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
