@@ -64,7 +64,11 @@
                   },
                 }
               %>
-              <%= link_to attachment.name, cl_image_path(attachment.file.filename), target: :blank  %>
+              <% if attachment.file.file.storage_type == "private" %>
+                <%= link_to attachment.name, cl_private_download_url(attachment.file.file.public_id, attachment.file.format), target: :blank  %>
+              <% else %>
+                <%= link_to attachment.name, cl_image_path(attachment.file.filename), target: :blank  %>
+              <% end %>
               <%= link_to business_invoice_equivalent_path(@invoice_equivalent, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
                 <i class="material-icons"> delete </i>
               <% end %>
