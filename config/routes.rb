@@ -37,6 +37,8 @@ Rails.application.routes.draw do
         get '/print', to: "invoice_equivalents#print", defaults: { format: 'pdf' }
       end
     end
+
+    resources :attachments, only: :show
   end
 
   require "sidekiq/web"
