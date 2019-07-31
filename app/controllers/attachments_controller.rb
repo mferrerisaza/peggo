@@ -3,7 +3,7 @@ class AttachmentsController < ApplicationController
   before_action :set_attachment
 
   def show
-    authorize @business, :business_of_current_user?
+    authorize @attachment
     url = if @attachment.file.file.storage_type == "private"
             Cloudinary::Utils.private_download_url(@attachment.file.file.public_id, @attachment.file.format)
           else

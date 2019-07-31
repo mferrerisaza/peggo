@@ -69,6 +69,7 @@
               <% else %>
                 <%= link_to attachment.name, cl_image_path(attachment.file.filename), target: :blank  %>
               <% end %>
+              <%= link_to "test", business_attachment_path(@business, attachment)  %>
               <%= link_to business_invoice_equivalent_path(@invoice_equivalent, attachments_delete_params), class: "delete-attachement", method: :patch, data: { confirm: 'Are you sure?' } do%>
                 <i class="material-icons"> delete </i>
               <% end %>
