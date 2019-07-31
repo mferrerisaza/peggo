@@ -39,11 +39,14 @@ Rails.application.routes.draw do
     end
 
     resources :attachments, only: :show
+
+    member do
+      get 'export', to: "pages#export"
+    end
   end
 
   require "sidekiq/web"
-    authenticate :user, lambda { |u| u.admin } do
-      mount Sidekiq::Web => '/sidekiq'
-    end
-  get '/support', to: "pages#support"
+  authenticate :user, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

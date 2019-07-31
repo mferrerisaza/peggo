@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
   end
 
-  def support
+  def export
+    @business = Business.find(params[:id])
   end
 end
