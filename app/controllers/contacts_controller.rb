@@ -27,7 +27,8 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    authorize @business, :business_of_current_user?
+    authorize @contact
+    # authorize @business, :business_of_current_user?
   end
 
   def update

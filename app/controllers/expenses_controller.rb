@@ -29,7 +29,7 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    authorize @business, :business_of_current_user?
+    authorize @expense
   end
 
   def update
