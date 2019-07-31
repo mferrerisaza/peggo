@@ -3,8 +3,4 @@ class PagesController < ApplicationController
 
   def home
   end
-
-  def export
-    @business = Business.find(params[:id])
-  end
 end

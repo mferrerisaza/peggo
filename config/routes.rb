@@ -39,10 +39,7 @@ Rails.application.routes.draw do
     end
 
     resources :attachments, only: :show
-
-    member do
-      get 'export', to: "pages#export"
-    end
+    resources :exports, only: [:new, :create]
   end
 
   require "sidekiq/web"

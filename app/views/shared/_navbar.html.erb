@@ -6,7 +6,6 @@
         <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu <%= "hidden" unless render_navbar_dropdown %>">
           <% if current_user %>
             <li><%= link_to "Inicio", root_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
-            <li><%= link_to "Soporte", support_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
             <li><%= link_to "Cerrar Sesión", destroy_user_session_path , method: :delete, class: "navbar-wagon-item navbar-wagon-link" %></li>
           <% else %>
             <li><a href="#features" class="navbar-wagon-item navbar-wagon-link">Caracteristicas</a></li>
@@ -27,7 +26,6 @@
 
     <div class="navbar-wagon-right hidden-xs hidden-sm">
       <% if current_user %>
-        <%= link_to "Soporte", support_path, class: "navbar-wagon-item navbar-wagon-link"  %>
         <%= link_to "Cerrar Sesión", destroy_user_session_path , method: :delete, class: "navbar-wagon-item navbar-wagon-link" %>
       <% else %>
         <a href="#features" class="navbar-wagon-item navbar-wagon-link">Caracteristicas</a>

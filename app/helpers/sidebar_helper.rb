@@ -8,9 +8,10 @@ module SidebarHelper
       invoice_equivalents: %w[index show new create edit update],
       contacts: %w[index show new create edit update],
       budgets: %w[index new create edit update],
-      pages: %w[export]
+      exports: %w[new create]
     }
     return if allowed_controllers[controller_name.to_sym].nil?
+
     allowed_controllers[controller_name.to_sym].include?(action_name)
   end
 end

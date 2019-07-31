@@ -1,0 +1,33 @@
+<%= simple_form_for :export, url: business_exports_path(@business), method: :post  do |f| %>
+  <%= f.input :expenses,
+              label: "Comprobantes de Egreso",
+              as: :boolean,
+              input_html: {
+                checked: true
+              }
+  %>
+  <%= f.input :invoices,
+              label: "Factuas de venta",
+              as: :boolean,
+              input_html: {
+                checked: true
+              }
+  %>
+  <%= f.input :invoice_equivalents,
+              label: "Documentos Equivalentes",
+              as: :boolean,
+              input_html: {
+                checked: true
+              }
+  %>
+  <%= f.input :payments,
+              label: "Recibos de Caja",
+              as: :boolean,
+              input_html: {
+                checked: true
+              }
+  %>
+  <span class="new-property-form-btns">
+    <%= f.submit "Enviar", class:"btn form-btn" %>
+  </span>
+<% end %>

@@ -80,7 +80,7 @@
           </i>
           <span>Pagos</span>
         </a>
-        <a class="sidebar-link <%= "active" if action_name == "export" %>" href="/businesses/<%= @business.id %>/export">
+        <a class="sidebar-link <%= "active" if action_name == "export" %>" href="<%= new_business_export_path(@business) %>">
           <i class="material-icons">
             import_export
           </i>
