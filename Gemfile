@@ -29,6 +29,9 @@ gem 'wkhtmltopdf-binary'
 gem "pg_search"
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
