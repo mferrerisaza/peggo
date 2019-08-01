@@ -1,0 +1,31 @@
+wb.add_worksheet(name: "Facturas") do |sheet|
+  sheet.add_row ["Número",
+                 "Cliente",
+                 "Tipo Id",
+                 "No. Id",
+                 "Descripción General",
+                 "Subtotal",
+                 "IVA",
+                 "Total",
+                 "Por Cobrar",
+                 "Estado",
+                 "Fecha Expedición",
+                 "Fecha Vencimiento",
+                 "Link Factura"]
+
+  @invoices.each do |invoice|
+    sheet.add_row [invoice.formated_number,
+                   invoice.contact.name,
+                   invoice.contact.tax_id_type,
+                   invoice.contact.tax_id,
+                   invoice.items.map(&:name).join(' - '),
+                   invoice.items_net_subtotal,
+                   invoice.items_vat_subtotal,
+                   invoice.total,
+                   invoice.debt,
+                   invoice.status,
+                   invoice.date,
+                   invoice.expiration_date,
+                   print_business_invoice_url(@business, invoice)]
+  end
+end
