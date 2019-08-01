@@ -1,33 +1,51 @@
 <%= simple_form_for :export, url: business_exports_path(@business), method: :post  do |f| %>
-  <%= f.input :expenses,
+  <%= f.input :dates,
+              as: :string,
+              placeholder: "Seleccionar...",
+              label: "Fechas a exportar",
+              input_html: {
+                required: true,
+                class: "datepicker-expense",
+                  data: { controller: "flatpickr", "flatpickr-type": "export"}
+              }
+  %>
+  <%= f.input :expense,
               label: "Comprobantes de Egreso",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
-  <%= f.input :invoices,
+  <%= f.input :invoice,
               label: "Factuas de venta",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
-  <%= f.input :invoice_equivalents,
+  <%= f.input :invoice_equivalent,
               label: "Documentos Equivalentes",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
-  <%= f.input :payments,
+  <%= f.input :payment,
               label: "Recibos de Caja",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
+  <%= f.input :contact,
+              label: "Contactos",
+              as: :boolean,
+              input_html: {
+                checked: true
+              }
+  %>
   <span class="new-property-form-btns">
+    <%= link_to "cancelar", :back, class:"form-btn--no-background" %>
     <%= f.submit "Enviar", class:"btn form-btn" %>
   </span>
 <% end %>

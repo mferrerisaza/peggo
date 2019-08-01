@@ -11,6 +11,8 @@ export default class extends Controller {
       this.mountExpenseFlatpickr()
     } else if (this.type === "invoice") {
       this.mountInvoiceFlatpickr()
+    } else if (this.type === "export") {
+      this.mountExportFlatpickr()
     }
   }
 
@@ -30,6 +32,17 @@ export default class extends Controller {
       dateFormat: "Y-m-d",
       "locale": Spanish,
       onChange: this.checkExpDate
+    });
+  }
+
+  mountExportFlatpickr() {
+    const dateInputInvoice = flatpickr(this.element, {
+      mode: "range",
+      altInput: true,
+      altFormat: "d-M-Y",
+      dateFormat: "Y-m-d",
+      maxDate: new Date(),
+      "locale": Spanish
     });
   }
 
