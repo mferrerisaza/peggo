@@ -1,14 +1,17 @@
 <%= simple_form_for :export, url: business_exports_path(@business), method: :post  do |f| %>
   <%= f.input :dates,
               as: :string,
-              placeholder: "Seleccionar...",
-              label: "Fechas a exportar",
+              placeholder: "Exportar todo",
+              label: "Rango de fechas a exportar",
               input_html: {
                 required: true,
                 class: "datepicker-expense",
                   data: { controller: "flatpickr", "flatpickr-type": "export"}
               }
   %>
+  <br>
+  <h5 class="text-center">¿Qué quieres incluir en el reporte?</h5>
+  <hr>
   <%= f.input :expense,
               label: "Comprobantes de Egreso",
               as: :boolean,

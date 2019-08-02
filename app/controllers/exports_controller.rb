@@ -7,11 +7,13 @@ class ExportsController < ApplicationController
 
   def create
     authorize @business, :business_of_current_user?
-    CreateAndMailReportJob.perform_now(
-      @business.id,
-      current_user.id,
-      export_params
-    )
+
+    ExportMailer.with(
+      email: current_user.email,
+      business_id: @business.id,
+      export_params: export_params
+    ).send_report.deliver_now
+
     flash[:notice] = "La generación del reporte puede tomar algún tiempo, una vez finalizado lo enviaremos a #{current_user.email}"
     redirect_to new_business_export_path @business
   end
@@ -19,7 +21,7 @@ class ExportsController < ApplicationController
   private
 
   def export_params
-    strong_params = params.require(:export).permit(
+    params.require(:export).permit(
       :dates,
       :expense,
       :invoice,
@@ -27,10 +29,5 @@ class ExportsController < ApplicationController
       :payment,
       :contact
     )
-    unless strong_params[:dates].blank?
-      dates = strong_params[:dates].split(" a ")
-      strong_params[:dates] = dates[0]..dates[1]
-    end
-    strong_params
   end
 end
