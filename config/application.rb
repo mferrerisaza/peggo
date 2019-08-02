@@ -11,9 +11,9 @@ module Peggo
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.active_job.queue_adapter = :sidekiq
     config.generators do |generate|
-      generate.assets false       generate.assets false
-      generate.helper false       generate.helper false
-      generate.test_framework  :test_unit, fixture: false
+      generate.assets false
+      generate.helper false
+      generate.test_framework  :test_unit, fixture: true
     end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2

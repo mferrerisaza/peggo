@@ -7,4 +7,14 @@ require 'rails/test_help'
   fixtures :all
 
    # Add more helper methods to be used by all tests here...
+
+   # Devise test helpers
+   include Warden::Test::Helpers
+   Warden.test_mode!
 end
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+Capybara.save_path = Rails.root.join('tmp/capybara')
+Capybara.javascript_driver = :headless_chrome
