@@ -23,7 +23,6 @@ gem 'cloudinary'
 gem 'carrierwave'
 gem 'omniauth-google-oauth2'
 gem 'mailjet'
-gem 'forest_liana'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem "pg_search"
