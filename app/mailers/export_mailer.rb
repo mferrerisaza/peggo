@@ -1,18 +1,21 @@
 class ExportMailer < ApplicationMailer
   def send_report
+    business = Business.find(params[:business_id])
     attachments['Reporte.xlsx'] = {
       mime_type: Mime[:xlsx],
-      content: build_report(params[:export_params])
+      content: build_report(business, params[:export_params])
     }
 
-    mail(to: params[:email], subject: "Tu reporte")
+    mail(
+      to: params[:email],
+      from: "\"#{business.name} (Peggo)\" <noreply@scuad.co>",
+      subject: "Exporta tu información"
+    )
   end
 
   private
 
-  def build_report(export_params)
-    business = Business.find(params[:business_id])
-
+  def build_report(business, export_params)
     adjust_dates_for_filters(export_params) unless export_params[:dates].blank?
 
     expenses = retrive_records(:expense, business, export_params)

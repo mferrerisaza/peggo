@@ -2,7 +2,7 @@
   <%= f.input :dates,
               as: :string,
               placeholder: "Exportar todo",
-              label: "Rango de fechas a exportar",
+              label: "Rango de Fechas a Exportar",
               input_html: {
                 required: true,
                 class: "datepicker-expense",
@@ -13,35 +13,35 @@
   <h5 class="text-center">¿Qué quieres incluir en el reporte?</h5>
   <hr>
   <%= f.input :expense,
-              label: "Comprobantes de Egreso",
+              label: "Comprobantes de Egreso:",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
   <%= f.input :invoice,
-              label: "Factuas de venta",
+              label: "Factuas de Venta:",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
   <%= f.input :invoice_equivalent,
-              label: "Documentos Equivalentes",
+              label: "Documentos Equivalentes:",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
   <%= f.input :payment,
-              label: "Recibos de Caja",
+              label: "Recibos de Caja:",
               as: :boolean,
               input_html: {
                 checked: true
               }
   %>
   <%= f.input :contact,
-              label: "Contactos",
+              label: "Contactos Creados:",
               as: :boolean,
               input_html: {
                 checked: true
