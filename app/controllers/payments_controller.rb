@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
   end
 
   def edit
-    authorize @business, :business_of_current_user?
+    authorize @payment
     @invoice = @payment.invoice
   end
 
@@ -67,18 +67,18 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    strong_params = params.require(:payment).permit(
-                                              :number,
-                                              :contact_id,
-                                              :invoice_id,
-                                              :payment_method,
-                                              :date,
-                                              :description,
-                                              :amount,
-                                              :retention,
-                                              :retention_type,
-                                              :business_id,
-                                              :observation
-                                            )
+    params.require(:payment).permit(
+      :number,
+      :contact_id,
+      :invoice_id,
+      :payment_method,
+      :date,
+      :description,
+      :amount,
+      :retention,
+      :retention_type,
+      :business_id,
+      :observation
+    )
   end
 end

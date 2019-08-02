@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+
+render partial: "exports/contacts", locals: { wb: wb } if @contacts
+render partial: "exports/expenses", locals: { wb: wb } if @expenses
+render partial: "exports/invoices", locals: { wb: wb } if @invoices
+render partial: "exports/payments", locals: { wb: wb } if @payments
+render partial: "exports/invoice_equivalents", locals: { wb: wb } if @invoice_equivalents

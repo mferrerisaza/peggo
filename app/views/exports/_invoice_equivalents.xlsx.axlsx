@@ -1,0 +1,33 @@
+wb.add_worksheet(name: "Documentos Equivalentes") do |sheet|
+
+  sheet.add_row ["Número",
+                 "Beneficiario",
+                 "Tipo Id",
+                 "No. Id",
+                 "Fecha Operación",
+                 "Descripción",
+                 "Valor Operación",
+                 "Rte Fuente",
+                 "Total A Pagar",
+                 "Link Al Documento Equivalente",
+                 "Adjuntos"]
+
+  @invoice_equivalents.each do |invoice_equivalent|
+    row = [invoice_equivalent.formated_number,
+           invoice_equivalent.contact.name,
+           invoice_equivalent.contact.tax_id_type,
+           invoice_equivalent.contact.tax_id,
+           invoice_equivalent.date,
+           invoice_equivalent.description,
+           invoice_equivalent.amount,
+           invoice_equivalent.retention,
+           invoice_equivalent.total,
+           print_business_invoice_equivalent_url(@business, invoice_equivalent)]
+
+    invoice_equivalent.attachments.each do |attachment|
+      row << business_attachment_url(@business, attachment)
+    end
+
+    sheet.add_row row
+  end
+end

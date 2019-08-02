@@ -80,11 +80,11 @@
           </i>
           <span>Pagos</span>
         </a>
-        <a class="sidebar-link <%= "active" if controller_name == "pages" %>" href="<%= support_path %>">
+        <a class="sidebar-link <%= "active" if controller_name == "exports" %>" href="<%= new_business_export_path(@business) %>">
           <i class="material-icons">
-            help
+            import_export
           </i>
-          <span>Soporte</span>
+          <span>Exportar Datos</span>
         </a>
       </div>
     <% else %>

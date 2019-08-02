@@ -37,11 +37,13 @@ Rails.application.routes.draw do
         get '/print', to: "invoice_equivalents#print", defaults: { format: 'pdf' }
       end
     end
+
+    resources :attachments, only: :show
+    resources :exports, only: [:new, :create]
   end
 
   require "sidekiq/web"
-    authenticate :user, lambda { |u| u.admin } do
-      mount Sidekiq::Web => '/sidekiq'
-    end
-  get '/support', to: "pages#support"
+  authenticate :user, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

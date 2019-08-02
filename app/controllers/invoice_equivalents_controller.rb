@@ -28,7 +28,7 @@ class InvoiceEquivalentsController < ApplicationController
   end
 
   def edit
-    authorize @business, :business_of_current_user?
+    authorize @invoice_equivalent
   end
 
   def update

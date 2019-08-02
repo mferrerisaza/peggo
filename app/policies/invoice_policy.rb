@@ -3,6 +3,10 @@ class InvoicePolicy < ApplicationPolicy
     record.business.user == user
   end
 
+  def edit?
+    show?
+  end
+
   def destroy?
     show?
   end

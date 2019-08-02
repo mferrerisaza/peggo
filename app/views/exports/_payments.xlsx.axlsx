@@ -1,0 +1,28 @@
+wb.add_worksheet(name: "Recibos de caja") do |sheet|
+
+  sheet.add_row ["Número",
+                 "Beneficiario",
+                 "Tipo Id",
+                 "No. Id",
+                 "Fecha Recibo",
+                 "Medio de Pago",
+                 "Concepto",
+                 "Valor",
+                 "Retenciones",
+                 "Observaciones",
+                 "Link al Recibo de Caja"]
+
+  @payments.each do |payment|
+    sheet.add_row [payment.formated_number,
+                   payment.contact.name,
+                   payment.contact.tax_id_type,
+                   payment.contact.tax_id,
+                   payment.date,
+                   payment.payment_method,
+                   payment.description,
+                   payment.amount,
+                   payment.retention,
+                   payment.observation,
+                   print_business_payment_url(@business, payment)]
+  end
+end

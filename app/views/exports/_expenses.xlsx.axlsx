@@ -1,0 +1,29 @@
+wb.add_worksheet(name: "Egresos") do |sheet|
+
+  sheet.add_row ["Número",
+                 "Beneficiario",
+                 "Descripción",
+                 "Valor",
+                 "Forma de Pago",
+                 "Observaciones",
+                 "Fecha Egreso",
+                 "Link Egreso",
+                 "Adjuntos"]
+
+  @expenses.each do |expense|
+    row = [expense.formated_number,
+           expense.contact.name,
+           expense.concepts.map(&:name).join(' - '),
+           expense.total,
+           expense.payment_method,
+           expense.observation,
+           expense.date,
+           print_business_expense_url(@business, expense)]
+
+    expense.attachments.each do |attachment|
+      row << business_attachment_url(@business, attachment)
+    end
+
+    sheet.add_row row
+  end
+end

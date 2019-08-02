@@ -1,0 +1,36 @@
+wb.add_worksheet(name: "Contactos") do |sheet|
+
+  sheet.add_row ["Fecha Creación",
+                 "Nombre",
+                 "Tipo Id",
+                 "No. Id",
+                 "Proveedor",
+                 "Cliente",
+                 "Télefono",
+                 "Celular",
+                 "Correo Electrónico",
+                 "Departamento",
+                 "Ciudad",
+                 "Dirección",
+                 "Tipo Cuenta",
+                 "Banco",
+                 "Número de Cuenta"]
+
+  @contacts.each do |contact|
+    sheet.add_row [contact.created_at,
+                   contact.name,
+                   contact.tax_id_type,
+                   contact.tax_id,
+                   contact.provider,
+                   contact.client,
+                   contact.phone,
+                   contact.cell_phone,
+                   contact.email,
+                   contact.province,
+                   contact.city,
+                   contact.address,
+                   contact.account_type,
+                   contact.account_bank,
+                   contact.account_number]
+  end
+end
