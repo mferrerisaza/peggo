@@ -19,12 +19,12 @@
           </div>
         <% end %>
         <div class="card-actions">
-          <%= link_to edit_business_path(business) do %>
+          <%= link_to edit_business_path(business), class: "edit-business" do %>
             <i class="material-icons">
               create
             </i>
           <% end %>
-          <%= link_to business_path(business), method: :delete, data: { confirm: '¿Estás seguro?' } do %>
+          <%= link_to business_path(business), method: :delete, class: "delete-business", data: { confirm: '¿Estás seguro?' } do %>
             <i class="material-icons">
               delete
             </i>
