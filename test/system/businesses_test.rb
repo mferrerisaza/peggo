@@ -19,6 +19,7 @@ class BusinessesTest < ApplicationSystemTestCase
     within ".card-actions" do
       find('.edit-business').click
     end
+
     fill_in "Nombre de la empresa", with: "Scuad Editado"
     page.attach_file("Logo", Rails.root + 'test/fixtures/files/SCUAD-final.png')
 
