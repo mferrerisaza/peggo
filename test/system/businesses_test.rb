@@ -1,10 +1,14 @@
 require "application_system_test_case"
 
 class BusinessesTest < ApplicationSystemTestCase
-  test "let a signed in user create a new business" do
+  setup do
     login_as users(:mike)
+    @business = businesses(:xloop)
+    @businesses_count = Business.count
     visit "/"
+  end
 
+  test "let a signed in user create a new business" do
     find('.add-new-button').click
     fill_in "Nombre de la empresa", with: "Scuad Pruebas"
     assert_difference 'Business.count' do
@@ -13,9 +17,6 @@ class BusinessesTest < ApplicationSystemTestCase
   end
 
   test "let a signed in user edit an existing business" do
-    login_as users(:mike)
-    business = businesses(:xloop)
-    visit "/"
     within ".card-actions" do
       find('.edit-business').click
     end
@@ -25,24 +26,19 @@ class BusinessesTest < ApplicationSystemTestCase
 
     click_on "Editar"
 
-    business.reload
+    @business.reload
 
-    assert_equal "Scuad Editado", business.name
-    assert_not_nil business.logo
+    assert_equal "Scuad Editado", @business.name
+    assert_not_nil @business.logo
   end
 
   test "let a signed in user delete existing business" do
-    login_as users(:mike)
-    business = businesses(:xloop)
-    businesses_count = Business.count
-
-    visit "/"
     within ".card-actions" do
       accept_alert do
         find('.delete-business').click
       end
     end
     assert_selector ".alert.alert-info.alert-dismissible"
-    assert_equal businesses_count - 1, Business.count
+    assert_equal @businesses_count - 1, Business.count
   end
 end

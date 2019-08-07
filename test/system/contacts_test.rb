@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 class ContactsTest < ApplicationSystemTestCase
-  def setup
+  setup do
     login_as users(:mike)
     @business = businesses(:xloop)
     visit "/"
@@ -12,8 +12,6 @@ class ContactsTest < ApplicationSystemTestCase
   end
 
   test "let a signed in user create a contact within a business" do
-    setup
-
     find(".mdc-fab.fab-bottom-right.fab-color").click
 
     fill_in "Nombre", with: "Miguel Ferrer"
@@ -27,9 +25,6 @@ class ContactsTest < ApplicationSystemTestCase
   end
 
   test "let a signed in user edit a contact" do
-    setup
-
-
     assert_selector ".table-row-link", count: Contact.count
 
     contact = contacts(:amg)
@@ -49,8 +44,6 @@ class ContactsTest < ApplicationSystemTestCase
   end
 
   test "let a signed in user delete a contact" do
-    setup
-
     contact_count = Contact.count
 
     accept_alert do
