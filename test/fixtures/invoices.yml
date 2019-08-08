@@ -6,3 +6,10 @@ factura_amg:
   date: <%= Date.today %>
   expiration_date: <%= Date.today + 30.days %>
   business: xloop
+
+factura_amg_con_pago:
+  number: 2
+  contact: client
+  date: <%= Date.today %>
+  expiration_date: <%= Date.today + 30.days %>
+  business: xloop

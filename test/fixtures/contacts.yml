@@ -33,3 +33,11 @@ client:
   provider: false
   client: true
   business: xloop
+
+client_with_out_bills:
+  name: "Cliente sin facturas"
+  tax_id_type: "NIT - Número de identificación tributaria"
+  tax_id: "9216160623"
+  provider: false
+  client: true
+  business: xloop

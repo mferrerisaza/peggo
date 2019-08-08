@@ -29,9 +29,6 @@ class ExpensesTest < ApplicationSystemTestCase
 
   test "let a signed in user create an expense within a business" do
     find(".mdc-fab.fab-bottom-right.fab-color").click
-    find(".ss-single-selected").click
-    assert_selector ".ss-option:not(.ss-disabled)", count: Contact.where(business: @business).where(provider: true).size
-    find(".ss-option:not(.ss-disabled)", match: :first).click
     select "Transferencia", from: "Método de pago"
     find(".datepicker-expense").click
     assert_selector ".flatpickr-calendar"
@@ -70,7 +67,10 @@ class ExpensesTest < ApplicationSystemTestCase
     assert_equal "38,000", vat_input.value
     assert_equal "8,000", expense_retention.value
 
+    find(".ss-single-selected").click
     sleep(1)
+    assert_selector ".ss-option:not(.ss-disabled)", count: Contact.where(business: @business).where(provider: true).size
+    find(".ss-option:not(.ss-disabled)", match: :first).click
 
     assert_equal "230,000", total_input.value
     assert_difference 'Expense.count' do
