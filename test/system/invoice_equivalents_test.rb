@@ -11,7 +11,7 @@ class InvoiceEquivalentsTest < ApplicationSystemTestCase
     end
   end
 
-  test "let a signed in user create an invoice equivalent within a business" do
+  test "let a signed in user create a invoice equivalent within a business" do
     find(".mdc-fab.fab-bottom-right.fab-color").click
     fill_in "Descripción", with: "Prestación Servicios De Desarrollo Web"
     find(".datepicker-expense").click
@@ -53,7 +53,7 @@ class InvoiceEquivalentsTest < ApplicationSystemTestCase
     end
   end
 
-  test "let a signed in user edit an expense" do
+  test "let a signed in user edit an invoice_equivalent" do
     setup
 
 
@@ -90,7 +90,6 @@ class InvoiceEquivalentsTest < ApplicationSystemTestCase
 
     assert_equal invoice_equivalent.total, 900_000.to_money
     assert_equal "Prestación Servicios Editado", invoice_equivalent.description
-
   end
 
   test "let a signed in user delete an invoice equivalent" do

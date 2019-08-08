@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+asesoria_mercadeo_digital:
+  name: "Asesoria mercadeo digital"
+  quantity: 1
+  price_cents: 150_000_000
+  vat: 0.19
+  discount: 0
+  invoice: factura_amg
+
+desarrollo_web:
+  name: "Desarrollo sitio web"
+  quantity: 1
+  price_cents: 250_000_000
+  vat: 0
+  discount: 0.1
+  invoice: factura_amg
+
+asesoria_digital:
+  name: "Asesoria estrategia digital"
+  quantity: 1
+  price_cents: 100_000_000
+  vat: 0.1
+  discount: 0
+  invoice: factura_amg

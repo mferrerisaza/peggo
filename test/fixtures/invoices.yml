@@ -1,0 +1,8 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+factura_amg:
+  number: 1
+  contact: client
+  date: <%= Date.today %>
+  expiration_date: <%= Date.today + 30.days %>
+  business: xloop
