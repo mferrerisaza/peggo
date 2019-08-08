@@ -30,6 +30,8 @@ class BusinessesTest < ApplicationSystemTestCase
 
     assert_equal "Scuad Editado", @business.name
     assert_not_nil @business.logo
+
+    delete_attached_logo_from_cloudinary(@business)
   end
 
   test "let a signed in user delete existing business" do
@@ -40,5 +42,12 @@ class BusinessesTest < ApplicationSystemTestCase
     end
     assert_selector ".alert.alert-info.alert-dismissible"
     assert_equal @businesses_count - 1, Business.count
+  end
+
+
+  private
+
+  def delete_attached_logo_from_cloudinary(business)
+    business.logo.file.delete
   end
 end

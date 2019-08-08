@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 5.times do |i| %>
+invoice_equivalent_<%= i %>:
+  business: xloop
+  contact: provider
+  date: <%= Date.today - rand(1..30).days %>
+  number: i
+  observation: <%= rand(0..1).positive? ? "" : "Exento de pago de renta" %>
+  retention_type: "Servicios en general - (4%)"
+  description: <%= Faker::Lorem.sentence %>
+  amount_cents: <%= 600_000 * 100 %>
+  retention_cents: <%= 600_000 * 0.04 * 100 %>
+<% end %>
+
+prestacion_servicios_mercadeo:
+  business: xloop
+  contact: provider
+  date: <%= Date.today - rand(1..30).days %>
+  number: 6
+  observation: "Exento de pago de renta"
+  retention_type: "Servicios en general - (4%)"
+  description: "Prestacion servicios de mercadeo"
+  amount_cents: <%= 600_000 * 100 %>
+  retention_cents: <%= 600_000 * 0.04 * 100 %>
