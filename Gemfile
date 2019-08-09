@@ -23,7 +23,6 @@ gem 'cloudinary'
 gem 'carrierwave'
 gem 'omniauth-google-oauth2'
 gem 'mailjet'
-gem 'forest_liana'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem "pg_search"
@@ -35,7 +34,6 @@ gem 'axlsx_rails'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'spring-commands-rspec'
   gem "letter_opener"
   gem 'rails-erd'
 end
@@ -47,11 +45,8 @@ group :development, :test do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'dotenv-rails'
-  gem 'rspec-rails', '~> 3.7'
-  gem 'factory_bot_rails'
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
-  gem 'launchy'
   gem 'faker'
+  gem 'capybara'
+  gem 'webdrivers', '~> 4.0'
+  gem 'launchy'
 end

@@ -52,7 +52,7 @@
                 label: false,
                 input_html: {
                   step: 0.01,
-                  value: 0.19,
+                  value: f.object.vat?,
                   class: "item-vat",
                   data: { target: "item-form.vat invoice-form.vat" }
                 }
@@ -63,7 +63,7 @@
                 label: false,
                 input_html: {
                   step: 0.001,
-                  value: 0,
+                  value: f.object.discount?,
                   class: "item-discount",
                   data: { target: "item-form.discount invoice-form.discount" }
                 }

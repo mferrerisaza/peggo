@@ -39,4 +39,12 @@ class Item < ApplicationRecord
   def gross_total?
     price && quantity ? gross_total : 0
   end
+
+  def vat?
+    vat || 0.19
+  end
+
+  def discount?
+    discount || 0
+  end
 end

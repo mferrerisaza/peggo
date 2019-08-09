@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+industria_y_comercio:
+  number: 1
+  date: <%= Date.today - rand(1..30).days %>
+  payment_method: "Transferencia"
+  contact: provider
+  business: xloop

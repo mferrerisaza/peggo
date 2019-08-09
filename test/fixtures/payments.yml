@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+pago_factura_amg:
+  contact: client
+  invoice: factura_amg_con_pago
+  number: 1
+  date: <%= Date.today %>
+  payment_method: "Transferencia"
+  description: "Pago a factura de venta 001"
+  retention_type: "Servicios en general - (4%)"
+  retention_cents: <%= 200_000 * 100 %>
+  amount_cents: <%= 4_935_000 * 100 %>
+  business: xloop

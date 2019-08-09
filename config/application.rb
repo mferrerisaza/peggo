@@ -13,12 +13,7 @@ module Peggo
     config.generators do |generate|
       generate.assets false
       generate.helper false
-      generate.test_framework :rspec,
-        view_specs: false,
-        controller_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        request_specs: false
+      generate.test_framework  :test_unit, fixture: true
     end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2

@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 1.upto(5) do |i| %>
+contact_<%= i %>:
+  name: <%= Faker::Name.unique.name %>
+  tax_id_type: "NIT - Número de identificación tributaria"
+  tax_id: "901616062<%=i%>"
+  provider: false
+  client: false
+  business: xloop
+<% end %>
+
+amg:
+  name: "AMG Mascotas"
+  tax_id_type: "NIT - Número de identificación tributaria"
+  tax_id: "8016160622"
+  provider: false
+  client: false
+  business: xloop
+
+provider:
+  name: "Arce Modern Gardens - Proveedor"
+  tax_id_type: "NIT - Número de identificación tributaria"
+  tax_id: "8016160623"
+  provider: true
+  client: false
+  business: xloop
+
+client:
+  name: "Arce Modern Gardens - Cliente"
+  tax_id_type: "NIT - Número de identificación tributaria"
+  tax_id: "8016160623"
+  provider: false
+  client: true
+  business: xloop
+
+client_with_out_bills:
+  name: "Cliente sin facturas"
+  tax_id_type: "NIT - Número de identificación tributaria"
+  tax_id: "9216160623"
+  provider: false
+  client: true
+  business: xloop
