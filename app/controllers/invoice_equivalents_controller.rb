@@ -1,6 +1,6 @@
 class InvoiceEquivalentsController < ApplicationController
   before_action :set_business, except: :update
-  before_action :set_invoice_equivalent, only: %i[show edit update destroy print]
+  before_action :set_invoice_equivalent, only: %i[show edit update destroy print toggle_printed]
 
   def index
     @invoice_equivalents = policy_scope(InvoiceEquivalent.where(business: @business).order(number: :desc).includes(:contact).paginate(page: params[:page]))
@@ -58,6 +58,10 @@ class InvoiceEquivalentsController < ApplicationController
         render pdf: @invoice_equivalent.pdf_file_name, layout: 'pdf.html', show_as_html: params.key?('debug')   # Excluding ".pdf" extension.
       end
     end
+  end
+
+  def toggle_printed
+    @invoice_equivalent.update(printed: !@invoice_equivalent.printed)
   end
 
   private

@@ -162,4 +162,17 @@ class PaymentsTest < ApplicationSystemTestCase
     assert_selector ".alert.alert-info.alert-dismissible"
     assert_equal payment_count - 1, Payment.count
   end
+
+  test "user can change print status from index" do
+    payment = payments(:pago_factura_amg)
+
+    within "[data-table-row-location='#{business_payment_path(@business, payment)}']" do
+      check "printed"
+    end
+
+    sleep 0.1
+
+    payment.reload
+    assert payment.printed
+  end
 end

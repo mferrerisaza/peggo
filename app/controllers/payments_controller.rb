@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_business, except: :update
-  before_action :set_payment, only: %i[show edit update destroy print]
+  before_action :set_payment, only: %i[show edit update destroy print toggle_printed]
 
   def index
     @payments = policy_scope(Payment.where(business: @business).order(number: :desc).includes(:contact).paginate(page: params[:page]))
@@ -58,6 +58,10 @@ class PaymentsController < ApplicationController
         render pdf: @payment.pdf_file_name, layout: 'pdf.html', show_as_html: params.key?('debug')   # Excluding ".pdf" extension.
       end
     end
+  end
+
+  def toggle_printed
+    @payment.update(printed: !@payment.printed)
   end
 
   private
