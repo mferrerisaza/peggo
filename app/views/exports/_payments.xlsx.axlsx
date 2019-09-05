@@ -10,10 +10,11 @@ wb.add_worksheet(name: "Recibos de caja") do |sheet|
                  "Valor",
                  "Retenciones",
                  "Observaciones",
+                 "Impreso",
                  "Link al Recibo de Caja"]
 
   @payments.each do |payment|
-    sheet.add_row [payment.formated_number,
+    row = sheet.add_row [payment.formated_number,
                    payment.contact.name,
                    payment.contact.tax_id_type,
                    payment.contact.tax_id,
@@ -23,6 +24,9 @@ wb.add_worksheet(name: "Recibos de caja") do |sheet|
                    payment.amount,
                    payment.retention,
                    payment.observation,
+                   payment.printed,
                    print_business_payment_url(@business, payment)]
+    sheet.add_hyperlink location: "#{print_business_payment_url(@business, payment)}", ref: row.last
+
   end
 end

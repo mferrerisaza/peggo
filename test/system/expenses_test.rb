@@ -128,4 +128,17 @@ class ExpensesTest < ApplicationSystemTestCase
     assert_selector ".alert.alert-info.alert-dismissible"
     assert_equal expense_count - 1, Expense.count
   end
+
+  test "user can change print status from index" do
+    expense = expenses(:industria_y_comercio)
+
+    within "[data-table-row-location='#{business_expense_path(@business, expense)}']" do
+      check "printed"
+    end
+
+    sleep 0.1
+
+    expense.reload
+    assert expense.printed
+  end
 end

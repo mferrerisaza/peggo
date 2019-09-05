@@ -143,4 +143,17 @@ class InvoicesTest < ApplicationSystemTestCase
     assert_selector ".alert.alert-info.alert-dismissible"
     assert_equal invoice_count - 1, Invoice.count
   end
+
+  test "user can change print status from index" do
+    invoice = invoices(:factura_amg)
+
+    within "[data-table-row-location='#{business_invoice_path(@business, invoice)}']" do
+      check "printed"
+    end
+
+    sleep 0.1
+
+    invoice.reload
+    assert invoice.printed
+  end
 end

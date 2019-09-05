@@ -56,7 +56,6 @@ class InvoiceEquivalentsTest < ApplicationSystemTestCase
   test "let a signed in user edit an invoice_equivalent" do
     setup
 
-
     assert_selector ".table-row-link", count: InvoiceEquivalent.count
 
     invoice_equivalent = invoice_equivalents(:prestacion_servicios_mercadeo)
@@ -101,5 +100,19 @@ class InvoiceEquivalentsTest < ApplicationSystemTestCase
 
     assert_selector ".alert.alert-info.alert-dismissible"
     assert_equal invoice_equivalent_count - 1, InvoiceEquivalent.count
+  end
+
+
+  test "user can change print status from index" do
+    invoice_equivalent = invoice_equivalents(:prestacion_servicios_mercadeo)
+
+    within "[data-table-row-location='#{business_invoice_equivalent_path(@business, invoice_equivalent)}']" do
+      check "printed"
+    end
+
+    sleep 0.1
+
+    invoice_equivalent.reload
+    assert invoice_equivalent.printed
   end
 end

@@ -20,6 +20,7 @@
           <div class="table-header">Rte Fuente</div>
           <div class="table-header">Total a Pagar</div>
           <div class="table-header">Acciones</div>
+          <div class="table-header">Impreso</div>
         </div>
         <% @invoice_equivalents.each do |invoice_equivalent| %>
             <div class="table-row-link table-row"
@@ -43,6 +44,15 @@
                 <%= link_to business_invoice_equivalent_path(@business, invoice_equivalent), class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
                   <i class="material-icons"> delete </i>
                 <% end %>
+              </div>
+              <div class="table-data">
+                <%= check_box_tag 'printed', invoice_equivalent.id, invoice_equivalent.printed,
+                    data: {
+                      remote: true,
+                      url: toggle_printed_business_invoice_equivalent_path(@business, invoice_equivalent),
+                      method: :post
+                    }
+                %>
               </div>
             </div>
         <% end %>

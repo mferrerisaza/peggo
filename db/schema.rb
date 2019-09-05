@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_155140) do
+ActiveRecord::Schema.define(version: 2019_09_05_011609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_155140) do
     t.bigint "contact_id"
     t.integer "retention_type"
     t.bigint "retention_cents", default: 0, null: false
+    t.boolean "printed", default: false
     t.index ["business_id"], name: "index_expenses_on_business_id"
     t.index ["contact_id"], name: "index_expenses_on_contact_id"
   end
@@ -102,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_155140) do
     t.bigint "retention_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "printed", default: false
     t.index ["business_id"], name: "index_invoice_equivalents_on_business_id"
     t.index ["contact_id"], name: "index_invoice_equivalents_on_contact_id"
   end
@@ -118,6 +120,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_155140) do
     t.datetime "updated_at", null: false
     t.bigint "business_id"
     t.date "expiration_date"
+    t.boolean "printed", default: false
     t.index ["business_id"], name: "index_invoices_on_business_id"
     t.index ["contact_id"], name: "index_invoices_on_contact_id"
   end
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_155140) do
     t.datetime "updated_at", null: false
     t.bigint "business_id"
     t.integer "retention_type"
+    t.boolean "printed", default: false
     t.index ["business_id"], name: "index_payments_on_business_id"
     t.index ["contact_id"], name: "index_payments_on_contact_id"
     t.index ["invoice_id"], name: "index_payments_on_invoice_id"

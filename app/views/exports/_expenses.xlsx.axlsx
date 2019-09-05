@@ -7,23 +7,26 @@ wb.add_worksheet(name: "Egresos") do |sheet|
                  "Forma de Pago",
                  "Observaciones",
                  "Fecha Egreso",
+                 "Impreso",
                  "Link Egreso",
                  "Adjuntos"]
 
   @expenses.each do |expense|
-    row = [expense.formated_number,
-           expense.contact.name,
-           expense.concepts.map(&:name).join(' - '),
-           expense.total,
-           expense.payment_method,
-           expense.observation,
-           expense.date,
-           print_business_expense_url(@business, expense)]
+    row = sheet.add_row [expense.formated_number,
+                         expense.contact.name,
+                         expense.concepts.map(&:name).join(' - '),
+                         expense.total,
+                         expense.payment_method,
+                         expense.observation,
+                         expense.date,
+                         expense.printed,
+                         print_business_expense_url(@business, expense)]
+
+    sheet.add_hyperlink location: "#{print_business_expense_url(@business, expense)}", ref: row.last
 
     expense.attachments.each do |attachment|
-      row << business_attachment_url(@business, attachment)
+      cell = row.add_cell business_attachment_url(@business, attachment)
+      sheet.add_hyperlink location: "#{business_attachment_url(@business, attachment)}", ref: cell
     end
-
-    sheet.add_row row
   end
 end

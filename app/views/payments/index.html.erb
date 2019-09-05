@@ -19,6 +19,7 @@
           <div class="table-header">Forma de Pago</div>
           <div class="table-header">Monto</div>
           <div class="table-header">Acciones</div>
+          <div class="table-header">Impreso</div>
         </div>
         <% @payments.each do |payment| %>
             <div class="table-row-link table-row"
@@ -41,6 +42,15 @@
                 <%= link_to business_payment_path(@business, payment), class: "destroy-property", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
                   <i class="material-icons"> delete </i>
                 <% end %>
+              </div>
+              <div class="table-data">
+                <%= check_box_tag 'printed', payment.id, payment.printed,
+                    data: {
+                      remote: true,
+                      url: toggle_printed_business_payment_path(@business, payment),
+                      method: :post
+                    }
+                %>
               </div>
             </div>
         <% end %>

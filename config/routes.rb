@@ -16,24 +16,28 @@ Rails.application.routes.draw do
     resources :expenses do
       member do
         get '/print', to: "expenses#print", defaults: { format: 'pdf' }
+        post :toggle_printed
       end
     end
 
     resources :invoices do
       member do
         get '/print', to: "invoices#print", defaults: { format: 'pdf' }
+        post :toggle_printed
       end
     end
 
     resources :payments do
       member do
         get '/print', to: "payments#print", defaults: { format: 'pdf' }
+        post :toggle_printed
       end
     end
 
     resources :invoice_equivalents do
       member do
         get '/print', to: "invoice_equivalents#print", defaults: { format: 'pdf' }
+        post :toggle_printed
       end
     end
 
