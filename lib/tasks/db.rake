@@ -17,4 +17,28 @@ namespace :db do
       puts "Done."
     end
   end
+
+  desc "Change printed status of old documents (before printed funcionallity)"
+  task marked_old_documents_as_printed: :environment do
+    models = ["Expense", "Invoice", "InvoiceEquivalent", "Payment"]
+
+    models.each do |model_to_retrieve|
+      model_to_retrieve.constantize.where("date < ?", 34.days.ago.midnight).each do |record|
+        puts "Actualizando #{model_to_retrieve} número: #{record.number}"
+        record.update(printed: true)
+      end
+    end
+  end
+
+  desc "Change printed status to false"
+  task marked_documents_as_not_printed: :environment do
+    models = ["Expense", "Invoice", "InvoiceEquivalent", "Payment"]
+
+    models.each do |model_to_retrieve|
+      model_to_retrieve.constantize.all.each do |record|
+        puts "Actualizando #{model_to_retrieve} número: #{record.number}"
+        record.update(printed: false)
+      end
+    end
+  end
 end
