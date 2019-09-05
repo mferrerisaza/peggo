@@ -9,6 +9,7 @@ wb.add_worksheet(name: "Documentos Equivalentes") do |sheet|
                  "Valor Operación",
                  "Rte Fuente",
                  "Total A Pagar",
+                 "Impreso",
                  "Link Al Documento Equivalente",
                  "Adjuntos"]
 
@@ -22,6 +23,7 @@ wb.add_worksheet(name: "Documentos Equivalentes") do |sheet|
            invoice_equivalent.amount,
            invoice_equivalent.retention,
            invoice_equivalent.total,
+           invoice_equivalent.printed,
            print_business_invoice_equivalent_url(@business, invoice_equivalent)]
 
     invoice_equivalent.attachments.each do |attachment|

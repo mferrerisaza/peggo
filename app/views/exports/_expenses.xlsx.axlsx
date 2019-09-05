@@ -7,6 +7,7 @@ wb.add_worksheet(name: "Egresos") do |sheet|
                  "Forma de Pago",
                  "Observaciones",
                  "Fecha Egreso",
+                 "Impreso",
                  "Link Egreso",
                  "Adjuntos"]
 
@@ -18,6 +19,7 @@ wb.add_worksheet(name: "Egresos") do |sheet|
            expense.payment_method,
            expense.observation,
            expense.date,
+           expense.printed,
            print_business_expense_url(@business, expense)]
 
     expense.attachments.each do |attachment|
