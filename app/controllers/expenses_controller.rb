@@ -1,6 +1,6 @@
 class ExpensesController < ApplicationController
   before_action :set_business, except: :update
-  before_action :set_expense, only: %i[show edit update destroy print]
+  before_action :set_expense, only: %i[show edit update destroy print toggle_printed]
 
   def index
     @expenses = policy_scope(Expense.where(business: @business).order(number: :desc).includes(:contact).paginate(page: params[:page]))
@@ -60,6 +60,10 @@ class ExpensesController < ApplicationController
         render pdf: @expense.pdf_file_name, layout: 'pdf.html', show_as_html: params.key?('debug')   # Excluding ".pdf" extension.
       end
     end
+  end
+
+  def toggle_printed
+    @expense.update(printed: !@expense.printed)
   end
 
   private
