@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :expenses do
       member do
         get '/print', to: "expenses#print", defaults: { format: 'pdf' }
+        post :toggle_printed
       end
     end
 
