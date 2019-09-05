@@ -14,22 +14,24 @@ wb.add_worksheet(name: "Documentos Equivalentes") do |sheet|
                  "Adjuntos"]
 
   @invoice_equivalents.each do |invoice_equivalent|
-    row = [invoice_equivalent.formated_number,
-           invoice_equivalent.contact.name,
-           invoice_equivalent.contact.tax_id_type,
-           invoice_equivalent.contact.tax_id,
-           invoice_equivalent.date,
-           invoice_equivalent.description,
-           invoice_equivalent.amount,
-           invoice_equivalent.retention,
-           invoice_equivalent.total,
-           invoice_equivalent.printed,
-           print_business_invoice_equivalent_url(@business, invoice_equivalent)]
+    row = sheet.add_row [invoice_equivalent.formated_number,
+                         invoice_equivalent.contact.name,
+                         invoice_equivalent.contact.tax_id_type,
+                         invoice_equivalent.contact.tax_id,
+                         invoice_equivalent.date,
+                         invoice_equivalent.description,
+                         invoice_equivalent.amount,
+                         invoice_equivalent.retention,
+                         invoice_equivalent.total,
+                         invoice_equivalent.printed,
+                         print_business_invoice_equivalent_url(@business, invoice_equivalent)]
+
+    sheet.add_hyperlink location: "#{print_business_invoice_equivalent_url(@business, invoice_equivalent)}", ref: row.last
 
     invoice_equivalent.attachments.each do |attachment|
-      row << business_attachment_url(@business, attachment)
+      cell = row.add_cell business_attachment_url(@business, attachment)
+      sheet.add_hyperlink location: "#{business_attachment_url(@business, attachment)}", ref: cell
     end
 
-    sheet.add_row row
   end
 end
