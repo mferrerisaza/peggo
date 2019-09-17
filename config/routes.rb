@@ -19,7 +19,6 @@ Rails.application.routes.draw do
         post :toggle_printed
       end
     end
-    end
 
     resources :expenses do
       member do
