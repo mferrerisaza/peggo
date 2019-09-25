@@ -25,7 +25,7 @@ class BusinessesTest < ApplicationSystemTestCase
     page.attach_file("Logo", Rails.root + 'test/fixtures/files/SCUAD-final.png')
 
     click_on "Editar"
-
+    sleep(10)
     @business.reload
 
     assert_equal "Scuad Editado", @business.name

@@ -1,4 +1,4 @@
-Money.use_i18n = false
+Money.locale_backend = :currency
 MoneyRails.configure do |config|
   config.register_currency = {
       :priority            => 1,

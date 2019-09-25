@@ -17,7 +17,7 @@ class Item < ApplicationRecord
 
   monetize :price_cents
 
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search_by_name,
                   against: :name,
                   using: {

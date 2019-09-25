@@ -5,7 +5,7 @@ invoice_equivalent_<%= i %>:
   business: xloop
   contact: provider
   date: <%= Date.today - rand(1..30).days %>
-  number: i
+  number: <%= i %>
   observation: <%= rand(0..1).positive? ? "" : "Exento de pago de renta" %>
   retention_type: "Servicios en general - (4%)"
   description: <%= Faker::Lorem.sentence %>

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   authenticated :user do
-    root to: 'businesses#index'
+    root to: 'businesses#index', as: :authenticated_root
   end
-  root to: 'pages#home'
+  unauthenticated :user do
+    root to: 'pages#home'
+  end
   devise_for :users,
   controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   resources :businesses do
@@ -10,6 +12,13 @@ Rails.application.routes.draw do
     resources :contacts do
       member do
         get '/invoices', to: "contacts#invoices", defaults: { format: 'pdf' }
+      end
+    end
+
+    resources :expenses do
+      member do
+        get '/print', to: "expenses#print", defaults: { format: 'pdf' }
+        post :toggle_printed
       end
     end
 
