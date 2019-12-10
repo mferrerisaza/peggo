@@ -12,7 +12,8 @@ class Payment < ApplicationRecord
                         "Cheque",
                         "Tarjeta crédito",
                         "Tarjeta débito",
-                        "Otro"]
+                        "Otro",
+                        "Tarjeta E-Prepago"]
 
   enum retention_type: ["Arrendamiento de bienes muebles - (4%)",
                         "Arrendamiento de bienes raíces - (3.5%)",
@@ -26,7 +27,8 @@ class Payment < ApplicationRecord
                         "Servicios en general - (6%)",
                         "ReteICA - (0%)",
                         "ReteIVA - (15%)",
-                        "Transporte de carga - (1%)"]
+                        "Transporte de carga - (1%)",
+                        "Servicios tecnológicos - (3.5%)"]
 
   monetize :amount_cents
   monetize :retention_cents

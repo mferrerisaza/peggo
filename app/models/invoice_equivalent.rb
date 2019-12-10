@@ -18,7 +18,8 @@ class InvoiceEquivalent < ApplicationRecord
                         "Servicios en general - (6%)",
                         "ReteICA - (0%)",
                         "ReteIVA - (15%)",
-                        "Transporte de carga - (1%)"]
+                        "Transporte de carga - (1%)",
+                        "Servicios tecnológicos - (3.5%)"]
 
   validates :date, :description, :number, :amount, presence: true
   validates :amount, numericality: { greater_than: 0 }
